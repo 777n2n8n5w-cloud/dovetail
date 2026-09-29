@@ -1495,6 +1495,56 @@
   }
   .tc-rule { position: absolute; left: 0; right: 0; top: 0; height: 4px; z-index: 1; }
 
+  /* ---- Scoreboard ---- */
+  .score-btn { position: relative; display: flex; align-items: center; justify-content: center; }
+  .score-btn svg { width: 17px; height: 17px; }
+  .score-btn[data-badge]:not([data-badge=""])::after { content: ""; position: absolute; top: 5px; right: 5px; width: 8px; height: 8px; border-radius: 50%; background: var(--notinterested); }
+  .sb-seg { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; padding: 4px; border-radius: 10px; background: var(--surface-raised); border: 1px solid var(--border); margin: 6px 0 12px; }
+  .sb-tab { background: none; border: 0; border-radius: 7px; padding: 8px 2px; font-family: inherit; font-size: 12px; font-weight: 600; color: var(--text-dim); cursor: pointer; }
+  .sb-tab.active { background: var(--accent); color: var(--accent-text); }
+  .sb-card { border: 1px solid var(--border); background: var(--surface-raised); border-radius: 12px; padding: 11px 12px; margin-bottom: 8px; }
+  .sb-card.sb-total { border-color: var(--accent); }
+  .sb-card.off { opacity: 0.6; }
+  .sb-top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+  .sb-top b { font-size: 14.5px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .sb-top em { font-weight: 500; font-size: 12px; color: var(--text-faint); }
+  .sb-big { font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; flex: none; }
+  .sb-big small { font-size: 11.5px; font-weight: 600; color: var(--text-faint); }
+  .sb-bar { height: 5px; border-radius: 3px; background: var(--border); margin: 7px 0 8px; overflow: hidden; }
+  .sb-bar span { display: block; height: 100%; border-radius: 3px; background: var(--accent); }
+  .sb-stats { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12.5px; color: var(--text-dim); margin-top: 4px; }
+  .sb-stats b { color: var(--text); }
+  .sb-stats .warn, .sb-stats .warn b { color: var(--notinterested); }
+  .sb-sub { font-size: 12px; color: var(--text-faint); margin-top: 5px; line-height: 1.4; }
+  .sb-days { padding-top: 0; margin-bottom: 10px; }
+  .ans-list { display: flex; flex-direction: column; gap: 6px; }
+  .ans-row { display: grid; grid-template-columns: 46px 1fr 78px; gap: 8px; align-items: center; font-size: 12.5px; }
+  .ans-h { color: var(--text-dim); font-weight: 600; }
+  .ans-bar { height: 10px; border-radius: 5px; background: var(--border); overflow: hidden; }
+  .ans-bar span { display: block; height: 100%; border-radius: 5px; background: var(--accent); }
+  .ans-v { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+  .ans-v small { color: var(--text-faint); font-weight: 500; }
+
+  /* ---- Admin controls + Themes screen ---- */
+  body.team-mode .settings-section.admin-only { display: none !important; }
+  .settings-row { width: 100%; display: flex; align-items: center; gap: 10px; padding: 13px 14px; border-radius: 10px; border: 1px solid var(--border);
+    background: var(--surface-raised); color: var(--text); font-family: inherit; font-size: 15px; cursor: pointer; text-align: left; }
+  .settings-row .sr-l { font-weight: 600; flex: none; }
+  .settings-row .sr-v { flex: 1; min-width: 0; text-align: right; color: var(--text-dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .settings-row .sr-c { color: var(--text-faint); font-size: 20px; line-height: 1; }
+  .theme-cats { padding-top: 0; margin-bottom: 4px; }
+  .hub-tile { width: 100%; display: flex; align-items: center; gap: 12px; padding: 13px 12px; margin-bottom: 8px; border-radius: 12px; cursor: pointer;
+    border: 1px solid var(--border); background: var(--surface-raised); color: var(--text); font-family: inherit; text-align: left; }
+  .hub-tile.hot { border-color: var(--accent); }
+  .hub-ico { flex: none; width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: var(--accent); color: var(--accent-text); }
+  .hub-ico svg { width: 19px; height: 19px; }
+  .hub-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+  .hub-txt b { font-size: 15px; }
+  .hub-txt span { font-size: 12.5px; color: var(--text-dim); line-height: 1.35; }
+  .hub-tile.hot .hub-txt span { color: var(--accent); font-weight: 600; }
+  .hub-go { flex: none; color: var(--text-faint); font-size: 22px; line-height: 1; }
+  .hub-note { font-size: 12px; color: var(--text-faint); line-height: 1.5; margin-top: 6px; word-break: break-word; }
+
   ::-webkit-scrollbar { width: 8px; }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 8px; }
 
@@ -1548,6 +1598,7 @@
     </div>
     <div class="header-right">
       <span class="save-pill" id="savePill"></span>
+      <button class="icon-btn team-admin-only score-btn" id="adminBtn" aria-label="Admin controls" title="Admin controls"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 9.5C8 19.2 5 15.5 5 11V6l7-3z"/><path d="M9.5 12l1.8 1.8L15 10"/></svg></button>
       <button class="icon-btn add-leads-btn" id="addLeadsBtn" aria-label="Add leads" title="Add leads">+</button>
       <button class="icon-btn" id="menuBtn" aria-label="Settings" title="Settings">☰</button>
     </div>
@@ -1664,7 +1715,7 @@
       <div class="settings-heading">Account</div>
       <div class="acct-who" id="acctWho"></div>
       <div class="modal-actions" style="flex-direction:column">
-        <button class="btn-primary team-admin-only" id="teamBtn" style="width:100%">Team &amp; access</button>
+        <button class="btn-primary team-admin-only" id="teamBtn" style="width:100%">Admin controls: logins, team &amp; scoreboard</button>
         <button class="btn-secondary" id="changePwBtn" style="width:100%">Change my password</button>
         <button class="btn-secondary" id="signOutBtn" style="width:100%;color:var(--danger)">Sign out</button>
       </div>
@@ -1672,7 +1723,7 @@
 
     <div class="settings-section">
       <div class="settings-heading">Appearance</div>
-      <div class="theme-grid" id="themeSwatchRow"></div>
+      <button class="settings-row" id="openThemesBtn" type="button"><span class="sr-l">Theme</span><span class="sr-v" id="themeCurrent">Auto</span><span class="sr-c">›</span></button>
     </div>
 
     <div class="settings-section">
@@ -1723,7 +1774,7 @@
     </div>
 
     <div style="margin-top:22px;padding-top:14px;border-top:1px solid var(--border);text-align:center;">
-      <div style="font-size:11px;color:var(--text-faint);">Build 2026-10-05 · Team · If a fix doesn't seem to have landed, re-download this file and confirm the build date here matches what I tell you.</div>
+      <div style="font-size:11px;color:var(--text-faint);">Build 2026-10-07 · Team · If a fix doesn't seem to have landed, re-download this file and confirm the build date here matches what I tell you.</div>
     </div>
   </div>
 </div>
@@ -1773,6 +1824,27 @@
 <!-- Account -->
 <div class="modal-overlay" id="acctModal">
   <div class="modal" id="acctModalBody" style="max-width:420px"></div>
+</div>
+
+<!-- Scoreboard (admin) -->
+<div class="modal-overlay" id="scoreModal">
+  <div class="modal" id="scoreModalBody"></div>
+</div>
+
+<!-- Themes -->
+<div class="modal-overlay" id="themeModal">
+  <div class="modal">
+    <button class="close-x" id="themeClose">&times;</button>
+    <h3>Themes</h3>
+    <p class="modal-sub">Pick a look for this phone. Everyone on your team chooses their own.</p>
+    <div class="filter-row theme-cats" id="themeCats"></div>
+    <div class="theme-grid" id="themeSwatchRow"></div>
+  </div>
+</div>
+
+<!-- Admin controls -->
+<div class="modal-overlay" id="adminModal">
+  <div class="modal" id="adminModalBody"></div>
 </div>
 
 <!-- Lead profile -->
@@ -2116,6 +2188,20 @@
     '</button>';
   }
 
+  var themeCat = "all";
+  function updateThemeLabel() {
+    var el = document.getElementById("themeCurrent");
+    if (!el) return;
+    var cur = currentThemeName();
+    el.textContent = cur === "auto" ? "Auto (follows your phone)" : (THEME_LABELS[cur] || cur);
+  }
+  function openThemes() {
+    closeMenuModal();
+    document.getElementById("themeModal").classList.add("show");
+    renderThemeSwatches();
+    var act = document.querySelector("#themeSwatchRow .theme-card.active");
+    if (act && act.scrollIntoView) act.scrollIntoView({ block: "center" });
+  }
   function renderThemeSwatches() {
     var grid = document.getElementById("themeSwatchRow");
     if (!grid) return;
@@ -2125,7 +2211,20 @@
       '<span class="tc-name">Auto' + (cur === "auto" ? '<span class="tc-check">\u2713</span>' : '') + '</span>' +
       '<span class="tc-desc">Daylight in light mode, Midnight in dark mode. Follows your phone.</span></button>';
     var GROUPS = [["everyday", "Everyday"], ["money", "Wall Street & Old Money"], ["miami", "Miami After Dark"], ["holiday", "Holidays"]];
+    var cats = document.getElementById("themeCats");
+    if (cats) {
+      cats.innerHTML = [["all", "All"], ["everyday", "Everyday"], ["money", "Wall Street"], ["miami", "Miami"], ["holiday", "Holidays"]].map(function (c) {
+        var n = c[0] === "all" ? THEMES.length + 1 : THEMES.filter(function (t) { return (t.cat || "everyday") === c[0]; }).length + (c[0] === "everyday" ? 1 : 0);
+        return '<button class="filter-chip' + (themeCat === c[0] ? ' active' : '') + '" data-themecat="' + c[0] + '">' + c[1] + ' <span class="chip-n">' + n + '</span></button>';
+      }).join("");
+      cats.querySelectorAll("[data-themecat]").forEach(function (b) {
+        b.addEventListener("click", function () { themeCat = b.getAttribute("data-themecat"); renderThemeSwatches(); });
+      });
+    }
+    if (themeCat !== "all" && themeCat !== "everyday") auto = "";
+    updateThemeLabel();
     grid.innerHTML = auto + GROUPS.map(function (g) {
+      if (themeCat !== "all" && themeCat !== g[0]) return "";
       var items = THEMES.filter(function (t) { return (t.cat || "everyday") === g[0]; });
       return items.length ? '<div class="theme-group-label">' + g[1] + '</div>' + items.map(function (t) { return themeCardHtml(t, cur); }).join("") : "";
     }).join("");
@@ -2284,7 +2383,7 @@
     if (!z.iana) return 0.2;
     var t = zoneTime(z.iana);
     if (!t.ok) return 0;
-    return HOUR_SCORE[t.hour] || 0.3;
+    return hourScore(t.hour);
   }
   function smartSort(list) {
     return list.map(function (l, i) { return { l: l, s: callScore(l), i: i }; })
@@ -2442,6 +2541,8 @@
     document.getElementById("viewTabTasks").classList.toggle("active", state.activeView === "tasks");
     document.getElementById("queueControls").style.display = "none";
     var dueN = dueTasks().length;
+    var scb = document.getElementById("adminBtn");
+    if (scb) scb.setAttribute("data-badge", (TEAM.on && isAdmin() && new Date().getHours() >= 17 && state.recapSeen !== localDateStr(new Date())) ? "1" : "");
     document.getElementById("viewTabTasks").setAttribute("data-badge", dueN ? String(dueN) : "");
 
     if (state.activeView === "history") {
@@ -2513,10 +2614,11 @@
     try { return Intl.DateTimeFormat().resolvedOptions().timeZone || "America/New_York"; } catch (e) { return "America/New_York"; }
   }
   function leadIana(lead) { var z = leadZone(lead); return z.iana || deviceZone(); }
+  var zpFmt = {};
   function zonedParts(ts, iana) {
     var o = {};
-    new Intl.DateTimeFormat("en-US", { timeZone: iana, hourCycle: "h23", year: "numeric", month: "2-digit", day: "2-digit",
-      hour: "2-digit", minute: "2-digit", weekday: "short" }).formatToParts(new Date(ts)).forEach(function (p) { o[p.type] = p.value; });
+    (zpFmt[iana] || (zpFmt[iana] = new Intl.DateTimeFormat("en-US", { timeZone: iana, hourCycle: "h23", year: "numeric", month: "2-digit", day: "2-digit",
+      hour: "2-digit", minute: "2-digit", weekday: "short" }))).formatToParts(new Date(ts)).forEach(function (p) { o[p.type] = p.value; });
     var h = Number(o.hour); if (h === 24) h = 0;
     return { y: Number(o.year), m: Number(o.month) - 1, d: Number(o.day), h: h, mi: Number(o.minute),
       dow: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].indexOf(o.weekday) };
@@ -2564,9 +2666,10 @@
     return null;
   }
   function noContactStreak(id) {
-    var n = 0;
+    var n = 0, lead = findLeadById(id), since = lead && lead.recycledAt ? lead.recycledAt : 0;
     for (var i = state.callLog.length - 1; i >= 0; i--) {
       var c = state.callLog[i];
+      if (since && c.leadId === id && new Date(c.timestamp).getTime() < since) break;
       if (c.leadId !== id) continue;
       if (c.outcomeKey === "voicemail" || c.outcomeKey === "noanswer") n++; else break;
     }
@@ -2643,7 +2746,13 @@
     var t;
     if (outcome === "voicemail" || outcome === "noanswer") {
       var n = noContactStreak(lead.id);
-      if (n >= MAX_ATTEMPTS) { lead.exhausted = true; return MAX_ATTEMPTS + " attempts made \u2014 cadence complete"; }
+      if (n >= MAX_ATTEMPTS) {
+        lead.exhausted = true;
+        if ((lead.recycled || 0) >= RECYCLE_MAX) { lead.retired = true; return MAX_ATTEMPTS + " attempts made \u2014 retired"; }
+        var rd = restDaysFrom(now);
+        lead.restUntil = now + rd * 86400000;
+        return MAX_ATTEMPTS + " attempts made \u2014 back in the queue in " + rd + " days";
+      }
       lead.exhausted = false;
       t = addAutoTask(lead, "Call", n <= 2 ? "High" : "Medium", retrySlot(lead, n),
         "Attempt " + (n + 1) + " of " + MAX_ATTEMPTS + " \u00b7 last try: " + outcomeLabel(outcome));
@@ -2883,11 +2992,12 @@
   function leadTrackHtml(lead) {
     var last = lastCallFor(lead.id);
     var next = openTasksFor(lead.id)[0];
-    if (!last && !next && !lead.exhausted) return "";
+    if (!last && !next && !lead.exhausted && !lead.recycled) return "";
     var bits = [];
     if (last) bits.push("Called " + callsForLead(lead.id).length + "\u00d7 \u00b7 last: " + outcomeLabel(last.outcomeKey, last.outcome).toLowerCase() + " " + agoStr(last.timestamp));
     if (next) bits.push("Next: " + taskWhen(next, null));
-    if (lead.exhausted) bits.push(MAX_ATTEMPTS + " attempts made");
+    if (lead.exhausted) bits.push(lead.retired ? "retired after " + ((lead.recycled || 0) + 1) + " rounds" : MAX_ATTEMPTS + " attempts made" + (lead.restUntil ? " \u00b7 back " + dayLabel(new Date(lead.restUntil)) : ""));
+    if (lead.recycled && lead.status === "pending") bits.push("fresh try #" + (lead.recycled + 1));
     return '<div class="lead-track">' + escapeHtml(bits.join(" \u00b7 ")) + '</div>';
   }
   function callLinkHtml(lead, from, taskId, cls, inner) {
@@ -2937,7 +3047,7 @@
       '<div class="lp-stats">' +
         '<div><b>' + calls.length + '</b><span>Calls</span></div>' +
         '<div><b>' + escapeHtml(last ? outcomeLabel(last.outcomeKey, last.outcome) : "\u2014") + '</b><span>' + (last ? escapeHtml(agoStr(last.timestamp)) : "Not called") + '</span></div>' +
-        '<div><b>' + escapeHtml(next ? taskWhen(next, null) : (lead.exhausted ? "Cadence done" : "\u2014")) + '</b><span>Next step</span></div>' +
+        '<div><b>' + escapeHtml(next ? taskWhen(next, null) : (lead.exhausted ? (lead.retired ? "Retired" : lead.restUntil ? "Back " + dayLabel(new Date(lead.restUntil)) : "Cadence done") : "\u2014")) + '</b><span>Next step</span></div>' +
       '</div>' +
       '<label for="lpStage">Pipeline stage</label>' +
       '<select id="lpStage">' + STAGES.map(function (s2) { return '<option' + (s2 === (lead.stage || "New Lead") ? " selected" : "") + '>' + s2 + '</option>'; }).join("") + '</select>' +
@@ -4422,7 +4532,7 @@
           names.map(function (k) { return '<option value="' + escapeHtml(k) + '"' + (cur === k ? ' selected' : '') + '>' + escapeHtml(k) + ' (' + srcs[k] + ')</option>'; }).join("") +
           '</select></div>';
       })() +
-      (o === "smart" ? '<div class="qc-note">\u2605 Leads at their best local hour come first. Sales-call studies show 10\u201311 AM and 4\u20135 PM in the prospect\u2019s own time answer best, with lunch the weakest. <strong>' + (counts.prime || 0) + '</strong> of your leads are in a prime hour right now.</div>' : '');
+      (o === "smart" ? '<div class="qc-note">' + smartNoteText(counts.prime || 0) + '</div>' : '');
     var qls = document.getElementById("queueListSelect");
     if (qls) qls.addEventListener("change", function (e) {
       if (state.awaitingOutcome) { showToast("Log the outcome for this call first"); render(); return; }
@@ -4459,6 +4569,7 @@
 
   // Keeps local times and "Callable now" current without interrupting typing.
   function softRefresh() {
+    recycleSweep();
     if (document.hidden) return;
     var ae = document.activeElement;
     if (ae && /^(INPUT|TEXTAREA|SELECT)$/.test(ae.tagName)) return;
@@ -4677,7 +4788,7 @@
     state = defaultState();
     pendingText = null;
     renderTextPrompt();
-    ["menuModal", "leadModal", "taskModal", "loadModal", "teamModal", "acctModal", "confirmModal"].forEach(function (id) {
+    ["menuModal", "leadModal", "taskModal", "loadModal", "teamModal", "acctModal", "scoreModal", "themeModal", "adminModal", "confirmModal"].forEach(function (id) {
       var el = document.getElementById(id);
       if (el) el.classList.remove("show");
     });
@@ -4806,6 +4917,7 @@
     state.completedStack = (state.completedStack || []).filter(function (id) { return !!remote[id] || !!localById[id]; });
     var fromCache = !!(qs.metadata && qs.metadata.fromCache);
     if (!TEAM.ready) TEAM.ready = true;
+    recycleSweep();
     if (!fromCache && !TEAM.migrationChecked) { TEAM.migrationChecked = true; teamOfferMigration(qs.empty); }
     setSaveStatus(fromCache ? "teamoffline" : "teamsynced");
     teamRenderSoon();
@@ -4819,6 +4931,8 @@
       if (ae && /^(INPUT|TEXTAREA|SELECT)$/.test(ae.tagName)) { TEAM.renderPending = true; return; }
       render();
       if (teamModalOpen()) renderTeamPanel();
+      var sm = document.getElementById("scoreModal");
+      if (sm && sm.classList.contains("show")) renderScoreboard();
     }, 150);
   }
   document.addEventListener("focusout", function () {
@@ -5169,11 +5283,259 @@
     return p;
   }
 
+  /** ---------- Scoreboard, daily recap, answer-time learning, lead recycling ---------- **/
+  var RECYCLE_MIN_DAYS = 60, RECYCLE_MAX_DAYS = 90, RECYCLE_MAX = 2, LEARN_MIN_CALLS = 150, LEARN_PRIOR = 25;
+  var scoreView = "today", recapDay = 0, answerCache = { key: "", model: null };
+
+  function dayStart(offsetDays) { var d = new Date(); d.setHours(0, 0, 0, 0); d.setDate(d.getDate() + (offsetDays || 0)); return d.getTime(); }
+  function weekStart() { var d = new Date(); d.setHours(0, 0, 0, 0); d.setDate(d.getDate() - ((d.getDay() + 6) % 7)); return d.getTime(); }
+  function shortMoney(n) { return n ? fmtMoney(n) : "$0"; }
+  function timeShort(ts) { return new Date(ts).toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" }); }
+
+  // Everyone's numbers for a time window.
+  function repStats(from, to, nextDay) {
+    var by = {};
+    function row(ref) {
+      var k = ref && ref.uid ? ref.uid : "_none";
+      return by[k] || (by[k] = { uid: k, name: ref && ref.name ? ref.name : "Unassigned", calls: 0, reached: 0, interested: 0,
+        names: [], first: 0, last: 0, pipeline: 0, committed: 0, active: 0, dueNext: 0, overdue: 0, member: null });
+    }
+    Object.keys(TEAM.members).forEach(function (k) { var m = TEAM.members[k]; row({ uid: k, name: m.name || m.username }).member = m; });
+    state.callLog.forEach(function (c) {
+      var ts = new Date(c.timestamp).getTime();
+      if (ts < from || ts >= to) return;
+      var r = row(c.by);
+      r.calls++;
+      if (CONTACT_OUTCOMES[c.outcomeKey]) r.reached++;
+      if (c.outcomeKey === "interested") { r.interested++; r.names.push(c.name); }
+      if (!r.first || ts < r.first) r.first = ts;
+      if (ts > r.last) r.last = ts;
+    });
+    state.leads.forEach(function (l) {
+      if (!l.owner || !l.stage || l.stage === "New Lead" || l.stage === "Closed Lost") return;
+      var r = row(l.owner);
+      r.active++;
+      r.pipeline += Number(l.amount) || 0;
+      if (l.stage === "Committed") r.committed += Number(l.amount) || 0;
+    });
+    var now = Date.now();
+    state.tasks.forEach(function (t) {
+      if (t.done) return;
+      var r = row(assigneeOf(t));
+      if (t.due === nextDay) r.dueNext++;
+      else if (taskDueTs(t) < now - 3600000) r.overdue++;
+    });
+    return Object.keys(by).map(function (k) { return by[k]; })
+      .filter(function (r) { return r.uid !== "_none" || r.calls || r.active; })
+      .sort(function (a, b) { return (b.calls - a.calls) || (b.reached - a.reached) || String(a.name).localeCompare(String(b.name)); });
+  }
+  function sumRows(rows) {
+    var t = { calls: 0, reached: 0, interested: 0, pipeline: 0, committed: 0, active: 0, dueNext: 0, overdue: 0 };
+    rows.forEach(function (r) { Object.keys(t).forEach(function (k) { t[k] += r[k]; }); });
+    return t;
+  }
+  function pct(a, b) { return b ? Math.round((a / b) * 100) + "%" : "\u2014"; }
+
+  function openScoreboard(view) {
+    closeMenuModal();
+    scoreView = view || (new Date().getHours() >= 17 ? "recap" : "today");
+    recapDay = 0;
+    document.getElementById("scoreModal").classList.add("show");
+    renderScoreboard();
+  }
+  function renderScoreboard() {
+    var body = document.getElementById("scoreModalBody");
+    if (!body) return;
+    var tabs = [["today", "Today"], ["week", "This week"], ["recap", "Recap"], ["answers", "Answer times"]];
+    var html = '<button class="close-x" id="scoreClose">&times;</button><h3>Team scoreboard</h3>' +
+      '<div class="sb-seg">' + tabs.map(function (t) { return '<button class="sb-tab' + (scoreView === t[0] ? ' active' : '') + '" data-sbview="' + t[0] + '">' + t[1] + '</button>'; }).join("") + '</div>';
+    if (scoreView === "today" || scoreView === "week") {
+      var from = scoreView === "today" ? dayStart(0) : weekStart();
+      var rows = repStats(from, dayStart(1), localDateStr(new Date(Date.now() + 86400000)));
+      var tot = sumRows(rows), maxCalls = Math.max.apply(null, rows.map(function (r) { return r.calls; }).concat([1]));
+      html += '<div class="sb-card sb-total"><div class="sb-top"><b>Team</b><span class="sb-big">' + tot.calls + '<small> calls</small></span></div>' +
+        '<div class="sb-stats"><span><b>' + tot.reached + '</b> reached \u00b7 ' + pct(tot.reached, tot.calls) + '</span><span><b>' + tot.interested + '</b> interested</span>' +
+        '<span><b>' + shortMoney(tot.pipeline) + '</b> pipeline</span><span><b>' + shortMoney(tot.committed) + '</b> committed</span></div></div>';
+      html += rows.map(function (r) {
+        return '<div class="sb-card' + (r.member && !r.member.active ? ' off' : '') + '">' +
+          '<div class="sb-top"><b>' + escapeHtml(r.name) + (r.member && !r.member.active ? ' <em>(access off)</em>' : '') + '</b><span class="sb-big">' + r.calls + '<small> calls</small></span></div>' +
+          '<div class="sb-bar"><span style="width:' + Math.round((r.calls / maxCalls) * 100) + '%"></span></div>' +
+          '<div class="sb-stats"><span><b>' + r.reached + '</b> reached \u00b7 ' + pct(r.reached, r.calls) + '</span><span><b>' + r.interested + '</b> interested</span>' +
+          '<span><b>' + shortMoney(r.pipeline) + '</b> pipeline</span>' + (r.overdue ? '<span class="warn"><b>' + r.overdue + '</b> overdue</span>' : '') + '</div></div>';
+      }).join("");
+    } else if (scoreView === "recap") {
+      html += '<div class="filter-row sb-days"><button class="filter-chip' + (recapDay === 0 ? ' active' : '') + '" data-recapday="0">Today</button>' +
+        '<button class="filter-chip' + (recapDay === -1 ? ' active' : '') + '" data-recapday="-1">Yesterday</button></div>';
+      var rec = recapData(recapDay);
+      html += '<div class="sb-card sb-total"><div class="sb-top"><b>' + escapeHtml(rec.label) + '</b><span class="sb-big">' + rec.tot.calls + '<small> calls</small></span></div>' +
+        '<div class="sb-stats"><span><b>' + rec.tot.reached + '</b> conversations \u00b7 ' + pct(rec.tot.reached, rec.tot.calls) + '</span><span><b>' + rec.tot.interested + '</b> interested</span>' +
+        '<span><b>' + rec.tot.dueNext + '</b> follow-ups ' + escapeHtml(rec.nextLabel) + '</span></div></div>';
+      html += rec.rows.map(function (r) {
+        return '<div class="sb-card"><div class="sb-top"><b>' + escapeHtml(r.name) + '</b><span class="sb-big">' + r.calls + '<small> calls</small></span></div>' +
+          '<div class="sb-stats"><span><b>' + r.reached + '</b> conversations \u00b7 ' + pct(r.reached, r.calls) + '</span><span><b>' + r.interested + '</b> interested</span>' +
+          '<span><b>' + r.dueNext + '</b> follow-ups ' + escapeHtml(rec.nextLabel) + '</span>' + (r.overdue ? '<span class="warn"><b>' + r.overdue + '</b> overdue</span>' : '') + '</div>' +
+          (r.first ? '<div class="sb-sub">Calling ' + escapeHtml(timeShort(r.first)) + ' \u2013 ' + escapeHtml(timeShort(r.last)) + '</div>' : '<div class="sb-sub">No calls</div>') +
+          (r.names.length ? '<div class="sb-sub">Interested: ' + escapeHtml(r.names.join(", ")) + '</div>' : '') + '</div>';
+      }).join("");
+      html += '<div class="modal-actions"><button class="btn-primary" id="recapCopy" style="width:100%">Copy recap as a text</button></div>';
+      if (recapDay === 0 && new Date().getHours() >= 17 && state.recapSeen !== localDateStr(new Date())) {
+        state.recapSeen = localDateStr(new Date());   // only an end-of-day look clears the evening reminder
+        saveState();
+      }
+    } else {
+      html += answersHtml();
+    }
+    body.innerHTML = html;
+    document.getElementById("scoreClose").addEventListener("click", function () { document.getElementById("scoreModal").classList.remove("show"); render(); });
+    body.querySelectorAll("[data-sbview]").forEach(function (b) { b.addEventListener("click", function () { scoreView = b.getAttribute("data-sbview"); renderScoreboard(); }); });
+    body.querySelectorAll("[data-recapday]").forEach(function (b) { b.addEventListener("click", function () { recapDay = Number(b.getAttribute("data-recapday")); renderScoreboard(); }); });
+    var cp = document.getElementById("recapCopy");
+    if (cp) cp.addEventListener("click", function () {
+      showToast(copyText(recapText(recapData(recapDay))) ? "Recap copied \u2014 paste it into a text or email" : "Couldn\u2019t copy the recap");
+    });
+  }
+  function recapData(offset) {
+    var from = dayStart(offset), to = dayStart(offset + 1);
+    var nextDay = localDateStr(new Date(to + 3600000));
+    var rows = repStats(from, to, nextDay).filter(function (r) { return r.calls || r.dueNext || (r.member && r.member.active); });
+    return { rows: rows, tot: sumRows(rows), label: new Date(from).toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" }),
+      nextLabel: offset === 0 ? "tomorrow" : "today" };
+  }
+  function recapText(rec) {
+    var lines = ["Dovetail recap \u2014 " + rec.label,
+      "Team: " + rec.tot.calls + " calls \u00b7 " + rec.tot.reached + " conversations (" + pct(rec.tot.reached, rec.tot.calls) + ") \u00b7 " + rec.tot.interested + " interested \u00b7 " + rec.tot.dueNext + " follow-ups " + rec.nextLabel, ""];
+    rec.rows.forEach(function (r) {
+      lines.push(r.name + ": " + r.calls + " calls, " + r.reached + " conversations (" + pct(r.reached, r.calls) + "), " + r.interested + " interested" +
+        (r.first ? " \u00b7 " + timeShort(r.first) + "\u2013" + timeShort(r.last) : "") + " \u00b7 " + r.dueNext + " follow-ups " + rec.nextLabel +
+        (r.overdue ? " \u00b7 " + r.overdue + " overdue" : ""));
+      if (r.names.length) lines.push("   Interested: " + r.names.join(", "));
+    });
+    return lines.join("\n");
+  }
+
+  // Learns which local hours your investors actually answer, blended with the research
+  // ranking until there's enough data (so a few odd calls can't swing it).
+  function answerModel() {
+    var last = state.callLog.length ? state.callLog[state.callLog.length - 1] : null;
+    var key = state.callLog.length + ":" + (last ? last.timestamp : "");
+    if (answerCache.key === key && answerCache.model) return answerCache.model;
+    var byId = {}, calls = {}, reached = {}, n = 0, nr = 0, h;
+    if (!answerModel.hours) answerModel.hours = typeof WeakMap === "function" ? new WeakMap() : null;
+    var hc = answerModel.hours;
+    state.leads.forEach(function (l) { byId[l.id] = l; });
+    for (h = 8; h <= 20; h++) { calls[h] = 0; reached[h] = 0; }
+    state.callLog.forEach(function (c) {
+      if (c.outcomeKey === "badnum") return;
+      var l = byId[c.leadId]; if (!l) return;
+      var z = leadZone(l); if (!z.iana) return;
+      var hit = hc && hc.get(c), hr;
+      if (hit && hit.z === z.iana) hr = hit.h;
+      else { hr = zonedParts(new Date(c.timestamp).getTime(), z.iana).h; if (hc) hc.set(c, { z: z.iana, h: hr }); }
+      if (hr < 8 || hr > 20) return;
+      calls[hr]++; n++;
+      if (CONTACT_OUTCOMES[c.outcomeKey]) { reached[hr]++; nr++; }
+    });
+    var base = n ? nr / n : 0.2, avg = 0, rate = {}, max = 0, score = {};
+    for (h = 8; h <= 20; h++) avg += (HOUR_SCORE[h] || 0.3) / 13;
+    for (h = 8; h <= 20; h++) {
+      var prior = base * (HOUR_SCORE[h] || 0.3) / avg;
+      rate[h] = (reached[h] + LEARN_PRIOR * prior) / (calls[h] + LEARN_PRIOR);
+      if (rate[h] > max) max = rate[h];
+    }
+    for (h = 8; h <= 20; h++) score[h] = max ? rate[h] / max : 0;
+    var model = { learned: n >= LEARN_MIN_CALLS, n: n, base: base, calls: calls, reached: reached, rate: rate, score: score };
+    answerCache = { key: key, model: model };
+    return model;
+  }
+  function hourScore(h) {
+    var m = answerModel();
+    if (m.learned && m.score[h] !== undefined) return m.score[h];
+    return HOUR_SCORE[h] || 0.3;
+  }
+  function smartNoteText(prime) {
+    var m = answerModel();
+    return m.learned
+      ? "\u2605 Ranked by when <em>your</em> investors actually pick up, learned from " + m.n + " calls and updated as you go. <strong>" + prime + "</strong> of your leads are in a strong hour right now."
+      : "\u2605 Leads at their best local hour come first. Sales-call studies show 10\u201311 AM and 4\u20135 PM in the prospect\u2019s own time answer best, with lunch the weakest. After " + LEARN_MIN_CALLS + " calls (" + m.n + " so far) this switches to your own answer data. <strong>" + prime + "</strong> of your leads are in a prime hour right now.";
+  }
+  function answersHtml() {
+    var m = answerModel(), max = 0, h, rows = "";
+    for (h = 8; h <= 20; h++) if (m.rate[h] > max) max = m.rate[h];
+    for (h = 8; h <= 20; h++) {
+      var label = (h % 12 || 12) + (h < 12 ? " AM" : " PM");
+      rows += '<div class="ans-row"><span class="ans-h">' + label + '</span><span class="ans-bar"><span style="width:' + Math.round((max ? m.rate[h] / max : 0) * 100) + '%"></span></span>' +
+        '<span class="ans-v">' + Math.round(m.rate[h] * 100) + '%<small> \u00b7 ' + m.calls[h] + '</small></span></div>';
+    }
+    return '<p class="modal-sub">' + (m.learned
+      ? 'Your team\u2019s answer rate by the investor\u2019s local time, from ' + m.n + ' calls. Smart order now uses this.'
+      : 'Answer rate by the investor\u2019s local time. Smart order switches to your own data after ' + LEARN_MIN_CALLS + ' calls \u2014 ' + m.n + ' so far. Until then, hours with few calls lean on sales research.') + '</p>' +
+      '<div class="ans-list">' + rows + '</div><p class="tx-help" style="margin-top:10px">Right number: answer rate \u00b7 calls made in that hour.</p>';
+  }
+
+  // Leads not reached after 6 tries rest 60\u201390 days, then come back for a fresh try (twice at most).
+  function recycleSweep() {
+    if (TEAM.on && (!TEAM.me || !TEAM.ready)) return 0;
+    var now = Date.now(), changed = 0;
+    state.leads.forEach(function (l) {
+      if (!l.exhausted || l.status !== "done") return;
+      if ((l.recycled || 0) >= RECYCLE_MAX) { if (!l.retired) { l.retired = true; changed++; } return; }
+      if (!l.restUntil) {
+        var base = l.calledAt ? new Date(l.calledAt).getTime() : now;
+        l.restUntil = base + (RECYCLE_MIN_DAYS + Math.floor(Math.random() * (RECYCLE_MAX_DAYS - RECYCLE_MIN_DAYS + 1))) * 86400000;
+        changed++;
+        return;
+      }
+      if (l.restUntil <= now) {
+        l.status = "pending"; l.outcome = null; l.exhausted = false; l.restUntil = null;
+        l.recycled = (l.recycled || 0) + 1; l.recycledAt = now; l.owner = null; l.claim = null;
+        changed++;
+      }
+    });
+    if (changed) saveState();
+    return changed;
+  }
+  function restDaysFrom(now) { return RECYCLE_MIN_DAYS + Math.floor(Math.random() * (RECYCLE_MAX_DAYS - RECYCLE_MIN_DAYS + 1)); }
+
+  /** ---------- Admin controls ---------- **/
+  function closeAdminHub() { document.getElementById("adminModal").classList.remove("show"); }
+  function openAdminHub() {
+    closeMenuModal();
+    var recapReady = new Date().getHours() >= 17 && state.recapSeen !== localDateStr(new Date());
+    var members = Object.keys(TEAM.members).map(function (k) { return TEAM.members[k]; });
+    var active = members.filter(function (m) { return m.active; }).length;
+    function tile(id, icon, title, sub, hot) {
+      return '<button class="hub-tile' + (hot ? ' hot' : '') + '" id="' + id + '" type="button"><span class="hub-ico">' + icon + '</span>' +
+        '<span class="hub-txt"><b>' + title + '</b><span>' + sub + '</span></span><span class="hub-go">\u203a</span></button>';
+    }
+    var I = function (d) { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + d + '</svg>'; };
+    document.getElementById("adminModalBody").innerHTML =
+      '<button class="close-x" id="adminClose">&times;</button><h3>Admin controls</h3>' +
+      '<p class="modal-sub">Signed in as ' + escapeHtml(TEAM.me ? TEAM.me.name : "") + ' (admin). Only you see this.</p>' +
+      tile("hubTeam", I('<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7"/><path d="M18 14.8c2 .7 3.2 2.4 3.6 5.2"/>'),
+        "Team &amp; logins", "Create usernames and passwords for reps, turn access off or on, remove people \u00b7 " + active + " active") +
+      tile("hubScore", I('<path d="M5 20V10M12 20V4M19 20v-7"/>'), "Scoreboard &amp; daily recap",
+        recapReady ? "Today\u2019s recap is ready" : "Calls, conversations, interested and pipeline by rep", recapReady) +
+      tile("hubAnswers", I('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'), "Answer times", "When your investors actually pick up") +
+      tile("hubLeads", I('<path d="M12 5v14M5 12h14"/>'), "Add leads", "Upload Excel, CSV, text or contacts") +
+      tile("hubExport", I('<path d="M12 4v11M7 10l5 5 5-5"/><path d="M5 20h14"/>'), "Export call log", "A CSV of every call, for your records") +
+      tile("hubBackup", I('<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 4v6h8V4"/>'), "Download full backup", "Leads, calls and follow-ups in one file") +
+      '<div class="hub-note">Reps sign in at <b>' + escapeHtml(TEAM_LINK) + '</b> with the logins you create in Team &amp; logins.</div>';
+    document.getElementById("adminModal").classList.add("show");
+    document.getElementById("adminClose").addEventListener("click", closeAdminHub);
+    document.getElementById("hubTeam").addEventListener("click", function () { closeAdminHub(); openTeamPanel(); });
+    document.getElementById("hubScore").addEventListener("click", function () { closeAdminHub(); openScoreboard(); });
+    document.getElementById("hubAnswers").addEventListener("click", function () { closeAdminHub(); openScoreboard("answers"); });
+    document.getElementById("hubLeads").addEventListener("click", function () { closeAdminHub(); openLoadModal(); switchTab("upload"); });
+    document.getElementById("hubExport").addEventListener("click", function () { closeAdminHub(); document.getElementById("menuExportBtn").click(); });
+    document.getElementById("hubBackup").addEventListener("click", function () { closeAdminHub(); document.getElementById("menuBackupBtn").click(); });
+  }
+
   /** ---------- Wire up static controls ---------- **/
   function init() {
     loadTheme();
     setUpImportTab();
     migrateState();
+    recycleSweep();
     try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {}
 
     document.getElementById("viewTabDial").addEventListener("click", function () {
@@ -5325,7 +5687,14 @@
       closeMenuModal();
       showConfirm("Sign out of Dovetail on this phone?", teamSignOut, "Sign out");
     });
-    document.getElementById("teamBtn").addEventListener("click", openTeamPanel);
+    document.getElementById("teamBtn").addEventListener("click", openAdminHub);
+    document.getElementById("adminBtn").addEventListener("click", openAdminHub);
+    document.getElementById("openThemesBtn").addEventListener("click", openThemes);
+    document.getElementById("themeClose").addEventListener("click", function () { document.getElementById("themeModal").classList.remove("show"); });
+    ["themeModal", "adminModal"].forEach(function (id) {
+      document.getElementById(id).addEventListener("click", function (e) { if (e.target === this) this.classList.remove("show"); });
+    });
+    document.getElementById("scoreModal").addEventListener("click", function (e) { if (e.target === this) { this.classList.remove("show"); render(); } });
     document.getElementById("changePwBtn").addEventListener("click", openChangePassword);
     ["teamModal", "acctModal"].forEach(function (id) {
       document.getElementById(id).addEventListener("click", function (e) { if (e.target === this) this.classList.remove("show"); });
@@ -5346,7 +5715,10 @@
     });
 
     document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") { closeLoadModal(); closeMenuModal(); closeTaskModal(); closeConfirm(); closeLeadProfile(); }
+      if (e.key === "Escape") {
+        closeLoadModal(); closeMenuModal(); closeTaskModal(); closeConfirm(); closeLeadProfile();
+        ["themeModal", "adminModal", "teamModal", "scoreModal", "acctModal"].forEach(function (id) { var el = document.getElementById(id); if (el) el.classList.remove("show"); });
+      }
     });
 
     if (teamAvailable()) teamBoot();
