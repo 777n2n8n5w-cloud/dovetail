@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="dovetail-build" content="2026-10-14">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -414,6 +415,461 @@
   :root[data-theme="rosegold"] { --header-rule: linear-gradient(90deg, #C98378, #A5564C, #C98378); }
   :root[data-theme="arctic"] { --header-rule: linear-gradient(90deg, #5B95DE, #1F6FD1, #5B95DE); }
   :root[data-theme="sand"] { --header-rule: linear-gradient(90deg, #D07A52, #B4532A, #D07A52); }
+  :root[data-theme="gilded"] {
+    --bg: #F4EFE4; --surface: #FFFDF8; --surface-raised: #F8F3E8; --border: #E3D5B5;
+    --text: #221B10; --text-dim: #5B4E38; --text-faint: #7D6F55;
+    --accent: #8A6A1F; --accent-dim: #B08D3E; --accent-text: #FFFFFF;
+    --interested: #2E7D55; --notinterested: #A23B4B; --voicemail: #8A6A00; --noanswer: #5F6470; --badnum: #A4492F; --callback: #3A62A0; --danger: #A4492F;
+    --bg-image: linear-gradient(115deg, transparent 40%, rgba(176,141,62,0.12) 41%, transparent 43%), linear-gradient(160deg, transparent 62%, rgba(120,100,70,0.08) 63%, transparent 65%), linear-gradient(35deg, transparent 20%, rgba(176,141,62,0.07) 21%, transparent 22.5%), radial-gradient(1200px 600px at 50% -10%, rgba(214,178,94,0.22), transparent 60%);
+    --call-bg: linear-gradient(135deg, #B38A34 0%, #8A6A1F 55%, #6E5214 100%);
+    --call-shadow: 0 8px 22px rgba(138,106,31,0.35);
+    --tab-active-bg: linear-gradient(135deg, #B38A34, #7A5A18);
+    --header-rule: linear-gradient(135deg, #F3D98B 0%, #B08D3E 28%, #FFF1C2 50%, #9A7426 72%, #E8C46A 100%);
+    --header-rule-h: 3px;
+    --card-shadow: 0 10px 28px rgba(90,70,20,0.12);
+    --font-display: Didot, 'Bodoni 72', Georgia, serif;
+    --display-transform: uppercase;
+    --display-spacing: 0.06em;
+    --radius-l: 6px;
+    --radius-m: 6px;
+    --fx-a: radial-gradient(circle at 12% 18%, rgba(176,141,62,0.55) 0 1.2px, transparent 1.7999999999999998px), radial-gradient(circle at 62% 42%, rgba(176,141,62,0.4) 0 0.9px, transparent 1.5px), radial-gradient(circle at 36% 78%, rgba(176,141,62,0.5) 0 1.1px, transparent 1.7000000000000002px), radial-gradient(circle at 86% 88%, rgba(176,141,62,0.35) 0 0.8px, transparent 1.4px), radial-gradient(circle at 78% 12%, rgba(176,141,62,0.45) 0 1.0px, transparent 1.6px);
+    --fx-a-size: 180px 180px;
+    --fx-a-anim: fxTwinkle 4s ease-in-out infinite alternate;
+    --card-frame: linear-gradient(135deg, #F3D98B 0%, #B08D3E 28%, #FFF1C2 50%, #9A7426 72%, #E8C46A 100%);
+    --name-fill: linear-gradient(100deg, #5E4510 0%, #9A7426 30%, #A8802E 48%, #7A5A18 70%, #5E4510 100%);
+    --header-bg: rgba(244,239,228,0.82); --header-blur: saturate(150%) blur(16px);
+    color-scheme: light;
+  }
+  :root[data-theme="blackcard"] {
+    --bg: #070708; --surface: #111113; --surface-raised: #18181B; --border: #2A2A2E;
+    --text: #F2F2F4; --text-dim: #B4B4BC; --text-faint: #85858F;
+    --accent: #C9CCD3; --accent-dim: #9A9DA6; --accent-text: #0A0A0B;
+    --bg-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.028) 0 2px, transparent 2px 4px), repeating-linear-gradient(-45deg, rgba(0,0,0,0.4) 0 2px, transparent 2px 4px), radial-gradient(900px 500px at 50% -10%, rgba(200,205,215,0.12), transparent 60%);
+    --card-tex: repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 3px);
+    --call-bg: linear-gradient(135deg, #F2F3F6 0%, #BFC3CC 45%, #8E929C 100%);
+    --call-shadow: 0 8px 24px rgba(0,0,0,0.6);
+    --tab-active-bg: linear-gradient(135deg, #E6E8ED, #9A9DA6);
+    --header-rule: linear-gradient(90deg, #52555D, #EDEFF3 50%, #52555D);
+    --card-shadow: 0 16px 36px rgba(0,0,0,0.7);
+    --font-display: 'Avenir Next', 'Helvetica Neue', system-ui, sans-serif;
+    --display-transform: uppercase;
+    --display-spacing: 0.1em;
+    --fx-a: linear-gradient(115deg, transparent 42%, rgba(255,255,255,0.06) 50%, transparent 58%);
+    --fx-a-anim: fxSweep 11s ease-in-out infinite;
+    --fx-a-inset: -20%;
+    --card-frame: linear-gradient(135deg, #5A5D66, #D9DCE3 35%, #6E717B 55%, #EDEFF3 75%, #52555D);
+    --name-fill: linear-gradient(100deg, #9EA2AC 0%, #FFFFFF 38%, #B7BAC3 58%, #F4F5F8 100%);
+    --header-bg: rgba(7,7,8,0.82); --header-blur: saturate(150%) blur(16px);
+    color-scheme: dark;
+  }
+  :root[data-theme="privatejet"] {
+    --bg: #0E1426; --surface: #151D33; --surface-raised: #1C2640; --border: #2E3A5C;
+    --text: #F4F1EA; --text-dim: #BDC2D1; --text-faint: #8C93A8;
+    --accent: #E3C48A; --accent-dim: #B99A5C; --accent-text: #0E1426;
+    --bg-image: radial-gradient(1400px 380px at 50% 40%, rgba(255,160,100,0.26), transparent 60%), linear-gradient(180deg, #121A33 0%, #1E2445 35%, #3C2F4F 52%, #0E1426 78%);
+    --call-bg: linear-gradient(135deg, #F1DDB0 0%, #E3C48A 45%, #B99A5C 100%);
+    --call-shadow: 0 8px 24px rgba(227,196,138,0.25);
+    --tab-active-bg: linear-gradient(135deg, #F1DDB0, #B99A5C);
+    --header-rule: linear-gradient(90deg, transparent, #E3C48A 25%, #F6E7C4 50%, #E3C48A 75%, transparent);
+    --card-shadow: 0 14px 34px rgba(0,0,0,0.5);
+    --font-display: Didot, 'Bodoni 72', Georgia, serif;
+    --display-spacing: 0.04em;
+    --fx-a: radial-gradient(260px 60px at 20% 30%, rgba(255,255,255,0.07), transparent 70%), radial-gradient(320px 70px at 75% 55%, rgba(255,255,255,0.06), transparent 70%), radial-gradient(200px 50px at 45% 82%, rgba(255,255,255,0.05), transparent 70%);
+    --fx-a-size: 900px 600px;
+    --fx-a-anim: fxClouds 70s linear infinite;
+    --fx-a-inset: 0 0 0 -900px;
+    --card-frame: linear-gradient(135deg, rgba(227,196,138,0.7), rgba(227,196,138,0.12) 50%, rgba(227,196,138,0.6));
+    --name-fill: linear-gradient(100deg, #E3C48A 0%, #FFF4DA 45%, #D6B26E 100%);
+    --header-bg: rgba(14,20,38,0.82); --header-blur: saturate(150%) blur(16px);
+    color-scheme: dark;
+  }
+  :root[data-theme="monaco"] {
+    --bg: #EEF3F7; --surface: #FFFFFF; --surface-raised: #F5F8FB; --border: #D4DEE8;
+    --text: #0C1B2E; --text-dim: #3E5268; --text-faint: #5F7389;
+    --accent: #0B2E59; --accent-dim: #2F5A8C; --accent-text: #FFFFFF;
+    --interested: #2E7D55; --notinterested: #A23B4B; --voicemail: #8A6A00; --noanswer: #5F6470; --badnum: #A4492F; --callback: #3A62A0; --danger: #A4492F;
+    --bg-image: repeating-radial-gradient(circle at 50% 130%, rgba(11,46,89,0.045) 0 2px, transparent 2px 22px), linear-gradient(180deg, #F4F8FB, #E3ECF4);
+    --call-bg: linear-gradient(135deg, #184A85 0%, #0B2E59 60%, #071E3C 100%);
+    --call-shadow: 0 8px 22px rgba(11,46,89,0.3);
+    --tab-active-bg: linear-gradient(135deg, #184A85, #0B2E59);
+    --header-rule: repeating-linear-gradient(90deg, #0B2E59 0 14px, #C9A15B 14px 18px);
+    --header-rule-h: 3px;
+    --card-shadow: 0 10px 26px rgba(11,46,89,0.1);
+    --font-display: Didot, 'Bodoni 72', Georgia, serif;
+    --display-transform: uppercase;
+    --display-spacing: 0.07em;
+    --fx-a: radial-gradient(circle at 12% 18%, rgba(201,161,91,0.55) 0 1.3px, transparent 1.9px), radial-gradient(circle at 62% 42%, rgba(255,255,255,0.9) 0 1.4px, transparent 2.0px), radial-gradient(circle at 36% 78%, rgba(201,161,91,0.45) 0 1.0px, transparent 1.6px), radial-gradient(circle at 86% 88%, rgba(255,255,255,0.8) 0 1.2px, transparent 1.7999999999999998px), radial-gradient(circle at 78% 12%, rgba(201,161,91,0.5) 0 1.1px, transparent 1.7000000000000002px);
+    --fx-a-size: 150px 150px;
+    --fx-a-anim: fxTwinkle 2.6s ease-in-out infinite alternate;
+    --card-frame: linear-gradient(135deg, #C9A15B, #F1DCA8 35%, #0B2E59 65%, #C9A15B);
+    --header-bg: rgba(238,243,247,0.82); --header-blur: saturate(150%) blur(16px);
+    color-scheme: light;
+  }
+  :root[data-theme="bullion"] {
+    --bg: #120D05; --surface: #1B1409; --surface-raised: #241B0D; --border: #4A3715;
+    --text: #FBF3E1; --text-dim: #D6C39A; --text-faint: #A08B5F;
+    --accent: #E3B341; --accent-dim: #B8892A; --accent-text: #120D05;
+    --bg-image: repeating-linear-gradient(180deg, rgba(227,179,65,0.05) 0 38px, rgba(0,0,0,0.3) 38px 40px), repeating-linear-gradient(90deg, transparent 0 118px, rgba(0,0,0,0.25) 118px 120px), radial-gradient(900px 600px at 50% -10%, rgba(227,179,65,0.2), transparent 60%);
+    --card-tex: linear-gradient(160deg, rgba(255,230,160,0.07), transparent 45%);
+    --call-bg: linear-gradient(135deg, #FFE28A 0%, #E3B341 40%, #B8892A 75%, #8A6414 100%);
+    --call-shadow: 0 10px 26px rgba(227,179,65,0.3);
+    --tab-active-bg: linear-gradient(135deg, #FFE28A, #B8892A);
+    --header-rule: linear-gradient(90deg, #8A6414, #FFE28A 50%, #8A6414);
+    --header-rule-h: 3px;
+    --card-shadow: 0 16px 36px rgba(0,0,0,0.6);
+    --font-display: 'Bodoni 72', Didot, Georgia, serif;
+    --display-transform: uppercase;
+    --display-spacing: 0.06em;
+    --fx-a: radial-gradient(circle at 12% 18%, rgba(255,220,120,0.7) 0 1.2px, transparent 1.7999999999999998px), radial-gradient(circle at 62% 42%, rgba(255,220,120,0.5) 0 0.9px, transparent 1.5px), radial-gradient(circle at 36% 78%, rgba(255,240,180,0.7) 0 1.3px, transparent 1.9px), radial-gradient(circle at 86% 88%, rgba(255,220,120,0.45) 0 0.8px, transparent 1.4px), radial-gradient(circle at 78% 12%, rgba(255,230,150,0.6) 0 1.0px, transparent 1.6px), radial-gradient(circle at 24% 56%, rgba(255,220,120,0.5) 0 0.9px, transparent 1.5px);
+    --fx-a-size: 170px 170px;
+    --fx-a-anim: fxTwinkle 2.2s ease-in-out infinite alternate;
+    --fx-b: linear-gradient(115deg, transparent 44%, rgba(255,226,138,0.07) 50%, transparent 56%);
+    --fx-b-anim: fxSweep 9s ease-in-out infinite;
+    --fx-b-inset: -20%;
+    --card-frame: linear-gradient(135deg, #8A6414, #FFE28A 30%, #B8892A 55%, #FFF0B8 78%, #8A6414);
+    --name-fill: linear-gradient(100deg, #B8892A 0%, #FFE28A 35%, #E3B341 55%, #FFF0B8 75%, #B8892A 100%);
+    --header-bg: rgba(18,13,5,0.82); --header-blur: saturate(150%) blur(16px);
+    color-scheme: dark;
+  }
+  :root[data-theme="chairman"] {
+    --bg: #1A0F0A; --surface: #24150E; --surface-raised: #2E1B12; --border: #4C2F20;
+    --text: #F6EDE4; --text-dim: #CDB6A2; --text-faint: #9A8270;
+    --accent: #C8A263; --accent-dim: #9C7C44; --accent-text: #1A0F0A;
+    --bg-image: repeating-linear-gradient(92deg, rgba(0,0,0,0.2) 0 2px, transparent 2px 9px, rgba(255,200,150,0.035) 9px 11px, transparent 11px 17px), linear-gradient(180deg, #26150D, #140B07);
+    --card-tex: radial-gradient(120% 80% at 50% 0%, rgba(30,90,62,0.28), transparent 70%);
+    --call-bg: linear-gradient(135deg, #E0BF83 0%, #C8A263 45%, #8E6F38 100%);
+    --call-shadow: 0 8px 22px rgba(0,0,0,0.5);
+    --tab-active-bg: linear-gradient(135deg, #E0BF83, #9C7C44);
+    --header-rule: linear-gradient(90deg, #8E6F38, #E0BF83 50%, #8E6F38);
+    --header-rule-h: 3px;
+    --card-shadow: 0 14px 32px rgba(0,0,0,0.55);
+    --font-display: Baskerville, 'Palatino', Georgia, serif;
+    --display-spacing: 0.02em;
+    --card-frame: linear-gradient(135deg, #8E6F38, #E0BF83 40%, #6E5226 60%, #C8A263);
+    --header-bg: rgba(26,15,10,0.82); --header-blur: saturate(150%) blur(16px);
+    color-scheme: dark;
+  }
+  :root[data-theme="neonnoir"] {
+    --bg: #07060D; --surface: #0F0D19; --surface-raised: #161325; --border: #2A2442;
+    --text: #F3F0FF; --text-dim: #B9B2D6; --text-faint: #8A83A8;
+    --accent: #FF2E88; --accent-dim: #C21F66; --accent-text: #0A0612;
+    --bg-image: radial-gradient(700px 420px at 88% 0%, rgba(0,229,255,0.2), transparent 60%), radial-gradient(760px 520px at 0% 100%, rgba(255,46,136,0.22), transparent 60%), linear-gradient(180deg, #0B0918, #07060D);
+    --call-bg: linear-gradient(135deg, #FF2E88 0%, #B026FF 100%);
+    --call-shadow: 0 0 24px rgba(255,46,136,0.5);
+    --tab-active-bg: linear-gradient(135deg, #FF2E88, #7A2BFF);
+    --tab-glow: 0 0 16px rgba(255,46,136,0.5);
+    --header-rule: linear-gradient(90deg, #FF2E88, #7A2BFF 50%, #00E5FF);
+    --header-rule-h: 2px;
+    --display-glow: 0 0 12px rgba(255,46,136,0.75), 0 0 2px rgba(255,255,255,0.6);
+    --brand-anim: fxFlicker 6s linear infinite;
+    --card-shadow: 0 0 22px rgba(122,43,255,0.18), 0 14px 30px rgba(0,0,0,0.6);
+    --font-display: Futura, 'Avenir Next', 'Trebuchet MS', sans-serif;
+    --display-transform: uppercase;
+    --display-spacing: 0.05em;
+    --fx-a: radial-gradient(ellipse 0.9px 13px at 12% 18%, rgba(150,215,255,0.45), transparent), radial-gradient(ellipse 0.9px 13px at 62% 42%, rgba(150,215,255,0.45), transparent), radial-gradient(ellipse 0.9px 13px at 36% 78%, rgba(150,215,255,0.45), transparent), radial-gradient(ellipse 0.9px 13px at 86% 88%, rgba(150,215,255,0.45), transparent), radial-gradient(ellipse 0.9px 13px at 78% 12%, rgba(150,215,255,0.45), transparent), radial-gradient(ellipse 0.9px 13px at 24% 56%, rgba(150,215,255,0.45), transparent), radial-gradient(ellipse 0.9px 13px at 50% 30%, rgba(150,215,255,0.45), transparent), radial-gradient(ellipse 0.9px 13px at 92% 60%, rgba(150,215,255,0.45), transparent);
+    --fx-a-size: 130px 220px;
+    --fx-a-anim: fxRain 0.8s linear infinite;
+    --fx-b: radial-gradient(60% 30% at 50% 100%, rgba(255,46,136,0.14), transparent 70%);
+    --fx-b-anim: fxPulse 4s ease-in-out infinite alternate;
+    --fx-b-inset: 0;
+    --card-frame: linear-gradient(135deg, #FF2E88, #7A2BFF 50%, #00E5FF);
+    --header-bg: rgba(7,6,13,0.82); --header-blur: saturate(150%) blur(16px);
+    color-scheme: dark;
+  }
+  :root[data-theme="synthwave"] {
+    --bg: #120424; --surface: #1B0934; --surface-raised: #240E44; --border: #43206E;
+    --text: #FFF0FB; --text-dim: #D9B6E8; --text-faint: #A383B8;
+    --accent: #FF4FD8; --accent-dim: #C23AA6; --accent-text: #160428;
+    --bg-image: radial-gradient(170px 170px at 50% 44%, rgba(255,190,90,0.55), rgba(255,79,139,0.45) 55%, transparent 72%), linear-gradient(180deg, #12032A 0%, #3A0B52 44%, #5A1260 56%, #120424 62%, #120424 100%);
+    --call-bg: linear-gradient(135deg, #FF4FD8 0%, #FF7A45 60%, #FFC23D 100%);
+    --call-shadow: 0 0 22px rgba(255,79,216,0.45);
+    --tab-active-bg: linear-gradient(135deg, #FF4FD8, #8E2DE2);
+    --tab-glow: 0 0 14px rgba(255,79,216,0.45);
+    --header-rule: linear-gradient(90deg, #00E5FF, #FF4FD8 50%, #FFC23D);
+    --header-rule-h: 3px;
+    --fill-glow: drop-shadow(0 0 8px rgba(255,79,216,0.55));
+    --card-shadow: 0 0 20px rgba(255,79,216,0.15), 0 14px 30px rgba(0,0,0,0.55);
+    --font-display: Futura, 'Avenir Next', 'Trebuchet MS', sans-serif;
+    --display-style: italic;
+    --display-transform: uppercase;
+    --display-spacing: 0.04em;
+    --fx-b: repeating-linear-gradient(0deg, rgba(255,79,216,0.38) 0 1px, transparent 1px 36px), repeating-linear-gradient(90deg, rgba(0,229,255,0.22) 0 1px, transparent 1px 48px);
+    --fx-b-anim: fxGrid 1.6s linear infinite;
+    --fx-b-inset: 58% 0 -40px 0;
+    --card-frame: linear-gradient(135deg, #FF4FD8, #8E2DE2 50%, #00E5FF);
+    --name-fill: linear-gradient(180deg, #FFFFFF 0%, #FFD1F4 42%, #FF4FD8 52%, #B04BFF 72%, #FFE3F8 100%);
+    --header-bg: rgba(18,4,36,0.82); --header-blur: saturate(150%) blur(16px);
+    color-scheme: dark;
+  }
+  :root[data-theme="highroller"] {
+    --bg: #06241A; --surface: #0B2F22; --surface-raised: #10392A; --border: #1F5A42;
+    --text: #F4F1E6; --text-dim: #BFD1C4; --text-faint: #8AA597;
+    --accent: #D4AF37; --accent-dim: #A8892A; --accent-text: #06241A;
+    --bg-image: radial-gradient(1200px 800px at 50% 30%, rgba(40,140,90,0.35), transparent 70%), repeating-linear-gradient(45deg, rgba(0,0,0,0.06) 0 1px, transparent 1px 3px), repeating-linear-gradient(-45deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 3px);
+    --call-bg: linear-gradient(135deg, #F1D36B 0%, #D4AF37 45%, #9E7A1E 100%);
+    --call-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    --tab-active-bg: linear-gradient(135deg, #F1D36B, #A8892A);
+    --header-rule: repeating-linear-gradient(90deg, #B3121F 0 10px, #111 10px 20px, #F4F1E6 20px 22px);
+    --header-rule-h: 3px;
+    --card-shadow: 0 14px 32px rgba(0,0,0,0.5);
+    --font-display: Didot, 'Bodoni 72', Georgia, serif;
+    --display-transform: uppercase;
+    --display-spacing: 0.07em;
+    --fx-a: radial-gradient(circle at 12% 18%, rgba(255,215,110,0.75) 0 1.4px, transparent 2.0px), radial-gradient(circle at 62% 42%, rgba(255,215,110,0.5) 0 1.0px, transparent 1.6px), radial-gradient(circle at 36% 78%, rgba(255,80,80,0.55) 0 1.2px, transparent 1.7999999999999998px), radial-gradient(circle at 86% 88%, rgba(255,215,110,0.6) 0 1.2px, transparent 1.7999999999999998px), radial-gradient(circle at 78% 12%, rgba(255,255,255,0.5) 0 1.0px, transparent 1.6px);
+    --fx-a-size: 140px 140px;
+    --fx-a-anim: fxTwinkle 1.6s ease-in-out infinite alternate;
+    --card-frame: linear-gradient(135deg, #D4AF37, #8B0000 50%, #D4AF37);
+    --header-bg: rgba(6,36,26,0.82); --header-blur: saturate(150%) blur(16px);
+    color-scheme: dark;
+  }
+  :root[data-theme="velvet"] {
+    --bg: #1A0610; --surface: #250A17; --surface-raised: #300E1E; --border: #521A33;
+    --text: #FBEFF4; --text-dim: #D9B3C4; --text-faint: #A67E90;
+    --accent: #E8B04B; --accent-dim: #B9892F; --accent-text: #1A0610;
+    --bg-image: radial-gradient(900px 700px at 50% -10%, rgba(255,120,170,0.2), transparent 60%), repeating-linear-gradient(90deg, rgba(0,0,0,0.22) 0 3px, rgba(255,255,255,0.025) 3px 6px, rgba(0,0,0,0.12) 6px 14px);
+    --call-bg: linear-gradient(135deg, #F5CE78 0%, #E8B04B 45%, #A87A22 100%);
+    --call-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    --tab-active-bg: linear-gradient(135deg, #F5CE78, #B9892F);
+    --header-rule: linear-gradient(90deg, transparent, #E8B04B 30%, #F5CE78 50%, #E8B04B 70%, transparent);
+    --card-shadow: 0 16px 36px rgba(0,0,0,0.6);
+    --font-display: 'Bodoni 72', Didot, Georgia, serif;
+    --display-style: italic;
+    --display-spacing: 0.02em;
+    --fx-a: radial-gradient(420px 760px at 50% 0%, rgba(255,225,190,0.12), transparent 70%);
+    --fx-a-anim: fxSway 14s ease-in-out infinite alternate;
+    --fx-a-inset: -20%;
+    --card-frame: linear-gradient(135deg, #E8B04B, #521A33 50%, #E8B04B);
+    --header-bg: rgba(26,6,16,0.82); --header-blur: saturate(150%) blur(16px);
+    color-scheme: dark;
+  }
+  :root[data-theme="afterparty"] {
+    --bg: #090716; --surface: #120F24; --surface-raised: #1A1633; --border: #2F2A57;
+    --text: #F4F2FF; --text-dim: #BDB8E3; --text-faint: #8B86B3;
+    --accent: #6D4AFF; --accent-dim: #5B3FD9; --accent-text: #FFFFFF;
+    --bg-image: linear-gradient(180deg, #0D0A20, #090716);
+    --call-bg: linear-gradient(135deg, #6D4AFF 0%, #00B8D9 100%);
+    --call-shadow: 0 0 24px rgba(109,74,255,0.5);
+    --tab-active-bg: linear-gradient(135deg, #6D4AFF, #00B8D9);
+    --tab-glow: 0 0 14px rgba(109,74,255,0.5);
+    --header-rule: linear-gradient(90deg, #FF2E88, #6D4AFF 50%, #00E5FF);
+    --display-glow: 0 0 10px rgba(109,74,255,0.6);
+    --card-shadow: 0 0 24px rgba(109,74,255,0.16), 0 14px 30px rgba(0,0,0,0.55);
+    --font-display: 'Avenir Next', 'Helvetica Neue', system-ui, sans-serif;
+    --display-transform: uppercase;
+    --display-spacing: 0.06em;
+    --fx-a: radial-gradient(40% 32% at 28% 28%, rgba(124,92,255,0.4), transparent 70%), radial-gradient(34% 28% at 72% 58%, rgba(0,229,255,0.28), transparent 70%), radial-gradient(30% 26% at 46% 88%, rgba(255,46,136,0.26), transparent 70%);
+    --fx-a-anim: fxAurora 9s ease-in-out infinite alternate;
+    --fx-a-inset: -20%;
+    --card-frame: linear-gradient(135deg, #FF2E88, #6D4AFF 50%, #00E5FF);
+    --header-bg: rgba(9,7,22,0.82); --header-blur: saturate(150%) blur(16px);
+    color-scheme: dark;
+  }
+  :root[data-theme="aurora"] {
+    --bg: #04111A; --surface: #0A1C28; --surface-raised: #0F2533; --border: #1D3D50;
+    --text: #EAF7F4; --text-dim: #A9C9C4; --text-faint: #7A9C98;
+    --accent: #3FE0A5; --accent-dim: #26A97A; --accent-text: #04111A;
+    --bg-image: linear-gradient(180deg, #06182A 0%, #04111A 60%);
+    --call-bg: linear-gradient(135deg, #3FE0A5 0%, #3FA8E0 100%);
+    --call-shadow: 0 0 22px rgba(63,224,165,0.35);
+    --tab-active-bg: linear-gradient(135deg, #3FE0A5, #3FA8E0);
+    --header-rule: linear-gradient(90deg, #3FE0A5, #6A7BFF 50%, #B06BFF);
+    --display-glow: 0 0 10px rgba(63,224,165,0.45);
+    --card-shadow: 0 14px 32px rgba(0,0,0,0.5);
+    --font-display: 'Avenir Next', 'Helvetica Neue', system-ui, sans-serif;
+    --display-spacing: 0.02em;
+    --fx-a: linear-gradient(100deg, transparent 18%, rgba(63,224,165,0.22) 34%, rgba(90,120,255,0.2) 50%, transparent 66%), radial-gradient(60% 38% at 30% 18%, rgba(63,224,165,0.24), transparent 70%), radial-gradient(50% 32% at 76% 12%, rgba(176,107,255,0.2), transparent 70%);
+    --fx-a-anim: fxAurora 16s ease-in-out infinite alternate;
+    --fx-a-inset: -20%;
+    --fx-b: radial-gradient(circle at 12% 18%, rgba(255,255,255,0.8) 0 1.0px, transparent 1.6px), radial-gradient(circle at 62% 42%, rgba(255,255,255,0.55) 0 0.7px, transparent 1.2999999999999998px), radial-gradient(circle at 36% 78%, rgba(200,240,255,0.7) 0 0.9px, transparent 1.5px), radial-gradient(circle at 86% 88%, rgba(255,255,255,0.5) 0 0.6px, transparent 1.2px), radial-gradient(circle at 78% 12%, rgba(255,255,255,0.7) 0 0.8px, transparent 1.4px);
+    --fx-b-size: 150px 150px;
+    --fx-b-anim: fxTwinkle 3s ease-in-out infinite alternate;
+    --card-frame: linear-gradient(135deg, rgba(63,224,165,0.7), rgba(106,123,255,0.4) 50%, rgba(176,107,255,0.7));
+    --header-bg: rgba(4,17,26,0.82); --header-blur: saturate(150%) blur(16px);
+    color-scheme: dark;
+  }
+  :root[data-theme="deepsea"] {
+    --bg: #020B18; --surface: #071628; --surface-raised: #0B1F36; --border: #163556;
+    --text: #E6F4FF; --text-dim: #A2C3DD; --text-faint: #7597B3;
+    --accent: #22D3EE; --accent-dim: #1598AD; --accent-text: #02101D;
+    --bg-image: radial-gradient(1200px 700px at 50% -20%, rgba(34,211,238,0.16), transparent 60%), linear-gradient(180deg, #06223F 0%, #020B18 70%);
+    --call-bg: linear-gradient(135deg, #22D3EE 0%, #1E7FD6 100%);
+    --call-shadow: 0 0 22px rgba(34,211,238,0.35);
+    --tab-active-bg: linear-gradient(135deg, #22D3EE, #1E7FD6);
+    --header-rule: linear-gradient(90deg, transparent, #22D3EE 50%, transparent);
+    --display-glow: 0 0 10px rgba(34,211,238,0.4);
+    --card-shadow: 0 14px 32px rgba(0,0,0,0.55);
+    --font-display: 'Avenir Next', 'Helvetica Neue', system-ui, sans-serif;
+    --radius-l: 20px;
+    --fx-a: radial-gradient(circle at 12% 18%, rgba(120,240,255,0.7) 0 1.3px, transparent 1.9px), radial-gradient(circle at 62% 42%, rgba(120,240,255,0.45) 0 0.9px, transparent 1.5px), radial-gradient(circle at 36% 78%, rgba(180,255,230,0.6) 0 1.1px, transparent 1.7000000000000002px), radial-gradient(circle at 86% 88%, rgba(120,240,255,0.4) 0 0.8px, transparent 1.4px), radial-gradient(circle at 78% 12%, rgba(160,220,255,0.55) 0 1.0px, transparent 1.6px), radial-gradient(circle at 24% 56%, rgba(120,240,255,0.5) 0 0.9px, transparent 1.5px);
+    --fx-a-size: 200px 240px;
+    --fx-a-anim: fxRise 22s linear infinite;
+    --fx-b: repeating-linear-gradient(100deg, transparent 0 70px, rgba(120,220,255,0.045) 70px 110px);
+    --fx-b-anim: fxSway 18s ease-in-out infinite alternate;
+    --fx-b-inset: -20%;
+    --card-frame: linear-gradient(135deg, rgba(34,211,238,0.6), rgba(30,127,214,0.2) 50%, rgba(34,211,238,0.5));
+    --header-bg: rgba(2,11,24,0.82); --header-blur: saturate(150%) blur(16px);
+    color-scheme: dark;
+  }
+  :root[data-theme="sakura"] {
+    --bg: #FBF1F3; --surface: #FFFFFF; --surface-raised: #FFF7F8; --border: #F1D5DC;
+    --text: #2D1A20; --text-dim: #6D4C56; --text-faint: #8F6D77;
+    --accent: #B83B62; --accent-dim: #D86E8F; --accent-text: #FFFFFF;
+    --interested: #2E7D55; --notinterested: #A23B4B; --voicemail: #8A6A00; --noanswer: #5F6470; --badnum: #A4492F; --callback: #3A62A0; --danger: #A4492F;
+    --bg-image: radial-gradient(700px 500px at 100% 0%, rgba(244,160,185,0.3), transparent 60%), radial-gradient(600px 500px at 0% 100%, rgba(244,160,185,0.22), transparent 60%);
+    --call-bg: linear-gradient(135deg, #D0527A 0%, #A8325A 100%);
+    --call-shadow: 0 8px 22px rgba(184,59,98,0.3);
+    --tab-active-bg: linear-gradient(135deg, #D0527A, #A8325A);
+    --header-rule: linear-gradient(90deg, #F4A0B9, #B83B62 50%, #F4A0B9);
+    --card-shadow: 0 10px 26px rgba(150,60,90,0.1);
+    --font-display: Georgia, 'Times New Roman', serif;
+    --display-style: italic;
+    --radius-l: 20px;
+    --fx-a: radial-gradient(ellipse 5px 3px at 12% 18%, rgba(232,120,155,0.55), transparent), radial-gradient(ellipse 5px 3px at 62% 42%, rgba(232,120,155,0.55), transparent), radial-gradient(ellipse 5px 3px at 36% 78%, rgba(232,120,155,0.55), transparent), radial-gradient(ellipse 5px 3px at 86% 88%, rgba(232,120,155,0.55), transparent), radial-gradient(ellipse 5px 3px at 78% 12%, rgba(232,120,155,0.55), transparent), radial-gradient(ellipse 5px 3px at 24% 56%, rgba(232,120,155,0.55), transparent), radial-gradient(ellipse 5px 3px at 50% 30%, rgba(232,120,155,0.55), transparent);
+    --fx-a-size: 220px 260px;
+    --fx-a-anim: fxSnow 18s linear infinite;
+    --card-frame: linear-gradient(135deg, #F4A0B9, #FFFFFF 50%, #F4A0B9);
+    --header-bg: rgba(251,241,243,0.82); --header-blur: saturate(150%) blur(16px);
+    color-scheme: light;
+  }
+  :root[data-theme="desertdusk"] {
+    --bg: #1C0F0A; --surface: #27160F; --surface-raised: #321D14; --border: #533222;
+    --text: #FBEEE3; --text-dim: #D8B9A0; --text-faint: #A5866F;
+    --accent: #FF8A3D; --accent-dim: #D06A26; --accent-text: #1C0F0A;
+    --bg-image: radial-gradient(130% 55% at 18% 112%, #3A1E12 0 42%, transparent 43%), radial-gradient(130% 50% at 88% 118%, #2E170D 0 46%, transparent 47%), radial-gradient(900px 260px at 50% 30%, rgba(255,138,61,0.3), transparent 65%), linear-gradient(180deg, #2A1330 0%, #5E2A26 30%, #A4502A 44%, #1C0F0A 62%);
+    --call-bg: linear-gradient(135deg, #FFB067 0%, #FF8A3D 45%, #C8541A 100%);
+    --call-shadow: 0 8px 24px rgba(255,138,61,0.3);
+    --tab-active-bg: linear-gradient(135deg, #FFB067, #D06A26);
+    --header-rule: linear-gradient(90deg, #7A2E4A, #FF8A3D 50%, #FFC76A);
+    --card-shadow: 0 14px 32px rgba(0,0,0,0.5);
+    --font-display: Futura, 'Avenir Next', 'Trebuchet MS', sans-serif;
+    --display-transform: uppercase;
+    --display-spacing: 0.06em;
+    --fx-a: radial-gradient(circle at 12% 18%, rgba(255,190,130,0.45) 0 1.0px, transparent 1.6px), radial-gradient(circle at 62% 42%, rgba(255,170,110,0.35) 0 0.8px, transparent 1.4px), radial-gradient(circle at 36% 78%, rgba(255,210,160,0.4) 0 0.9px, transparent 1.5px), radial-gradient(circle at 86% 88%, rgba(255,170,110,0.3) 0 0.7px, transparent 1.2999999999999998px);
+    --fx-a-size: 300px 200px;
+    --fx-a-anim: fxWind 16s linear infinite;
+    --fx-a-inset: 0 0 0 -300px;
+    --card-frame: linear-gradient(135deg, #FF8A3D, #533222 50%, #FFC76A);
+    --header-bg: rgba(28,15,10,0.82); --header-blur: saturate(150%) blur(16px);
+    color-scheme: dark;
+  }
+  :root[data-theme="rainforest"] {
+    --bg: #07140D; --surface: #0D1F15; --surface-raised: #12291C; --border: #214231;
+    --text: #EAF5EC; --text-dim: #A9C8B2; --text-faint: #7B9A84;
+    --accent: #7BD389; --accent-dim: #4FA35F; --accent-text: #07140D;
+    --bg-image: radial-gradient(ellipse 60px 24px at 20% 30%, rgba(80,160,100,0.14), transparent 70%), radial-gradient(ellipse 50px 20px at 70% 65%, rgba(60,140,90,0.12), transparent 70%), radial-gradient(ellipse 40px 16px at 45% 90%, rgba(90,170,110,0.1), transparent 70%), linear-gradient(180deg, #0B2016, #07140D);
+    --bg-size: 180px 160px, 180px 160px, 180px 160px, auto;
+    --call-bg: linear-gradient(135deg, #9BE3A6 0%, #7BD389 40%, #3F8F4E 100%);
+    --call-shadow: 0 8px 22px rgba(0,0,0,0.45);
+    --tab-active-bg: linear-gradient(135deg, #9BE3A6, #4FA35F);
+    --header-rule: linear-gradient(90deg, #2E6B3F, #9BE3A6 50%, #2E6B3F);
+    --card-shadow: 0 14px 32px rgba(0,0,0,0.5);
+    --font-display: Georgia, 'Times New Roman', serif;
+    --fx-a: radial-gradient(300px 90px at 20% 35%, rgba(220,255,230,0.06), transparent 70%), radial-gradient(360px 100px at 70% 70%, rgba(220,255,230,0.05), transparent 70%);
+    --fx-a-size: 900px 600px;
+    --fx-a-anim: fxClouds 80s linear infinite;
+    --fx-a-inset: 0 0 0 -900px;
+    --fx-b: radial-gradient(circle at 12% 18%, rgba(220,255,120,0.85) 0 1.3px, transparent 1.9px), radial-gradient(circle at 62% 42%, rgba(220,255,120,0.6) 0 1.0px, transparent 1.6px), radial-gradient(circle at 36% 78%, rgba(240,255,160,0.8) 0 1.2px, transparent 1.7999999999999998px);
+    --fx-b-size: 210px 210px;
+    --fx-b-anim: fxTwinkle 2.4s ease-in-out infinite alternate;
+    --card-frame: linear-gradient(135deg, #7BD389, #214231 50%, #7BD389);
+    --header-bg: rgba(7,20,13,0.82); --header-blur: saturate(150%) blur(16px);
+    color-scheme: dark;
+  }
+  :root[data-theme="cybergrid"] {
+    --bg: #030A12; --surface: #07131F; --surface-raised: #0B1B2B; --border: #15344D;
+    --text: #E3F4FF; --text-dim: #9CC2DA; --text-faint: #6F93AD;
+    --accent: #00B3FF; --accent-dim: #0086C2; --accent-text: #02111C;
+    --bg-image: repeating-linear-gradient(0deg, rgba(0,179,255,0.07) 0 1px, transparent 1px 28px), repeating-linear-gradient(90deg, rgba(0,179,255,0.07) 0 1px, transparent 1px 28px), radial-gradient(circle at 14px 14px, rgba(0,179,255,0.3) 0 1.5px, transparent 2px);
+    --bg-size: 28px 28px;
+    --call-bg: linear-gradient(135deg, #3FD0FF 0%, #0086C2 100%);
+    --call-shadow: 0 0 22px rgba(0,179,255,0.45);
+    --tab-active-bg: linear-gradient(135deg, #3FD0FF, #0086C2);
+    --tab-glow: 0 0 14px rgba(0,179,255,0.45);
+    --header-rule: linear-gradient(90deg, transparent, #00B3FF 50%, transparent);
+    --display-glow: 0 0 10px rgba(0,179,255,0.6);
+    --card-shadow: 0 0 18px rgba(0,179,255,0.12), 0 14px 30px rgba(0,0,0,0.55);
+    --font-body: ui-monospace, 'IBM Plex Mono', Menlo, monospace;
+    --font-display: ui-monospace, 'IBM Plex Mono', Menlo, monospace;
+    --radius-s: 3px;
+    --radius-m: 4px;
+    --radius-l: 6px;
+    --fx-a: radial-gradient(45% 30% at 50% 40%, rgba(0,179,255,0.2), transparent 70%);
+    --fx-a-anim: fxPulse 3s ease-in-out infinite alternate;
+    --fx-a-inset: 0;
+    --fx-b: linear-gradient(180deg, transparent 0 48%, rgba(0,179,255,0.3) 50%, transparent 52%);
+    --fx-b-size: 100% 600px;
+    --fx-b-anim: fxScan 7s linear infinite;
+    --fx-b-inset: -600px 0 0 0;
+    --card-frame: linear-gradient(135deg, #00B3FF, rgba(0,179,255,0.15) 50%, #00B3FF);
+    --header-bg: rgba(3,10,18,0.82); --header-blur: saturate(150%) blur(16px);
+    color-scheme: dark;
+  }
+  :root[data-theme="chrome"] {
+    --bg: #0C0D10; --surface: #15171B; --surface-raised: #1C1F24; --border: #33373F;
+    --text: #F5F7FA; --text-dim: #B9BFC9; --text-faint: #878E9A;
+    --accent: #D9DEE6; --accent-dim: #A7AEB9; --accent-text: #0C0D10;
+    --bg-image: linear-gradient(160deg, #1A1C21 0%, #2B2F37 18%, #0E0F12 36%, #3A3F48 52%, #101115 70%, #262A31 100%);
+    --card-tex: linear-gradient(180deg, rgba(255,255,255,0.04), transparent 40%);
+    --call-bg: linear-gradient(180deg, #FFFFFF 0%, #C9CED6 45%, #8E949E 52%, #E6E9EE 100%);
+    --call-shadow: 0 8px 22px rgba(0,0,0,0.6);
+    --tab-active-bg: linear-gradient(180deg, #FFFFFF, #A7AEB9);
+    --header-rule: linear-gradient(90deg, #6C727C, #FFFFFF 50%, #6C727C);
+    --card-shadow: 0 16px 34px rgba(0,0,0,0.6);
+    --font-display: Futura, 'Avenir Next', 'Trebuchet MS', sans-serif;
+    --display-transform: uppercase;
+    --display-spacing: 0.05em;
+    --fx-a: linear-gradient(115deg, transparent 42%, rgba(255,255,255,0.07) 50%, transparent 58%);
+    --fx-a-anim: fxSweep 8s ease-in-out infinite;
+    --fx-a-inset: -20%;
+    --card-frame: linear-gradient(135deg, #6C727C, #FFFFFF 30%, #8E949E 55%, #E6E9EE 80%, #6C727C);
+    --name-fill: linear-gradient(180deg, #FFFFFF 0%, #C9CED6 45%, #6C727C 50%, #E6E9EE 56%, #9BA1AB 100%);
+    --header-bg: rgba(12,13,16,0.82); --header-blur: saturate(150%) blur(16px);
+    color-scheme: dark;
+  }
+  :root[data-theme="missioncontrol"] {
+    --bg: #0A0C0F; --surface: #11151A; --surface-raised: #171C22; --border: #2A323C;
+    --text: #EDF1F5; --text-dim: #AAB4C0; --text-faint: #7B8795;
+    --accent: #FF6B1A; --accent-dim: #C9500F; --accent-text: #0A0C0F;
+    --bg-image: repeating-linear-gradient(0deg, rgba(255,255,255,0.035) 0 1px, transparent 1px 40px), repeating-linear-gradient(90deg, rgba(255,255,255,0.035) 0 1px, transparent 1px 40px), radial-gradient(circle at 50% 45%, transparent 0 170px, rgba(255,107,26,0.1) 171px 172px, transparent 173px, transparent 260px, rgba(255,107,26,0.07) 261px 262px, transparent 263px);
+    --call-bg: linear-gradient(135deg, #FF8A45 0%, #FF6B1A 50%, #C9500F 100%);
+    --call-shadow: 0 0 18px rgba(255,107,26,0.35);
+    --tab-active-bg: linear-gradient(135deg, #FF8A45, #C9500F);
+    --header-rule: repeating-linear-gradient(135deg, #FF6B1A 0 8px, #0A0C0F 8px 16px);
+    --header-rule-h: 4px;
+    --card-shadow: 0 14px 30px rgba(0,0,0,0.55);
+    --font-body: ui-monospace, 'IBM Plex Mono', Menlo, monospace;
+    --font-display: ui-monospace, 'IBM Plex Mono', Menlo, monospace;
+    --display-transform: uppercase;
+    --display-spacing: 0.08em;
+    --radius-l: 4px;
+    --radius-m: 4px;
+    --radius-s: 2px;
+    --fx-a: conic-gradient(from 0deg at 50% 45%, rgba(255,107,26,0.16), transparent 50deg, transparent 360deg);
+    --fx-a-anim: fxSpin 8s linear infinite;
+    --fx-a-inset: -60%;
+    --card-frame: linear-gradient(135deg, #FF6B1A, #2A323C 40%, #2A323C 60%, #FF6B1A);
+    --header-bg: rgba(10,12,15,0.82); --header-blur: saturate(150%) blur(16px);
+    color-scheme: dark;
+  }
+  :root[data-theme="stpatricks"] {
+    --bg: #04170E; --surface: #0A2416; --surface-raised: #0E2E1C; --border: #1C4A30;
+    --text: #F1F8EE; --text-dim: #B5D3BC; --text-faint: #86A690;
+    --accent: #2FBF71; --accent-dim: #22915A; --accent-text: #04170E;
+    --bg-image: radial-gradient(1000px 600px at 50% -10%, rgba(47,191,113,0.22), transparent 60%), repeating-linear-gradient(135deg, rgba(255,255,255,0.02) 0 10px, transparent 10px 20px);
+    --call-bg: linear-gradient(135deg, #5FE09A 0%, #2FBF71 45%, #1C7F4A 100%);
+    --call-shadow: 0 8px 22px rgba(0,0,0,0.45);
+    --tab-active-bg: linear-gradient(135deg, #5FE09A, #22915A);
+    --header-rule: linear-gradient(90deg, #169B62 0 33%, #FFFFFF 33% 66%, #FF883E 66%);
+    --header-rule-h: 3px;
+    --card-shadow: 0 14px 30px rgba(0,0,0,0.5);
+    --font-display: Georgia, 'Times New Roman', serif;
+    --fx-a: radial-gradient(circle at 12% 18%, rgba(255,215,90,0.85) 0 2.2px, transparent 2.8000000000000003px), radial-gradient(circle at 62% 42%, rgba(255,215,90,0.55) 0 1.5px, transparent 2.1px), radial-gradient(circle at 36% 78%, rgba(255,235,150,0.75) 0 1.8px, transparent 2.4px), radial-gradient(circle at 86% 88%, rgba(255,215,90,0.5) 0 1.2px, transparent 1.7999999999999998px);
+    --fx-a-size: 190px 190px;
+    --fx-a-anim: fxTwinkle 2.8s ease-in-out infinite alternate;
+    --card-frame: linear-gradient(135deg, #D4AF37, #2FBF71 50%, #D4AF37);
+    --header-bg: rgba(4,23,14,0.82); --header-blur: saturate(150%) blur(16px);
+    color-scheme: dark;
+  }
   * { box-sizing: border-box; }
   html { scroll-padding-top: env(safe-area-inset-top, 0px); }
   html, body { height: 100%; }
@@ -1582,6 +2038,105 @@
   #ilOutro { width: 100%; box-sizing: border-box; }
   #infoModalBody .btn-primary[disabled] { opacity: 0.5; }
 
+  /* ---- Send info: link cards ---- */
+  .info-mode { margin: 4px 0 10px; grid-template-columns: 1fr 1fr; }
+  .info-steps { display: flex; flex-direction: column; gap: 8px; margin: 10px 0 6px; }
+  .is-row { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface-raised); }
+  .is-row.next { border-color: var(--accent); }
+  .is-row.done { opacity: 0.7; }
+  .is-num { flex: none; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;
+    background: var(--border); color: var(--text); }
+  .is-row.next .is-num { background: var(--accent); color: var(--accent-text); }
+  .is-row.done .is-num { background: var(--interested); color: #fff; }
+  .is-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+  .is-txt b { font-size: 13.5px; }
+  .is-txt small { font-size: 11.5px; color: var(--text-faint); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .is-send { flex: none; min-width: 70px; padding: 8px 12px; font-size: 13px; text-align: center; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; }
+  .is-send[disabled] { opacity: 0.5; }
+
+
+  /* ---- Theme engine III: living backgrounds, framed cards, foil lettering ---- */
+  #fxLayer { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  #fxLayer::before, #fxLayer::after { content: ""; position: absolute; will-change: transform, opacity; background-repeat: repeat; }
+  #fxLayer::before { inset: var(--fx-a-inset, -300px 0); background-image: var(--fx-a, none); background-size: var(--fx-a-size, auto); opacity: var(--fx-a-op, 1); animation: var(--fx-a-anim, none); }
+  #fxLayer::after { inset: var(--fx-b-inset, -300px 0); background-image: var(--fx-b, none); background-size: var(--fx-b-size, auto); opacity: var(--fx-b-op, 1); animation: var(--fx-b-anim, none); }
+  .shell { position: relative; z-index: 1; }
+  header.top::after { height: var(--header-rule-h, 2px); }
+  .view-tab.active { background: var(--tab-active-bg, var(--accent)); box-shadow: var(--tab-glow, none); }
+  .brand .name { animation: var(--brand-anim, none); }
+  :root[data-theme="gilded"] .card, :root[data-theme="gilded"] .deal-bar-card, :root[data-theme="gilded"] .pipe-item, :root[data-theme="gilded"] .task-item, :root[data-theme="gilded"] .hist-item, :root[data-theme="blackcard"] .card, :root[data-theme="blackcard"] .deal-bar-card, :root[data-theme="blackcard"] .pipe-item, :root[data-theme="blackcard"] .task-item, :root[data-theme="blackcard"] .hist-item, :root[data-theme="privatejet"] .card, :root[data-theme="privatejet"] .deal-bar-card, :root[data-theme="privatejet"] .pipe-item, :root[data-theme="privatejet"] .task-item, :root[data-theme="privatejet"] .hist-item, :root[data-theme="monaco"] .card, :root[data-theme="monaco"] .deal-bar-card, :root[data-theme="monaco"] .pipe-item, :root[data-theme="monaco"] .task-item, :root[data-theme="monaco"] .hist-item, :root[data-theme="bullion"] .card, :root[data-theme="bullion"] .deal-bar-card, :root[data-theme="bullion"] .pipe-item, :root[data-theme="bullion"] .task-item, :root[data-theme="bullion"] .hist-item, :root[data-theme="chairman"] .card, :root[data-theme="chairman"] .deal-bar-card, :root[data-theme="chairman"] .pipe-item, :root[data-theme="chairman"] .task-item, :root[data-theme="chairman"] .hist-item, :root[data-theme="neonnoir"] .card, :root[data-theme="neonnoir"] .deal-bar-card, :root[data-theme="neonnoir"] .pipe-item, :root[data-theme="neonnoir"] .task-item, :root[data-theme="neonnoir"] .hist-item, :root[data-theme="synthwave"] .card, :root[data-theme="synthwave"] .deal-bar-card, :root[data-theme="synthwave"] .pipe-item, :root[data-theme="synthwave"] .task-item, :root[data-theme="synthwave"] .hist-item, :root[data-theme="highroller"] .card, :root[data-theme="highroller"] .deal-bar-card, :root[data-theme="highroller"] .pipe-item, :root[data-theme="highroller"] .task-item, :root[data-theme="highroller"] .hist-item, :root[data-theme="velvet"] .card, :root[data-theme="velvet"] .deal-bar-card, :root[data-theme="velvet"] .pipe-item, :root[data-theme="velvet"] .task-item, :root[data-theme="velvet"] .hist-item, :root[data-theme="afterparty"] .card, :root[data-theme="afterparty"] .deal-bar-card, :root[data-theme="afterparty"] .pipe-item, :root[data-theme="afterparty"] .task-item, :root[data-theme="afterparty"] .hist-item, :root[data-theme="aurora"] .card, :root[data-theme="aurora"] .deal-bar-card, :root[data-theme="aurora"] .pipe-item, :root[data-theme="aurora"] .task-item, :root[data-theme="aurora"] .hist-item, :root[data-theme="deepsea"] .card, :root[data-theme="deepsea"] .deal-bar-card, :root[data-theme="deepsea"] .pipe-item, :root[data-theme="deepsea"] .task-item, :root[data-theme="deepsea"] .hist-item, :root[data-theme="sakura"] .card, :root[data-theme="sakura"] .deal-bar-card, :root[data-theme="sakura"] .pipe-item, :root[data-theme="sakura"] .task-item, :root[data-theme="sakura"] .hist-item, :root[data-theme="desertdusk"] .card, :root[data-theme="desertdusk"] .deal-bar-card, :root[data-theme="desertdusk"] .pipe-item, :root[data-theme="desertdusk"] .task-item, :root[data-theme="desertdusk"] .hist-item, :root[data-theme="rainforest"] .card, :root[data-theme="rainforest"] .deal-bar-card, :root[data-theme="rainforest"] .pipe-item, :root[data-theme="rainforest"] .task-item, :root[data-theme="rainforest"] .hist-item, :root[data-theme="cybergrid"] .card, :root[data-theme="cybergrid"] .deal-bar-card, :root[data-theme="cybergrid"] .pipe-item, :root[data-theme="cybergrid"] .task-item, :root[data-theme="cybergrid"] .hist-item, :root[data-theme="chrome"] .card, :root[data-theme="chrome"] .deal-bar-card, :root[data-theme="chrome"] .pipe-item, :root[data-theme="chrome"] .task-item, :root[data-theme="chrome"] .hist-item, :root[data-theme="missioncontrol"] .card, :root[data-theme="missioncontrol"] .deal-bar-card, :root[data-theme="missioncontrol"] .pipe-item, :root[data-theme="missioncontrol"] .task-item, :root[data-theme="missioncontrol"] .hist-item, :root[data-theme="stpatricks"] .card, :root[data-theme="stpatricks"] .deal-bar-card, :root[data-theme="stpatricks"] .pipe-item, :root[data-theme="stpatricks"] .task-item, :root[data-theme="stpatricks"] .hist-item {
+    border-color: transparent !important;
+    background: var(--card-tex, linear-gradient(transparent, transparent)) padding-box, linear-gradient(var(--surface), var(--surface)) padding-box, var(--card-frame) border-box !important;
+  }
+  :root[data-theme="gilded"] .lead-name, :root[data-theme="gilded"] .brand .name, :root[data-theme="gilded"] .lp-name, :root[data-theme="gilded"] .auth-brand, :root[data-theme="blackcard"] .lead-name, :root[data-theme="blackcard"] .brand .name, :root[data-theme="blackcard"] .lp-name, :root[data-theme="blackcard"] .auth-brand, :root[data-theme="privatejet"] .lead-name, :root[data-theme="privatejet"] .brand .name, :root[data-theme="privatejet"] .lp-name, :root[data-theme="privatejet"] .auth-brand, :root[data-theme="bullion"] .lead-name, :root[data-theme="bullion"] .brand .name, :root[data-theme="bullion"] .lp-name, :root[data-theme="bullion"] .auth-brand, :root[data-theme="synthwave"] .lead-name, :root[data-theme="synthwave"] .brand .name, :root[data-theme="synthwave"] .lp-name, :root[data-theme="synthwave"] .auth-brand, :root[data-theme="chrome"] .lead-name, :root[data-theme="chrome"] .brand .name, :root[data-theme="chrome"] .lp-name, :root[data-theme="chrome"] .auth-brand {
+    background-image: var(--name-fill); -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent !important; text-shadow: none !important; filter: var(--fill-glow, none);
+  }
+  :root[data-theme="gilded"] .call-btn, :root[data-theme="blackcard"] .call-btn, :root[data-theme="privatejet"] .call-btn, :root[data-theme="monaco"] .call-btn, :root[data-theme="bullion"] .call-btn, :root[data-theme="chairman"] .call-btn, :root[data-theme="highroller"] .call-btn, :root[data-theme="velvet"] .call-btn, :root[data-theme="chrome"] .call-btn, :root[data-theme="stpatricks"] .call-btn { position: relative; overflow: hidden; }
+  :root[data-theme="gilded"] .call-btn::after, :root[data-theme="blackcard"] .call-btn::after, :root[data-theme="privatejet"] .call-btn::after, :root[data-theme="monaco"] .call-btn::after, :root[data-theme="bullion"] .call-btn::after, :root[data-theme="chairman"] .call-btn::after, :root[data-theme="highroller"] .call-btn::after, :root[data-theme="velvet"] .call-btn::after, :root[data-theme="chrome"] .call-btn::after, :root[data-theme="stpatricks"] .call-btn::after {
+    content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 34%; pointer-events: none;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,0.5), transparent); transform: translateX(-160%); animation: callShine 5.5s ease-in-out infinite;
+  }
+  @keyframes callShine { 0% { transform: translateX(-160%); } 55% { transform: translateX(420%); } 100% { transform: translateX(420%); } }
+  @keyframes fxRain { from { transform: translate3d(0,0,0); } to { transform: translate3d(0,220px,0); } }
+  @keyframes fxSnow { from { transform: translate3d(0,0,0); } to { transform: translate3d(0,260px,0); } }
+  @keyframes fxRise { from { transform: translate3d(0,0,0); } to { transform: translate3d(0,-240px,0); } }
+  @keyframes fxWind { from { transform: translate3d(0,0,0); } to { transform: translate3d(300px,0,0); } }
+  @keyframes fxClouds { from { transform: translate3d(0,0,0); } to { transform: translate3d(900px,0,0); } }
+  @keyframes fxGrid { from { transform: translate3d(0,0,0); } to { transform: translate3d(0,36px,0); } }
+  @keyframes fxScan { from { transform: translate3d(0,0,0); } to { transform: translate3d(0,600px,0); } }
+  @keyframes fxTwinkle { from { opacity: 0.25; } to { opacity: 1; } }
+  @keyframes fxPulse { from { opacity: 0.35; } to { opacity: 1; } }
+  @keyframes fxAurora { from { transform: translate3d(-6%,-2%,0) scale(1.05); } to { transform: translate3d(6%,3%,0) scale(1.2); } }
+  @keyframes fxSway { from { transform: translate3d(-22%,0,0); } to { transform: translate3d(22%,0,0); } }
+  @keyframes fxSweep { 0% { transform: translate3d(-80%,0,0); } 45% { transform: translate3d(80%,0,0); } 100% { transform: translate3d(80%,0,0); } }
+  @keyframes fxSpin { to { transform: rotate(360deg); } }
+  @keyframes fxFlicker { 0%, 100% { opacity: 1; } 91% { opacity: 1; } 92% { opacity: 0.55; } 93% { opacity: 1; } 95% { opacity: 0.7; } 96% { opacity: 1; } }
+  html[data-motion="off"] #fxLayer::before, html[data-motion="off"] #fxLayer::after, html[data-motion="off"] .call-btn::after, html[data-motion="off"] .brand .name { animation: none !important; }
+  @media (prefers-reduced-motion: reduce) { #fxLayer::before, #fxLayer::after, .call-btn::after, .brand .name { animation: none !important; } }
+  .motion-row { margin: 2px 0 10px !important; font-size: 13.5px !important; }
+
+  .auth-note { margin-top: 18px; font-size: 11.5px; color: var(--text-faint); text-align: center; }
+
+  /* ---- Investor Vault ---- */
+  @media (max-width: 360px) { .view-tab { font-size: 11px; letter-spacing: -0.2px; } .view-tabs { gap: 3px; } }
+  @media (max-width: 340px) { .view-tab { font-size: 10.5px; letter-spacing: -0.3px; padding: 9px 0; } }
+  .vault-row, .vi-row, .va-row { width: 100%; display: flex; align-items: center; gap: 10px; padding: 11px 12px; margin-bottom: 7px; border-radius: 10px; cursor: pointer;
+    border: 1px solid var(--border); background: var(--surface); color: var(--text); font-family: inherit; text-align: left; }
+  .vr-main, .vi-row > span:first-child { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+  .vr-main b, .vi-row b { font-size: 14.5px; }
+  .vr-main > span, .vi-row small { font-size: 12px; color: var(--text-faint); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .vr-main .vr-alert { color: var(--accent); font-weight: 600; }
+  .vr-main .vr-flag { color: var(--notinterested); font-weight: 700; }
+  .vr-amt { flex: none; font-weight: 700; font-variant-numeric: tabular-nums; font-size: 14.5px; }
+  .vr-amt.cancelled { text-decoration: line-through; color: var(--text-faint); }
+  .vault-alerts { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+  .va-row { margin: 0; padding: 9px 12px; justify-content: space-between; border-color: var(--accent); background: var(--surface-raised); }
+  .va-row b { font-size: 13.5px; }
+  .va-row span { font-size: 12.5px; color: var(--accent); font-weight: 600; }
+  .va-row.static { cursor: default; }
+  .vault-setup, .vault-req { margin-top: 12px; padding: 12px; border-radius: 10px; border: 1px solid var(--voicemail); background: var(--surface-raised); font-size: 13.5px; line-height: 1.5; }
+  .vault-req b { display: block; font-size: 14px; }
+  .vault-req small { display: block; color: var(--text-dim); font-size: 12.5px; margin-top: 2px; }
+  .vq-row { display: flex; gap: 10px; align-items: center; justify-content: space-between; padding: 8px 0; border-top: 1px solid var(--border); margin-top: 8px; }
+  .vq-row > span:first-child { min-width: 0; }
+  .vq-btns { display: flex; gap: 6px; flex: none; margin-top: 8px; }
+  .vq-row .vq-btns { margin-top: 0; }
+  .vq-btns button { padding: 7px 10px; font-size: 12.5px; }
+  .vi-form { display: flex; flex-direction: column; gap: 7px; padding: 10px; border: 1px solid var(--accent); border-radius: 10px; margin: 6px 0; background: var(--surface-raised); }
+  .vi-form input, .vi-form select, .vi-form textarea { width: 100%; box-sizing: border-box; }
+  .vi-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+  .vi-btns { display: flex; gap: 6px; justify-content: flex-end; flex-wrap: wrap; }
+  .vi-btns button { padding: 8px 12px; font-size: 13px; }
+  .kd-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 12px; border: 1px solid var(--border); border-radius: 10px; margin-bottom: 6px; }
+  .kd-row span { display: flex; flex-direction: column; } .kd-row b { font-size: 13.5px; } .kd-row small { font-size: 12px; color: var(--text-faint); }
+  .kd-del { background: none; border: 0; color: var(--text-faint); font-size: 22px; line-height: 1; cursor: pointer; padding: 4px 8px; min-width: 38px; min-height: 38px; }
+  #vaultModalBody input, #vaultModalBody select, #vaultModalBody textarea { width: 100%; box-sizing: border-box; }
+
+  .upd-note { margin-top: 10px; padding: 11px 12px; border-radius: 10px; border: 1px solid var(--accent); background: var(--surface-raised); display: flex; flex-direction: column; gap: 4px; }
+  .upd-note b { font-size: 13.5px; } .upd-note span { font-size: 12.5px; color: var(--text-dim); }
+  .upd-note button { margin-top: 6px; }
+
   ::-webkit-scrollbar { width: 8px; }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 8px; }
 
@@ -1623,9 +2178,12 @@
       </div>
       <button class="btn-primary" id="authGo">Sign in</button>
       <button class="auth-link" id="authSetup" type="button" style="display:none">First time? Set up the admin account</button>
+      <div class="auth-note" id="authNote"></div>
+      <div class="auth-note" id="authBuild"></div>
     </div>
   </div>
 </div>
+<div id="fxLayer" aria-hidden="true"></div>
 <div class="shell">
 
   <header class="top">
@@ -1648,6 +2206,7 @@
     <button class="view-tab" data-view="history" id="viewTabHistory">History</button>
     <button class="view-tab" data-view="pipeline" id="viewTabPipeline">Pipeline</button>
     <button class="view-tab" data-view="tasks" id="viewTabTasks">Tasks</button>
+    <button class="view-tab" data-view="vault" id="viewTabVault">Vault</button>
   </div>
 
   <div class="progress-wrap" id="progressWrap" style="display:none">
@@ -1817,7 +2376,8 @@
     </div>
 
     <div style="margin-top:22px;padding-top:14px;border-top:1px solid var(--border);text-align:center;">
-      <div style="font-size:11px;color:var(--text-faint);">Build 2026-10-09 · Team · If a fix doesn't seem to have landed, re-download this file and confirm the build date here matches what I tell you.</div>
+      <div style="font-size:11px;color:var(--text-faint);">Build 2026-10-14 · Team · Updates install automatically after midnight.</div>
+      <div id="updNote"></div>
     </div>
   </div>
 </div>
@@ -1880,6 +2440,7 @@
     <button class="close-x" id="themeClose">&times;</button>
     <h3>Themes</h3>
     <p class="modal-sub">Pick a look for this phone. Everyone on your team chooses their own.</p>
+    <label class="up-check motion-row"><input type="checkbox" id="motionToggle"> Motion effects (animated backgrounds and shine)</label>
     <div class="filter-row theme-cats" id="themeCats"></div>
     <div class="theme-grid" id="themeSwatchRow"></div>
   </div>
@@ -1898,6 +2459,11 @@
 <!-- Send info -->
 <div class="modal-overlay" id="infoModal">
   <div class="modal" id="infoModalBody"></div>
+</div>
+
+<!-- Investor Vault -->
+<div class="modal-overlay" id="vaultModal">
+  <div class="modal" id="vaultModalBody"></div>
 </div>
 
 <!-- Lead profile -->
@@ -2184,8 +2750,12 @@
   }
 
   // Every theme's name, description and preview colors. The look itself lives in the CSS above.
-  var THEMES = [{"id": "midnight", "name": "Midnight", "desc": "Charcoal with a warm gold accent. The original.", "mode": "dark", "bg": "#12151A", "bgImage": "", "surface": "#1B1F26", "border": "#2A2F38", "text": "#ECE9E3", "dim": "#9195A0", "accent": "#C2A05F", "callBg": "#C2A05F", "font": "", "radius": "", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"], "cat": "everyday"}, {"id": "daylight", "name": "Daylight", "desc": "Clean paper-white for bright rooms and sunlight.", "mode": "light", "bg": "#F3F1EC", "bgImage": "", "surface": "#FFFFFF", "border": "#DEDACE", "text": "#1B1D22", "dim": "#6B6E76", "accent": "#9C7C3F", "callBg": "#9C7C3F", "font": "", "radius": "", "dots": ["#2E7D55", "#8A6A00", "#3A62A0", "#A23B4B"], "cat": "everyday"}, {"id": "slate", "name": "Slate", "desc": "Cool blue-gray, calm and focused.", "mode": "dark", "bg": "#0F1420", "bgImage": "", "surface": "#171E2E", "border": "#2A3450", "text": "#E6E9F2", "dim": "#8D96AC", "accent": "#7B93C4", "callBg": "#7B93C4", "font": "", "radius": "", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"], "cat": "everyday"}, {"id": "forest", "name": "Forest", "desc": "Muted greens, easy on the eyes for long sessions.", "mode": "dark", "bg": "#101913", "bgImage": "", "surface": "#17221B", "border": "#2A3B30", "text": "#E5ECE6", "dim": "#8FA396", "accent": "#7FAE7C", "callBg": "#7FAE7C", "font": "", "radius": "", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"], "cat": "everyday"}, {"id": "sunset", "name": "Sunset", "desc": "Warm copper and clay tones for evening calls.", "mode": "dark", "bg": "#1A1310", "bgImage": "", "surface": "#241B16", "border": "#40312A", "text": "#F2E9E2", "dim": "#B09E90", "accent": "#D48A5C", "callBg": "#D48A5C", "font": "", "radius": "", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"], "cat": "everyday"}, {"id": "contrast", "name": "High contrast", "desc": "Pure black and yellow, maximum legibility.", "mode": "dark", "bg": "#000000", "bgImage": "", "surface": "#121212", "border": "#3A3A3A", "text": "#FFFFFF", "dim": "#C4C4C4", "accent": "#FFD24A", "callBg": "#FFD24A", "font": "", "radius": "", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"], "cat": "everyday"}, {"id": "wallstreet", "name": "Wall Street", "desc": "Navy and brass with serif headlines and a faint pinstripe. Boardroom classic.", "mode": "dark", "bg": "#0B1424", "bgImage": "repeating-linear-gradient(90deg, rgba(255,255,255,0.022) 0 1px, transparent 1px 24px), radial-gradient(1200px 520px at 50% -12%, rgba(201,163,74,0.13), transparent 62%)", "surface": "#111D33", "border": "#243557", "text": "#EEF1F6", "dim": "#9BA8BF", "accent": "#C9A34A", "callBg": "linear-gradient(135deg, #D8B45C 0%, #A8842F 100%)", "font": "Georgia, 'Times New Roman', serif", "radius": "", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"], "cat": "money", "rule": "linear-gradient(90deg, transparent, #C9A34A 20%, #C9A34A 80%, transparent)"}, {"id": "ivory", "name": "Ivory", "desc": "Warm paper and banker's green with serif type. Calm in daylight.", "mode": "light", "bg": "#F6F1E4", "bgImage": "radial-gradient(900px 480px at 15% -10%, rgba(31,92,69,0.07), transparent 60%)", "surface": "#FFFDF7", "border": "#E2D8BF", "text": "#1E2A22", "dim": "#4F5B53", "accent": "#1F5C45", "callBg": "linear-gradient(135deg, #236B50 0%, #184A38 100%)", "font": "Georgia, 'Times New Roman', serif", "radius": "", "dots": ["#2E7D55", "#8A6A00", "#3A62A0", "#A23B4B"], "cat": "money", "rule": "linear-gradient(90deg, #1F5C45, #B08D57, #1F5C45)"}, {"id": "emerald", "name": "Emerald", "desc": "Deep green-black with bright emerald highlights and a soft glow.", "mode": "dark", "bg": "#07130F", "bgImage": "radial-gradient(900px 500px at 85% -10%, rgba(46,204,143,0.14), transparent 60%)", "surface": "#0D1F18", "border": "#1E3D30", "text": "#E8F5EE", "dim": "#92B3A3", "accent": "#2ECC8F", "callBg": "linear-gradient(135deg, #3BE0A0 0%, #1FAE78 100%)", "font": "", "radius": "", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"], "cat": "everyday", "rule": "linear-gradient(90deg, #1FAE78, #3BE0A0, #1FAE78)"}, {"id": "ocean", "name": "Ocean", "desc": "Deep-sea blues fading to aqua, like calling from the coast.", "mode": "dark", "bg": "#061822", "bgImage": "linear-gradient(180deg, rgba(60,198,216,0.08) 0%, transparent 38%), radial-gradient(1000px 520px at 50% 110%, rgba(35,152,184,0.16), transparent 60%)", "surface": "#0B2330", "border": "#1B4155", "text": "#E6F4F8", "dim": "#8FB2C0", "accent": "#3CC6D8", "callBg": "linear-gradient(135deg, #4FD6E6 0%, #2398B8 100%)", "font": "", "radius": "20px", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"], "cat": "everyday", "rule": "linear-gradient(90deg, #2398B8, #4FD6E6, #2398B8)"}, {"id": "royal", "name": "Royal", "desc": "Rich violet and gold with serif headlines. Bold and premium.", "mode": "dark", "bg": "#140F24", "bgImage": "radial-gradient(1000px 540px at 50% -15%, rgba(140,100,230,0.20), transparent 60%)", "surface": "#1D1633", "border": "#362B5C", "text": "#F1ECFA", "dim": "#A89CC8", "accent": "#E3B55B", "callBg": "linear-gradient(135deg, #F0C66E 0%, #C9953D 100%)", "font": "Georgia, 'Times New Roman', serif", "radius": "", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"], "cat": "money", "rule": "linear-gradient(90deg, #6B4FB8, #E3B55B, #6B4FB8)"}, {"id": "rosegold", "name": "Rose Gold", "desc": "Soft blush tones with rose-gold buttons. Light and polished.", "mode": "light", "bg": "#FBF3F1", "bgImage": "radial-gradient(900px 480px at 90% -10%, rgba(201,131,120,0.14), transparent 60%)", "surface": "#FFFFFF", "border": "#EFD9D3", "text": "#2B1D1F", "dim": "#6A5155", "accent": "#A5564C", "callBg": "linear-gradient(135deg, #B06357 0%, #92463D 100%)", "font": "", "radius": "20px", "dots": ["#2E7D55", "#8A6A00", "#3A62A0", "#A23B4B"], "cat": "everyday", "rule": "linear-gradient(90deg, #C98378, #A5564C, #C98378)"}, {"id": "arctic", "name": "Arctic", "desc": "Crisp icy whites, clean blue and rounded shapes. Bright and modern.", "mode": "light", "bg": "#EEF3F8", "bgImage": "", "surface": "#FFFFFF", "border": "#D6E0EA", "text": "#102030", "dim": "#4D6173", "accent": "#1F6FD1", "callBg": "linear-gradient(135deg, #2A7DE1 0%, #1A5DB5 100%)", "font": "ui-rounded, 'SF Pro Rounded', 'IBM Plex Sans', system-ui, sans-serif", "radius": "22px", "dots": ["#2E7D55", "#8A6A00", "#3A62A0", "#A23B4B"], "cat": "everyday", "rule": "linear-gradient(90deg, #5B95DE, #1F6FD1, #5B95DE)"}, {"id": "graphite", "name": "Graphite", "desc": "Industrial gray, safety-orange accent and sharp square edges.", "mode": "dark", "bg": "#161719", "bgImage": "", "surface": "#1E2023", "border": "#34383E", "text": "#EDEEF0", "dim": "#A3A7AE", "accent": "#FF7A1A", "callBg": "#FF7A1A", "font": "", "radius": "6px", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"], "cat": "everyday", "rule": "linear-gradient(90deg, #FF7A1A, #FF7A1A)", "transform": "uppercase"}, {"id": "terminal", "name": "Terminal", "desc": "Green phosphor on black with scanlines. Trading-desk energy.", "mode": "dark", "bg": "#030805", "bgImage": "repeating-linear-gradient(0deg, rgba(57,255,122,0.035) 0 1px, transparent 1px 3px)", "surface": "#07120B", "border": "#143A1F", "text": "#B8F5C8", "dim": "#6FC48A", "accent": "#39FF7A", "callBg": "#39FF7A", "font": "ui-monospace, 'IBM Plex Mono', Menlo, monospace", "radius": "6px", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"], "cat": "money", "rule": "linear-gradient(90deg, #39FF7A, #39FF7A)", "glow": "0 0 8px rgba(57,255,122,0.4)"}, {"id": "sand", "name": "Sand", "desc": "Warm sand and terracotta. Relaxed and easy in daylight.", "mode": "light", "bg": "#F4ECDF", "bgImage": "radial-gradient(900px 480px at 10% -10%, rgba(180,83,42,0.08), transparent 60%)", "surface": "#FFFAF2", "border": "#E6D6BC", "text": "#2A2118", "dim": "#62533F", "accent": "#B4532A", "callBg": "linear-gradient(135deg, #C25E33 0%, #9C4422 100%)", "font": "", "radius": "", "dots": ["#2E7D55", "#8A6A00", "#3A62A0", "#A23B4B"], "cat": "everyday", "rule": "linear-gradient(90deg, #D07A52, #B4532A, #D07A52)"}, {"id": "oceandrive", "name": "Ocean Drive", "desc": "Neon pink and teal over a Miami sunset, bold italic type with a glow.", "mode": "dark", "cat": "miami", "bg": "#120824", "bgImage": "radial-gradient(900px 420px at 50% -8%, rgba(255,122,69,0.32), transparent 60%), radial-gradient(700px 380px at 12% -4%, rgba(255,62,165,0.30), transparent 60%), linear-gradient(180deg, #2A0B3D 0%, #120824 48%)", "bgSize": "", "surface": "#1C0F33", "border": "#3C2466", "text": "#FFF1FA", "dim": "#D3B8E0", "accent": "#FF3EA5", "callBg": "linear-gradient(135deg, #FF3EA5 0%, #FF7A45 55%, #FFC23D 100%)", "font": "Futura, 'Avenir Next', 'Trebuchet MS', sans-serif", "radius": "18px", "rule": "linear-gradient(90deg, #FF3EA5, #FF9F1C 50%, #19E3D1)", "glow": "0 0 10px rgba(255,62,165,0.55)", "transform": "uppercase", "italic": true, "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"]}, {"id": "kingpin", "name": "Kingpin", "desc": "Black lacquer, gold and a blood-red edge. 1980s penthouse power.", "mode": "dark", "cat": "miami", "bg": "#0A0909", "bgImage": "radial-gradient(1000px 520px at 50% -12%, rgba(212,175,55,0.14), transparent 60%), radial-gradient(800px 600px at 100% 110%, rgba(122,0,16,0.38), transparent 60%), repeating-linear-gradient(115deg, rgba(255,255,255,0.013) 0 2px, transparent 2px 9px)", "bgSize": "", "surface": "#141111", "border": "#3B301B", "text": "#F6F0E4", "dim": "#BFB39B", "accent": "#D4AF37", "callBg": "linear-gradient(135deg, #F1D36B 0%, #D4AF37 45%, #9E7A1E 100%)", "font": "Didot, 'Bodoni 72', Georgia, serif", "radius": "", "rule": "linear-gradient(90deg, #7A0010, #D4AF37 50%, #7A0010)", "glow": "", "transform": "uppercase", "italic": false, "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"]}, {"id": "oldmoney", "name": "Old Money", "desc": "Cream linen, hunter green and brass, with engraved-stationery headlines.", "mode": "light", "cat": "money", "bg": "#EEE8DA", "bgImage": "repeating-linear-gradient(0deg, rgba(60,50,30,0.028) 0 1px, transparent 1px 4px), repeating-linear-gradient(90deg, rgba(60,50,30,0.022) 0 1px, transparent 1px 4px)", "bgSize": "", "surface": "#FBF8F1", "border": "#D6CBB2", "text": "#1D2923", "dim": "#4B574F", "accent": "#1E4D3A", "callBg": "linear-gradient(135deg, #245C45 0%, #173B2D 100%)", "font": "Copperplate, 'Copperplate Gothic Light', Baskerville, Georgia, serif", "radius": "", "rule": "linear-gradient(#B08D57, #B08D57)", "glow": "", "transform": "", "italic": false, "dots": ["#2E7D55", "#8A6A00", "#3A62A0", "#A23B4B"]}, {"id": "oxblood", "name": "Oxblood", "desc": "Leather-library oxblood and antique gold. Private-bank quiet.", "mode": "dark", "cat": "money", "bg": "#190B0D", "bgImage": "radial-gradient(1100px 600px at 50% -20%, rgba(201,161,91,0.11), transparent 60%), radial-gradient(900px 700px at 50% 120%, rgba(0,0,0,0.5), transparent 60%)", "bgSize": "", "surface": "#231013", "border": "#4A262C", "text": "#F5EBE6", "dim": "#C9AFA9", "accent": "#C9A15B", "callBg": "linear-gradient(135deg, #DDB76E 0%, #A98141 100%)", "font": "'Bodoni 72', Didot, Georgia, serif", "radius": "", "rule": "linear-gradient(90deg, transparent, #C9A15B 20%, #C9A15B 80%, transparent)", "glow": "", "transform": "", "italic": false, "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"]}, {"id": "tickertape", "name": "Ticker Tape", "desc": "Amber-on-black trading terminal. Every number glows.", "mode": "dark", "cat": "money", "bg": "#0B0800", "bgImage": "repeating-linear-gradient(0deg, rgba(255,176,0,0.035) 0 1px, transparent 1px 3px)", "bgSize": "", "surface": "#130E02", "border": "#3D2C08", "text": "#FFD98F", "dim": "#DDAA4A", "accent": "#FFB000", "callBg": "#FFB000", "font": "ui-monospace, 'IBM Plex Mono', Menlo, monospace", "radius": "6px", "rule": "linear-gradient(90deg, #FFB000, #FFB000)", "glow": "0 0 8px rgba(255,176,0,0.35)", "transform": "", "italic": false, "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"]}, {"id": "nantucket", "name": "Nantucket", "desc": "Crisp white and navy with a grosgrain-ribbon stripe. Summer on the Cape.", "mode": "light", "cat": "money", "bg": "#F2F5F8", "bgImage": "repeating-linear-gradient(45deg, rgba(27,42,74,0.028) 0 2px, transparent 2px 10px)", "bgSize": "", "surface": "#FFFFFF", "border": "#D3DDE8", "text": "#13203A", "dim": "#45546B", "accent": "#1B2A4A", "callBg": "linear-gradient(135deg, #243759 0%, #14203A 100%)", "font": "'Avenir Next', 'Helvetica Neue', system-ui, sans-serif", "radius": "18px", "rule": "repeating-linear-gradient(90deg, #1B2A4A 0 18px, #B22234 18px 24px, #1B2A4A 24px 42px, #FFFFFF 42px 46px)", "glow": "", "transform": "", "italic": false, "dots": ["#2E7D55", "#8A6A00", "#3A62A0", "#A23B4B"]}, {"id": "christmas", "name": "Christmas Eve", "desc": "Pine green, cranberry and gold with falling snow and a candy-cane stripe.", "mode": "dark", "cat": "holiday", "bg": "#0C1A12", "bgImage": "radial-gradient(circle at 12% 18%, rgba(255,255,255,0.38) 0 1.5px, transparent 2.0px), radial-gradient(circle at 62% 42%, rgba(255,255,255,0.26) 0 1.0px, transparent 1.5px), radial-gradient(circle at 36% 78%, rgba(255,255,255,0.32) 0 1.5px, transparent 2.0px), radial-gradient(circle at 86% 88%, rgba(255,255,255,0.22) 0 1.0px, transparent 1.5px)", "bgSize": "140px 140px", "surface": "#13261B", "border": "#2C4A38", "text": "#F5F1E6", "dim": "#B9C9BD", "accent": "#D93A3A", "callBg": "linear-gradient(135deg, #D84040 0%, #A52A2A 100%)", "font": "Georgia, 'Times New Roman', serif", "radius": "", "rule": "repeating-linear-gradient(135deg, #C8303A 0 8px, #F5F1E6 8px 16px)", "glow": "", "transform": "", "italic": false, "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"]}, {"id": "winter", "name": "Winter Wonderland", "desc": "Icy blue and fresh snow. Soft, bright and calm.", "mode": "light", "cat": "holiday", "bg": "#EAF2F8", "bgImage": "radial-gradient(circle at 12% 18%, rgba(43,108,176,0.20) 0 1.5px, transparent 2.0px), radial-gradient(circle at 62% 42%, rgba(43,108,176,0.13) 0 1.0px, transparent 1.5px), radial-gradient(circle at 36% 78%, rgba(43,108,176,0.17) 0 1.5px, transparent 2.0px)", "bgSize": "120px 120px", "surface": "#FFFFFF", "border": "#CFDEEA", "text": "#102233", "dim": "#43596D", "accent": "#2B6CB0", "callBg": "linear-gradient(135deg, #3A7CC2 0%, #1F5A99 100%)", "font": "ui-rounded, 'SF Pro Rounded', 'IBM Plex Sans', system-ui, sans-serif", "radius": "22px", "rule": "linear-gradient(90deg, #9CC3E6, #FFFFFF, #9CC3E6)", "glow": "", "transform": "", "italic": false, "dots": ["#2E7D55", "#8A6A00", "#3A62A0", "#A23B4B"]}, {"id": "newyears", "name": "New Year's Eve", "desc": "Black tie and champagne with gold confetti. Countdown to midnight.", "mode": "dark", "cat": "holiday", "bg": "#07070A", "bgImage": "radial-gradient(circle at 12% 18%, rgba(232,199,102,0.60) 0 1.5px, transparent 2.0px), radial-gradient(circle at 62% 42%, rgba(210,210,220,0.45) 0 1.0px, transparent 1.5px), radial-gradient(circle at 36% 78%, rgba(232,199,102,0.42) 0 1.5px, transparent 2.0px), radial-gradient(circle at 86% 88%, rgba(210,210,220,0.35) 0 1.0px, transparent 1.5px), radial-gradient(circle at 78% 12%, rgba(232,199,102,0.32) 0 1.0px, transparent 1.5px)", "bgSize": "160px 160px", "surface": "#111117", "border": "#2E2A1F", "text": "#F7F3E8", "dim": "#BDB6A3", "accent": "#E8C766", "callBg": "linear-gradient(135deg, #F3DA8C 0%, #C9A044 100%)", "font": "Didot, 'Bodoni 72', Georgia, serif", "radius": "", "rule": "linear-gradient(90deg, #C9A044, #F3DA8C, #C9A044)", "glow": "", "transform": "uppercase", "italic": false, "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"]}, {"id": "valentine", "name": "Valentine's", "desc": "Blush and rose red with soft polka dots. Sweet, but still all business.", "mode": "light", "cat": "holiday", "bg": "#FBEFF1", "bgImage": "radial-gradient(circle at 12% 18%, rgba(194,24,91,0.12) 0 3.0px, transparent 3.5px), radial-gradient(circle at 62% 42%, rgba(194,24,91,0.09) 0 2.0px, transparent 2.5px)", "bgSize": "90px 90px", "surface": "#FFFFFF", "border": "#F0D0D6", "text": "#2B1419", "dim": "#6B4750", "accent": "#C2185B", "callBg": "linear-gradient(135deg, #E0306F 0%, #A3124B 100%)", "font": "Georgia, 'Times New Roman', serif", "radius": "20px", "rule": "linear-gradient(90deg, #F48FB1, #C2185B, #F48FB1)", "glow": "", "transform": "", "italic": true, "dots": ["#2E7D55", "#8A6A00", "#3A62A0", "#A23B4B"]}, {"id": "july4", "name": "Fourth of July", "desc": "Navy night, red-and-white stripes and a sky full of stars.", "mode": "dark", "cat": "holiday", "bg": "#0B1530", "bgImage": "radial-gradient(circle at 12% 18%, rgba(255,255,255,0.38) 0 1.2px, transparent 1.7px), radial-gradient(circle at 62% 42%, rgba(255,255,255,0.26) 0 1.0px, transparent 1.5px), radial-gradient(circle at 36% 78%, rgba(255,255,255,0.32) 0 1.2px, transparent 1.7px)", "bgSize": "110px 110px", "surface": "#121E3F", "border": "#2B3D6E", "text": "#F4F6FB", "dim": "#B7C1DA", "accent": "#D93A3A", "callBg": "linear-gradient(135deg, #D8283A 0%, #9E1A26 100%)", "font": "Futura, 'Avenir Next', 'Trebuchet MS', sans-serif", "radius": "", "rule": "repeating-linear-gradient(90deg, #C8202F 0 12px, #FFFFFF 12px 24px)", "glow": "", "transform": "uppercase", "italic": false, "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"]}, {"id": "halloween", "name": "Halloween", "desc": "Midnight purple, a harvest moon and jack-o'-lantern orange.", "mode": "dark", "cat": "holiday", "bg": "#0E0A14", "bgImage": "radial-gradient(520px 520px at 88% -6%, rgba(255,196,110,0.24), transparent 60%), radial-gradient(900px 500px at 50% 115%, rgba(255,122,26,0.18), transparent 60%)", "bgSize": "", "surface": "#17111F", "border": "#3A2A48", "text": "#F4EEF7", "dim": "#BFB0CB", "accent": "#FF7A1A", "callBg": "linear-gradient(135deg, #FF9A3C 0%, #E0600E 100%)", "font": "Georgia, 'Times New Roman', serif", "radius": "", "rule": "linear-gradient(90deg, #7A3FB0, #FF7A1A, #7A3FB0)", "glow": "0 0 10px rgba(255,122,26,0.35)", "transform": "", "italic": false, "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"]}, {"id": "harvest", "name": "Thanksgiving", "desc": "Warm cream, rust and gold. Cozy, grateful, still dialing.", "mode": "light", "cat": "holiday", "bg": "#F5EDE0", "bgImage": "radial-gradient(900px 480px at 85% -10%, rgba(214,140,50,0.15), transparent 60%)", "bgSize": "", "surface": "#FFFAF2", "border": "#E4D3B8", "text": "#2B1D12", "dim": "#634D3A", "accent": "#A64B1E", "callBg": "linear-gradient(135deg, #B85A26 0%, #8A3A14 100%)", "font": "Palatino, 'Book Antiqua', Georgia, serif", "radius": "", "rule": "linear-gradient(90deg, #8A3A14, #D68C32, #B8862B)", "glow": "", "transform": "", "italic": false, "dots": ["#2E7D55", "#8A6A00", "#3A62A0", "#A23B4B"]}];
+  var THEMES = [{"id": "midnight", "name": "Midnight", "desc": "Charcoal with a warm gold accent. The original.", "mode": "dark", "bg": "#12151A", "bgImage": "", "surface": "#1B1F26", "border": "#2A2F38", "text": "#ECE9E3", "dim": "#9195A0", "accent": "#C2A05F", "callBg": "#C2A05F", "font": "", "radius": "", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"], "cat": "everyday"}, {"id": "daylight", "name": "Daylight", "desc": "Clean paper-white for bright rooms and sunlight.", "mode": "light", "bg": "#F3F1EC", "bgImage": "", "surface": "#FFFFFF", "border": "#DEDACE", "text": "#1B1D22", "dim": "#6B6E76", "accent": "#9C7C3F", "callBg": "#9C7C3F", "font": "", "radius": "", "dots": ["#2E7D55", "#8A6A00", "#3A62A0", "#A23B4B"], "cat": "everyday"}, {"id": "slate", "name": "Slate", "desc": "Cool blue-gray, calm and focused.", "mode": "dark", "bg": "#0F1420", "bgImage": "", "surface": "#171E2E", "border": "#2A3450", "text": "#E6E9F2", "dim": "#8D96AC", "accent": "#7B93C4", "callBg": "#7B93C4", "font": "", "radius": "", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"], "cat": "everyday"}, {"id": "forest", "name": "Forest", "desc": "Muted greens, easy on the eyes for long sessions.", "mode": "dark", "bg": "#101913", "bgImage": "", "surface": "#17221B", "border": "#2A3B30", "text": "#E5ECE6", "dim": "#8FA396", "accent": "#7FAE7C", "callBg": "#7FAE7C", "font": "", "radius": "", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"], "cat": "everyday"}, {"id": "sunset", "name": "Sunset", "desc": "Warm copper and clay tones for evening calls.", "mode": "dark", "bg": "#1A1310", "bgImage": "", "surface": "#241B16", "border": "#40312A", "text": "#F2E9E2", "dim": "#B09E90", "accent": "#D48A5C", "callBg": "#D48A5C", "font": "", "radius": "", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"], "cat": "everyday"}, {"id": "contrast", "name": "High contrast", "desc": "Pure black and yellow, maximum legibility.", "mode": "dark", "bg": "#000000", "bgImage": "", "surface": "#121212", "border": "#3A3A3A", "text": "#FFFFFF", "dim": "#C4C4C4", "accent": "#FFD24A", "callBg": "#FFD24A", "font": "", "radius": "", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"], "cat": "everyday"}, {"id": "wallstreet", "name": "Wall Street", "desc": "Navy and brass with serif headlines and a faint pinstripe. Boardroom classic.", "mode": "dark", "bg": "#0B1424", "bgImage": "repeating-linear-gradient(90deg, rgba(255,255,255,0.022) 0 1px, transparent 1px 24px), radial-gradient(1200px 520px at 50% -12%, rgba(201,163,74,0.13), transparent 62%)", "surface": "#111D33", "border": "#243557", "text": "#EEF1F6", "dim": "#9BA8BF", "accent": "#C9A34A", "callBg": "linear-gradient(135deg, #D8B45C 0%, #A8842F 100%)", "font": "Georgia, 'Times New Roman', serif", "radius": "", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"], "cat": "money", "rule": "linear-gradient(90deg, transparent, #C9A34A 20%, #C9A34A 80%, transparent)"}, {"id": "ivory", "name": "Ivory", "desc": "Warm paper and banker's green with serif type. Calm in daylight.", "mode": "light", "bg": "#F6F1E4", "bgImage": "radial-gradient(900px 480px at 15% -10%, rgba(31,92,69,0.07), transparent 60%)", "surface": "#FFFDF7", "border": "#E2D8BF", "text": "#1E2A22", "dim": "#4F5B53", "accent": "#1F5C45", "callBg": "linear-gradient(135deg, #236B50 0%, #184A38 100%)", "font": "Georgia, 'Times New Roman', serif", "radius": "", "dots": ["#2E7D55", "#8A6A00", "#3A62A0", "#A23B4B"], "cat": "money", "rule": "linear-gradient(90deg, #1F5C45, #B08D57, #1F5C45)"}, {"id": "emerald", "name": "Emerald", "desc": "Deep green-black with bright emerald highlights and a soft glow.", "mode": "dark", "bg": "#07130F", "bgImage": "radial-gradient(900px 500px at 85% -10%, rgba(46,204,143,0.14), transparent 60%)", "surface": "#0D1F18", "border": "#1E3D30", "text": "#E8F5EE", "dim": "#92B3A3", "accent": "#2ECC8F", "callBg": "linear-gradient(135deg, #3BE0A0 0%, #1FAE78 100%)", "font": "", "radius": "", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"], "cat": "everyday", "rule": "linear-gradient(90deg, #1FAE78, #3BE0A0, #1FAE78)"}, {"id": "ocean", "name": "Ocean", "desc": "Deep-sea blues fading to aqua, like calling from the coast.", "mode": "dark", "bg": "#061822", "bgImage": "linear-gradient(180deg, rgba(60,198,216,0.08) 0%, transparent 38%), radial-gradient(1000px 520px at 50% 110%, rgba(35,152,184,0.16), transparent 60%)", "surface": "#0B2330", "border": "#1B4155", "text": "#E6F4F8", "dim": "#8FB2C0", "accent": "#3CC6D8", "callBg": "linear-gradient(135deg, #4FD6E6 0%, #2398B8 100%)", "font": "", "radius": "20px", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"], "cat": "everyday", "rule": "linear-gradient(90deg, #2398B8, #4FD6E6, #2398B8)"}, {"id": "royal", "name": "Royal", "desc": "Rich violet and gold with serif headlines. Bold and premium.", "mode": "dark", "bg": "#140F24", "bgImage": "radial-gradient(1000px 540px at 50% -15%, rgba(140,100,230,0.20), transparent 60%)", "surface": "#1D1633", "border": "#362B5C", "text": "#F1ECFA", "dim": "#A89CC8", "accent": "#E3B55B", "callBg": "linear-gradient(135deg, #F0C66E 0%, #C9953D 100%)", "font": "Georgia, 'Times New Roman', serif", "radius": "", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"], "cat": "money", "rule": "linear-gradient(90deg, #6B4FB8, #E3B55B, #6B4FB8)"}, {"id": "rosegold", "name": "Rose Gold", "desc": "Soft blush tones with rose-gold buttons. Light and polished.", "mode": "light", "bg": "#FBF3F1", "bgImage": "radial-gradient(900px 480px at 90% -10%, rgba(201,131,120,0.14), transparent 60%)", "surface": "#FFFFFF", "border": "#EFD9D3", "text": "#2B1D1F", "dim": "#6A5155", "accent": "#A5564C", "callBg": "linear-gradient(135deg, #B06357 0%, #92463D 100%)", "font": "", "radius": "20px", "dots": ["#2E7D55", "#8A6A00", "#3A62A0", "#A23B4B"], "cat": "everyday", "rule": "linear-gradient(90deg, #C98378, #A5564C, #C98378)"}, {"id": "arctic", "name": "Arctic", "desc": "Crisp icy whites, clean blue and rounded shapes. Bright and modern.", "mode": "light", "bg": "#EEF3F8", "bgImage": "", "surface": "#FFFFFF", "border": "#D6E0EA", "text": "#102030", "dim": "#4D6173", "accent": "#1F6FD1", "callBg": "linear-gradient(135deg, #2A7DE1 0%, #1A5DB5 100%)", "font": "ui-rounded, 'SF Pro Rounded', 'IBM Plex Sans', system-ui, sans-serif", "radius": "22px", "dots": ["#2E7D55", "#8A6A00", "#3A62A0", "#A23B4B"], "cat": "everyday", "rule": "linear-gradient(90deg, #5B95DE, #1F6FD1, #5B95DE)"}, {"id": "graphite", "name": "Graphite", "desc": "Industrial gray, safety-orange accent and sharp square edges.", "mode": "dark", "bg": "#161719", "bgImage": "", "surface": "#1E2023", "border": "#34383E", "text": "#EDEEF0", "dim": "#A3A7AE", "accent": "#FF7A1A", "callBg": "#FF7A1A", "font": "", "radius": "6px", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"], "cat": "everyday", "rule": "linear-gradient(90deg, #FF7A1A, #FF7A1A)", "transform": "uppercase"}, {"id": "terminal", "name": "Terminal", "desc": "Green phosphor on black with scanlines. Trading-desk energy.", "mode": "dark", "bg": "#030805", "bgImage": "repeating-linear-gradient(0deg, rgba(57,255,122,0.035) 0 1px, transparent 1px 3px)", "surface": "#07120B", "border": "#143A1F", "text": "#B8F5C8", "dim": "#6FC48A", "accent": "#39FF7A", "callBg": "#39FF7A", "font": "ui-monospace, 'IBM Plex Mono', Menlo, monospace", "radius": "6px", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"], "cat": "money", "rule": "linear-gradient(90deg, #39FF7A, #39FF7A)", "glow": "0 0 8px rgba(57,255,122,0.4)"}, {"id": "sand", "name": "Sand", "desc": "Warm sand and terracotta. Relaxed and easy in daylight.", "mode": "light", "bg": "#F4ECDF", "bgImage": "radial-gradient(900px 480px at 10% -10%, rgba(180,83,42,0.08), transparent 60%)", "surface": "#FFFAF2", "border": "#E6D6BC", "text": "#2A2118", "dim": "#62533F", "accent": "#B4532A", "callBg": "linear-gradient(135deg, #C25E33 0%, #9C4422 100%)", "font": "", "radius": "", "dots": ["#2E7D55", "#8A6A00", "#3A62A0", "#A23B4B"], "cat": "everyday", "rule": "linear-gradient(90deg, #D07A52, #B4532A, #D07A52)"}, {"id": "oceandrive", "name": "Ocean Drive", "desc": "Neon pink and teal over a Miami sunset, bold italic type with a glow.", "mode": "dark", "cat": "miami", "bg": "#120824", "bgImage": "radial-gradient(900px 420px at 50% -8%, rgba(255,122,69,0.32), transparent 60%), radial-gradient(700px 380px at 12% -4%, rgba(255,62,165,0.30), transparent 60%), linear-gradient(180deg, #2A0B3D 0%, #120824 48%)", "bgSize": "", "surface": "#1C0F33", "border": "#3C2466", "text": "#FFF1FA", "dim": "#D3B8E0", "accent": "#FF3EA5", "callBg": "linear-gradient(135deg, #FF3EA5 0%, #FF7A45 55%, #FFC23D 100%)", "font": "Futura, 'Avenir Next', 'Trebuchet MS', sans-serif", "radius": "18px", "rule": "linear-gradient(90deg, #FF3EA5, #FF9F1C 50%, #19E3D1)", "glow": "0 0 10px rgba(255,62,165,0.55)", "transform": "uppercase", "italic": true, "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"]}, {"id": "kingpin", "name": "Kingpin", "desc": "Black lacquer, gold and a blood-red edge. 1980s penthouse power.", "mode": "dark", "cat": "miami", "bg": "#0A0909", "bgImage": "radial-gradient(1000px 520px at 50% -12%, rgba(212,175,55,0.14), transparent 60%), radial-gradient(800px 600px at 100% 110%, rgba(122,0,16,0.38), transparent 60%), repeating-linear-gradient(115deg, rgba(255,255,255,0.013) 0 2px, transparent 2px 9px)", "bgSize": "", "surface": "#141111", "border": "#3B301B", "text": "#F6F0E4", "dim": "#BFB39B", "accent": "#D4AF37", "callBg": "linear-gradient(135deg, #F1D36B 0%, #D4AF37 45%, #9E7A1E 100%)", "font": "Didot, 'Bodoni 72', Georgia, serif", "radius": "", "rule": "linear-gradient(90deg, #7A0010, #D4AF37 50%, #7A0010)", "glow": "", "transform": "uppercase", "italic": false, "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"]}, {"id": "oldmoney", "name": "Old Money", "desc": "Cream linen, hunter green and brass, with engraved-stationery headlines.", "mode": "light", "cat": "money", "bg": "#EEE8DA", "bgImage": "repeating-linear-gradient(0deg, rgba(60,50,30,0.028) 0 1px, transparent 1px 4px), repeating-linear-gradient(90deg, rgba(60,50,30,0.022) 0 1px, transparent 1px 4px)", "bgSize": "", "surface": "#FBF8F1", "border": "#D6CBB2", "text": "#1D2923", "dim": "#4B574F", "accent": "#1E4D3A", "callBg": "linear-gradient(135deg, #245C45 0%, #173B2D 100%)", "font": "Copperplate, 'Copperplate Gothic Light', Baskerville, Georgia, serif", "radius": "", "rule": "linear-gradient(#B08D57, #B08D57)", "glow": "", "transform": "", "italic": false, "dots": ["#2E7D55", "#8A6A00", "#3A62A0", "#A23B4B"]}, {"id": "oxblood", "name": "Oxblood", "desc": "Leather-library oxblood and antique gold. Private-bank quiet.", "mode": "dark", "cat": "money", "bg": "#190B0D", "bgImage": "radial-gradient(1100px 600px at 50% -20%, rgba(201,161,91,0.11), transparent 60%), radial-gradient(900px 700px at 50% 120%, rgba(0,0,0,0.5), transparent 60%)", "bgSize": "", "surface": "#231013", "border": "#4A262C", "text": "#F5EBE6", "dim": "#C9AFA9", "accent": "#C9A15B", "callBg": "linear-gradient(135deg, #DDB76E 0%, #A98141 100%)", "font": "'Bodoni 72', Didot, Georgia, serif", "radius": "", "rule": "linear-gradient(90deg, transparent, #C9A15B 20%, #C9A15B 80%, transparent)", "glow": "", "transform": "", "italic": false, "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"]}, {"id": "tickertape", "name": "Ticker Tape", "desc": "Amber-on-black trading terminal. Every number glows.", "mode": "dark", "cat": "money", "bg": "#0B0800", "bgImage": "repeating-linear-gradient(0deg, rgba(255,176,0,0.035) 0 1px, transparent 1px 3px)", "bgSize": "", "surface": "#130E02", "border": "#3D2C08", "text": "#FFD98F", "dim": "#DDAA4A", "accent": "#FFB000", "callBg": "#FFB000", "font": "ui-monospace, 'IBM Plex Mono', Menlo, monospace", "radius": "6px", "rule": "linear-gradient(90deg, #FFB000, #FFB000)", "glow": "0 0 8px rgba(255,176,0,0.35)", "transform": "", "italic": false, "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"]}, {"id": "nantucket", "name": "Nantucket", "desc": "Crisp white and navy with a grosgrain-ribbon stripe. Summer on the Cape.", "mode": "light", "cat": "money", "bg": "#F2F5F8", "bgImage": "repeating-linear-gradient(45deg, rgba(27,42,74,0.028) 0 2px, transparent 2px 10px)", "bgSize": "", "surface": "#FFFFFF", "border": "#D3DDE8", "text": "#13203A", "dim": "#45546B", "accent": "#1B2A4A", "callBg": "linear-gradient(135deg, #243759 0%, #14203A 100%)", "font": "'Avenir Next', 'Helvetica Neue', system-ui, sans-serif", "radius": "18px", "rule": "repeating-linear-gradient(90deg, #1B2A4A 0 18px, #B22234 18px 24px, #1B2A4A 24px 42px, #FFFFFF 42px 46px)", "glow": "", "transform": "", "italic": false, "dots": ["#2E7D55", "#8A6A00", "#3A62A0", "#A23B4B"]}, {"id": "christmas", "name": "Christmas Eve", "desc": "Pine green, cranberry and gold with falling snow and a candy-cane stripe.", "mode": "dark", "cat": "holiday", "bg": "#0C1A12", "bgImage": "radial-gradient(circle at 12% 18%, rgba(255,255,255,0.38) 0 1.5px, transparent 2.0px), radial-gradient(circle at 62% 42%, rgba(255,255,255,0.26) 0 1.0px, transparent 1.5px), radial-gradient(circle at 36% 78%, rgba(255,255,255,0.32) 0 1.5px, transparent 2.0px), radial-gradient(circle at 86% 88%, rgba(255,255,255,0.22) 0 1.0px, transparent 1.5px)", "bgSize": "140px 140px", "surface": "#13261B", "border": "#2C4A38", "text": "#F5F1E6", "dim": "#B9C9BD", "accent": "#D93A3A", "callBg": "linear-gradient(135deg, #D84040 0%, #A52A2A 100%)", "font": "Georgia, 'Times New Roman', serif", "radius": "", "rule": "repeating-linear-gradient(135deg, #C8303A 0 8px, #F5F1E6 8px 16px)", "glow": "", "transform": "", "italic": false, "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"]}, {"id": "winter", "name": "Winter Wonderland", "desc": "Icy blue and fresh snow. Soft, bright and calm.", "mode": "light", "cat": "holiday", "bg": "#EAF2F8", "bgImage": "radial-gradient(circle at 12% 18%, rgba(43,108,176,0.20) 0 1.5px, transparent 2.0px), radial-gradient(circle at 62% 42%, rgba(43,108,176,0.13) 0 1.0px, transparent 1.5px), radial-gradient(circle at 36% 78%, rgba(43,108,176,0.17) 0 1.5px, transparent 2.0px)", "bgSize": "120px 120px", "surface": "#FFFFFF", "border": "#CFDEEA", "text": "#102233", "dim": "#43596D", "accent": "#2B6CB0", "callBg": "linear-gradient(135deg, #3A7CC2 0%, #1F5A99 100%)", "font": "ui-rounded, 'SF Pro Rounded', 'IBM Plex Sans', system-ui, sans-serif", "radius": "22px", "rule": "linear-gradient(90deg, #9CC3E6, #FFFFFF, #9CC3E6)", "glow": "", "transform": "", "italic": false, "dots": ["#2E7D55", "#8A6A00", "#3A62A0", "#A23B4B"]}, {"id": "newyears", "name": "New Year's Eve", "desc": "Black tie and champagne with gold confetti. Countdown to midnight.", "mode": "dark", "cat": "holiday", "bg": "#07070A", "bgImage": "radial-gradient(circle at 12% 18%, rgba(232,199,102,0.60) 0 1.5px, transparent 2.0px), radial-gradient(circle at 62% 42%, rgba(210,210,220,0.45) 0 1.0px, transparent 1.5px), radial-gradient(circle at 36% 78%, rgba(232,199,102,0.42) 0 1.5px, transparent 2.0px), radial-gradient(circle at 86% 88%, rgba(210,210,220,0.35) 0 1.0px, transparent 1.5px), radial-gradient(circle at 78% 12%, rgba(232,199,102,0.32) 0 1.0px, transparent 1.5px)", "bgSize": "160px 160px", "surface": "#111117", "border": "#2E2A1F", "text": "#F7F3E8", "dim": "#BDB6A3", "accent": "#E8C766", "callBg": "linear-gradient(135deg, #F3DA8C 0%, #C9A044 100%)", "font": "Didot, 'Bodoni 72', Georgia, serif", "radius": "", "rule": "linear-gradient(90deg, #C9A044, #F3DA8C, #C9A044)", "glow": "", "transform": "uppercase", "italic": false, "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"]}, {"id": "valentine", "name": "Valentine's", "desc": "Blush and rose red with soft polka dots. Sweet, but still all business.", "mode": "light", "cat": "holiday", "bg": "#FBEFF1", "bgImage": "radial-gradient(circle at 12% 18%, rgba(194,24,91,0.12) 0 3.0px, transparent 3.5px), radial-gradient(circle at 62% 42%, rgba(194,24,91,0.09) 0 2.0px, transparent 2.5px)", "bgSize": "90px 90px", "surface": "#FFFFFF", "border": "#F0D0D6", "text": "#2B1419", "dim": "#6B4750", "accent": "#C2185B", "callBg": "linear-gradient(135deg, #E0306F 0%, #A3124B 100%)", "font": "Georgia, 'Times New Roman', serif", "radius": "20px", "rule": "linear-gradient(90deg, #F48FB1, #C2185B, #F48FB1)", "glow": "", "transform": "", "italic": true, "dots": ["#2E7D55", "#8A6A00", "#3A62A0", "#A23B4B"]}, {"id": "july4", "name": "Fourth of July", "desc": "Navy night, red-and-white stripes and a sky full of stars.", "mode": "dark", "cat": "holiday", "bg": "#0B1530", "bgImage": "radial-gradient(circle at 12% 18%, rgba(255,255,255,0.38) 0 1.2px, transparent 1.7px), radial-gradient(circle at 62% 42%, rgba(255,255,255,0.26) 0 1.0px, transparent 1.5px), radial-gradient(circle at 36% 78%, rgba(255,255,255,0.32) 0 1.2px, transparent 1.7px)", "bgSize": "110px 110px", "surface": "#121E3F", "border": "#2B3D6E", "text": "#F4F6FB", "dim": "#B7C1DA", "accent": "#D93A3A", "callBg": "linear-gradient(135deg, #D8283A 0%, #9E1A26 100%)", "font": "Futura, 'Avenir Next', 'Trebuchet MS', sans-serif", "radius": "", "rule": "repeating-linear-gradient(90deg, #C8202F 0 12px, #FFFFFF 12px 24px)", "glow": "", "transform": "uppercase", "italic": false, "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"]}, {"id": "halloween", "name": "Halloween", "desc": "Midnight purple, a harvest moon and jack-o'-lantern orange.", "mode": "dark", "cat": "holiday", "bg": "#0E0A14", "bgImage": "radial-gradient(520px 520px at 88% -6%, rgba(255,196,110,0.24), transparent 60%), radial-gradient(900px 500px at 50% 115%, rgba(255,122,26,0.18), transparent 60%)", "bgSize": "", "surface": "#17111F", "border": "#3A2A48", "text": "#F4EEF7", "dim": "#BFB0CB", "accent": "#FF7A1A", "callBg": "linear-gradient(135deg, #FF9A3C 0%, #E0600E 100%)", "font": "Georgia, 'Times New Roman', serif", "radius": "", "rule": "linear-gradient(90deg, #7A3FB0, #FF7A1A, #7A3FB0)", "glow": "0 0 10px rgba(255,122,26,0.35)", "transform": "", "italic": false, "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"]}, {"id": "harvest", "name": "Thanksgiving", "desc": "Warm cream, rust and gold. Cozy, grateful, still dialing.", "mode": "light", "cat": "holiday", "bg": "#F5EDE0", "bgImage": "radial-gradient(900px 480px at 85% -10%, rgba(214,140,50,0.15), transparent 60%)", "bgSize": "", "surface": "#FFFAF2", "border": "#E4D3B8", "text": "#2B1D12", "dim": "#634D3A", "accent": "#A64B1E", "callBg": "linear-gradient(135deg, #B85A26 0%, #8A3A14 100%)", "font": "Palatino, 'Book Antiqua', Georgia, serif", "radius": "", "rule": "linear-gradient(90deg, #8A3A14, #D68C32, #B8862B)", "glow": "", "transform": "", "italic": false, "dots": ["#2E7D55", "#8A6A00", "#3A62A0", "#A23B4B"]}, {"id": "gilded", "name": "Gilded Age", "desc": "Marble veined with gold, gold-foil lettering and gold-framed cards.", "mode": "light", "cat": "money", "bg": "#F4EFE4", "bgImage": "linear-gradient(115deg, transparent 40%, rgba(176,141,62,0.12) 41%, transparent 43%), linear-gradient(160deg, transparent 62%, rgba(120,100,70,0.08) 63%, transparent 65%), linear-gradient(35deg, transparent 20%, rgba(176,141,62,0.07) 21%, transparent 22.5%), radial-gradient(1200px 600px at 50% -10%, rgba(214,178,94,0.22), transparent 60%)", "bgSize": "", "surface": "#FFFDF8", "border": "#E3D5B5", "text": "#221B10", "dim": "#5B4E38", "accent": "#8A6A1F", "callBg": "linear-gradient(135deg, #B38A34 0%, #8A6A1F 55%, #6E5214 100%)", "font": "Didot, 'Bodoni 72', Georgia, serif", "radius": "6px", "rule": "linear-gradient(135deg, #F3D98B 0%, #B08D3E 28%, #FFF1C2 50%, #9A7426 72%, #E8C46A 100%)", "glow": "", "transform": "uppercase", "italic": false, "fxPrev": "radial-gradient(circle at 12% 18%, rgba(176,141,62,0.55) 0 1.2px, transparent 1.7999999999999998px), radial-gradient(circle at 62% 42%, rgba(176,141,62,0.4) 0 0.9px, transparent 1.5px), radial-gradient(circle at 36% 78%, rgba(176,141,62,0.5) 0 1.1px, transparent 1.7000000000000002px), radial-gradient(circle at 86% 88%, rgba(176,141,62,0.35) 0 0.8px, transparent 1.4px), radial-gradient(circle at 78% 12%, rgba(176,141,62,0.45) 0 1.0px, transparent 1.6px)", "fxPrevSize": "180px 180px", "frame": "linear-gradient(135deg, #F3D98B 0%, #B08D3E 28%, #FFF1C2 50%, #9A7426 72%, #E8C46A 100%)", "fill": "linear-gradient(100deg, #5E4510 0%, #9A7426 30%, #A8802E 48%, #7A5A18 70%, #5E4510 100%)", "dots": ["#2E7D55", "#8A6A00", "#3A62A0", "#A23B4B"]}, {"id": "blackcard", "name": "Black Card", "desc": "Carbon fiber, brushed titanium cards, platinum lettering and a light sweep.", "mode": "dark", "cat": "money", "bg": "#070708", "bgImage": "repeating-linear-gradient(45deg, rgba(255,255,255,0.028) 0 2px, transparent 2px 4px), repeating-linear-gradient(-45deg, rgba(0,0,0,0.4) 0 2px, transparent 2px 4px), radial-gradient(900px 500px at 50% -10%, rgba(200,205,215,0.12), transparent 60%)", "bgSize": "", "surface": "#111113", "border": "#2A2A2E", "text": "#F2F2F4", "dim": "#B4B4BC", "accent": "#C9CCD3", "callBg": "linear-gradient(135deg, #F2F3F6 0%, #BFC3CC 45%, #8E929C 100%)", "font": "'Avenir Next', 'Helvetica Neue', system-ui, sans-serif", "radius": "", "rule": "linear-gradient(90deg, #52555D, #EDEFF3 50%, #52555D)", "glow": "", "transform": "uppercase", "italic": false, "fxPrev": "linear-gradient(115deg, transparent 42%, rgba(255,255,255,0.06) 50%, transparent 58%)", "fxPrevSize": "", "frame": "linear-gradient(135deg, #5A5D66, #D9DCE3 35%, #6E717B 55%, #EDEFF3 75%, #52555D)", "fill": "linear-gradient(100deg, #9EA2AC 0%, #FFFFFF 38%, #B7BAC3 58%, #F4F5F8 100%)", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"]}, {"id": "privatejet", "name": "Private Jet", "desc": "Dusk at 41,000 feet: sunset glow, drifting clouds, champagne trim.", "mode": "dark", "cat": "money", "bg": "#0E1426", "bgImage": "radial-gradient(1400px 380px at 50% 40%, rgba(255,160,100,0.26), transparent 60%), linear-gradient(180deg, #121A33 0%, #1E2445 35%, #3C2F4F 52%, #0E1426 78%)", "bgSize": "", "surface": "#151D33", "border": "#2E3A5C", "text": "#F4F1EA", "dim": "#BDC2D1", "accent": "#E3C48A", "callBg": "linear-gradient(135deg, #F1DDB0 0%, #E3C48A 45%, #B99A5C 100%)", "font": "Didot, 'Bodoni 72', Georgia, serif", "radius": "", "rule": "linear-gradient(90deg, transparent, #E3C48A 25%, #F6E7C4 50%, #E3C48A 75%, transparent)", "glow": "", "transform": "", "italic": false, "fxPrev": "radial-gradient(260px 60px at 20% 30%, rgba(255,255,255,0.07), transparent 70%), radial-gradient(320px 70px at 75% 55%, rgba(255,255,255,0.06), transparent 70%), radial-gradient(200px 50px at 45% 82%, rgba(255,255,255,0.05), transparent 70%)", "fxPrevSize": "900px 600px", "frame": "linear-gradient(135deg, rgba(227,196,138,0.7), rgba(227,196,138,0.12) 50%, rgba(227,196,138,0.6))", "fill": "linear-gradient(100deg, #E3C48A 0%, #FFF4DA 45%, #D6B26E 100%)", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"]}, {"id": "monaco", "name": "Monaco", "desc": "Riviera navy and gold over rippling water that glitters in the sun.", "mode": "light", "cat": "money", "bg": "#EEF3F7", "bgImage": "repeating-radial-gradient(circle at 50% 130%, rgba(11,46,89,0.045) 0 2px, transparent 2px 22px), linear-gradient(180deg, #F4F8FB, #E3ECF4)", "bgSize": "", "surface": "#FFFFFF", "border": "#D4DEE8", "text": "#0C1B2E", "dim": "#3E5268", "accent": "#0B2E59", "callBg": "linear-gradient(135deg, #184A85 0%, #0B2E59 60%, #071E3C 100%)", "font": "Didot, 'Bodoni 72', Georgia, serif", "radius": "", "rule": "repeating-linear-gradient(90deg, #0B2E59 0 14px, #C9A15B 14px 18px)", "glow": "", "transform": "uppercase", "italic": false, "fxPrev": "radial-gradient(circle at 12% 18%, rgba(201,161,91,0.55) 0 1.3px, transparent 1.9px), radial-gradient(circle at 62% 42%, rgba(255,255,255,0.9) 0 1.4px, transparent 2.0px), radial-gradient(circle at 36% 78%, rgba(201,161,91,0.45) 0 1.0px, transparent 1.6px), radial-gradient(circle at 86% 88%, rgba(255,255,255,0.8) 0 1.2px, transparent 1.7999999999999998px), radial-gradient(circle at 78% 12%, rgba(201,161,91,0.5) 0 1.1px, transparent 1.7000000000000002px)", "fxPrevSize": "150px 150px", "frame": "linear-gradient(135deg, #C9A15B, #F1DCA8 35%, #0B2E59 65%, #C9A15B)", "fill": "", "dots": ["#2E7D55", "#8A6A00", "#3A62A0", "#A23B4B"]}, {"id": "bullion", "name": "Bullion", "desc": "Stacked gold bars, glittering gold dust and solid-gold lettering.", "mode": "dark", "cat": "money", "bg": "#120D05", "bgImage": "repeating-linear-gradient(180deg, rgba(227,179,65,0.05) 0 38px, rgba(0,0,0,0.3) 38px 40px), repeating-linear-gradient(90deg, transparent 0 118px, rgba(0,0,0,0.25) 118px 120px), radial-gradient(900px 600px at 50% -10%, rgba(227,179,65,0.2), transparent 60%)", "bgSize": "", "surface": "#1B1409", "border": "#4A3715", "text": "#FBF3E1", "dim": "#D6C39A", "accent": "#E3B341", "callBg": "linear-gradient(135deg, #FFE28A 0%, #E3B341 40%, #B8892A 75%, #8A6414 100%)", "font": "'Bodoni 72', Didot, Georgia, serif", "radius": "", "rule": "linear-gradient(90deg, #8A6414, #FFE28A 50%, #8A6414)", "glow": "", "transform": "uppercase", "italic": false, "fxPrev": "radial-gradient(circle at 12% 18%, rgba(255,220,120,0.7) 0 1.2px, transparent 1.7999999999999998px), radial-gradient(circle at 62% 42%, rgba(255,220,120,0.5) 0 0.9px, transparent 1.5px), radial-gradient(circle at 36% 78%, rgba(255,240,180,0.7) 0 1.3px, transparent 1.9px), radial-gradient(circle at 86% 88%, rgba(255,220,120,0.45) 0 0.8px, transparent 1.4px), radial-gradient(circle at 78% 12%, rgba(255,230,150,0.6) 0 1.0px, transparent 1.6px), radial-gradient(circle at 24% 56%, rgba(255,220,120,0.5) 0 0.9px, transparent 1.5px)", "fxPrevSize": "170px 170px", "frame": "linear-gradient(135deg, #8A6414, #FFE28A 30%, #B8892A 55%, #FFF0B8 78%, #8A6414)", "fill": "linear-gradient(100deg, #B8892A 0%, #FFE28A 35%, #E3B341 55%, #FFF0B8 75%, #B8892A 100%)", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"]}, {"id": "chairman", "name": "Chairman", "desc": "Mahogany boardroom: wood grain, banker's-green desk light, brass fittings.", "mode": "dark", "cat": "money", "bg": "#1A0F0A", "bgImage": "repeating-linear-gradient(92deg, rgba(0,0,0,0.2) 0 2px, transparent 2px 9px, rgba(255,200,150,0.035) 9px 11px, transparent 11px 17px), linear-gradient(180deg, #26150D, #140B07)", "bgSize": "", "surface": "#24150E", "border": "#4C2F20", "text": "#F6EDE4", "dim": "#CDB6A2", "accent": "#C8A263", "callBg": "linear-gradient(135deg, #E0BF83 0%, #C8A263 45%, #8E6F38 100%)", "font": "Baskerville, 'Palatino', Georgia, serif", "radius": "", "rule": "linear-gradient(90deg, #8E6F38, #E0BF83 50%, #8E6F38)", "glow": "", "transform": "", "italic": false, "fxPrev": "", "fxPrevSize": "", "frame": "linear-gradient(135deg, #8E6F38, #E0BF83 40%, #6E5226 60%, #C8A263)", "fill": "", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"]}, {"id": "neonnoir", "name": "Neon Noir", "desc": "Rain on a neon city at night: falling rain, flickering pink and cyan signs.", "mode": "dark", "cat": "miami", "bg": "#07060D", "bgImage": "radial-gradient(700px 420px at 88% 0%, rgba(0,229,255,0.2), transparent 60%), radial-gradient(760px 520px at 0% 100%, rgba(255,46,136,0.22), transparent 60%), linear-gradient(180deg, #0B0918, #07060D)", "bgSize": "", "surface": "#0F0D19", "border": "#2A2442", "text": "#F3F0FF", "dim": "#B9B2D6", "accent": "#FF2E88", "callBg": "linear-gradient(135deg, #FF2E88 0%, #B026FF 100%)", "font": "Futura, 'Avenir Next', 'Trebuchet MS', sans-serif", "radius": "", "rule": "linear-gradient(90deg, #FF2E88, #7A2BFF 50%, #00E5FF)", "glow": "0 0 12px rgba(255,46,136,0.75), 0 0 2px rgba(255,255,255,0.6)", "transform": "uppercase", "italic": false, "fxPrev": "radial-gradient(ellipse 0.9px 13px at 12% 18%, rgba(150,215,255,0.45), transparent), radial-gradient(ellipse 0.9px 13px at 62% 42%, rgba(150,215,255,0.45), transparent), radial-gradient(ellipse 0.9px 13px at 36% 78%, rgba(150,215,255,0.45), transparent), radial-gradient(ellipse 0.9px 13px at 86% 88%, rgba(150,215,255,0.45), transparent), radial-gradient(ellipse 0.9px 13px at 78% 12%, rgba(150,215,255,0.45), transparent), radial-gradient(ellipse 0.9px 13px at 24% 56%, rgba(150,215,255,0.45), transparent), radial-gradient(ellipse 0.9px 13px at 50% 30%, rgba(150,215,255,0.45), transparent), radial-gradient(ellipse 0.9px 13px at 92% 60%, rgba(150,215,255,0.45), transparent)", "fxPrevSize": "130px 220px", "frame": "linear-gradient(135deg, #FF2E88, #7A2BFF 50%, #00E5FF)", "fill": "", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"]}, {"id": "synthwave", "name": "Synthwave", "desc": "Retro-future sunset, a neon grid rolling toward you, 80s chrome lettering.", "mode": "dark", "cat": "miami", "bg": "#120424", "bgImage": "radial-gradient(170px 170px at 50% 44%, rgba(255,190,90,0.55), rgba(255,79,139,0.45) 55%, transparent 72%), linear-gradient(180deg, #12032A 0%, #3A0B52 44%, #5A1260 56%, #120424 62%, #120424 100%)", "bgSize": "", "surface": "#1B0934", "border": "#43206E", "text": "#FFF0FB", "dim": "#D9B6E8", "accent": "#FF4FD8", "callBg": "linear-gradient(135deg, #FF4FD8 0%, #FF7A45 60%, #FFC23D 100%)", "font": "Futura, 'Avenir Next', 'Trebuchet MS', sans-serif", "radius": "", "rule": "linear-gradient(90deg, #00E5FF, #FF4FD8 50%, #FFC23D)", "glow": "", "transform": "uppercase", "italic": true, "fxPrev": "repeating-linear-gradient(0deg, rgba(255,79,216,0.38) 0 1px, transparent 1px 36px), repeating-linear-gradient(90deg, rgba(0,229,255,0.22) 0 1px, transparent 1px 48px)", "fxPrevSize": "", "frame": "linear-gradient(135deg, #FF4FD8, #8E2DE2 50%, #00E5FF)", "fill": "linear-gradient(180deg, #FFFFFF 0%, #FFD1F4 42%, #FF4FD8 52%, #B04BFF 72%, #FFE3F8 100%)", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"]}, {"id": "highroller", "name": "High Roller", "desc": "Casino green felt, blinking table lights, gold trim and red chips.", "mode": "dark", "cat": "miami", "bg": "#06241A", "bgImage": "radial-gradient(1200px 800px at 50% 30%, rgba(40,140,90,0.35), transparent 70%), repeating-linear-gradient(45deg, rgba(0,0,0,0.06) 0 1px, transparent 1px 3px), repeating-linear-gradient(-45deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 3px)", "bgSize": "", "surface": "#0B2F22", "border": "#1F5A42", "text": "#F4F1E6", "dim": "#BFD1C4", "accent": "#D4AF37", "callBg": "linear-gradient(135deg, #F1D36B 0%, #D4AF37 45%, #9E7A1E 100%)", "font": "Didot, 'Bodoni 72', Georgia, serif", "radius": "", "rule": "repeating-linear-gradient(90deg, #B3121F 0 10px, #111 10px 20px, #F4F1E6 20px 22px)", "glow": "", "transform": "uppercase", "italic": false, "fxPrev": "radial-gradient(circle at 12% 18%, rgba(255,215,110,0.75) 0 1.4px, transparent 2.0px), radial-gradient(circle at 62% 42%, rgba(255,215,110,0.5) 0 1.0px, transparent 1.6px), radial-gradient(circle at 36% 78%, rgba(255,80,80,0.55) 0 1.2px, transparent 1.7999999999999998px), radial-gradient(circle at 86% 88%, rgba(255,215,110,0.6) 0 1.2px, transparent 1.7999999999999998px), radial-gradient(circle at 78% 12%, rgba(255,255,255,0.5) 0 1.0px, transparent 1.6px)", "fxPrevSize": "140px 140px", "frame": "linear-gradient(135deg, #D4AF37, #8B0000 50%, #D4AF37)", "fill": "", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"]}, {"id": "velvet", "name": "Velvet Lounge", "desc": "Deep velvet curtains, a slow-swaying spotlight and gold accents.", "mode": "dark", "cat": "miami", "bg": "#1A0610", "bgImage": "radial-gradient(900px 700px at 50% -10%, rgba(255,120,170,0.2), transparent 60%), repeating-linear-gradient(90deg, rgba(0,0,0,0.22) 0 3px, rgba(255,255,255,0.025) 3px 6px, rgba(0,0,0,0.12) 6px 14px)", "bgSize": "", "surface": "#250A17", "border": "#521A33", "text": "#FBEFF4", "dim": "#D9B3C4", "accent": "#E8B04B", "callBg": "linear-gradient(135deg, #F5CE78 0%, #E8B04B 45%, #A87A22 100%)", "font": "'Bodoni 72', Didot, Georgia, serif", "radius": "", "rule": "linear-gradient(90deg, transparent, #E8B04B 30%, #F5CE78 50%, #E8B04B 70%, transparent)", "glow": "", "transform": "", "italic": true, "fxPrev": "radial-gradient(420px 760px at 50% 0%, rgba(255,225,190,0.12), transparent 70%)", "fxPrevSize": "", "frame": "linear-gradient(135deg, #E8B04B, #521A33 50%, #E8B04B)", "fill": "", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"]}, {"id": "afterparty", "name": "Afterparty", "desc": "Club lights drifting across the room in violet, cyan and pink.", "mode": "dark", "cat": "miami", "bg": "#090716", "bgImage": "linear-gradient(180deg, #0D0A20, #090716)", "bgSize": "", "surface": "#120F24", "border": "#2F2A57", "text": "#F4F2FF", "dim": "#BDB8E3", "accent": "#6D4AFF", "callBg": "linear-gradient(135deg, #6D4AFF 0%, #00B8D9 100%)", "font": "'Avenir Next', 'Helvetica Neue', system-ui, sans-serif", "radius": "", "rule": "linear-gradient(90deg, #FF2E88, #6D4AFF 50%, #00E5FF)", "glow": "0 0 10px rgba(109,74,255,0.6)", "transform": "uppercase", "italic": false, "fxPrev": "radial-gradient(40% 32% at 28% 28%, rgba(124,92,255,0.4), transparent 70%), radial-gradient(34% 28% at 72% 58%, rgba(0,229,255,0.28), transparent 70%), radial-gradient(30% 26% at 46% 88%, rgba(255,46,136,0.26), transparent 70%)", "fxPrevSize": "", "frame": "linear-gradient(135deg, #FF2E88, #6D4AFF 50%, #00E5FF)", "fill": "", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"]}, {"id": "aurora", "name": "Aurora", "desc": "Northern lights rippling slowly across a star-filled arctic sky.", "mode": "dark", "cat": "nature", "bg": "#04111A", "bgImage": "linear-gradient(180deg, #06182A 0%, #04111A 60%)", "bgSize": "", "surface": "#0A1C28", "border": "#1D3D50", "text": "#EAF7F4", "dim": "#A9C9C4", "accent": "#3FE0A5", "callBg": "linear-gradient(135deg, #3FE0A5 0%, #3FA8E0 100%)", "font": "'Avenir Next', 'Helvetica Neue', system-ui, sans-serif", "radius": "", "rule": "linear-gradient(90deg, #3FE0A5, #6A7BFF 50%, #B06BFF)", "glow": "0 0 10px rgba(63,224,165,0.45)", "transform": "", "italic": false, "fxPrev": "linear-gradient(100deg, transparent 18%, rgba(63,224,165,0.22) 34%, rgba(90,120,255,0.2) 50%, transparent 66%), radial-gradient(60% 38% at 30% 18%, rgba(63,224,165,0.24), transparent 70%), radial-gradient(50% 32% at 76% 12%, rgba(176,107,255,0.2), transparent 70%)", "fxPrevSize": "150px 150px", "frame": "linear-gradient(135deg, rgba(63,224,165,0.7), rgba(106,123,255,0.4) 50%, rgba(176,107,255,0.7))", "fill": "", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"]}, {"id": "deepsea", "name": "Deep Sea", "desc": "The abyss: shimmering light rays and glowing plankton drifting upward.", "mode": "dark", "cat": "nature", "bg": "#020B18", "bgImage": "radial-gradient(1200px 700px at 50% -20%, rgba(34,211,238,0.16), transparent 60%), linear-gradient(180deg, #06223F 0%, #020B18 70%)", "bgSize": "", "surface": "#071628", "border": "#163556", "text": "#E6F4FF", "dim": "#A2C3DD", "accent": "#22D3EE", "callBg": "linear-gradient(135deg, #22D3EE 0%, #1E7FD6 100%)", "font": "'Avenir Next', 'Helvetica Neue', system-ui, sans-serif", "radius": "20px", "rule": "linear-gradient(90deg, transparent, #22D3EE 50%, transparent)", "glow": "0 0 10px rgba(34,211,238,0.4)", "transform": "", "italic": false, "fxPrev": "radial-gradient(circle at 12% 18%, rgba(120,240,255,0.7) 0 1.3px, transparent 1.9px), radial-gradient(circle at 62% 42%, rgba(120,240,255,0.45) 0 0.9px, transparent 1.5px), radial-gradient(circle at 36% 78%, rgba(180,255,230,0.6) 0 1.1px, transparent 1.7000000000000002px), radial-gradient(circle at 86% 88%, rgba(120,240,255,0.4) 0 0.8px, transparent 1.4px), radial-gradient(circle at 78% 12%, rgba(160,220,255,0.55) 0 1.0px, transparent 1.6px), radial-gradient(circle at 24% 56%, rgba(120,240,255,0.5) 0 0.9px, transparent 1.5px)", "fxPrevSize": "200px 240px", "frame": "linear-gradient(135deg, rgba(34,211,238,0.6), rgba(30,127,214,0.2) 50%, rgba(34,211,238,0.5))", "fill": "", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"]}, {"id": "sakura", "name": "Sakura", "desc": "Cherry blossom pink with petals drifting down the screen.", "mode": "light", "cat": "nature", "bg": "#FBF1F3", "bgImage": "radial-gradient(700px 500px at 100% 0%, rgba(244,160,185,0.3), transparent 60%), radial-gradient(600px 500px at 0% 100%, rgba(244,160,185,0.22), transparent 60%)", "bgSize": "", "surface": "#FFFFFF", "border": "#F1D5DC", "text": "#2D1A20", "dim": "#6D4C56", "accent": "#B83B62", "callBg": "linear-gradient(135deg, #D0527A 0%, #A8325A 100%)", "font": "Georgia, 'Times New Roman', serif", "radius": "20px", "rule": "linear-gradient(90deg, #F4A0B9, #B83B62 50%, #F4A0B9)", "glow": "", "transform": "", "italic": true, "fxPrev": "radial-gradient(ellipse 5px 3px at 12% 18%, rgba(232,120,155,0.55), transparent), radial-gradient(ellipse 5px 3px at 62% 42%, rgba(232,120,155,0.55), transparent), radial-gradient(ellipse 5px 3px at 36% 78%, rgba(232,120,155,0.55), transparent), radial-gradient(ellipse 5px 3px at 86% 88%, rgba(232,120,155,0.55), transparent), radial-gradient(ellipse 5px 3px at 78% 12%, rgba(232,120,155,0.55), transparent), radial-gradient(ellipse 5px 3px at 24% 56%, rgba(232,120,155,0.55), transparent), radial-gradient(ellipse 5px 3px at 50% 30%, rgba(232,120,155,0.55), transparent)", "fxPrevSize": "220px 260px", "frame": "linear-gradient(135deg, #F4A0B9, #FFFFFF 50%, #F4A0B9)", "fill": "", "dots": ["#2E7D55", "#8A6A00", "#3A62A0", "#A23B4B"]}, {"id": "desertdusk", "name": "Desert Dusk", "desc": "Sunset over the dunes with sand drifting on a warm wind.", "mode": "dark", "cat": "nature", "bg": "#1C0F0A", "bgImage": "radial-gradient(130% 55% at 18% 112%, #3A1E12 0 42%, transparent 43%), radial-gradient(130% 50% at 88% 118%, #2E170D 0 46%, transparent 47%), radial-gradient(900px 260px at 50% 30%, rgba(255,138,61,0.3), transparent 65%), linear-gradient(180deg, #2A1330 0%, #5E2A26 30%, #A4502A 44%, #1C0F0A 62%)", "bgSize": "", "surface": "#27160F", "border": "#533222", "text": "#FBEEE3", "dim": "#D8B9A0", "accent": "#FF8A3D", "callBg": "linear-gradient(135deg, #FFB067 0%, #FF8A3D 45%, #C8541A 100%)", "font": "Futura, 'Avenir Next', 'Trebuchet MS', sans-serif", "radius": "", "rule": "linear-gradient(90deg, #7A2E4A, #FF8A3D 50%, #FFC76A)", "glow": "", "transform": "uppercase", "italic": false, "fxPrev": "radial-gradient(circle at 12% 18%, rgba(255,190,130,0.45) 0 1.0px, transparent 1.6px), radial-gradient(circle at 62% 42%, rgba(255,170,110,0.35) 0 0.8px, transparent 1.4px), radial-gradient(circle at 36% 78%, rgba(255,210,160,0.4) 0 0.9px, transparent 1.5px), radial-gradient(circle at 86% 88%, rgba(255,170,110,0.3) 0 0.7px, transparent 1.2999999999999998px)", "fxPrevSize": "300px 200px", "frame": "linear-gradient(135deg, #FF8A3D, #533222 50%, #FFC76A)", "fill": "", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"]}, {"id": "rainforest", "name": "Rainforest", "desc": "Layers of jungle green, drifting mist and blinking fireflies.", "mode": "dark", "cat": "nature", "bg": "#07140D", "bgImage": "radial-gradient(ellipse 60px 24px at 20% 30%, rgba(80,160,100,0.14), transparent 70%), radial-gradient(ellipse 50px 20px at 70% 65%, rgba(60,140,90,0.12), transparent 70%), radial-gradient(ellipse 40px 16px at 45% 90%, rgba(90,170,110,0.1), transparent 70%), linear-gradient(180deg, #0B2016, #07140D)", "bgSize": "180px 160px, 180px 160px, 180px 160px, auto", "surface": "#0D1F15", "border": "#214231", "text": "#EAF5EC", "dim": "#A9C8B2", "accent": "#7BD389", "callBg": "linear-gradient(135deg, #9BE3A6 0%, #7BD389 40%, #3F8F4E 100%)", "font": "Georgia, 'Times New Roman', serif", "radius": "", "rule": "linear-gradient(90deg, #2E6B3F, #9BE3A6 50%, #2E6B3F)", "glow": "", "transform": "", "italic": false, "fxPrev": "radial-gradient(300px 90px at 20% 35%, rgba(220,255,230,0.06), transparent 70%), radial-gradient(360px 100px at 70% 70%, rgba(220,255,230,0.05), transparent 70%)", "fxPrevSize": "900px 600px", "frame": "linear-gradient(135deg, #7BD389, #214231 50%, #7BD389)", "fill": "", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"]}, {"id": "cybergrid", "name": "Cyber Grid", "desc": "Glowing circuit grid with a scanning beam and pulsing electric blue.", "mode": "dark", "cat": "tech", "bg": "#030A12", "bgImage": "repeating-linear-gradient(0deg, rgba(0,179,255,0.07) 0 1px, transparent 1px 28px), repeating-linear-gradient(90deg, rgba(0,179,255,0.07) 0 1px, transparent 1px 28px), radial-gradient(circle at 14px 14px, rgba(0,179,255,0.3) 0 1.5px, transparent 2px)", "bgSize": "28px 28px", "surface": "#07131F", "border": "#15344D", "text": "#E3F4FF", "dim": "#9CC2DA", "accent": "#00B3FF", "callBg": "linear-gradient(135deg, #3FD0FF 0%, #0086C2 100%)", "font": "ui-monospace, 'IBM Plex Mono', Menlo, monospace", "radius": "6px", "rule": "linear-gradient(90deg, transparent, #00B3FF 50%, transparent)", "glow": "0 0 10px rgba(0,179,255,0.6)", "transform": "", "italic": false, "fxPrev": "radial-gradient(45% 30% at 50% 40%, rgba(0,179,255,0.2), transparent 70%)", "fxPrevSize": "100% 600px", "frame": "linear-gradient(135deg, #00B3FF, rgba(0,179,255,0.15) 50%, #00B3FF)", "fill": "", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"]}, {"id": "chrome", "name": "Chrome", "desc": "Liquid chrome, mirror-finish lettering and a light sweep.", "mode": "dark", "cat": "tech", "bg": "#0C0D10", "bgImage": "linear-gradient(160deg, #1A1C21 0%, #2B2F37 18%, #0E0F12 36%, #3A3F48 52%, #101115 70%, #262A31 100%)", "bgSize": "", "surface": "#15171B", "border": "#33373F", "text": "#F5F7FA", "dim": "#B9BFC9", "accent": "#D9DEE6", "callBg": "linear-gradient(180deg, #FFFFFF 0%, #C9CED6 45%, #8E949E 52%, #E6E9EE 100%)", "font": "Futura, 'Avenir Next', 'Trebuchet MS', sans-serif", "radius": "", "rule": "linear-gradient(90deg, #6C727C, #FFFFFF 50%, #6C727C)", "glow": "", "transform": "uppercase", "italic": false, "fxPrev": "linear-gradient(115deg, transparent 42%, rgba(255,255,255,0.07) 50%, transparent 58%)", "fxPrevSize": "", "frame": "linear-gradient(135deg, #6C727C, #FFFFFF 30%, #8E949E 55%, #E6E9EE 80%, #6C727C)", "fill": "linear-gradient(180deg, #FFFFFF 0%, #C9CED6 45%, #6C727C 50%, #E6E9EE 56%, #9BA1AB 100%)", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"]}, {"id": "missioncontrol", "name": "Mission Control", "desc": "Flight-control HUD: crosshair grid, radar sweep and hazard stripes.", "mode": "dark", "cat": "tech", "bg": "#0A0C0F", "bgImage": "repeating-linear-gradient(0deg, rgba(255,255,255,0.035) 0 1px, transparent 1px 40px), repeating-linear-gradient(90deg, rgba(255,255,255,0.035) 0 1px, transparent 1px 40px), radial-gradient(circle at 50% 45%, transparent 0 170px, rgba(255,107,26,0.1) 171px 172px, transparent 173px, transparent 260px, rgba(255,107,26,0.07) 261px 262px, transparent 263px)", "bgSize": "", "surface": "#11151A", "border": "#2A323C", "text": "#EDF1F5", "dim": "#AAB4C0", "accent": "#FF6B1A", "callBg": "linear-gradient(135deg, #FF8A45 0%, #FF6B1A 50%, #C9500F 100%)", "font": "ui-monospace, 'IBM Plex Mono', Menlo, monospace", "radius": "4px", "rule": "repeating-linear-gradient(135deg, #FF6B1A 0 8px, #0A0C0F 8px 16px)", "glow": "", "transform": "uppercase", "italic": false, "fxPrev": "conic-gradient(from 0deg at 50% 45%, rgba(255,107,26,0.16), transparent 50deg, transparent 360deg)", "fxPrevSize": "", "frame": "linear-gradient(135deg, #FF6B1A, #2A323C 40%, #2A323C 60%, #FF6B1A)", "fill": "", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"]}, {"id": "stpatricks", "name": "St. Patrick's Day", "desc": "Emerald green, glinting gold coins and an Irish tricolor stripe.", "mode": "dark", "cat": "holiday", "bg": "#04170E", "bgImage": "radial-gradient(1000px 600px at 50% -10%, rgba(47,191,113,0.22), transparent 60%), repeating-linear-gradient(135deg, rgba(255,255,255,0.02) 0 10px, transparent 10px 20px)", "bgSize": "", "surface": "#0A2416", "border": "#1C4A30", "text": "#F1F8EE", "dim": "#B5D3BC", "accent": "#2FBF71", "callBg": "linear-gradient(135deg, #5FE09A 0%, #2FBF71 45%, #1C7F4A 100%)", "font": "Georgia, 'Times New Roman', serif", "radius": "", "rule": "linear-gradient(90deg, #169B62 0 33%, #FFFFFF 33% 66%, #FF883E 66%)", "glow": "", "transform": "", "italic": false, "fxPrev": "radial-gradient(circle at 12% 18%, rgba(255,215,90,0.85) 0 2.2px, transparent 2.8000000000000003px), radial-gradient(circle at 62% 42%, rgba(255,215,90,0.55) 0 1.5px, transparent 2.1px), radial-gradient(circle at 36% 78%, rgba(255,235,150,0.75) 0 1.8px, transparent 2.4px), radial-gradient(circle at 86% 88%, rgba(255,215,90,0.5) 0 1.2px, transparent 1.7999999999999998px)", "fxPrevSize": "190px 190px", "frame": "linear-gradient(135deg, #D4AF37, #2FBF71 50%, #D4AF37)", "fill": "", "dots": ["#6FA085", "#C9A227", "#7E9BC2", "#A85C68"]}];
   var THEME_NAMES = THEMES.map(function (t) { return t.id; });
+  var MOTION_KEY = "dovetail_motion";
+  function motionOn() { try { return window.localStorage.getItem(MOTION_KEY) !== "off"; } catch (e) { return true; } }
+  function applyMotion() { document.documentElement.setAttribute("data-motion", motionOn() ? "on" : "off"); }
+  applyMotion();
   var THEME_LABELS = {};
   THEMES.forEach(function (t) { THEME_LABELS[t.id] = t.name; });
 
@@ -2226,11 +2796,13 @@
   }
 
   function themeCardHtml(t, cur) {
-    var prevBg = "background-color:" + t.bg + ";" + (t.bgImage ? "background-image:" + t.bgImage + ";" : "") + (t.bgSize ? "background-size:" + t.bgSize + ";" : "");
+    var imgs = [t.fxPrev, t.bgImage].filter(Boolean);
+    var prevBg = "background-color:" + t.bg + ";" + (imgs.length ? "background-image:" + imgs.join(", ") + ";" : "") +
+      (t.fxPrev ? "background-size:" + (t.fxPrevSize || "auto") + ", " + (t.bgSize || "auto") + ";" : (t.bgSize ? "background-size:" + t.bgSize + ";" : ""));
     return '<button class="theme-card' + (t.id === cur ? ' active' : '') + '" data-theme-choice="' + t.id + '" aria-pressed="' + (t.id === cur) + '">' +
       '<span class="tc-prev" style="' + escapeHtml(prevBg) + '">' + (t.rule ? '<span class="tc-rule" style="background:' + escapeHtml(t.rule) + '"></span>' : '') +
-        '<span class="tc-card" style="background:' + t.surface + ';border-color:' + t.border + ';' + (t.radius ? 'border-radius:' + (parseInt(t.radius, 10) / 2) + 'px;' : '') + '">' +
-          '<span class="tc-title" style="color:' + t.text + ';' + (t.font ? 'font-family:' + escapeHtml(t.font) + ';' : '') + (t.transform ? 'text-transform:' + t.transform + ';letter-spacing:0.05em;' : '') + (t.italic ? 'font-style:italic;' : '') + (t.glow ? 'text-shadow:' + escapeHtml(t.glow) + ';' : '') + '">Jordan Casey</span>' +
+        '<span class="tc-card" style="' + (t.frame ? 'background:linear-gradient(' + t.surface + ',' + t.surface + ') padding-box, ' + escapeHtml(t.frame) + ' border-box;border-color:transparent;' : 'background:' + t.surface + ';border-color:' + t.border + ';') + (t.radius ? 'border-radius:' + (parseInt(t.radius, 10) / 2) + 'px;' : '') + '">' +
+          '<span class="tc-title" style="color:' + t.text + ';' + (t.font ? 'font-family:' + escapeHtml(t.font) + ';' : '') + (t.transform ? 'text-transform:' + t.transform + ';letter-spacing:0.05em;' : '') + (t.italic ? 'font-style:italic;' : '') + (t.glow && !t.fill ? 'text-shadow:' + escapeHtml(t.glow) + ';' : '') + (t.fill ? 'background-image:' + escapeHtml(t.fill) + ';-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;' : '') + '">Jordan Casey</span>' +
           '<span class="tc-line" style="background:' + t.dim + '"></span>' +
           '<span class="tc-foot"><span class="tc-btn" style="background:' + escapeHtml(t.callBg) + '"></span>' +
             t.dots.map(function (d) { return '<span class="tc-dot" style="background:' + d + '"></span>'; }).join("") + '</span>' +
@@ -2263,10 +2835,10 @@
       '<span class="tc-prev tc-auto"></span>' +
       '<span class="tc-name">Auto' + (cur === "auto" ? '<span class="tc-check">\u2713</span>' : '') + '</span>' +
       '<span class="tc-desc">Daylight in light mode, Midnight in dark mode. Follows your phone.</span></button>';
-    var GROUPS = [["everyday", "Everyday"], ["money", "Wall Street & Old Money"], ["miami", "Miami After Dark"], ["holiday", "Holidays"]];
+    var GROUPS = [["everyday", "Everyday"], ["money", "Wall Street & Old Money"], ["miami", "After Dark"], ["nature", "Nature"], ["tech", "Tech"], ["holiday", "Holidays"]];
     var cats = document.getElementById("themeCats");
     if (cats) {
-      cats.innerHTML = [["all", "All"], ["everyday", "Everyday"], ["money", "Wall Street"], ["miami", "Miami"], ["holiday", "Holidays"]].map(function (c) {
+      cats.innerHTML = [["all", "All"], ["everyday", "Everyday"], ["money", "Wall Street"], ["miami", "After Dark"], ["nature", "Nature"], ["tech", "Tech"], ["holiday", "Holidays"]].map(function (c) {
         var n = c[0] === "all" ? THEMES.length + 1 : THEMES.filter(function (t) { return (t.cat || "everyday") === c[0]; }).length + (c[0] === "everyday" ? 1 : 0);
         return '<button class="filter-chip' + (themeCat === c[0] ? ' active' : '') + '" data-themecat="' + c[0] + '">' + c[1] + ' <span class="chip-n">' + n + '</span></button>';
       }).join("");
@@ -2592,10 +3164,11 @@
     document.getElementById("viewTabHistory").classList.toggle("active", state.activeView === "history");
     document.getElementById("viewTabPipeline").classList.toggle("active", state.activeView === "pipeline");
     document.getElementById("viewTabTasks").classList.toggle("active", state.activeView === "tasks");
+    document.getElementById("viewTabVault").classList.toggle("active", state.activeView === "vault");
     document.getElementById("queueControls").style.display = "none";
     var dueN = dueTasks().length;
     var scb = document.getElementById("adminBtn");
-    if (scb) scb.setAttribute("data-badge", (TEAM.on && isAdmin() && new Date().getHours() >= 17 && state.recapSeen !== localDateStr(new Date())) ? "1" : "");
+    if (scb) scb.setAttribute("data-badge", (TEAM.on && isAdmin() && ((new Date().getHours() >= 17 && state.recapSeen !== localDateStr(new Date())) || vaultPending().length)) ? "1" : "");
     document.getElementById("viewTabTasks").setAttribute("data-badge", dueN ? String(dueN) : "");
 
     if (state.activeView === "history") {
@@ -2610,6 +3183,13 @@
       document.getElementById("statsBlock").style.display = "none";
       document.getElementById("queueBlock").style.display = "none";
       renderPipelineTab();
+      return;
+    }
+    if (state.activeView === "vault") {
+      document.getElementById("progressWrap").style.display = "none";
+      document.getElementById("statsBlock").style.display = "none";
+      document.getElementById("queueBlock").style.display = "none";
+      renderVaultTab();
       return;
     }
     if (state.activeView === "tasks") {
@@ -3113,6 +3693,7 @@
         Object.keys(TEAM.members).map(function (k) { return TEAM.members[k]; }).filter(function (m) { return m.active || (lead.owner && lead.owner.uid === m.uid); })
           .map(function (m) { return '<option value="' + m.uid + '"' + (lead.owner && lead.owner.uid === m.uid ? ' selected' : '') + '>' + escapeHtml(m.name || m.username) + '</option>'; }).join("") +
         (lead.owner ? '' : '<option value="" selected>Not assigned yet</option>') + '</select>' : '') +
+      '<button class="btn-secondary" id="lpVault" style="width:100%;margin-top:12px">' + (vaultForLead(lead.id) ? 'Open in Investor Vault' : 'Add to Investor Vault') + '</button>' +
       '<label class="up-check lp-notext"><input type="checkbox" id="lpNoText"' + (lead.noText ? ' checked' : '') + '> Do not text (they asked not to)</label>' +
       '<div class="modal-actions"><button class="btn-secondary" id="lpAddTask">+ Follow-up</button><button class="btn-primary" id="lpDone">Done</button></div>' +
       '<div class="lp-tl-head">Timeline</div>' +
@@ -3125,7 +3706,11 @@
     });
     document.getElementById("lpStage").addEventListener("change", function (e) {
       lead.stage = e.target.value; saveState(); showToast("Moved to " + lead.stage);
+      if (lead.stage === "Committed" && !vaultForLead(lead.id)) {
+        showConfirm(lead.name + " committed. Add them to the Investor Vault so you can track their investments?", function () { closeLeadProfile(true); vaultAddFromLead(lead); }, "Add to Vault");
+      }
     });
+    document.getElementById("lpVault").addEventListener("click", function () { closeLeadProfile(true); vaultAddFromLead(lead); });
     document.getElementById("lpAmount").addEventListener("change", function (e) {
       lead.amount = Math.max(0, Number(e.target.value) || 0); saveState(); showToast("Amount saved");
     });
@@ -4704,6 +5289,113 @@
     return JSON.parse(JSON.stringify(p));
   }
 
+  // ---- Staying signed in ----
+  // A "permission denied" answer can be a stale login token (phone idle for an hour, weak signal)
+  // just as easily as a real access change. Nobody is signed out until the server confirms it.
+  var SIGNOUT_LOG = "dovetail_signout_log";
+  function logSignout(reason, msg) {
+    try {
+      var l = JSON.parse(window.localStorage.getItem(SIGNOUT_LOG) || "[]");
+      l.push({ at: Date.now(), reason: reason || "", msg: msg || "" });
+      window.localStorage.setItem(SIGNOUT_LOG, JSON.stringify(l.slice(-10)));
+    } catch (e) {}
+  }
+  function lastSignoutNote() {
+    try {
+      var l = JSON.parse(window.localStorage.getItem(SIGNOUT_LOG) || "[]"), x = l[l.length - 1];
+      if (!x) return "";
+      return "Last sign-out: " + new Date(x.at).toLocaleString(undefined, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }) + " (" + x.reason + ")";
+    } catch (e) { return ""; }
+  }
+  async function fetchMember(user, ref) {
+    try { var snap = await ref.get(); return snap.exists ? snap.data() : null; }
+    catch (e) {
+      if (e && e.code === "permission-denied") {
+        // Your own access record is always readable, so this means the login token was stale.
+        try { await user.getIdToken(true); } catch (e2) { throw { kind: "network" }; }
+        try { var s2 = await ref.get(); return s2.exists ? s2.data() : null; }
+        catch (e3) { throw { kind: e3 && e3.code === "permission-denied" ? "denied" : "network" }; }
+      }
+      try { var c = await ref.get({ source: "cache" }); if (c.exists) return c.data(); } catch (e4) {}
+      throw { kind: "network" };
+    }
+  }
+  function teamAttachData() {
+    vaultStart();
+    teamWatchMe();
+    teamWatchMembers();
+    TEAM.unsub.push(TEAM.db.collection("leadChunks").onSnapshot(function (qs) {
+      teamApplyChunks(qs);
+      document.body.classList.remove("sync-lock");
+    }, teamListenError));
+    teamWatchDays();
+  }
+  function teamDetachData() {
+    vaultStop();
+    TEAM.unsub.forEach(function (f) { try { f(); } catch (e) {} });
+    TEAM.unsub = [];
+    Object.keys(TEAM.dayUnsub).forEach(function (k) { try { TEAM.dayUnsub[k](); } catch (e) {} });
+    TEAM.dayUnsub = {};
+    if (TEAM.membersUnsub) { try { TEAM.membersUnsub(); } catch (e) {} TEAM.membersUnsub = null; }
+  }
+  function teamRestartListeners() {
+    if (!TEAM.me) return;
+    teamDetachData();
+    teamAttachData();
+    teamRetryCalls();
+    teamScheduleFlush(300);
+  }
+  var verifyRun = null, verifyTimer = null, verifyDenied = 0;
+  function scheduleVerify(reason, ms) {
+    clearTimeout(verifyTimer);
+    setSaveStatus("teamoffline");
+    verifyTimer = setTimeout(function () { teamVerifyAccess(reason); }, ms || 8000);
+  }
+  function teamVerifyAccess(reason) {
+    if (!TEAM.me || TEAM.signingOut) return Promise.resolve();
+    if (verifyRun) return verifyRun;
+    verifyRun = (async function () {
+      var user = TEAM.auth.currentUser;
+      if (!user) { await forceSignOut("You were signed out. Please sign in again.", reason + ":no-user"); return; }
+      try { await user.getIdToken(true); }
+      catch (e) {
+        var c = (e && e.code) || "";
+        if (/user-disabled|user-not-found|user-token-expired|invalid-user-token/.test(c)) { await forceSignOut("Your sign-in expired. Please sign in again.", reason + ":" + c); return; }
+        scheduleVerify(reason); return;
+      }
+      var snap;
+      try { snap = await TEAM.db.collection("members").doc(user.uid).get({ source: "server" }); }
+      catch (e) {
+        if (e && e.code === "permission-denied" && ++verifyDenied >= 3) { await forceSignOut("Your access couldn\u2019t be confirmed. Please sign in again.", reason + ":verify-denied"); return; }
+        scheduleVerify(reason, e && e.code === "permission-denied" ? 3000 : 8000); return;
+      }
+      verifyDenied = 0;
+      var m = snap.exists ? snap.data() : null;
+      if (!m || m.active !== true) {
+        if (TEAM.me && TEAM.me.username === TEAM_OWNER) { teamRestartListeners(); return; }
+        await forceSignOut("Your access has been turned off. Contact your admin.", reason + ":" + (m ? "inactive" : "removed"));
+        return;
+      }
+      teamRestartListeners();
+    })().then(function () { verifyRun = null; }, function () { verifyRun = null; });
+    return verifyRun;
+  }
+  // Calls that couldn't be saved are kept on this phone and retried until they land.
+  function teamRetryCalls() {
+    if (!TEAM.me || !state.pendingCalls || !state.pendingCalls.length) return;
+    var list = state.pendingCalls.slice();
+    state.pendingCalls = [];
+    list.forEach(function (c) { teamLogCall(c); });
+  }
+  var lastHiddenAt = 0;
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden) { lastHiddenAt = Date.now(); return; }
+    if (TEAM.on && TEAM.me && lastHiddenAt && Date.now() - lastHiddenAt > 20 * 60 * 1000) {
+      var u = TEAM.auth.currentUser;
+      if (u) u.getIdToken(true).then(teamRestartListeners, function () {});
+    }
+  });
+
   /* ----- start-up and sign-in ----- */
   function teamBoot() {
     TEAM.on = true;
@@ -4722,7 +5414,7 @@
     showAuthScreen("", true);
     TEAM.auth.onAuthStateChanged(function (user) {
       if (user) teamSignedIn(user);
-      else if (TEAM.me) forceSignOut("");
+      else if (TEAM.me) forceSignOut("You were signed out. Please sign in again.", "auth-signed-out");
       else showAuthScreen(document.getElementById("authMsg").textContent || "");
     });
   }
@@ -4733,6 +5425,10 @@
     document.getElementById("authMsg").textContent = msg || "";
     document.getElementById("authMsg").style.display = msg ? "" : "none";
     document.getElementById("authForm").style.display = connecting ? "none" : "";
+    var note = document.getElementById("authNote");
+    if (note) note.textContent = connecting ? "" : lastSignoutNote();
+    var bn = document.getElementById("authBuild");
+    if (bn) bn.textContent = "Build " + (((document.querySelector('meta[name="dovetail-build"]') || {}).content) || "");
     document.getElementById("authConnecting").style.display = connecting ? "" : "none";
     setAuthMode(TEAM.setupMode);
   }
@@ -4784,40 +5480,43 @@
 
   async function teamSignedIn(user) {
     if (TEAM.signingOut || (TEAM.me && TEAM.me.uid === user.uid)) return;
+    clearTimeout(TEAM.retryTimer);
     showAuthScreen("", true);
     var username = String(user.email || "").split("@")[0];
     var ref = TEAM.db.collection("members").doc(user.uid), m = null;
-    try {
-      var snap = await ref.get();
-      m = snap.exists ? snap.data() : null;
-    } catch (e) {
-      if (!(e && e.code === "permission-denied")) { showAuthScreen("Couldn\u2019t reach the team server. Check your connection and try again."); return; }
+    try { m = await fetchMember(user, ref); }
+    catch (err) {
+      if (err && err.kind === "denied") {
+        TEAM.startDenied = (TEAM.startDenied || 0) + 1;
+        if (TEAM.startDenied >= 3) { TEAM.startDenied = 0; await forceSignOut("Your sign-in expired. Please sign in again.", "start:denied"); return; }
+      }
+      // Weak or no signal: stay signed in and keep trying.
+      document.getElementById("authConnecting").textContent = "Can\u2019t reach the team server. Retrying\u2026 (you\u2019re still signed in)";
+      TEAM.retryTimer = setTimeout(function () { if (TEAM.auth.currentUser) teamSignedIn(TEAM.auth.currentUser); }, 5000);
+      return;
     }
     if (!m && username === TEAM_OWNER) {
       m = { username: username, name: "Vincent", role: "admin", active: true, createdAt: Date.now(), lastSeen: Date.now() };
       try { await ref.set(m); }
-      catch (e) { await forceSignOut("Your admin account exists, but the database won\u2019t accept it yet. Make sure the security rules are published."); return; }
+      catch (e) { await forceSignOut("Your admin account exists, but the database won\u2019t accept it yet. Make sure the security rules are published.", "start:owner-setup"); return; }
     }
-    if (!m || m.active !== true) { await forceSignOut("Your access has been turned off. Contact your admin."); return; }
+    if (!m || m.active !== true) { await forceSignOut("Your access has been turned off. Contact your admin.", "start:" + (m ? "inactive" : "removed")); return; }
+    document.getElementById("authConnecting").textContent = "Connecting\u2026";
+    TEAM.startDenied = 0;
     TEAM.me = { uid: user.uid, username: m.username || username, name: m.name || username, role: m.role || "rep" };
     STORAGE_KEY = "dovetail_team_" + user.uid;
     state = loadTeamPrefs();
     if (!state.textSettings) { textSettings(); state.textSettings.myName = firstName(TEAM.me.name); }
-    TEAM.ready = false; TEAM.lastSent = {}; TEAM.lastCk = {}; TEAM.days = {}; TEAM.migrationChecked = false; TEAM.myClaimId = null;
+    TEAM.ready = false; TEAM.lastSent = {}; TEAM.lastCk = {}; TEAM.days = {}; TEAM.migrationChecked = false; TEAM.myClaimId = null; TEAM.forceRemote = {};
     hideAuthScreen();
     applyTeamVisibility();
     document.body.classList.add("sync-lock");
     render();
-    teamWatchMe();
-    teamWatchMembers();
-    TEAM.unsub.push(TEAM.db.collection("leadChunks").onSnapshot(function (qs) {
-      teamApplyChunks(qs);
-      document.body.classList.remove("sync-lock");
-    }, teamListenError));
-    teamWatchDays();
+    teamAttachData();
     TEAM.dayTimer = setInterval(teamWatchDays, 10 * 60 * 1000);
     teamHeartbeat();
     TEAM.heartbeat = setInterval(teamHeartbeat, 5 * 60 * 1000);
+    teamRetryCalls();
   }
 
   function teamHeartbeat() {
@@ -4831,21 +5530,19 @@
     await forceSignOut("");
   }
 
-  async function forceSignOut(msg) {
+  async function forceSignOut(msg, reason) {
     if (TEAM.signingOut) return;
     TEAM.signingOut = true;
-    TEAM.unsub.forEach(function (f) { try { f(); } catch (e) {} });
-    TEAM.unsub = [];
-    Object.keys(TEAM.dayUnsub).forEach(function (k) { try { TEAM.dayUnsub[k](); } catch (e) {} });
-    TEAM.dayUnsub = {};
-    if (TEAM.membersUnsub) { try { TEAM.membersUnsub(); } catch (e) {} TEAM.membersUnsub = null; }
+    logSignout(reason || (msg ? "signed out" : "you signed out"), msg);
+    clearTimeout(verifyTimer); clearTimeout(TEAM.retryTimer);
+    teamDetachData();
     clearInterval(TEAM.heartbeat); clearInterval(TEAM.dayTimer); clearTimeout(TEAM.flushTimer);
     TEAM.me = null; TEAM.ready = false; TEAM.members = {}; TEAM.lastSent = {}; TEAM.lastCk = {}; TEAM.days = {}; TEAM.myClaimId = null;
     STORAGE_KEY = "dovetail_team_signedout";
     state = defaultState();
     pendingText = null;
     renderTextPrompt();
-    ["menuModal", "leadModal", "taskModal", "loadModal", "teamModal", "acctModal", "scoreModal", "themeModal", "adminModal", "coachModal", "infoModal", "confirmModal"].forEach(function (id) {
+    ["menuModal", "leadModal", "taskModal", "loadModal", "teamModal", "acctModal", "scoreModal", "themeModal", "adminModal", "coachModal", "infoModal", "vaultModal", "confirmModal"].forEach(function (id) {
       var el = document.getElementById(id);
       if (el) el.classList.remove("show");
     });
@@ -4859,11 +5556,9 @@
   }
 
   function teamListenError(e) {
-    if (e && e.code === "permission-denied") {
-      forceSignOut(TEAM.me && TEAM.me.username === TEAM_OWNER
-        ? "The database blocked your account. Make sure the security rules are published exactly as provided."
-        : "Your access has been turned off. Contact your admin.");
-    } else setSaveStatus("teamoffline");
+    if (!TEAM.me) return;
+    if (e && e.code === "permission-denied") teamVerifyAccess("listener");
+    else { setSaveStatus("teamoffline"); clearTimeout(teamListenError.t); teamListenError.t = setTimeout(teamRestartListeners, 5000); }
   }
 
   function applyTeamVisibility() {
@@ -4881,13 +5576,15 @@
       if (!TEAM.me) return;
       var m = snap.exists ? snap.data() : null;
       if (!m || m.active !== true) {
-        if (TEAM.me.username !== TEAM_OWNER) forceSignOut("Your access has been turned off. Contact your admin.");
+        if (TEAM.me.username === TEAM_OWNER) return;
+        if (snap.metadata && snap.metadata.fromCache) { teamVerifyAccess("member-cache"); return; }
+        forceSignOut("Your access has been turned off. Contact your admin.", "admin-" + (m ? "turned-off" : "removed"));
         return;
       }
       var roleChanged = (m.role || "rep") !== TEAM.me.role;
       TEAM.me.name = m.name || TEAM.me.name;
       TEAM.me.role = m.role || "rep";
-      if (roleChanged) { applyTeamVisibility(); teamWatchMembers(); teamRenderSoon(); }
+      if (roleChanged) { applyTeamVisibility(); teamWatchMembers(); vaultStart(); teamRenderSoon(); }
     }, teamListenError));
   }
   function teamWatchMembers() {
@@ -4920,17 +5617,26 @@
       var m = TEAM.days[k];
       Object.keys(m).forEach(function (id) { var c = m[id]; c.id = id; all.push(c); });
     });
+    var have = {}; all.forEach(function (c) { have[c.id] = true; });
+    (state.pendingCalls || []).forEach(function (c) { if (!have[c.id]) all.push(c); });
     all.sort(function (a, b) { return new Date(a.timestamp) - new Date(b.timestamp); });
     state.callLog = all;
     teamRenderSoon();
   }
   function teamLogCall(entry) {
     var ref = TEAM.db.collection("callDays").doc(String(entry.timestamp).slice(0, 10));
-    var upd = {}; upd["calls." + fp(entry.id)] = JSON.parse(JSON.stringify(entry));
+    var clean = JSON.parse(JSON.stringify(entry));
+    var upd = {}; upd["calls." + fp(entry.id)] = clean;
     ref.update(upd).catch(function (e) {
-      if (e && e.code === "not-found") { var obj = { calls: {} }; obj.calls[entry.id] = upd["calls." + fp(entry.id)]; return ref.set(obj, { merge: true }); }
+      if (e && e.code === "not-found") { var obj = { calls: {} }; obj.calls[entry.id] = clean; return ref.set(obj, { merge: true }); }
       throw e;
-    }).catch(function (e) { if (e && e.code === "permission-denied") teamListenError(e); else setSaveStatus("teamoffline"); });
+    }).catch(function (e) {
+      if (!state.pendingCalls) state.pendingCalls = [];
+      if (!state.pendingCalls.some(function (c) { return c.id === entry.id; })) state.pendingCalls.push(clean);
+      saveState();
+      if (e && e.code === "permission-denied") teamVerifyAccess("save-call");
+      else { setSaveStatus("teamoffline"); setTimeout(teamRetryCalls, 8000); }
+    });
   }
 
   // Apply the shared lead list. Local edits not yet saved are kept, so nothing typed is lost.
@@ -4950,7 +5656,8 @@
     function take(ts, xs) { tasks.push.apply(tasks, ts || []); texts.push.apply(texts, xs || []); }
     Object.keys(remote).forEach(function (id) {
       var r = remote[id], local = localById[id];
-      if (local && TEAM.lastSent[id] !== undefined && stableJson(teamPayload(local, tBy[id], xBy[id])) !== TEAM.lastSent[id]) {
+      if (TEAM.forceRemote && TEAM.forceRemote[id]) { delete TEAM.forceRemote[id]; }
+      else if (local && TEAM.lastSent[id] !== undefined && stableJson(teamPayload(local, tBy[id], xBy[id])) !== TEAM.lastSent[id]) {
         local.ck = r.ck; keep.push(local); take(tBy[id], xBy[id]); return;
       }
       var v = r.v || {}, lead = {};
@@ -5004,6 +5711,28 @@
     clearTimeout(TEAM.flushTimer);
     TEAM.flushTimer = setTimeout(teamFlush, ms == null ? 400 : ms);
   }
+  // A save the database refused (e.g. the admin deleted that lead a moment earlier): first make sure
+  // this person still has access, then take the server's version so it never loops or signs anyone out.
+  async function teamReconcileRejected(rejected) {
+    await teamVerifyAccess("save");
+    if (!TEAM.me) return;
+    for (var i = 0; i < rejected.length; i++) {
+      var r = rejected[i], remote = {};
+      try { var snap = await chunkRef(r.ck).get({ source: "server" }); remote = snap.exists ? ((snap.data() || {}).leads || {}) : {}; }
+      catch (e) { continue; }
+      r.ids.forEach(function (id) {
+        if (remote[id]) { TEAM.forceRemote[id] = true; TEAM.lastSent[id] = "__refresh__"; return; }
+        state.leads = state.leads.filter(function (l) { return l.id !== id; });
+        state.tasks = state.tasks.filter(function (t) { return t.leadId !== id; });
+        state.texts = state.texts.filter(function (x) { return x.leadId !== id; });
+        if (state.focusLeadId === id) { state.focusLeadId = null; state.focusTaskId = null; }
+        if (state.activeLeadId === id) { state.activeLeadId = null; state.awaitingOutcome = false; }
+        delete TEAM.lastSent[id]; delete TEAM.lastCk[id];
+      });
+    }
+    teamRestartListeners();
+    render();
+  }
   function teamPickChunk() {
     var ids = Object.keys(TEAM.chunkSizes).sort();
     for (var i = 0; i < ids.length; i++) {
@@ -5037,10 +5766,12 @@
       var cks = Object.keys(byChunk);
       if (!cks.length) return;
       setSaveStatus("syncing");
+      var rejected = [];
       for (var i = 0; i < cks.length; i++) {
         var ck = cks[i], upd = byChunk[ck], ref = chunkRef(ck);
         try { await ref.update(upd); }
         catch (e) {
+          if (e && e.code === "permission-denied") { rejected.push({ ck: ck, ids: Object.keys(upd).map(function (k) { return k.slice(6).replace(/`/g, ""); }) }); continue; }
           if (!(e && e.code === "not-found")) throw e;
           var obj = { leads: {} };
           Object.keys(upd).forEach(function (k) { var id = k.slice(6).replace(/`/g, ""); if (!dels[id]) obj.leads[id] = upd[k]; });
@@ -5052,9 +5783,10 @@
           else if (sent[id]) { TEAM.lastSent[id] = sent[id]; TEAM.lastCk[id] = ck; }
         });
       }
-      setSaveStatus("teamsynced");
+      if (rejected.length) teamReconcileRejected(rejected);
+      else setSaveStatus("teamsynced");
     } catch (e) {
-      if (e && e.code === "permission-denied") teamListenError(e);
+      if (e && e.code === "permission-denied") teamVerifyAccess("save");
       else { setSaveStatus("teamoffline"); teamScheduleFlush(5000); }
     } finally {
       TEAM.flushing = false;
@@ -5101,7 +5833,7 @@
         if (res.by) showToast(firstName(res.by.name) + " is on that lead \u2014 here\u2019s your next one");
         teamRenderSoon();
       }
-    }).catch(function (e) { TEAM.claiming = null; if (e && e.code === "permission-denied") teamListenError(e); });
+    }).catch(function (e) { TEAM.claiming = null; if (e && e.code === "permission-denied") teamVerifyAccess("claim"); });
   }
 
   /* ----- moving this phone's list into the team database (admin, first time) ----- */
@@ -5244,6 +5976,7 @@
             if (l.claim && l.claim.uid === id) l.claim = null;
           });
           state.tasks.forEach(function (t) { if (t.assignee && t.assignee.uid === id) t.assignee = me; });
+          vaultRecords().forEach(function (vr) { if (vr.ownerUid === id) { vr.ownerUid = me.uid; vr.ownerName = me.name; vaultSave(vr).catch(function () {}); } });
           saveState();
           teamScheduleFlush(0);
           TEAM.db.collection("members").doc(id).delete().then(function () {
@@ -5785,36 +6518,78 @@
         (canEditInfo() ? '<div class="modal-actions"><button class="btn-primary" id="infoSetup" style="width:100%">Add your links</button></div>' : '');
     } else {
       cfg.links.forEach(function (l) { if (infoSel[l.id] === undefined) infoSel[l.id] = true; });
+      var mode = state.infoMode === "one" ? "one" : "cards", sent = {}, logged = false, oneEdited = false, oneText = "";
+      var introVal = fillTemplate(cfg.intro, lead).replace(/:\s*$/, ".") + (cfg.outro ? " " + cfg.outro : "");
+      function picked() { return cfg.links.filter(function (l) { return infoSel[l.id]; }); }
       b.innerHTML = head +
         (late ? '<div class="info-late">It\u2019s ' + escapeHtml(zoneTime(z.iana).label) + ' for ' + escapeHtml(textFirstName(lead.name)) + '. Texts go out between 8 AM and 9 PM their time, so send this later.</div>' : '') +
+        '<div class="sb-seg info-mode"><button class="sb-tab" data-imode="cards">Link cards</button><button class="sb-tab" data-imode="one">One text</button></div>' +
         '<div class="info-list">' + cfg.links.map(function (l) {
           return '<label class="info-item"><input type="checkbox" data-info-id="' + escapeHtml(l.id) + '"' + (infoSel[l.id] ? ' checked' : '') + '>' +
             '<span><b>' + escapeHtml(l.label) + '</b><small>' + escapeHtml(l.url) + '</small></span></label>';
         }).join("") + '</div>' +
-        '<label for="infoMsg" class="tx-label" style="margin-top:12px">Message (you can still edit it in Messages)</label>' +
-        '<textarea id="infoMsg" class="tx-tpl" style="min-height:120px"></textarea>' +
-        '<div class="modal-actions" id="infoActions"></div>';
-      var msg = document.getElementById("infoMsg"), edited = false;
-      function picked() { return cfg.links.filter(function (l) { return infoSel[l.id]; }); }
-      function refresh() {
-        if (!edited) msg.value = infoBody(lead, picked(), cfg);
-        var n = picked().length, act = document.getElementById("infoActions");
-        act.innerHTML = '<button class="btn-secondary" id="infoCancel">Cancel</button>' +
-          (late || !n ? '<button class="btn-primary" disabled>' + (late ? 'Too late in their day' : 'Pick at least one link') + '</button>'
-            : textLinkHtml(lead, "info", msg.value, "btn-primary tp-send", sendIconSvg() + '<span>Send ' + n + ' link' + (n === 1 ? '' : 's') + '</span>', "infoSend"));
-        document.getElementById("infoCancel").addEventListener("click", closeInfo);
-        var s = document.getElementById("infoSend");
-        if (s) s.addEventListener("click", function () { setTimeout(closeInfo, 60); });
+        '<div id="infoBody"></div>';
+      function markSent(key) {
+        sent[key] = true;
+        if (!logged) { logged = true; logText(lead.id, "info", infoBody(lead, picked(), cfg)); }
+        setTimeout(draw, 400);
       }
+      function draw() {
+        b.querySelectorAll("[data-imode]").forEach(function (t) { t.classList.toggle("active", t.getAttribute("data-imode") === mode); });
+        var box = document.getElementById("infoBody"), links = picked(), blocked = late || !links.length;
+        if (mode === "one") {
+          if (!oneEdited) oneText = infoBody(lead, links, cfg);
+          box.innerHTML = '<label for="infoMsg" class="tx-label" style="margin-top:12px">Message (you can still edit it in Messages)</label>' +
+            '<textarea id="infoMsg" class="tx-tpl" style="min-height:120px">' + escapeHtml(oneText) + '</textarea>' +
+            '<p class="tx-help">Everything goes in one text. iMessage shows several links as plain links, not preview cards.</p>' +
+            '<div class="modal-actions"><button class="btn-secondary" id="infoCancel">Cancel</button>' +
+            (blocked ? '<button class="btn-primary" disabled>' + (late ? 'Too late in their day' : 'Pick at least one link') + '</button>'
+              : textLinkHtml(lead, "info", oneText, "btn-primary tp-send", sendIconSvg() + '<span>Send ' + links.length + ' link' + (links.length === 1 ? '' : 's') + '</span>', "infoSend")) + '</div>';
+          document.getElementById("infoMsg").addEventListener("input", function (e) {
+            oneEdited = true; oneText = e.target.value;
+            var s = document.getElementById("infoSend"); if (s) s.setAttribute("href", smsHref(lead, oneText));
+          });
+          var s1 = document.getElementById("infoSend");
+          if (s1) s1.addEventListener("click", function () { setTimeout(closeInfo, 60); });
+        } else {
+          var steps = [{ key: "_intro", title: "Intro text", sub: introVal, body: introVal }].concat(links.map(function (l) {
+            return { key: l.id, title: l.label, sub: l.url.replace(/^https?:\/\//, ""), body: l.url };
+          }));
+          var nextIdx = -1;
+          for (var i = 0; i < steps.length; i++) if (!sent[steps[i].key]) { nextIdx = i; break; }
+          box.innerHTML = '<label for="infoIntro" class="tx-label" style="margin-top:12px">Intro text</label>' +
+            '<textarea id="infoIntro" class="tx-tpl" style="min-height:74px">' + escapeHtml(introVal) + '</textarea>' +
+            '<div class="info-steps">' + steps.map(function (st, i) {
+              return '<div class="is-row' + (sent[st.key] ? ' done' : '') + (i === nextIdx ? ' next' : '') + '">' +
+                '<span class="is-num">' + (sent[st.key] ? '\u2713' : (i + 1)) + '</span>' +
+                '<span class="is-txt"><b>' + escapeHtml(st.title) + '</b><small>' + escapeHtml(st.sub) + '</small></span>' +
+                (blocked ? '<button class="btn-secondary is-send" disabled>Send</button>'
+                  : textLinkHtml(lead, "info", st.body, (i === nextIdx ? "btn-primary" : "btn-secondary") + " is-send", sent[st.key] ? "Again" : "Send", "infoStep" + i)) +
+              '</div>';
+            }).join("") + '</div>' +
+            '<p class="tx-help">' + (nextIdx === -1 ? 'All sent. ' : 'Send them in order: tap Send, send it in Messages, then come back here for the next one. ') +
+              'Each link goes on its own, so iPhones show it as a preview card. Android phones show plain links.</p>' +
+            '<div class="modal-actions"><button class="btn-' + (nextIdx === -1 ? 'primary' : 'secondary') + '" id="infoCancel">' + (nextIdx === -1 ? 'Done' : 'Close') + '</button></div>';
+          steps.forEach(function (st, i) {
+            var a = document.getElementById("infoStep" + i);
+            if (!a) return;
+            a.setAttribute("data-retry", "1");
+            a.addEventListener("click", function () { markSent(st.key); });
+          });
+          document.getElementById("infoIntro").addEventListener("input", function (e) {
+            introVal = e.target.value;
+            var a0 = document.getElementById("infoStep0"); if (a0) a0.setAttribute("href", smsHref(lead, introVal));
+          });
+        }
+        document.getElementById("infoCancel").addEventListener("click", closeInfo);
+      }
+      b.querySelectorAll("[data-imode]").forEach(function (t) {
+        t.addEventListener("click", function () { mode = t.getAttribute("data-imode"); state.infoMode = mode; saveState(); draw(); });
+      });
       b.querySelectorAll("[data-info-id]").forEach(function (cb) {
-        cb.addEventListener("change", function () { infoSel[cb.getAttribute("data-info-id")] = cb.checked; edited = false; refresh(); });
+        cb.addEventListener("change", function () { infoSel[cb.getAttribute("data-info-id")] = cb.checked; oneEdited = false; draw(); });
       });
-      msg.addEventListener("input", function () {
-        edited = true;
-        var s = document.getElementById("infoSend");
-        if (s) s.setAttribute("href", smsHref(lead, msg.value));
-      });
-      refresh();
+      draw();
     }
     m.classList.add("show");
     document.getElementById("infoClose").addEventListener("click", closeInfo);
@@ -5876,6 +6651,351 @@
     m.classList.add("show");
   }
 
+  /** ---------- Investor Vault ---------- **/
+  // Every investor is its own locked record. The database rules let the admin read every record
+  // and a rep only the records assigned to them. Reps can't delete; they ask the admin.
+  var VAULT = { list: {}, unsub: null, status: "", q: "", sort: "total", who: "all", openId: null, editInv: null, addInv: false, addDate: false, reqOpen: false };
+  var VAULT_STATUSES = ["Committed", "Funded", "Closed", "Cancelled"];
+  var VAULT_RULES = "rules_version = '2';\nservice cloud.firestore {\n  match /databases/{database}/documents {\n    function signedIn() { return request.auth != null; }\n    function isOwner() {\n      return signedIn() && request.auth.token.email == 'vincent@dovetail-f863c.firebaseapp.com';\n    }\n    function memberPath() { return /databases/$(database)/documents/members/$(request.auth.uid); }\n    function isActive() {\n      return isOwner() || (signedIn() && exists(memberPath()) && get(memberPath()).data.active == true);\n    }\n    function isAdmin() {\n      return isOwner() || (isActive() && get(memberPath()).data.role == 'admin');\n    }\n    match /members/{uid} {\n      allow read: if isAdmin() || (signedIn() && request.auth.uid == uid);\n      allow create, delete: if isAdmin();\n      allow update: if isAdmin()\n        || (signedIn() && request.auth.uid == uid && isActive()\n            && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['lastSeen']));\n    }\n    match /leadChunks/{chunkId} {\n      allow read: if isActive();\n      allow create, delete: if isAdmin();\n      allow update: if isAdmin()\n        || (isActive()\n            && request.resource.data.leads.keys().hasAll(resource.data.leads.keys())\n            && resource.data.leads.keys().hasAll(request.resource.data.leads.keys()));\n    }\n    match /callDays/{day} {\n      allow read, create: if isActive();\n      allow update: if isAdmin()\n        || (isActive() && request.resource.data.calls.keys().hasAll(resource.data.calls.keys()));\n      allow delete: if isAdmin();\n    }\n    match /vault/{id} {\n      allow read: if isAdmin() || (isActive() && resource.data.ownerUid == request.auth.uid);\n      allow create: if isAdmin() || (isActive() && request.resource.data.ownerUid == request.auth.uid);\n      allow update: if isAdmin()\n        || (isActive()\n            && resource.data.ownerUid == request.auth.uid\n            && request.resource.data.ownerUid == request.auth.uid\n            && request.resource.data.investments.size() >= resource.data.investments.size());\n      allow delete: if isAdmin();\n    }\n  }\n}\n";
+  function vaultAdmin() { return !TEAM.on || isAdmin(); }
+  function vaultSrc() { return TEAM.on ? VAULT.list : (state.vault || (state.vault = {})); }
+  function vaultRecords() {
+    var src = vaultSrc();
+    return Object.keys(src).map(function (k) { return src[k]; })
+      .filter(function (r) { return vaultAdmin() || (TEAM.me && r.ownerUid === TEAM.me.uid); });
+  }
+  function vaultGet(id) { var r = vaultSrc()[id]; return r && (vaultAdmin() || (TEAM.me && r.ownerUid === TEAM.me.uid)) ? r : null; }
+  function vaultForLead(leadId) { return vaultRecords().filter(function (r) { return r.leadId === leadId; })[0] || null; }
+  function vaultTotal(r) { return (r.investments || []).reduce(function (a, i) { return a + (i.status === "Cancelled" ? 0 : (Number(i.amount) || 0)); }, 0); }
+  function vaultPending() { return TEAM.on && isAdmin() ? vaultRecords().filter(function (r) { return r.removalRequest; }) : []; }
+  function vaultStart() {
+    vaultStop();
+    if (!TEAM.on) { VAULT.status = "ok"; return; }
+    if (!TEAM.me) return;
+    var col = TEAM.db.collection("vault");
+    var q = isAdmin() ? col : col.where("ownerUid", "==", TEAM.me.uid);
+    VAULT.unsub = q.onSnapshot(function (qs) {
+      var m = {};
+      qs.docs.forEach(function (d) { var x = d.data() || {}; x.id = d.id; m[d.id] = x; });
+      VAULT.list = m; VAULT.status = "ok";
+      vaultRefresh();
+    }, function (e) {
+      // Kept apart from the rest of the app on purpose: if the Vault's rules aren't published yet,
+      // only the Vault shows a setup note. Nobody gets signed out.
+      VAULT.unsub = null;
+      VAULT.status = e && e.code === "permission-denied" ? "rules" : "offline";
+      vaultRefresh();
+      setTimeout(function () { if (TEAM.me && !VAULT.unsub) vaultStart(); }, VAULT.status === "rules" ? 60000 : 15000);
+    });
+  }
+  function vaultStop() { if (VAULT.unsub) { try { VAULT.unsub(); } catch (e) {} } VAULT.unsub = null; VAULT.list = {}; }
+  function vaultRefresh() {
+    if (state.activeView === "vault" || document.getElementById("adminBtn")) { if (TEAM.on) teamRenderSoon(); else render(); }
+    var m = document.getElementById("vaultModal");
+    if (m && m.classList.contains("show")) {
+      var ae = document.activeElement;
+      if (!(ae && /^(INPUT|TEXTAREA|SELECT)$/.test(ae.tagName) && m.contains(ae))) renderVaultModal();
+    }
+  }
+  function vaultSave(rec) {
+    rec.updatedAt = Date.now();
+    if (!Array.isArray(rec.investments)) rec.investments = [];
+    if (!TEAM.on) { vaultSrc()[rec.id] = rec; saveState(); vaultRefresh(); return Promise.resolve(); }
+    VAULT.list[rec.id] = rec;
+    vaultRefresh();
+    var clean = JSON.parse(JSON.stringify(rec)); delete clean.id;
+    return TEAM.db.collection("vault").doc(rec.id).set(clean).catch(function (e) {
+      showToast(e && e.code === "permission-denied"
+        ? (VAULT.status === "rules" ? "The Vault isn\u2019t switched on yet \u2014 the admin needs to publish the updated rules." : "Only your admin can make that change.")
+        : "Couldn\u2019t save \u2014 check your connection.");
+      vaultStart();
+      throw e;
+    });
+  }
+  function vaultDelete(id) {
+    if (!vaultAdmin()) return Promise.reject();
+    if (!TEAM.on) { delete vaultSrc()[id]; saveState(); vaultRefresh(); return Promise.resolve(); }
+    delete VAULT.list[id]; vaultRefresh();
+    return TEAM.db.collection("vault").doc(id).delete().catch(function () { showToast("Couldn\u2019t delete \u2014 check your connection."); vaultStart(); });
+  }
+  function daysUntilYearly(mmdd) {
+    var now = new Date(); now.setHours(0, 0, 0, 0);
+    var p = String(mmdd).split("-"), d = new Date(now.getFullYear(), (+p[0]) - 1, +p[1]);
+    if (d < now) d.setFullYear(d.getFullYear() + 1);
+    return { days: Math.round((d - now) / 86400000), year: d.getFullYear() };
+  }
+  function whenText(d) { return d === 0 ? " today" : d === 1 ? " tomorrow" : " in " + d + " days"; }
+  function vaultAlerts(r) {
+    var out = [], now = Date.now();
+    (r.keyDates || []).forEach(function (k) {
+      if (!k.date) return;
+      var u = daysUntilYearly(k.date.length >= 10 ? k.date.slice(5, 10) : k.date);
+      if (u.days <= 14) out.push({ days: u.days, text: (k.label || "Key date") + whenText(u.days) });
+    });
+    var first = (r.investments || []).map(function (i) { return i.date; }).filter(Boolean).sort()[0];
+    if (first) {
+      var ua = daysUntilYearly(first.slice(5, 10));
+      if (ua.days <= 14 && ua.year > +first.slice(0, 4)) out.push({ days: ua.days, text: (ua.year - first.slice(0, 4)) + "-year investing anniversary" + whenText(ua.days) });
+    }
+    if (r.nextReachOut) {
+      var nd = Math.round((new Date(r.nextReachOut + "T00:00:00").getTime() - dayStart(0)) / 86400000);
+      if (nd <= 7) out.push({ days: nd, text: nd < 0 ? "Reach-out overdue" : "Reach out" + whenText(nd) });
+    }
+    var last = r.lastContactAt || r.createdAt || 0;
+    if (last && now - last > 60 * 86400000) out.push({ days: 900, text: "No contact in " + Math.floor((now - last) / 86400000) + " days" });
+    return out.sort(function (a, b) { return a.days - b.days; });
+  }
+
+  /* ----- Vault tab ----- */
+  function renderVaultTab() {
+    var main = document.getElementById("mainArea"), admin = vaultAdmin();
+    var recs = vaultRecords();
+    if (TEAM.on && admin && VAULT.who !== "all") recs = recs.filter(function (r) { return r.ownerUid === VAULT.who; });
+    var total = recs.reduce(function (a, r) { return a + vaultTotal(r); }, 0);
+    var html = '<div class="tasks-head"><div><div class="tasks-title">Investor Vault</div><div class="tasks-sub">' + recs.length + ' investor' + (recs.length === 1 ? '' : 's') + ' \u00b7 ' + fmtMoney(total) + ' invested' + (TEAM.on && !admin ? ' \u00b7 yours' : '') + '</div></div>' +
+      '<button class="btn-primary" id="vaultAddBtn" style="padding:9px 14px">+ Add</button></div>';
+    if (TEAM.on && VAULT.status === "rules") {
+      html += '<div class="vault-setup">' + (admin
+        ? '<b>One step to switch on the Vault.</b> Your database needs the updated rules. Tap <b>Copy updated rules</b>, open your Firebase rules page, replace everything in the box, and tap Publish.' +
+          '<div class="modal-actions"><button class="btn-primary" id="vaultCopyRules">Copy updated rules</button><a class="btn-secondary" href="https://console.firebase.google.com/project/dovetail-f863c/firestore/rules" target="_blank" rel="noopener">Open Firebase rules</a></div>'
+        : 'The Vault isn\u2019t switched on yet. Your admin needs to finish setting it up.') + '</div>';
+    }
+    var pend = vaultPending();
+    if (pend.length) {
+      html += '<div class="vault-req"><b>Removal requests (' + pend.length + ')</b>' + pend.map(function (r) {
+        return '<div class="vq-row"><span><b>' + escapeHtml(r.name) + '</b><small>' + escapeHtml(r.removalRequest.name || "") + ': \u201c' + escapeHtml(r.removalRequest.reason || "no reason given") + '\u201d</small></span>' +
+          '<span class="vq-btns"><button class="btn-secondary" data-vq-keep="' + r.id + '">Keep</button><button class="btn-secondary danger-link" data-vq-del="' + r.id + '">Remove</button></span></div>';
+      }).join("") + '</div>';
+    }
+    if (TEAM.on && admin) {
+      var opts = Object.keys(TEAM.members).map(function (k) { return TEAM.members[k]; }).sort(function (a, b) { return String(a.name).localeCompare(String(b.name)); })
+        .map(function (m) { return '<option value="' + m.uid + '"' + (VAULT.who === m.uid ? ' selected' : '') + '>' + escapeHtml(m.name || m.username) + '</option>'; }).join("");
+      html += '<div class="qc-order hx-rep"><span>Rep</span><select id="vaultWho"><option value="all">Everyone</option>' + opts + '</select></div>';
+    }
+    var alerts = [];
+    recs.forEach(function (r) { vaultAlerts(r).forEach(function (a) { alerts.push({ r: r, a: a }); }); });
+    alerts.sort(function (x, y) { return x.a.days - y.a.days; });
+    if (alerts.length) {
+      html += '<div class="settings-heading" style="margin:14px 0 6px">Reach out</div><div class="vault-alerts">' + alerts.slice(0, 6).map(function (x) {
+        return '<button class="va-row" data-vault-open="' + x.r.id + '"><b>' + escapeHtml(x.r.name) + '</b><span>' + escapeHtml(x.a.text) + '</span></button>';
+      }).join("") + '</div>';
+    }
+    html += '<div class="crm-search" style="margin-top:12px"><input type="search" id="vaultSearch" placeholder="Search name, number or deal" value="' + escapeHtml(VAULT.q) + '"></div>' +
+      '<div class="filter-row">' + [["total", "Largest"], ["recent", "Recent"], ["name", "A\u2013Z"]].map(function (s) {
+        return '<button class="filter-chip' + (VAULT.sort === s[0] ? ' active' : '') + '" data-vsort="' + s[0] + '">' + s[1] + '</button>';
+      }).join("") + '</div><div id="vaultList"></div>';
+    main.innerHTML = html;
+    renderVaultList();
+    document.getElementById("vaultAddBtn").addEventListener("click", function () { openVaultNew(); });
+    document.getElementById("vaultSearch").addEventListener("input", function (e) { VAULT.q = e.target.value; renderVaultList(); });
+    main.querySelectorAll("[data-vsort]").forEach(function (b) { b.addEventListener("click", function () { VAULT.sort = b.getAttribute("data-vsort"); render(); }); });
+    main.querySelectorAll(".va-row[data-vault-open]").forEach(function (b) { b.addEventListener("click", function () { openVault(b.getAttribute("data-vault-open")); }); });
+    var who = document.getElementById("vaultWho");
+    if (who) who.addEventListener("change", function (e) { VAULT.who = e.target.value; render(); });
+    var cr = document.getElementById("vaultCopyRules");
+    if (cr) cr.addEventListener("click", function () { showToast(copyText(VAULT_RULES) ? "Rules copied \u2014 paste them into Firebase and tap Publish" : "Couldn\u2019t copy"); });
+    main.querySelectorAll("[data-vq-keep]").forEach(function (b) {
+      b.addEventListener("click", function () { var r = vaultGet(b.getAttribute("data-vq-keep")); if (!r) return; r.removalRequest = null; vaultSave(r).then(function () { showToast(r.name + " stays in the Vault"); }); });
+    });
+    main.querySelectorAll("[data-vq-del]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var r = vaultGet(b.getAttribute("data-vq-del")); if (!r) return;
+        showConfirm("Remove " + r.name + " from the Investor Vault? This deletes their investment history.", function () { vaultDelete(r.id).then(function () { showToast(r.name + " was removed"); }); }, "Remove");
+      });
+    });
+  }
+  function renderVaultList() {
+    var box = document.getElementById("vaultList"); if (!box) return;
+    var admin = vaultAdmin(), q = VAULT.q.trim().toLowerCase();
+    var recs = vaultRecords();
+    if (TEAM.on && admin && VAULT.who !== "all") recs = recs.filter(function (r) { return r.ownerUid === VAULT.who; });
+    recs = recs.filter(function (r) {
+      if (!q) return true;
+      return String(r.name || "").toLowerCase().indexOf(q) !== -1 || String(r.phoneRaw || "").replace(/\D/g, "").indexOf(q.replace(/\D/g, "") || "~") !== -1 ||
+        (r.investments || []).some(function (i) { return String(i.deal || "").toLowerCase().indexOf(q) !== -1; });
+    });
+    recs.sort(function (a, b) {
+      if (VAULT.sort === "name") return String(a.name).localeCompare(String(b.name));
+      if (VAULT.sort === "recent") return (b.updatedAt || 0) - (a.updatedAt || 0);
+      return vaultTotal(b) - vaultTotal(a);
+    });
+    if (!recs.length) {
+      box.innerHTML = '<div class="pipe-empty">' + (q ? "No investors match that search." : (TEAM.on && !admin ? "No investors assigned to you yet. When one of your leads commits, add them from their profile." : "No investors yet. When a lead commits, add them from their profile, or tap + Add.")) + '</div>';
+      return;
+    }
+    box.innerHTML = recs.map(function (r) {
+      var deals = (r.investments || []).filter(function (i) { return i.status !== "Cancelled"; });
+      var names = deals.map(function (i) { return i.deal; }).filter(Boolean);
+      var al = vaultAlerts(r)[0];
+      return '<button class="vault-row" data-vault-open="' + r.id + '">' +
+        '<span class="vr-main"><b>' + escapeHtml(r.name) + '</b><span>' + (names.length ? escapeHtml(names.slice(0, 3).join(", ")) : deals.length + ' investment' + (deals.length === 1 ? '' : 's')) +
+          (TEAM.on && admin && r.ownerName ? ' \u00b7 ' + escapeHtml(r.ownerName) : '') + '</span>' +
+          (al ? '<span class="vr-alert">' + escapeHtml(al.text) + '</span>' : '') +
+          (r.removalRequest ? '<span class="vr-flag">Removal requested</span>' : '') + '</span>' +
+        '<span class="vr-amt">' + fmtMoney(vaultTotal(r)) + '</span></button>';
+    }).join("");
+    box.querySelectorAll("[data-vault-open]").forEach(function (b) { b.addEventListener("click", function () { openVault(b.getAttribute("data-vault-open")); }); });
+  }
+
+  /* ----- Adding investors ----- */
+  function vaultOwnerFor(lead) {
+    if (TEAM.on && !isAdmin()) return meRef();
+    return (lead && lead.owner) || meRef() || { uid: "", name: "" };
+  }
+  function vaultCreate(base) {
+    var owner = base.owner || vaultOwnerFor(null), now = Date.now();
+    var rec = { id: "v" + uid(), name: base.name, phone: base.phone || "", phoneRaw: base.phoneRaw || "", state: base.state || "", leadId: base.leadId || "",
+      ownerUid: owner ? owner.uid : "", ownerName: owner ? owner.name : "", createdAt: now, createdBy: meRef() || null,
+      investments: base.investments || [], keyDates: [], interests: "", notes: "", lastContactAt: now, nextReachOut: "", removalRequest: null };
+    return vaultSave(rec).then(function () { return rec; });
+  }
+  function vaultAddFromLead(lead) {
+    var existing = vaultForLead(lead.id);
+    if (existing) { openVault(existing.id); return; }
+    vaultCreate({ name: lead.name, phone: lead.phone, phoneRaw: lead.phoneRaw, state: leadState(lead) || "", leadId: lead.id, owner: vaultOwnerFor(lead),
+      investments: Number(lead.amount) ? [{ id: uid(), deal: "", amount: Number(lead.amount), date: localDateStr(new Date()), status: lead.stage === "Committed" ? "Committed" : "Committed", note: "" }] : [] })
+      .then(function (rec) { showToast(lead.name + " is in the Investor Vault"); openVault(rec.id); }, function () {});
+  }
+  function openVaultNew() {
+    var m = document.getElementById("vaultModal"), b = document.getElementById("vaultModalBody"), admin = vaultAdmin();
+    var owners = TEAM.on && admin ? Object.keys(TEAM.members).map(function (k) { return TEAM.members[k]; }).filter(function (x) { return x.active; }) : [];
+    b.innerHTML = '<button class="close-x" id="vnClose">&times;</button><h3>Add an investor</h3>' +
+      '<label for="vnName">Name</label><input type="text" id="vnName" autocomplete="off">' +
+      '<label for="vnPhone">Phone</label><input type="tel" id="vnPhone" autocomplete="off">' +
+      (owners.length ? '<label for="vnOwner">Assigned to</label><select id="vnOwner">' + owners.map(function (o) { return '<option value="' + o.uid + '"' + (TEAM.me && o.uid === TEAM.me.uid ? ' selected' : '') + '>' + escapeHtml(o.name || o.username) + '</option>'; }).join("") + '</select>' : '') +
+      '<div class="field-error" id="vnErr"></div><div class="modal-actions"><button class="btn-secondary" id="vnCancel">Cancel</button><button class="btn-primary" id="vnSave">Add to Vault</button></div>';
+    m.classList.add("show");
+    function close() { m.classList.remove("show"); }
+    document.getElementById("vnClose").addEventListener("click", close);
+    document.getElementById("vnCancel").addEventListener("click", close);
+    document.getElementById("vnSave").addEventListener("click", function () {
+      var name = document.getElementById("vnName").value.trim(), raw = document.getElementById("vnPhone").value.trim();
+      if (!name) { document.getElementById("vnErr").textContent = "Enter their name."; return; }
+      var own = document.getElementById("vnOwner"), owner = own ? TEAM.members[own.value] : null;
+      vaultCreate({ name: name, phoneRaw: raw, phone: raw ? normalizePhone(raw) : "", owner: owner ? { uid: owner.uid, name: owner.name || owner.username } : vaultOwnerFor(null) })
+        .then(function (rec) { showToast(name + " added to the Vault"); openVault(rec.id); }, function () {});
+    });
+  }
+
+  /* ----- Investor profile ----- */
+  function openVault(id) { VAULT.openId = id; VAULT.editInv = null; VAULT.addInv = false; VAULT.addDate = false; VAULT.reqOpen = false; document.getElementById("vaultModal").classList.add("show"); renderVaultModal(); }
+  function closeVault() { document.getElementById("vaultModal").classList.remove("show"); VAULT.openId = null; if (state.activeView === "vault") render(); }
+  function renderVaultModal() {
+    var b = document.getElementById("vaultModalBody"), r = vaultGet(VAULT.openId);
+    if (!r) { closeVault(); return; }
+    var admin = vaultAdmin(), first = String(r.name || "").split(" ")[0] || "them";
+    var invs = (r.investments || []).slice().sort(function (a, b2) { return String(b2.date || "").localeCompare(String(a.date || "")); });
+    var since = (r.investments || []).map(function (i) { return i.date; }).filter(Boolean).sort()[0];
+    var lead = r.leadId ? findLeadById(r.leadId) : null;
+    function invForm(i, idp) {
+      return '<div class="vi-form"><input type="text" id="' + idp + 'Deal" placeholder="Deal (e.g. SambaNova)" value="' + escapeHtml(i.deal || "") + '">' +
+        '<div class="vi-2"><input type="number" inputmode="decimal" id="' + idp + 'Amt" placeholder="Amount $" value="' + (i.amount || "") + '"><input type="date" id="' + idp + 'Date" value="' + escapeHtml(i.date || localDateStr(new Date())) + '"></div>' +
+        '<select id="' + idp + 'Status">' + VAULT_STATUSES.map(function (s) { return '<option' + (i.status === s ? ' selected' : '') + '>' + s + '</option>'; }).join("") + '</select>' +
+        '<div class="vi-btns"><button class="btn-secondary" data-vi-cancel="1">Cancel</button>' + (admin && i.id ? '<button class="btn-secondary danger-link" data-vi-del="' + i.id + '">Remove</button>' : '') + '<button class="btn-primary" data-vi-save="' + (i.id || "") + '">Save</button></div></div>';
+    }
+    var html = '<button class="close-x" id="vClose">&times;</button>' +
+      '<h3>' + escapeHtml(r.name) + '</h3>' +
+      '<p class="modal-sub">' + escapeHtml([r.phoneRaw || r.phone, r.state].filter(Boolean).join(" \u00b7 ")) + (TEAM.on ? ' \u00b7 Assigned to ' + escapeHtml(r.ownerName || "\u2014") : '') + '</p>' +
+      (r.phone || r.phoneRaw ? '<div class="call-row lp-call-row"><a class="call-btn" id="vCall" href="tel:' + escapeHtml(String(r.phone || normalizePhone(r.phoneRaw)).replace(/[^\d+]/g, "")) + '">' + callIconSvg() + '<span>Call ' + escapeHtml(first) + '</span></a>' +
+        '<a class="copy-btn lp-text" id="vText" href="' + escapeHtml(smsHref(r, "")) + '" title="Text" aria-label="Text">' + messageIconSvg() + '</a></div>' : '') +
+      '<div class="coach-stats" style="margin-top:12px"><div><b>' + fmtMoney(vaultTotal(r)) + '</b><span>invested</span></div><div><b>' + (r.investments || []).filter(function (i) { return i.status !== "Cancelled"; }).length + '</b><span>investments</span></div><div><b>' + (since ? escapeHtml(since.slice(0, 4)) : "\u2014") + '</b><span>investor since</span></div></div>';
+    var al = vaultAlerts(r);
+    if (al.length) html += '<div class="vault-alerts">' + al.map(function (a) { return '<div class="va-row static"><span>' + escapeHtml(a.text) + '</span></div>'; }).join("") + '</div>';
+    html += '<div class="settings-heading" style="margin:14px 0 6px">Investments</div>' +
+      (invs.length ? invs.map(function (i) {
+        if (VAULT.editInv === i.id) return invForm(i, "vie");
+        return '<button class="vi-row" data-vi-edit="' + i.id + '"><span><b>' + escapeHtml(i.deal || "Deal not named") + '</b><small>' + escapeHtml(i.date || "") + ' \u00b7 ' + escapeHtml(i.status || "") + '</small></span><span class="vr-amt' + (i.status === "Cancelled" ? ' cancelled' : '') + '">' + fmtMoney(Number(i.amount) || 0) + '</span></button>';
+      }).join("") : '<div class="pipe-empty">No investments recorded yet.</div>') +
+      (VAULT.addInv ? invForm({ status: "Committed" }, "via") : '<button class="btn-secondary" id="vAddInv" style="width:100%;margin-top:6px">+ Add investment</button>') +
+      '<div class="settings-heading" style="margin:14px 0 6px">Key dates</div>' +
+      ((r.keyDates || []).map(function (k) {
+        return '<div class="kd-row"><span><b>' + escapeHtml(k.label) + '</b><small>' + escapeHtml(k.date) + '</small></span><button class="kd-del" data-kd-del="' + k.id + '" aria-label="Remove date">&times;</button></div>';
+      }).join("") || '') +
+      (VAULT.addDate ? '<div class="vi-form"><select id="kdLabel"><option>Birthday</option><option>Anniversary</option><option>Other</option></select><input type="text" id="kdCustom" placeholder="Label (if Other)"><input type="date" id="kdDate"><div class="vi-btns"><button class="btn-secondary" id="kdCancel">Cancel</button><button class="btn-primary" id="kdSave">Save date</button></div></div>'
+        : '<button class="btn-secondary" id="vAddDate" style="width:100%">+ Add a birthday or date</button>') +
+      '<label for="vNext" style="margin-top:14px">Next reach-out</label><input type="date" id="vNext" value="' + escapeHtml(r.nextReachOut || "") + '">' +
+      '<label for="vInterests">Interested in</label><input type="text" id="vInterests" placeholder="e.g. AI, late-stage tech, $50K+ tickets" value="' + escapeHtml(r.interests || "") + '">' +
+      '<label for="vNotes">Notes</label><textarea id="vNotes" rows="3">' + escapeHtml(r.notes || "") + '</textarea>';
+    if (TEAM.on && admin) {
+      var owners = Object.keys(TEAM.members).map(function (k) { return TEAM.members[k]; }).filter(function (m) { return m.active || m.uid === r.ownerUid; });
+      html += '<label for="vOwner">Assigned to</label><select id="vOwner">' + owners.map(function (m) { return '<option value="' + m.uid + '"' + (m.uid === r.ownerUid ? ' selected' : '') + '>' + escapeHtml(m.name || m.username) + '</option>'; }).join("") + '</select>';
+    }
+    if (lead) html += '<button class="btn-secondary" id="vOpenLead" style="width:100%;margin-top:12px">Open their lead profile</button>';
+    if (admin) {
+      if (r.removalRequest) html += '<div class="vault-req" style="margin-top:12px"><b>' + escapeHtml(r.removalRequest.name || "A rep") + ' asked to remove this investor</b><small>\u201c' + escapeHtml(r.removalRequest.reason || "no reason given") + '\u201d</small><div class="vq-btns"><button class="btn-secondary" id="vKeep">Keep</button></div></div>';
+      html += '<button class="btn-secondary danger-link" id="vDelete" style="width:100%;margin-top:12px">Remove from Vault</button>';
+    } else if (r.removalRequest) {
+      html += '<div class="vault-req" style="margin-top:12px"><b>Removal requested</b><small>Waiting for your admin to approve. \u201c' + escapeHtml(r.removalRequest.reason || "") + '\u201d</small><div class="vq-btns"><button class="btn-secondary" id="vCancelReq">Cancel request</button></div></div>';
+    } else if (VAULT.reqOpen) {
+      html += '<div class="vi-form" style="margin-top:12px"><label for="vReason">Why should they be removed?</label><textarea id="vReason" rows="2" placeholder="e.g. Duplicate entry, asked us not to contact"></textarea>' +
+        '<div class="vi-btns"><button class="btn-secondary" id="vReqCancel">Cancel</button><button class="btn-primary" id="vReqSend">Send to admin</button></div></div>';
+    } else {
+      html += '<button class="btn-secondary" id="vRequest" style="width:100%;margin-top:12px">Request removal</button><p class="tx-help" style="margin-top:6px">Only your admin can remove investors. They\u2019ll get your request.</p>';
+    }
+    html += '<div class="modal-actions"><button class="btn-primary" id="vDone" style="width:100%">Done</button></div>';
+    b.innerHTML = html;
+    function save(msg) { vaultSave(r).then(function () { if (msg) showToast(msg); }, function () {}); }
+    function on(id, ev, fn) { var el = document.getElementById(id); if (el) el.addEventListener(ev, fn); }
+    on("vClose", "click", closeVault); on("vDone", "click", closeVault);
+    on("vCall", "click", function () { r.lastContactAt = Date.now(); save(); });
+    on("vText", "click", function () { r.lastContactAt = Date.now(); save(); });
+    on("vAddInv", "click", function () { VAULT.addInv = true; VAULT.editInv = null; renderVaultModal(); });
+    on("vAddDate", "click", function () { VAULT.addDate = true; renderVaultModal(); });
+    b.querySelectorAll("[data-vi-edit]").forEach(function (el) { el.addEventListener("click", function () { VAULT.editInv = el.getAttribute("data-vi-edit"); VAULT.addInv = false; renderVaultModal(); }); });
+    b.querySelectorAll("[data-vi-cancel]").forEach(function (el) { el.addEventListener("click", function () { VAULT.editInv = null; VAULT.addInv = false; renderVaultModal(); }); });
+    b.querySelectorAll("[data-vi-save]").forEach(function (el) {
+      el.addEventListener("click", function () {
+        var existingId = el.getAttribute("data-vi-save"), p = existingId ? "vie" : "via";
+        var amt = Number(document.getElementById(p + "Amt").value) || 0, deal = document.getElementById(p + "Deal").value.trim();
+        if (!amt && !deal) { showToast("Add a deal name or an amount"); return; }
+        var data = { deal: deal, amount: amt, date: document.getElementById(p + "Date").value || localDateStr(new Date()), status: document.getElementById(p + "Status").value };
+        if (existingId) { r.investments.forEach(function (i) { if (i.id === existingId) Object.assign(i, data); }); }
+        else { data.id = uid(); data.note = ""; r.investments.push(data); }
+        VAULT.editInv = null; VAULT.addInv = false;
+        save(existingId ? "Investment updated" : "Investment added");
+        renderVaultModal();
+      });
+    });
+    b.querySelectorAll("[data-vi-del]").forEach(function (el) {
+      el.addEventListener("click", function () {
+        var iid = el.getAttribute("data-vi-del");
+        showConfirm("Remove this investment from " + r.name + "\u2019s record?", function () {
+          r.investments = r.investments.filter(function (i) { return i.id !== iid; }); VAULT.editInv = null; save("Investment removed"); renderVaultModal();
+        }, "Remove");
+      });
+    });
+    on("kdCancel", "click", function () { VAULT.addDate = false; renderVaultModal(); });
+    on("kdSave", "click", function () {
+      var d = document.getElementById("kdDate").value, lab = document.getElementById("kdLabel").value;
+      if (lab === "Other") lab = document.getElementById("kdCustom").value.trim() || "Key date";
+      if (!d) { showToast("Pick a date"); return; }
+      r.keyDates = (r.keyDates || []).concat([{ id: uid(), label: lab, date: d }]);
+      VAULT.addDate = false; save(lab + " saved"); renderVaultModal();
+    });
+    b.querySelectorAll("[data-kd-del]").forEach(function (el) {
+      el.addEventListener("click", function () { var kid = el.getAttribute("data-kd-del"); r.keyDates = (r.keyDates || []).filter(function (k) { return k.id !== kid; }); save(); renderVaultModal(); });
+    });
+    on("vNext", "change", function (e) { r.nextReachOut = e.target.value; save("Reach-out date saved"); });
+    on("vInterests", "change", function (e) { r.interests = e.target.value; save(); });
+    on("vNotes", "change", function (e) { r.notes = e.target.value; save("Notes saved"); });
+    on("vOwner", "change", function (e) {
+      var m = TEAM.members[e.target.value]; if (!m) return;
+      r.ownerUid = m.uid; r.ownerName = m.name || m.username; save(r.name + " is now assigned to " + r.ownerName);
+    });
+    on("vOpenLead", "click", function () { closeVault(); openLeadProfile(r.leadId); });
+    on("vKeep", "click", function () { r.removalRequest = null; save(r.name + " stays in the Vault"); renderVaultModal(); });
+    on("vDelete", "click", function () {
+      showConfirm("Remove " + r.name + " from the Investor Vault? This deletes their investment history.", function () { vaultDelete(r.id).then(function () { closeVault(); showToast(r.name + " was removed"); }); }, "Remove");
+    });
+    on("vRequest", "click", function () { VAULT.reqOpen = true; renderVaultModal(); });
+    on("vReqCancel", "click", function () { VAULT.reqOpen = false; renderVaultModal(); });
+    on("vReqSend", "click", function () {
+      r.removalRequest = { uid: TEAM.me ? TEAM.me.uid : "", name: TEAM.me ? TEAM.me.name : "", at: Date.now(), reason: document.getElementById("vReason").value.trim() };
+      VAULT.reqOpen = false; save("Request sent \u2014 your admin will decide"); renderVaultModal();
+    });
+    on("vCancelReq", "click", function () { r.removalRequest = null; save("Request cancelled"); renderVaultModal(); });
+  }
+
   /** ---------- Admin controls ---------- **/
   function closeAdminHub() { document.getElementById("adminModal").classList.remove("show"); }
   function openAdminHub() {
@@ -5896,6 +7016,8 @@
       tile("hubScore", I('<path d="M5 20V10M12 20V4M19 20v-7"/>'), "Scoreboard &amp; daily recap",
         recapReady ? "Today\u2019s recap is ready" : "Calls, conversations, interested and pipeline by rep", recapReady) +
       tile("hubCoach", I('<path d="M4 19l5-5 4 4 7-8"/><path d="M15 10h5v5"/>'), "Sales coach", "What\u2019s working, what isn\u2019t, and who needs help") +
+      tile("hubVault", I('<rect x="3" y="5" width="18" height="15" rx="2"/><circle cx="12" cy="12.5" r="3"/><path d="M12 9.5V8M7 5V3.5M17 5V3.5"/>'), "Investor Vault",
+        vaultPending().length ? vaultPending().length + " removal request" + (vaultPending().length === 1 ? "" : "s") + " waiting for you" : (VAULT.status === "rules" ? "One step left to switch it on" : "Every investor, their deals and key dates"), vaultPending().length > 0 || VAULT.status === "rules") +
       tile("hubInfo", I('<path d="M21 3L10 14"/><path d="M21 3l-7 18-4-7-7-4 18-7z"/>'), "Info links", (infoCfg().links.length ? infoCfg().links.length + " link" + (infoCfg().links.length === 1 ? "" : "s") + " your team can text with Send info" : "Add the pages your team can text to leads")) +
       tile("hubAnswers", I('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'), "Answer times", "When your investors actually pick up") +
       tile("hubLeads", I('<path d="M12 5v14M5 12h14"/>'), "Add leads", "Upload Excel, CSV, text or contacts") +
@@ -5907,12 +7029,73 @@
     document.getElementById("hubTeam").addEventListener("click", function () { closeAdminHub(); openTeamPanel(); });
     document.getElementById("hubScore").addEventListener("click", function () { closeAdminHub(); openScoreboard(); });
     document.getElementById("hubCoach").addEventListener("click", function () { closeAdminHub(); openCoach("team"); });
+    document.getElementById("hubVault").addEventListener("click", function () { closeAdminHub(); state.activeView = "vault"; saveState(); render(); });
     document.getElementById("hubInfo").addEventListener("click", function () { closeAdminHub(); openInfoEditor(); });
     document.getElementById("hubAnswers").addEventListener("click", function () { closeAdminHub(); openScoreboard("answers"); });
     document.getElementById("hubLeads").addEventListener("click", function () { closeAdminHub(); openLoadModal(); switchTab("upload"); });
     document.getElementById("hubExport").addEventListener("click", function () { closeAdminHub(); document.getElementById("menuExportBtn").click(); });
     document.getElementById("hubBackup").addEventListener("click", function () { closeAdminHub(); document.getElementById("menuBackupBtn").click(); });
   }
+
+  /** ---------- Automatic updates, installed overnight ---------- **/
+  // The app checks for a newer version on its own. Anything published during the day waits until
+  // midnight, then installs quietly the next time it's safe (never mid-call or while typing).
+  var APP_BUILD = ((document.querySelector('meta[name="dovetail-build"]') || {}).content) || "";
+  var UPD_KEY = "dovetail_update", UPD_TRY = "dovetail_update_tried";
+  var UPD = { pending: null, checking: false, lastCheck: 0 };
+  function updLoad() { try { return JSON.parse(window.localStorage.getItem(UPD_KEY) || "null"); } catch (e) { return null; } }
+  function updSave(v) { try { if (v) window.localStorage.setItem(UPD_KEY, JSON.stringify(v)); else window.localStorage.removeItem(UPD_KEY); } catch (e) {} }
+  function nextMidnight(ts) { var d = new Date(ts); d.setHours(24, 0, 0, 0); return d.getTime(); }
+  function updDue() { return !!(UPD.pending && Date.now() >= nextMidnight(UPD.pending.since)); }
+  function updSafe() {
+    var ae = document.activeElement;
+    return !state.awaitingOutcome && !(ae && /^(INPUT|TEXTAREA|SELECT)$/.test(ae.tagName)) && !document.querySelector(".modal-overlay.show") &&
+      !document.body.classList.contains("sync-lock") && !document.hidden;
+  }
+  function updRecentlyTried(build) {
+    try { var t = JSON.parse(window.localStorage.getItem(UPD_TRY) || "null"); return !!(t && t.build === build && Date.now() - t.at < 10 * 60 * 1000); } catch (e) { return false; }
+  }
+  function updCheck(force) {
+    if (!/^https?:$/.test(location.protocol) || !APP_BUILD) return;
+    if (UPD.checking || (!force && Date.now() - UPD.lastCheck < 25 * 60 * 1000)) return;
+    UPD.checking = true; UPD.lastCheck = Date.now();
+    fetch(location.pathname + "?check=" + Date.now(), { cache: "no-store", headers: { Range: "bytes=0-4095" } })
+      .then(function (r) { var lm = r.headers.get("Last-Modified"); return r.text().then(function (t) { return { t: t, lm: lm }; }); })
+      .then(function (x) {
+        var m = x.t.match(/name="dovetail-build" content="([^"]+)"/);
+        if (!m || m[1] <= APP_BUILD) { UPD.pending = null; updSave(null); updShow(); return; }
+        var saved = updLoad(), published = x.lm ? Date.parse(x.lm) : NaN;
+        var since = saved && saved.build === m[1] ? saved.since : (isNaN(published) ? Date.now() : Math.min(published, Date.now()));
+        UPD.pending = { build: m[1], since: since };
+        updSave(UPD.pending);
+        updShow();
+        updMaybeApply();
+      })
+      .catch(function () {})
+      .then(function () { UPD.checking = false; });
+  }
+  function updMaybeApply() { if (updDue() && updSafe() && !updRecentlyTried(UPD.pending.build)) updInstall(); }
+  function updInstall() {
+    if (!UPD.pending) return;
+    try { window.localStorage.setItem(UPD_TRY, JSON.stringify({ build: UPD.pending.build, at: Date.now() })); } catch (e) {}
+    try { flushSave(); } catch (e) {}
+    var url = location.pathname + "?v=" + encodeURIComponent(UPD.pending.build) + "-" + Date.now(), gone = false;
+    function go() { if (gone) return; gone = true; location.replace(url); }
+    if (TEAM.on && TEAM.me) { teamFlush().then(go, go); setTimeout(go, 2500); } else go();
+  }
+  function updShow() {
+    var el = document.getElementById("updNote");
+    if (!el) return;
+    if (!UPD.pending) { el.innerHTML = ""; return; }
+    el.innerHTML = '<div class="upd-note"><b>Update ready: Build ' + escapeHtml(UPD.pending.build) + '</b><span>' +
+      (updDue() ? "Installs the next time you\u2019re not mid-call." : "Installs automatically after midnight.") +
+      '</span><button class="btn-secondary" id="updNow">Install now</button></div>';
+    document.getElementById("updNow").addEventListener("click", function () { closeMenuModal(); updInstall(); });
+  }
+  (function () {
+    var s = updLoad();
+    if (s && s.build && APP_BUILD && s.build > APP_BUILD) UPD.pending = s; else updSave(null);
+  })();
 
   /** ---------- Wire up static controls ---------- **/
   function init() {
@@ -5942,12 +7125,19 @@
       saveState();
       render();
     });
+    document.getElementById("viewTabVault").addEventListener("click", function () {
+      state.activeView = "vault";
+      saveState();
+      render();
+    });
+    document.getElementById("vaultModal").addEventListener("click", function (e) { if (e.target === this) closeVault(); });
 
     document.getElementById("menuBtn").addEventListener("click", function () {
       renderThemeSwatches();
       document.getElementById("dealTargetInput").value = state.dealTarget || 0;
       document.getElementById("dailyGoalInput").value = state.dailyGoal || 0;
       wireTextSettings();
+      updShow();
       if (TEAM.on) applyTeamVisibility();
       updateCoachHeadline();
       openMenuModal();
@@ -6075,6 +7265,13 @@
     document.getElementById("teamBtn").addEventListener("click", openAdminHub);
     document.getElementById("adminBtn").addEventListener("click", openAdminHub);
     document.getElementById("openThemesBtn").addEventListener("click", openThemes);
+    var mt = document.getElementById("motionToggle");
+    mt.checked = motionOn();
+    mt.addEventListener("change", function () {
+      try { window.localStorage.setItem(MOTION_KEY, mt.checked ? "on" : "off"); } catch (e) {}
+      applyMotion();
+      showToast(mt.checked ? "Motion effects on" : "Motion effects off \u2014 saves battery");
+    });
     document.getElementById("infoLinksBtn").addEventListener("click", openInfoEditor);
     document.getElementById("infoModal").addEventListener("click", function (e) { if (e.target === this) closeInfo(); });
     document.getElementById("openCoachBtn").addEventListener("click", function () { openCoach("me"); });
@@ -6106,13 +7303,19 @@
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape") {
         closeLoadModal(); closeMenuModal(); closeTaskModal(); closeConfirm(); closeLeadProfile();
-        ["themeModal", "adminModal", "teamModal", "scoreModal", "acctModal", "coachModal", "infoModal"].forEach(function (id) { var el = document.getElementById(id); if (el) el.classList.remove("show"); });
+        ["themeModal", "adminModal", "teamModal", "scoreModal", "acctModal", "coachModal", "infoModal", "vaultModal"].forEach(function (id) { var el = document.getElementById(id); if (el) el.classList.remove("show"); });
       }
     });
 
     if (teamAvailable()) teamBoot();
-    else { render(); startCloudSync(); }
+    else { vaultStart(); render(); startCloudSync(); }
     setInterval(softRefresh, 60000);
+    setTimeout(function () { updCheck(true); }, 4000);
+    setInterval(function () { updCheck(false); updMaybeApply(); }, 60000);
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) return;
+      if (Date.now() - UPD.lastCheck > 5 * 60 * 1000) updCheck(true); else updMaybeApply();
+    });
     document.addEventListener("visibilitychange", function () {
       if (document.hidden) flushSave(); else softRefresh();
     });
