@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="dovetail-build" content="2026-10-14">
+<meta name="dovetail-build" content="2026-10-17">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2137,6 +2137,61 @@
   .upd-note b { font-size: 13.5px; } .upd-note span { font-size: 12.5px; color: var(--text-dim); }
   .upd-note button { margin-top: 6px; }
 
+  /* ---- Long names, links or notes never stretch the screen ---- */
+  html, body { overflow-x: clip; }
+  #mainArea, #mainArea *, .modal, .modal *, .text-prompt, .text-prompt *, #toast { overflow-wrap: anywhere; }
+  select { max-width: 100%; }
+  .qc-order { min-width: 0; }
+  .qc-order select { min-width: 0; max-width: 62vw; text-overflow: ellipsis; }
+  .modal { box-sizing: border-box; max-width: min(560px, 100vw); }
+  .va-row b, .va-row span, .vr-main, .vi-row > span:first-child, .kd-row span, .vq-row > span:first-child, .tm-main, .is-txt, .info-item span { min-width: 0; }
+
+  /* ---- Protecting your number ---- */
+  .num-warn { display: flex; flex-direction: column; gap: 3px; width: 100%; text-align: left; font-family: inherit; color: var(--text); cursor: pointer;
+    margin: 0 0 10px; padding: 11px 13px; border-radius: 12px; border: 1px solid var(--notinterested); background: var(--surface-raised); }
+  .num-warn.soft { border-color: var(--voicemail); cursor: default; }
+  .num-warn b { font-size: 14px; } .num-warn span { font-size: 12.5px; color: var(--text-dim); line-height: 1.4; }
+  .call-btn.paced { opacity: 0.6; }
+  .modal-overlay.gate { z-index: 140; }
+  .coach-card.protect { margin-top: 10px; }
+
+  /* ---- Hot list, call windows, forecast, briefing, goals, checklist, lock ---- */
+  .lead-name-row { display: flex; align-items: flex-start; gap: 8px; }
+  .lead-name-row .lead-name { flex: 1; min-width: 0; }
+  .star-btn { flex: none; background: none; border: 1px solid var(--border); color: var(--text-faint); border-radius: 999px; min-width: 38px; min-height: 38px; font-size: 18px; line-height: 1; cursor: pointer; font-family: inherit; }
+  .star-btn.on { color: var(--voicemail); border-color: var(--voicemail); }
+  .lp-star { min-height: 0; padding: 6px 12px; font-size: 13px; margin: 2px 0 8px; }
+  .win-chip { display: inline-block; margin-top: 6px; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; background: var(--surface-raised); border: 1px solid var(--callback); color: var(--text-dim); }
+  .hot-strip { margin: 0 0 10px; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--voicemail); background: var(--surface); }
+  .hot-head { font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--voicemail); margin-bottom: 6px; }
+  .hot-row { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-top: 1px solid var(--border); }
+  .hot-row:first-of-type { border-top: 0; }
+  .hot-name { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; background: none; border: 0; padding: 0; text-align: left; color: var(--text); font-family: inherit; cursor: pointer; }
+  .hot-name b { font-size: 14px; } .hot-name span { font-size: 12px; color: var(--text-faint); }
+  .hot-call svg { width: 17px; height: 17px; }
+  .pipe-forecast { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-dim); }
+  .pipe-forecast b { color: var(--text); } .pipe-forecast small { flex-basis: 100%; font-size: 11.5px; color: var(--text-faint); }
+  .brief-card { display: flex; align-items: center; gap: 10px; margin: 0 0 10px; padding: 11px 12px; border-radius: 12px; border: 1px solid var(--accent); background: var(--surface-raised); }
+  .brief-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; } .brief-txt b { font-size: 14.5px; } .brief-txt span { font-size: 12.5px; color: var(--text-dim); }
+  .brief-btns { display: flex; flex-direction: column; gap: 4px; flex: none; align-items: center; } .brief-btns .btn-primary { padding: 8px 12px; font-size: 13px; }
+  .goal-bars { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+  .gb-top { display: flex; justify-content: space-between; font-size: 13px; } .gb-top b { font-variant-numeric: tabular-nums; }
+  .gb-track { position: relative; height: 8px; border-radius: 4px; background: var(--border); margin: 5px 0 3px; overflow: visible; }
+  .gb-track span { display: block; height: 100%; border-radius: 4px; background: var(--accent); }
+  .gb-track i { position: absolute; top: -3px; width: 2px; height: 14px; background: var(--text-faint); }
+  .gb small { font-size: 11.5px; } .gb small.ok { color: var(--interested); } .gb small.behind { color: var(--notinterested); }
+  .goal-rep { padding: 10px 0; border-top: 1px solid var(--border); }
+  .goal-in { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-top: 6px; }
+  .goal-in label { font-size: 11.5px !important; margin: 0 !important; display: flex; flex-direction: column; gap: 3px; }
+  .goal-in input { width: 100%; box-sizing: border-box; min-width: 0; }
+  .od-row { padding: 10px 0; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 6px; }
+  .od-main b { font-size: 14px; cursor: pointer; } .od-main span { display: block; font-size: 12px; color: var(--text-faint); }
+  .od-move { display: flex; gap: 6px; } .od-move select { flex: 1; min-width: 0; } .od-move button { flex: none; padding: 8px 14px; }
+  .vi-steps { display: flex; flex-direction: column; gap: 2px; padding: 8px 0 2px; border-top: 1px solid var(--border); }
+  .vi-steps > b { font-size: 12.5px; color: var(--text-dim); }
+  .vi-step { margin: 2px 0 !important; font-size: 13px !important; } .vi-step small { color: var(--text-faint); }
+  .lock-screen { z-index: 300; }
+
   ::-webkit-scrollbar { width: 8px; }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 8px; }
 
@@ -2161,6 +2216,18 @@
 </style>
 </head>
 <body>
+<div class="auth-screen lock-screen" id="lockScreen" style="display:none">
+  <div class="auth-card">
+    <div class="auth-brand">Dovetail is locked</div>
+    <div class="auth-sub">Unlock to keep working.</div>
+    <button class="btn-primary" id="lockGo" style="width:100%;margin-top:6px">Unlock with Face ID</button>
+    <div class="auth-msg" id="lockMsg" style="display:none;margin-top:12px"></div>
+    <div id="lockPwWrap" style="display:none">
+      <label for="lockPw">Password</label><input id="lockPw" type="password" autocomplete="current-password">
+      <button class="btn-secondary" id="lockPwGo" style="width:100%;margin-top:10px">Unlock with password</button>
+    </div>
+  </div>
+</div>
 <div class="auth-screen" id="authScreen" style="display:none">
   <div class="auth-card">
     <div class="auth-brand">Dovetail Suite</div>
@@ -2312,6 +2379,7 @@
       <div class="acct-who" id="acctWho"></div>
       <div class="modal-actions" style="flex-direction:column">
         <button class="btn-primary team-admin-only" id="teamBtn" style="width:100%">Admin controls: logins, team &amp; scoreboard</button>
+        <button class="btn-secondary" id="lockToggleBtn" style="width:100%">Turn on Face ID lock</button>
         <button class="btn-secondary" id="changePwBtn" style="width:100%">Change my password</button>
         <button class="btn-secondary" id="signOutBtn" style="width:100%;color:var(--danger)">Sign out</button>
       </div>
@@ -2320,6 +2388,7 @@
     <div class="settings-section">
       <div class="settings-heading">Coaching</div>
       <button class="settings-row" id="openCoachBtn" type="button"><span class="sr-l">My coach</span><span class="sr-v" id="coachHeadline"></span><span class="sr-c">›</span></button>
+      <button class="settings-row" id="openBriefBtn" type="button" style="margin-top:8px"><span class="sr-l">My day</span><span class="sr-v">Follow-ups, hot list, who to call first</span><span class="sr-c">›</span></button>
     </div>
 
     <div class="settings-section">
@@ -2376,7 +2445,7 @@
     </div>
 
     <div style="margin-top:22px;padding-top:14px;border-top:1px solid var(--border);text-align:center;">
-      <div style="font-size:11px;color:var(--text-faint);">Build 2026-10-14 · Team · Updates install automatically after midnight.</div>
+      <div style="font-size:11px;color:var(--text-faint);">Build 2026-10-17 · Team · Updates install automatically after midnight.</div>
       <div id="updNote"></div>
     </div>
   </div>
@@ -2464,6 +2533,11 @@
 <!-- Investor Vault -->
 <div class="modal-overlay" id="vaultModal">
   <div class="modal" id="vaultModalBody"></div>
+</div>
+
+<!-- Briefing, goals, list ROI, overdue, security -->
+<div class="modal-overlay" id="featModal">
+  <div class="modal" id="featModalBody"></div>
 </div>
 
 <!-- Lead profile -->
@@ -2863,8 +2937,15 @@
     return "l" + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
   }
 
+  // "212-555-0903 x23", "ext. 23", "extension 23", "#23": dial the main number, keep the extension.
+  var EXT_RE = /\s*[,;]?\s*(?:ext\.?|extension|x|#)\s*(\d{1,6})\s*$/i;
+  function splitExt(raw) {
+    var s = String(raw || ""), m = s.match(EXT_RE);
+    if (m && s.replace(EXT_RE, "").replace(/\D/g, "").length >= 10) return { main: s.replace(EXT_RE, "").trim(), ext: m[1] };
+    return { main: s.trim(), ext: "" };
+  }
   function normalizePhone(raw) {
-    var digits = (raw || "").replace(/[^\d+]/g, "");
+    var digits = splitExt(raw).main.replace(/[^\d+]/g, "");
     // keep a leading + if present, strip other +'s
     var hasPlus = digits.charAt(0) === "+";
     digits = digits.replace(/\+/g, "");
@@ -2884,7 +2965,7 @@
   }
 
   function isValidPhone(raw) {
-    var digits = (raw || "").replace(/[^\d]/g, "");
+    var digits = splitExt(raw).main.replace(/[^\d]/g, "");
     return digits.length >= 7;
   }
 
@@ -2983,7 +3064,7 @@
 
   /** ---------- Core queue logic ---------- **/
   function allPendingLeads() {
-    return state.leads.filter(function (l) { return l.status === "pending" && !claimedByOther(l); });
+    return state.leads.filter(function (l) { return l.status === "pending" && !claimedByOther(l) && inPrefWindow(l); });
   }
 
   function pendingLeads() {
@@ -3011,9 +3092,16 @@
     return hourScore(t.hour);
   }
   function smartSort(list) {
-    return list.map(function (l, i) { return { l: l, s: callScore(l), i: i }; })
-      .sort(function (a, b) { return (b.s - a.s) || (a.i - b.i); })
-      .map(function (x) { return x.l; });
+    var a = list.map(function (l, i) { return { l: l, s: callScore(l), i: i, k: nxxOf(l) }; })
+      .sort(function (x, y) { return (y.s - x.s) || (x.i - y.i); });
+    // Best answer hours first, but never two numbers from the same exchange back to back.
+    for (var i = 1; i < a.length; i++) {
+      if (!a[i].k || a[i].k !== a[i - 1].k) continue;
+      for (var j = i + 1; j < Math.min(a.length, i + 25); j++) {
+        if (a[j].s >= a[i].s - 0.05 && a[j].k !== a[i - 1].k) { a.splice(i, 0, a.splice(j, 1)[0]); break; }
+      }
+    }
+    return a.map(function (x) { return x.l; });
   }
 
   function currentLead() {
@@ -3058,7 +3146,7 @@
     lead.calledAt = new Date().toISOString();
     var callEntry = {
       id: uid(), leadId: lead.id, name: lead.name, phone: lead.phone, phoneRaw: lead.phoneRaw, notes: lead.notes,
-      outcomeKey: outcome, outcome: outcomeLabel(outcome), attempt: attempt, timestamp: lead.calledAt
+      outcomeKey: outcome, outcome: outcomeLabel(outcome), attempt: attempt, timestamp: lead.calledAt, talk: talkFor(lead.id)
     };
     if (TEAM.on && TEAM.me) {
       callEntry.by = meRef();
@@ -3168,7 +3256,7 @@
     document.getElementById("queueControls").style.display = "none";
     var dueN = dueTasks().length;
     var scb = document.getElementById("adminBtn");
-    if (scb) scb.setAttribute("data-badge", (TEAM.on && isAdmin() && ((new Date().getHours() >= 17 && state.recapSeen !== localDateStr(new Date())) || vaultPending().length)) ? "1" : "");
+    if (scb) scb.setAttribute("data-badge", (TEAM.on && isAdmin() && ((new Date().getHours() >= 17 && state.recapSeen !== localDateStr(new Date())) || vaultPending().length || overdueWarm().length)) ? "1" : "");
     document.getElementById("viewTabTasks").setAttribute("data-badge", dueN ? String(dueN) : "");
 
     if (state.activeView === "history") {
@@ -3319,7 +3407,7 @@
   }
   function dueTasks() {
     var now = Date.now();
-    return state.tasks.filter(function (t) { return !t.done && t.leadId && taskDueTs(t) <= now && myTask(t); })
+    return state.tasks.filter(function (t) { return !t.done && t.leadId && taskDueTs(t) <= now && myTask(t) && inPrefWindow(findLeadById(t.leadId)); })
       .sort(function (a, b) { return taskDueTs(a) - taskDueTs(b); });
   }
   function dayLabel(d) {
@@ -3393,7 +3481,7 @@
     }
     lead.exhausted = false;
     if (outcome === "interested") {
-      if (!lead.stage || lead.stage === "New Lead") lead.stage = "Qualified";
+      if (!lead.stage || lead.stage === "New Lead") setStage(lead, "Qualified");
       t = addAutoTask(lead, "Follow-up", "High", slotAt(lead, 1, 10), "Interested \u2014 follow up while it\u2019s warm");
       return "Follow-up set " + fmtWhen(t.dueAt);
     }
@@ -3403,7 +3491,7 @@
       return "Callback set " + fmtWhen(t.dueAt);
     }
     if (outcome === "notinterested" && lead.stage && lead.stage !== "New Lead" && lead.stage !== "Closed Lost") {
-      lead.stage = "Closed Lost";
+      setStage(lead, "Closed Lost");
       return "Moved to Closed Lost";
     }
     if (outcome === "badnum") lead.badNumber = true;
@@ -3625,12 +3713,13 @@
   function leadTrackHtml(lead) {
     var last = lastCallFor(lead.id);
     var next = openTasksFor(lead.id)[0];
-    if (!last && !next && !lead.exhausted && !lead.recycled) return "";
+    if (!last && !next && !lead.exhausted && !lead.recycled && !lead.released) return "";
     var bits = [];
     if (last) bits.push("Called " + callsForLead(lead.id).length + "\u00d7 \u00b7 last: " + outcomeLabel(last.outcomeKey, last.outcome).toLowerCase() + " " + agoStr(last.timestamp));
     if (next) bits.push("Next: " + taskWhen(next, null));
     if (lead.exhausted) bits.push(lead.retired ? "retired after " + ((lead.recycled || 0) + 1) + " rounds" : MAX_ATTEMPTS + " attempts made" + (lead.restUntil ? " \u00b7 back " + dayLabel(new Date(lead.restUntil)) : ""));
     if (lead.recycled && lead.status === "pending") bits.push("fresh try #" + (lead.recycled + 1));
+    if (lead.released && lead.status === "pending") bits.push("back from " + lead.released.from);
     return '<div class="lead-track">' + escapeHtml(bits.join(" \u00b7 ")) + '</div>';
   }
   function callLinkHtml(lead, from, taskId, cls, inner) {
@@ -3666,6 +3755,7 @@
     body.innerHTML =
       '<button class="close-x" id="lpClose">&times;</button>' +
       '<h3 class="lp-name">' + escapeHtml(lead.name) + '</h3>' +
+      '<button class="star-btn lp-star' + (isHot(lead.id) ? ' on' : '') + '" data-star="' + lead.id + '">\u2605 ' + (isHot(lead.id) ? 'On your hot list' : 'Add to hot list') + '</button>' +
       '<div class="lp-phone">' + escapeHtml(formatPhoneDisplay(lead.phoneRaw)) + '</div>' +
       (lead.source ? '<div class="lp-src">List: ' + escapeHtml(lead.source) + (lead.addedAt ? ' \u00b7 added ' + escapeHtml(dayLabel(new Date(lead.addedAt))) : '') + '</div>' : '') +
       (TEAM.on ? '<div class="lp-src">' + (lead.owner ? 'Owner: ' + escapeHtml(lead.owner.name) : 'Not assigned yet') + (claimedByOther(lead) ? ' \u00b7 <b>' + escapeHtml(lead.claim.name) + ' is on this lead now</b>' : '') + '</div>' : '') +
@@ -3685,6 +3775,8 @@
       '</div>' +
       '<label for="lpStage">Pipeline stage</label>' +
       '<select id="lpStage">' + STAGES.map(function (s2) { return '<option' + (s2 === (lead.stage || "New Lead") ? " selected" : "") + '>' + s2 + '</option>'; }).join("") + '</select>' +
+      '<label for="lpWindow">Best time to call (their time)</label><select id="lpWindow"><option value="">Any time</option>' + Object.keys(CALL_WINDOWS).map(function (k) {
+        return '<option value="' + k + '"' + (lead.callWindow === k ? ' selected' : '') + '>' + CALL_WINDOWS[k][0] + ' \u00b7 ' + hourLabel(CALL_WINDOWS[k][1]) + '\u2013' + hourLabel(CALL_WINDOWS[k][2]) + '</option>'; }).join("") + '</select>' +
       '<label for="lpAmount">Deal amount ($)</label>' +
       '<input id="lpAmount" type="number" min="0" step="1000" inputmode="numeric" value="' + (Number(lead.amount) || 0) + '">' +
       '<label for="lpNotes">Notes</label>' +
@@ -3705,12 +3797,16 @@
       showToast(copyText(lead.phoneRaw) ? "Number copied" : "Couldn\u2019t copy \u2014 long-press the number");
     });
     document.getElementById("lpStage").addEventListener("change", function (e) {
-      lead.stage = e.target.value; saveState(); showToast("Moved to " + lead.stage);
+      setStage(lead, e.target.value); saveState(); showToast("Moved to " + lead.stage);
       if (lead.stage === "Committed" && !vaultForLead(lead.id)) {
         showConfirm(lead.name + " committed. Add them to the Investor Vault so you can track their investments?", function () { closeLeadProfile(true); vaultAddFromLead(lead); }, "Add to Vault");
       }
     });
     document.getElementById("lpVault").addEventListener("click", function () { closeLeadProfile(true); vaultAddFromLead(lead); });
+    document.getElementById("lpWindow").addEventListener("change", function (e) {
+      lead.callWindow = e.target.value; saveState();
+      showToast(lead.callWindow ? lead.name + " only comes up " + windowLabel(lead).toLowerCase() : lead.name + " can be called any time");
+    });
     document.getElementById("lpAmount").addEventListener("change", function (e) {
       lead.amount = Math.max(0, Number(e.target.value) || 0); saveState(); showToast("Amount saved");
     });
@@ -3828,7 +3924,7 @@
         '<div class="hx-main"' + (lead ? ' data-open-lead="' + lead.id + '"' : '') + '>' +
           '<div class="hist-top"><span class="hist-name">' + escapeHtml(c.name) + '</span><span class="qi-status ' + m.cls + '">' + escapeHtml(m.label) + '</span></div>' +
           '<div class="hx-sub">' + escapeHtml(d.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" })) +
-            ' \u00b7 Call ' + attemptOf[r.i] + (stage ? ' \u00b7 ' + escapeHtml(stage) : '') + (TEAM.on && isAdmin() && c.by ? ' \u00b7 ' + escapeHtml(c.by.name) : '') + '</div>' +
+            ' \u00b7 Call ' + attemptOf[r.i] + (c.talk ? ' \u00b7 ' + fmtTalk(c.talk) + ' on call' : '') + (stage ? ' \u00b7 ' + escapeHtml(stage) : '') + (TEAM.on && isAdmin() && c.by ? ' \u00b7 ' + escapeHtml(c.by.name) : '') + '</div>' +
         '</div>' +
         callLinkHtml(callTarget, "history", null, "hist-call-btn", callIconSvg()) +
         '<button class="hist-copy-btn" data-copy-phone="' + escapeHtml(c.phoneRaw || c.phone) + '" title="Copy number">' + copyIconSvg() + '</button>' +
@@ -3865,6 +3961,7 @@
       '<div class="deal-bar-track"><div class="deal-bar-fill" style="width:' + pct + '%"></div></div>' +
       '<div class="pipe-summary"><span><b>' + activeLeads.length + '</b> active</span><span><b>' + fmtMoney(sum(activeLeads)) + '</b> in play</span>' +
       (needs ? '<span class="warn"><b>' + needs + '</b> need a next step</span>' : '<span><b>0</b> without a next step</span>') + '</div>' +
+      forecastHtml() +
     '</div>';
     STAGES.forEach(function (stage) {
       var stLeads = state.leads.filter(function (l) { return (l.stage || "New Lead") === stage && (stage === "New Lead" || pipeScope(l)); });
@@ -3900,7 +3997,7 @@
     main.querySelectorAll("[data-pipe-stage]").forEach(function (sel) {
       sel.addEventListener("change", function () {
         var lead = findLeadById(sel.getAttribute("data-pipe-stage"));
-        if (lead) { lead.stage = sel.value; saveState(); render(); showToast("Moved to " + lead.stage); }
+        if (lead) { setStage(lead, sel.value); saveState(); render(); showToast("Moved to " + lead.stage); }
       });
     });
     main.querySelectorAll("[data-pipe-amount]").forEach(function (inp) {
@@ -4225,7 +4322,7 @@
     if (enterCls && lastShownLeadId !== null) setTimeout(revealCard, 30);
     lastShownLeadId = lead.id;
     main.innerHTML =
-      (focus ? '' : followupBannerHtml()) +
+      (focus ? '' : followupBannerHtml()) + spamBannerHtml() + overdueBannerHtml() + lockReqBannerHtml() + (focus ? '' : briefCardHtml() + hotStripHtml(lead.id)) +
       '<div class="card' + enterCls + '">' +
         '<div class="eyebrow-row">' +
           (focus
@@ -4238,8 +4335,9 @@
                 '<button class="skip-btn danger-link" id="removeLeadBtn">Remove lead</button>' +
               '</div>') +
         '</div>' +
-        '<div class="lead-name" data-open-lead="' + lead.id + '">' + escapeHtml(lead.name) + '</div>' +
+        '<div class="lead-name-row"><div class="lead-name" data-open-lead="' + lead.id + '">' + escapeHtml(lead.name) + '</div>' + starBtnHtml(lead) + '</div>' +
         '<div class="lead-phone">' + escapeHtml(formatPhoneDisplay(lead.phoneRaw)) + '</div>' +
+        (lead.callWindow ? '<div class="win-chip">Prefers ' + escapeHtml(windowLabel(lead)) + '</div>' : '') +
         leadWhereWhenHtml(lead) +
         leadTrackHtml(lead) +
         '<div class="lead-stage-row">' +
@@ -4280,12 +4378,13 @@
     });
 
     document.getElementById("leadStageSelect").addEventListener("change", function (e) {
-      lead.stage = e.target.value;
+      setStage(lead, e.target.value);
       saveState();
       showToast("Moved to " + lead.stage);
     });
 
     document.getElementById("callBtn").addEventListener("click", function (e) {
+      if (!state.awaitingOutcome && !callGate(lead, e, false)) return;
       state.awaitingOutcome = true;
       saveState();
       setTimeout(render, 50);
@@ -4298,6 +4397,13 @@
       }, 400);
     });
     document.getElementById("infoBtn").addEventListener("click", function () { openSendInfo(lead); });
+    var swb = document.getElementById("spamWarnBtn");
+    if (swb) swb.addEventListener("click", function () { openCoach("me"); });
+    if (pacingWait(Date.now()) > 0) pacingTick();
+    [["briefOpen", openBrief], ["overdueWarnBtn", openOverdue], ["lockReqBtn", function () { lockSetup().then(function () { render(); }); }],
+     ["briefHide", function () { state.briefSeen = localDateStr(new Date()); saveState(); render(); }]].forEach(function (x) {
+      var el = document.getElementById(x[0]); if (el) el.addEventListener("click", x[1]);
+    });
     document.getElementById("copyBtn").addEventListener("click", function () {
       var ok = copyText(lead.phoneRaw);
       showToast(ok ? "Number copied — paste it in your Phone app" : "Couldn't copy — long-press the number above to copy it");
@@ -4602,13 +4708,14 @@
   }
   // Uploads need a dialable number: 10 digits (US), 11 starting with 1, or +international.
   function uploadPhoneOk(v) {
-    var s = String(v || "").trim(), d = s.replace(/\D/g, "");
+    var s = splitExt(v).main, d = s.replace(/\D/g, "");
     if (s.charAt(0) === "+") return d.length >= 8 && d.length <= 15;
     return d.length === 10 || (d.length === 11 && d.charAt(0) === "1");
   }
   function makeLead(name, phoneRaw, notes, st) {
-    var l = { id: uid(), name: String(name || "").replace(/\s+/g, " ").trim() || "Unnamed lead", phoneRaw: String(phoneRaw).trim(),
-      phone: normalizePhone(String(phoneRaw)), notes: notes || "", stage: "New Lead", amount: 0, status: "pending", outcome: null, calledAt: null };
+    var sp = splitExt(phoneRaw);
+    var l = { id: uid(), name: String(name || "").replace(/\s+/g, " ").trim() || "Unnamed lead", phoneRaw: sp.main,
+      phone: normalizePhone(sp.main), notes: [notes || "", sp.ext ? "ext. " + sp.ext : ""].filter(Boolean).join(" | "), stage: "New Lead", amount: 0, status: "pending", outcome: null, calledAt: null };
     if (st) l.st = st;
     return l;
   }
@@ -5542,7 +5649,7 @@
     state = defaultState();
     pendingText = null;
     renderTextPrompt();
-    ["menuModal", "leadModal", "taskModal", "loadModal", "teamModal", "acctModal", "scoreModal", "themeModal", "adminModal", "coachModal", "infoModal", "vaultModal", "confirmModal"].forEach(function (id) {
+    ["menuModal", "leadModal", "taskModal", "loadModal", "teamModal", "acctModal", "scoreModal", "themeModal", "adminModal", "coachModal", "infoModal", "vaultModal", "featModal", "confirmModal"].forEach(function (id) {
       var el = document.getElementById(id);
       if (el) el.classList.remove("show");
     });
@@ -6091,7 +6198,7 @@
     function row(ref) {
       var k = ref && ref.uid ? ref.uid : "_none";
       return by[k] || (by[k] = { uid: k, name: ref && ref.name ? ref.name : "Unassigned", calls: 0, reached: 0, interested: 0,
-        names: [], first: 0, last: 0, pipeline: 0, committed: 0, active: 0, dueNext: 0, overdue: 0, member: null });
+        names: [], first: 0, last: 0, pipeline: 0, committed: 0, active: 0, dueNext: 0, overdue: 0, talk: 0, timed: 0, member: null });
     }
     Object.keys(TEAM.members).forEach(function (k) { var m = TEAM.members[k]; row({ uid: k, name: m.name || m.username }).member = m; });
     state.callLog.forEach(function (c) {
@@ -6099,6 +6206,7 @@
       if (ts < from || ts >= to) return;
       var r = row(c.by);
       r.calls++;
+      if (c.talk) { r.talk += c.talk; r.timed++; }
       if (CONTACT_OUTCOMES[c.outcomeKey]) r.reached++;
       if (c.outcomeKey === "interested") { r.interested++; r.names.push(c.name); }
       if (!r.first || ts < r.first) r.first = ts;
@@ -6123,7 +6231,7 @@
       .sort(function (a, b) { return (b.calls - a.calls) || (b.reached - a.reached) || String(a.name).localeCompare(String(b.name)); });
   }
   function sumRows(rows) {
-    var t = { calls: 0, reached: 0, interested: 0, pipeline: 0, committed: 0, active: 0, dueNext: 0, overdue: 0 };
+    var t = { calls: 0, reached: 0, interested: 0, pipeline: 0, committed: 0, active: 0, dueNext: 0, overdue: 0, talk: 0, timed: 0 };
     rows.forEach(function (r) { Object.keys(t).forEach(function (k) { t[k] += r[k]; }); });
     return t;
   }
@@ -6154,7 +6262,7 @@
           '<div class="sb-top"><b>' + escapeHtml(r.name) + (r.member && !r.member.active ? ' <em>(access off)</em>' : '') + '</b><span class="sb-big">' + r.calls + '<small> calls</small></span></div>' +
           '<div class="sb-bar"><span style="width:' + Math.round((r.calls / maxCalls) * 100) + '%"></span></div>' +
           '<div class="sb-stats"><span><b>' + r.reached + '</b> reached \u00b7 ' + pct(r.reached, r.calls) + '</span><span><b>' + r.interested + '</b> interested</span>' +
-          '<span><b>' + shortMoney(r.pipeline) + '</b> pipeline</span>' + (r.overdue ? '<span class="warn"><b>' + r.overdue + '</b> overdue</span>' : '') + '</div></div>';
+          (r.talk ? '<span><b>' + fmtTalk(r.talk) + '</b> on calls</span>' : '') + '<span><b>' + shortMoney(r.pipeline) + '</b> pipeline</span>' + (r.overdue ? '<span class="warn"><b>' + r.overdue + '</b> overdue</span>' : '') + '</div></div>';
       }).join("");
     } else if (scoreView === "recap") {
       html += '<div class="filter-row sb-days"><button class="filter-chip' + (recapDay === 0 ? ' active' : '') + '" data-recapday="0">Today</button>' +
@@ -6268,6 +6376,7 @@
   // Leads not reached after 6 tries rest 60\u201390 days, then come back for a fresh try (twice at most).
   function recycleSweep() {
     if (TEAM.on && (!TEAM.me || !TEAM.ready)) return 0;
+    fairSweep();
     var now = Date.now(), changed = 0;
     state.leads.forEach(function (l) {
       if (!l.exhausted || l.status !== "done") return;
@@ -6320,7 +6429,7 @@
     var mineL = function (l) { return uid ? !!(l.owner && l.owner.uid === uid) : pipeScope(l); };
     var mineT = function (t) { var a = assigneeOf(t); return uid ? !!(a && a.uid === uid) : myTask(t); };
     var now = ctx.now, today = dayStart(0), ws = weekStart(), lwFrom = ws - 7 * 86400000, lwTo = now - 7 * 86400000;
-    var s = { today: 0, todayReached: 0, firstToday: 0, week: 0, lastWeek: 0, c14: 0, r14: 0, hours: {}, early: [0, 0], late: [0, 0], days: {}, all: 0 };
+    var s = { today: 0, todayReached: 0, firstToday: 0, week: 0, lastWeek: 0, c14: 0, r14: 0, hours: {}, early: [0, 0], late: [0, 0], days: {}, all: 0, timed: 0, short: 0, talk: 0 };
     state.callLog.forEach(function (c) {
       if (!mineC(c)) return;
       var ts = new Date(c.timestamp).getTime(), reached = !!CONTACT_OUTCOMES[c.outcomeKey];
@@ -6331,6 +6440,7 @@
       if (ts >= lwFrom && ts < lwTo) s.lastWeek++;
       if (ts >= ctx.from14) {
         s.c14++; if (reached) s.r14++;
+        if (c.talk) { s.timed++; s.talk += c.talk; if (c.talk < 10) s.short++; }
         var h = callLocalHour(c, ctx.byId);
         if (h >= 8 && h <= 20) {
           var b = s.hours[h] || (s.hours[h] = [0, 0]); b[0]++; if (reached) b[1]++;
@@ -6378,6 +6488,10 @@
       if (mine <= team - 0.05) add("warn", (personal ? "Your reach rate" : "Reach rate") + " is " + Math.round(mine * 100) + "% vs the team\u2019s " + Math.round(team * 100) + "% (last " + COACH_DAYS + " days).", 7);
       else if (mine >= team + 0.05) add("good", (personal ? "Your reach rate" : "Reach rate") + " is " + Math.round(mine * 100) + "% vs the team\u2019s " + Math.round(team * 100) + "%. Keep doing what you\u2019re doing.", 5);
     }
+    if (s.timed >= 20 && s.short / s.timed > 0.4) add("warn", Math.round(s.short / s.timed * 100) + "% of " + (personal ? "your" : "their") + " calls end within 10 seconds. Let each one ring 20\u201325 seconds or leave a voicemail; very short calls look automated.", 7);
+    else if (s.timed >= 10) add("info", "Average time on a call: " + fmtTalk(s.talk / s.timed) + ".", 2);
+    var soon = TEAM.on ? returningSoon(uid || (TEAM.me && TEAM.me.uid)) : [];
+    if (soon.length) add("warn", soon.length + " lead" + (soon.length === 1 ? " goes" : "s go") + " back to the team pool in " + Math.min.apply(null, soon.map(function (x) { return x.days; })) + " day(s) unless " + (personal ? "you call" : "they're called") + ": " + soon.slice(0, 3).map(function (x) { return x.l.name; }).join(", ") + ".", 6);
     if (overdue) add("warn", overdue + " overdue follow-up" + (overdue === 1 ? "" : "s") + ".", 9);
     if (noNext) add("warn", noNext + " interested lead" + (noNext === 1 ? " has" : "s have") + " no next step scheduled.", 9);
     if (stalled) add("warn", stalled + " pipeline deal" + (stalled === 1 ? " hasn\u2019t" : "s haven\u2019t") + " been touched in 2+ weeks.", 8);
@@ -6391,6 +6505,9 @@
     Object.keys(s.days).forEach(function (k) { if (k !== todayKey && s.days[k] > pb) { pb = s.days[k]; pbDay = k; } });
     if (pb >= 20 && s.today > pb) add("good", "New personal best: " + s.today + " calls today (previous " + pb + ").", 7);
     else if (personal && pb >= 20) { var p = pbDay.split("-"); add("info", "Personal best: " + pb + " calls on " + new Date(+p[0], +p[1] - 1, +p[2]).toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" }) + ".", 2); }
+    var sg = spamSignal(uid || null);
+    if (sg) add("warn", (personal ? "Your answer rate today (" + sg.today + "%) is far below your usual (" + sg.usual + "%). Your number may be getting labeled \u201cSpam Likely\u201d \u2014 slow down and see Protect your number below."
+      : "Answer rate today " + sg.today + "% vs usual " + sg.usual + "% \u2014 their number may be getting labeled as spam."), 11);
     if (s.c14 < 20) add("info", "Not enough calls in the last " + COACH_DAYS + " days to spot patterns yet \u2014 keep dialing.", 1);
     ins.sort(function (a, b) { var o = { warn: 0, good: 1, info: 2 }; return (b.w - a.w) || (o[a.tone] - o[b.tone]); });
     return { s: s, best: best, worst: worst, overdue: overdue, noNext: noNext, stalled: stalled, insights: ins };
@@ -6454,7 +6571,8 @@
       var me = coachFor(TEAM.on && TEAM.me ? TEAM.me.uid : null, ctx, true);
       html += '<h3>My coach</h3><p class="modal-sub">Your own numbers' + (ctx.callers >= 3 ? ', compared with the team average' : '') + '. Only you see this.</p>' +
         '<div class="coach-stats"><div><b>' + me.s.today + '</b><span>calls today</span></div><div><b>' + pctN(me.s.r14, me.s.c14) + '%</b><span>reach, ' + COACH_DAYS + ' days</span></div><div><b>' + me.s.week + '</b><span>calls this week</span></div></div>' +
-        '<div class="coach-card">' + insightHtml(me.insights) + '</div>';
+        (goalBarsHtml(TEAM.on && TEAM.me ? TEAM.me.uid : null) ? '<div class="coach-card"><b>This month</b>' + goalBarsHtml(TEAM.on && TEAM.me ? TEAM.me.uid : null) + '</div>' : '') +
+        '<div class="coach-card">' + insightHtml(me.insights) + '</div>' + protectNumberHtml();
     }
     body.innerHTML = html;
     document.getElementById("coachClose").addEventListener("click", function () { document.getElementById("coachModal").classList.remove("show"); });
@@ -6737,6 +6855,7 @@
       var ua = daysUntilYearly(first.slice(5, 10));
       if (ua.days <= 14 && ua.year > +first.slice(0, 4)) out.push({ days: ua.days, text: (ua.year - first.slice(0, 4)) + "-year investing anniversary" + whenText(ua.days) });
     }
+    closingDue(r).forEach(function (c) { out.push(c); });
     if (r.nextReachOut) {
       var nd = Math.round((new Date(r.nextReachOut + "T00:00:00").getTime() - dayStart(0)) / 86400000);
       if (nd <= 7) out.push({ days: nd, text: nd < 0 ? "Reach-out overdue" : "Reach out" + whenText(nd) });
@@ -6853,7 +6972,7 @@
     var existing = vaultForLead(lead.id);
     if (existing) { openVault(existing.id); return; }
     vaultCreate({ name: lead.name, phone: lead.phone, phoneRaw: lead.phoneRaw, state: leadState(lead) || "", leadId: lead.id, owner: vaultOwnerFor(lead),
-      investments: Number(lead.amount) ? [{ id: uid(), deal: "", amount: Number(lead.amount), date: localDateStr(new Date()), status: lead.stage === "Committed" ? "Committed" : "Committed", note: "" }] : [] })
+      investments: Number(lead.amount) ? [{ id: uid(), deal: "", amount: Number(lead.amount), date: localDateStr(new Date()), status: "Committed", note: "", done: {} }] : [] })
       .then(function (rec) { showToast(lead.name + " is in the Investor Vault"); openVault(rec.id); }, function () {});
   }
   function openVaultNew() {
@@ -6891,6 +7010,9 @@
       return '<div class="vi-form"><input type="text" id="' + idp + 'Deal" placeholder="Deal (e.g. SambaNova)" value="' + escapeHtml(i.deal || "") + '">' +
         '<div class="vi-2"><input type="number" inputmode="decimal" id="' + idp + 'Amt" placeholder="Amount $" value="' + (i.amount || "") + '"><input type="date" id="' + idp + 'Date" value="' + escapeHtml(i.date || localDateStr(new Date())) + '"></div>' +
         '<select id="' + idp + 'Status">' + VAULT_STATUSES.map(function (s) { return '<option' + (i.status === s ? ' selected' : '') + '>' + s + '</option>'; }).join("") + '</select>' +
+        '<div class="vi-steps"><b>Closing checklist</b>' + CLOSE_STEPS.map(function (st) {
+          return '<label class="up-check vi-step"><input type="checkbox" data-step="' + st[0] + '"' + (invDone(i)[st[0]] ? ' checked' : '') + '> ' + st[1] + ' <small>by ' + escapeHtml(shortDate(invBase(i) + st[2] * 86400000)) + '</small></label>';
+        }).join("") + '</div>' +
         '<div class="vi-btns"><button class="btn-secondary" data-vi-cancel="1">Cancel</button>' + (admin && i.id ? '<button class="btn-secondary danger-link" data-vi-del="' + i.id + '">Remove</button>' : '') + '<button class="btn-primary" data-vi-save="' + (i.id || "") + '">Save</button></div></div>';
     }
     var html = '<button class="close-x" id="vClose">&times;</button>' +
@@ -6904,7 +7026,7 @@
     html += '<div class="settings-heading" style="margin:14px 0 6px">Investments</div>' +
       (invs.length ? invs.map(function (i) {
         if (VAULT.editInv === i.id) return invForm(i, "vie");
-        return '<button class="vi-row" data-vi-edit="' + i.id + '"><span><b>' + escapeHtml(i.deal || "Deal not named") + '</b><small>' + escapeHtml(i.date || "") + ' \u00b7 ' + escapeHtml(i.status || "") + '</small></span><span class="vr-amt' + (i.status === "Cancelled" ? ' cancelled' : '') + '">' + fmtMoney(Number(i.amount) || 0) + '</span></button>';
+        return '<button class="vi-row" data-vi-edit="' + i.id + '"><span><b>' + escapeHtml(i.deal || "Deal not named") + '</b><small>' + escapeHtml(i.date || "") + ' \u00b7 ' + escapeHtml(i.status || "") + (i.status === "Cancelled" || (!i.done && i.status !== "Closed") ? '' : ' \u00b7 ' + (invNextStep(i) ? invStepsDone(i) + '/5 steps \u00b7 next: ' + escapeHtml(invNextStep(i).label) + ' by ' + escapeHtml(shortDate(invNextStep(i).due)) : 'all steps done')) + '</small></span><span class="vr-amt' + (i.status === "Cancelled" ? ' cancelled' : '') + '">' + fmtMoney(Number(i.amount) || 0) + '</span></button>';
       }).join("") : '<div class="pipe-empty">No investments recorded yet.</div>') +
       (VAULT.addInv ? invForm({ status: "Committed" }, "via") : '<button class="btn-secondary" id="vAddInv" style="width:100%;margin-top:6px">+ Add investment</button>') +
       '<div class="settings-heading" style="margin:14px 0 6px">Key dates</div>' +
@@ -6949,6 +7071,10 @@
         var amt = Number(document.getElementById(p + "Amt").value) || 0, deal = document.getElementById(p + "Deal").value.trim();
         if (!amt && !deal) { showToast("Add a deal name or an amount"); return; }
         var data = { deal: deal, amount: amt, date: document.getElementById(p + "Date").value || localDateStr(new Date()), status: document.getElementById(p + "Status").value };
+        var prev = existingId ? (r.investments.filter(function (x) { return x.id === existingId; })[0] || {}) : {}, form = el.closest(".vi-form"), done = {};
+        form.querySelectorAll("[data-step]").forEach(function (cb) { var k = cb.getAttribute("data-step"); if (cb.checked) done[k] = (prev.done && prev.done[k]) || Date.now(); });
+        data.done = done;
+        if (data.status !== "Cancelled") { if (done.shares) data.status = "Closed"; else if (done.wire && data.status === "Committed") data.status = "Funded"; }
         if (existingId) { r.investments.forEach(function (i) { if (i.id === existingId) Object.assign(i, data); }); }
         else { data.id = uid(); data.note = ""; r.investments.push(data); }
         VAULT.editInv = null; VAULT.addInv = false;
@@ -6996,6 +7122,553 @@
     on("vCancelReq", "click", function () { r.removalRequest = null; save("Request cancelled"); renderVaultModal(); });
   }
 
+  /** ---------- Protecting your number: pacing, redial guard, spam early warning ---------- **/
+  // Carriers' spam filters look for bursts of short calls, quick redials to the same person,
+  // and sequential numbers. Normal calling is untouched; only rapid-fire dialing gets spaced out.
+  var PACING_DEFAULT = { perDay: 150, dayMode: "warn", burstMax: 20, burstMins: 15, burstGap: 40, minGap: 8 };
+  var pacingTimer = null;
+  function pacingCfg() {
+    var c = (TEAM.on ? (TEAM.infoCfg || {}).pacing : state.pacingCfg) || {}, o = {};
+    Object.keys(PACING_DEFAULT).forEach(function (k) { o[k] = c[k] !== undefined && c[k] !== null && c[k] !== "" ? c[k] : PACING_DEFAULT[k]; });
+    return o;
+  }
+  function dialStats(now) {
+    var cfg = pacingCfg(), win = now - cfg.burstMins * 60000, start = dayStart(0), s = { inWin: 0, today: 0, last: 0 };
+    (state.dialLog || []).forEach(function (t) { if (t >= win) s.inWin++; if (t >= start) s.today++; if (t > s.last) s.last = t; });
+    return s;
+  }
+  function pacingWait(now) {
+    var cfg = pacingCfg(), st = dialStats(now);
+    if (!st.last) return 0;
+    var gap = st.inWin >= cfg.burstMax ? Number(cfg.burstGap) : Number(cfg.minGap);
+    return Math.max(0, Math.ceil((st.last + gap * 1000 - now) / 1000));
+  }
+  function recordDial() {
+    var now = Date.now(), keep = dayStart(0) - 3600000;
+    state.dialLog = (state.dialLog || []).filter(function (t) { return t >= keep; }).concat([now]);
+    saveState();
+  }
+  function redialReason(lead, now) {
+    if (lead.outcome === "callback" || lead.outcome === "interested") return "";
+    var today = dayStart(0), n = 0, last = 0, first = textFirstName(lead.name);
+    callsForLead(lead.id).forEach(function (c) { var t = new Date(c.timestamp).getTime(); if (t >= today) n++; if (t > last) last = t; });
+    if (last && now - last < 2 * 3600000) {
+      var mins = Math.max(1, Math.round((now - last) / 60000));
+      return first + " was called " + (mins < 60 ? mins + " minute" + (mins === 1 ? "" : "s") : Math.round(mins / 60) + " hour") + " ago. Calling again this soon is one of the top reasons numbers get labeled spam.";
+    }
+    if (n >= 2) return first + " has already been called twice today. A third call today makes a spam label more likely.";
+    return "";
+  }
+  // Every Call button goes through here. Returns false (and stops the dial) when it should wait.
+  function callGate(lead, e, force) {
+    var now = Date.now(), cfg = pacingCfg(), st = dialStats(now);
+    if (cfg.dayMode === "pause" && st.today >= Number(cfg.perDay)) {
+      e.preventDefault();
+      showGateSheet(lead, "Daily limit reached", "You\u2019ve made " + st.today + " calls from your number today. Your admin set a limit of " + cfg.perDay + " to keep your number from being labeled spam. Pick it back up tomorrow.", false);
+      return false;
+    }
+    var w = pacingWait(now);
+    if (w > 0) {
+      e.preventDefault();
+      showToast(st.inWin >= Number(cfg.burstMax) ? "Pacing your calls to protect your number \u2014 next call in " + w + "s" : "One moment \u2014 next call in " + w + "s");
+      pacingTick();
+      return false;
+    }
+    if (!force) {
+      var why = redialReason(lead, now);
+      if (why) { e.preventDefault(); showGateSheet(lead, "Call " + textFirstName(lead.name) + " again?", why, true); return false; }
+    }
+    recordDial();
+    talkStart(lead.id);
+    return true;
+  }
+  function showGateSheet(lead, title, msg, canCall) {
+    var m = document.getElementById("infoModal"), b = document.getElementById("infoModalBody");
+    b.innerHTML = '<button class="close-x" id="gateClose">&times;</button><h3>' + escapeHtml(title) + '</h3><p class="modal-sub">' + escapeHtml(msg) + '</p>' +
+      '<div class="modal-actions"><button class="btn-' + (canCall ? 'secondary' : 'primary') + '" id="gateNo">' + (canCall ? 'Not now' : 'OK') + '</button>' +
+      (canCall ? callLinkHtml(lead, state.activeView || "dial", null, "btn-primary gate-call", '<span>Call anyway</span>').replace('<a ', '<a data-force="1" ') : '') + '</div>';
+    m.classList.add("show", "gate");
+    function close() { m.classList.remove("show", "gate"); }
+    document.getElementById("gateClose").addEventListener("click", close);
+    document.getElementById("gateNo").addEventListener("click", close);
+    var gc = b.querySelector(".gate-call");
+    if (gc) gc.addEventListener("click", function () { setTimeout(close, 50); });
+  }
+  function pacingTick() {
+    clearInterval(pacingTimer);
+    pacingTimer = setInterval(function () {
+      var w = pacingWait(Date.now()), btn = document.getElementById("callBtn");
+      if (btn) {
+        btn.classList.toggle("paced", w > 0);
+        var sp = btn.querySelector("span");
+        if (sp && w > 0) sp.textContent = "Next call in " + w + "s";
+      }
+      if (w <= 0) { clearInterval(pacingTimer); pacingTimer = null; render(); }
+    }, 1000);
+  }
+  // Early warning: a sudden collapse in answer rate is the clearest sign a number got labeled spam.
+  function spamSignal(uidOrNull) {
+    var today = dayStart(0), from = Date.now() - 14 * 86400000, t = [0, 0], b = [0, 0];
+    state.callLog.forEach(function (c) {
+      if (uidOrNull ? !(c.by && c.by.uid === uidOrNull) : !myCall(c)) return;
+      var ts = new Date(c.timestamp).getTime(), r = CONTACT_OUTCOMES[c.outcomeKey] ? 1 : 0;
+      if (ts >= today) { t[0]++; t[1] += r; } else if (ts >= from) { b[0]++; b[1] += r; }
+    });
+    if (t[0] < 25 || b[0] < 100) return null;
+    var tr = t[1] / t[0], br = b[1] / b[0];
+    return br >= 0.08 && tr < br * 0.5 ? { today: Math.round(tr * 100), usual: Math.round(br * 100), calls: t[0] } : null;
+  }
+  function spamBannerHtml() {
+    var sg = spamSignal(TEAM.on && TEAM.me ? TEAM.me.uid : null), cfg = pacingCfg(), st = dialStats(Date.now()), out = "";
+    if (sg) out += '<button class="num-warn" id="spamWarnBtn"><b>Your number may be getting labeled \u201cSpam Likely.\u201d</b><span>Answer rate today is ' + sg.today + '% vs your usual ' + sg.usual + '%. Slow down and tap here for how to fix it.</span></button>';
+    if (cfg.dayMode !== "pause" && st.today >= Number(cfg.perDay)) out += '<div class="num-warn soft"><b>' + st.today + ' calls from your number today.</b><span>Past ' + cfg.perDay + ' a day, carriers are more likely to label you as spam. Consider wrapping up.</span></div>';
+    return out;
+  }
+  function protectNumberHtml() {
+    return '<div class="coach-card protect"><b>Protect your number</b><ul class="coach-list">' +
+      ['Register your number free at Free Caller Registry. It feeds the spam-labeling companies behind AT&T, T-Mobile and Verizon.',
+       'Let each call ring 20\u201325 seconds or reach voicemail. Very short calls look automated.',
+       'Leave a short voicemail and send the follow-up text. People who know who called don\u2019t report you.',
+       'Keep a steady pace. The app spaces out rapid-fire dialing for you.',
+       'Don\u2019t call the same person twice within a couple of hours.'].map(function (t) { return '<li class="ci info"><span class="ci-dot">i</span><span>' + escapeHtml(t) + '</span></li>'; }).join("") +
+      '</ul><a class="btn-secondary" href="https://www.freecallerregistry.com/" target="_blank" rel="noopener" style="display:block;text-align:center;margin-top:10px;text-decoration:none">Register your number (free)</a></div>';
+  }
+  function openPacingEditor() {
+    var cfg = pacingCfg(), m = document.getElementById("infoModal"), b = document.getElementById("infoModalBody");
+    b.innerHTML = '<button class="close-x" id="pcClose">&times;</button><h3>Call pacing</h3>' +
+      '<p class="modal-sub">Keeps your team\u2019s numbers from being labeled spam. Normal calling isn\u2019t affected; only rapid-fire dialing gets spaced out.</p>' +
+      '<label for="pcDay">Daily calls per phone</label><input type="number" inputmode="numeric" id="pcDay" value="' + cfg.perDay + '">' +
+      '<label for="pcMode">When someone reaches it</label><select id="pcMode"><option value="warn"' + (cfg.dayMode === "warn" ? " selected" : "") + '>Warn them, let them keep going</option><option value="pause"' + (cfg.dayMode === "pause" ? " selected" : "") + '>Pause their calling until tomorrow</option></select>' +
+      '<label for="pcBurst">A burst is more than this many calls in ' + cfg.burstMins + ' minutes</label><input type="number" inputmode="numeric" id="pcBurst" value="' + cfg.burstMax + '">' +
+      '<label for="pcGap">During a burst, seconds between calls</label><input type="number" inputmode="numeric" id="pcGap" value="' + cfg.burstGap + '">' +
+      '<div class="field-error" id="pcErr"></div><div class="modal-actions"><button class="btn-secondary" id="pcReset">Defaults</button><button class="btn-primary" id="pcSave">Save</button></div>';
+    m.classList.add("show");
+    function close() { m.classList.remove("show"); }
+    document.getElementById("pcClose").addEventListener("click", close);
+    document.getElementById("pcReset").addEventListener("click", function () {
+      document.getElementById("pcDay").value = PACING_DEFAULT.perDay; document.getElementById("pcMode").value = PACING_DEFAULT.dayMode;
+      document.getElementById("pcBurst").value = PACING_DEFAULT.burstMax; document.getElementById("pcGap").value = PACING_DEFAULT.burstGap;
+    });
+    document.getElementById("pcSave").addEventListener("click", function () {
+      var v = { perDay: Math.round(Number(document.getElementById("pcDay").value)), dayMode: document.getElementById("pcMode").value,
+        burstMax: Math.round(Number(document.getElementById("pcBurst").value)), burstMins: PACING_DEFAULT.burstMins,
+        burstGap: Math.round(Number(document.getElementById("pcGap").value)), minGap: PACING_DEFAULT.minGap };
+      if (!(v.perDay >= 20 && v.perDay <= 1000)) { document.getElementById("pcErr").textContent = "Daily calls: between 20 and 1,000."; return; }
+      if (!(v.burstMax >= 5 && v.burstMax <= 100)) { document.getElementById("pcErr").textContent = "Burst size: between 5 and 100 calls."; return; }
+      if (!(v.burstGap >= 10 && v.burstGap <= 180)) { document.getElementById("pcErr").textContent = "Spacing: between 10 and 180 seconds."; return; }
+      if (TEAM.on) {
+        TEAM.db.collection("leadChunks").doc("_team").set({ pacing: v }, { merge: true })
+          .then(function () { TEAM.infoCfg = Object.assign({}, TEAM.infoCfg || {}, { pacing: v }); close(); showToast("Call pacing saved for the whole team"); })
+          .catch(function () { document.getElementById("pcErr").textContent = "Couldn\u2019t save. Check your connection."; });
+      } else { state.pacingCfg = v; saveState(); close(); showToast("Call pacing saved"); }
+    });
+  }
+  // Same area code + exchange back to back looks like a robocaller sweeping a number block.
+  function nxxOf(l) { var d = String(l.phone || l.phoneRaw || "").replace(/\D/g, ""); if (d.length === 11 && d.charAt(0) === "1") d = d.slice(1); return d.length >= 6 ? d.slice(0, 6) : ""; }
+
+  /** ---------- Closing checklist, list ROI, goals, talk time, call windows, morning briefing,
+                 overdue escalation, fair lead sharing, hot list, forecast, Face ID lock ---------- **/
+  function setStage(lead, stage) {
+    if (!lead) return;
+    if (lead.stage !== stage) lead.stageLog = (lead.stageLog || []).concat([{ s: stage, at: Date.now() }]).slice(-20);
+    lead.stage = stage;
+  }
+  function leadMap() { var m = {}; state.leads.forEach(function (l) { m[l.id] = l; }); return m; }
+  function featOpen(html) {
+    closeMenuModal(); if (typeof closeAdminHub === "function") closeAdminHub();
+    var m = document.getElementById("featModal"), b = document.getElementById("featModalBody");
+    b.innerHTML = '<button class="close-x" id="featClose">&times;</button>' + html;
+    m.classList.add("show");
+    document.getElementById("featClose").addEventListener("click", featClose);
+    return b;
+  }
+  function featClose() { document.getElementById("featModal").classList.remove("show"); }
+
+  /* ----- pipeline forecast ----- */
+  var FORECAST_DEFAULT = { "Qualified": 0.1, "Pitched": 0.25, "Objection": 0.15 };
+  function forecastRates() {
+    var rates = {}, learned = false;
+    Object.keys(FORECAST_DEFAULT).forEach(function (st) {
+      var seen = 0, won = 0;
+      state.leads.forEach(function (l) {
+        if (!(l.stageLog || []).some(function (x) { return x.s === st; })) return;
+        if (l.stage === "Committed") { seen++; won++; } else if (l.stage === "Closed Lost") seen++;
+      });
+      if (seen >= 10) { rates[st] = won / seen; learned = true; } else rates[st] = FORECAST_DEFAULT[st];
+    });
+    return { rates: rates, learned: learned };
+  }
+  function forecastHtml() {
+    var fr = forecastRates(), likely = 0, possible = 0, n = 0;
+    state.leads.forEach(function (l) {
+      if (!pipeScope(l) || fr.rates[l.stage] === undefined) return;
+      var amt = Number(l.amount) || 0; if (!amt) return;
+      n++; possible += amt; likely += amt * fr.rates[l.stage];
+    });
+    if (!n) return "";
+    return '<div class="pipe-forecast"><span><b>' + fmtMoney(Math.round(likely)) + '</b> likely to commit</span><span><b>' + fmtMoney(possible) + '</b> possible</span>' +
+      '<small>' + (fr.learned ? 'Forecast from your team\u2019s track record' : 'Forecast uses standard rates until your team has more closed deals') + '</small></div>';
+  }
+
+  /* ----- hot list ----- */
+  function isHot(id) { return (state.hotIds || []).indexOf(id) !== -1; }
+  function toggleHot(id) {
+    var l = findLeadById(id); if (!l) return;
+    var was = isHot(id);
+    state.hotIds = was ? (state.hotIds || []).filter(function (x) { return x !== id; }) : [id].concat(state.hotIds || []).slice(0, 25);
+    saveState();
+    showToast(was ? l.name + " is off your hot list" : "\u2605 " + l.name + " is on your hot list");
+    render();
+    if (profileLeadId === id && document.getElementById("leadModal").classList.contains("show")) openLeadProfile(id);
+  }
+  function hotLeads() {
+    var m = leadMap();
+    return (state.hotIds || []).map(function (id) { return m[id]; }).filter(function (l) { return l && l.stage !== "Committed" && l.stage !== "Closed Lost"; });
+  }
+  function starBtnHtml(lead) {
+    return '<button class="star-btn' + (isHot(lead.id) ? ' on' : '') + '" data-star="' + lead.id + '" aria-label="' + (isHot(lead.id) ? 'Remove from hot list' : 'Add to hot list') + '">\u2605</button>';
+  }
+  function hotStripHtml(curId) {
+    var hl = hotLeads().filter(function (l) { return l.id !== curId; }).slice(0, 5);
+    if (!hl.length) return "";
+    return '<div class="hot-strip"><div class="hot-head">\u2605 Hot list</div>' + hl.map(function (l) {
+      return '<div class="hot-row"><button class="hot-name" data-open-lead="' + l.id + '"><b>' + escapeHtml(l.name) + '</b><span>' + escapeHtml(l.stage || "New Lead") + (Number(l.amount) ? ' \u00b7 ' + fmtMoney(Number(l.amount)) : '') + '</span></button>' +
+        callLinkHtml(l, "dial", null, "copy-btn hot-call", callIconSvg()) + '</div>';
+    }).join("") + '</div>';
+  }
+
+  /* ----- preferred call times ----- */
+  var CALL_WINDOWS = { morning: ["Mornings", 8, 12], midday: ["Midday", 11, 14], afternoon: ["Afternoons", 12, 17], evening: ["Evenings", 17, 21] };
+  function inPrefWindow(l) {
+    var w = l && l.callWindow && CALL_WINDOWS[l.callWindow]; if (!w) return true;
+    var z = leadZone(l); if (!z.iana) return true;
+    var h = zoneTime(z.iana).hour; return h >= w[1] && h < w[2];
+  }
+  function windowLabel(l) { var w = l && l.callWindow && CALL_WINDOWS[l.callWindow]; return w ? w[0] + " (" + hourLabel(w[1]) + "\u2013" + hourLabel(w[2]) + " their time)" : ""; }
+
+  /* ----- talk time ----- */
+  var TALK = null;
+  function talkStart(leadId) { TALK = { leadId: leadId, hid: 0, dur: 0 }; }
+  function talkFor(id) {
+    if (!TALK || TALK.leadId !== id) return undefined;
+    var d = TALK.dur + (TALK.hid ? Date.now() - TALK.hid : 0); TALK = null;
+    return d >= 2000 && d < 3 * 3600000 ? Math.round(d / 1000) : undefined;
+  }
+  document.addEventListener("visibilitychange", function () {
+    if (!TALK) return;
+    if (document.hidden) TALK.hid = Date.now();
+    else if (TALK.hid) { TALK.dur += Date.now() - TALK.hid; TALK.hid = 0; }
+  });
+  function fmtTalk(s) {
+    s = Math.round(s || 0); if (s < 60) return s + "s";
+    var m = Math.floor(s / 60); if (m < 60) return m + ":" + String(s % 60).padStart(2, "0");
+    return Math.floor(m / 60) + "h " + (m % 60) + "m";
+  }
+
+  /* ----- closing checklist (Vault investments) ----- */
+  var CLOSE_STEPS = [["docs", "Docs sent", 1], ["accred", "Accreditation verified", 3], ["signed", "Docs signed", 5], ["wire", "Wire received", 10], ["shares", "Shares delivered", 30]];
+  function invBase(i) { var t = i.date ? new Date(i.date + "T00:00:00").getTime() : Date.now(); return isNaN(t) ? Date.now() : t; }
+  // Investments recorded before the checklist existed have no "done" field and aren't flagged.
+  // Funded implies the first four steps; Closed implies all five.
+  function invDone(i) {
+    var d = Object.assign({}, (i && i.done) || {});
+    if (i && (i.status === "Funded" || i.status === "Closed")) ["docs", "accred", "signed", "wire"].forEach(function (k) { d[k] = d[k] || 1; });
+    if (i && i.status === "Closed") d.shares = d.shares || 1;
+    return d;
+  }
+  function invNextStep(i) {
+    if (!i || !i.done || i.status === "Cancelled" || i.status === "Closed") return null;
+    var done = invDone(i);
+    for (var k = 0; k < CLOSE_STEPS.length; k++) { var st = CLOSE_STEPS[k]; if (!done[st[0]]) return { key: st[0], label: st[1], due: invBase(i) + st[2] * 86400000 }; }
+    return null;
+  }
+  function invStepsDone(i) { var d = invDone(i); return CLOSE_STEPS.filter(function (s) { return d[s[0]]; }).length; }
+  function shortDate(ts) { return new Date(ts).toLocaleDateString(undefined, { month: "short", day: "numeric" }); }
+  function closingDue(r) {
+    var out = [];
+    (r.investments || []).forEach(function (i) {
+      var ns = invNextStep(i); if (!ns) return;
+      var d = Math.round((ns.due - dayStart(0)) / 86400000);
+      if (d <= 2) out.push({ days: d, text: ns.label + (d < 0 ? " overdue" : d === 0 ? " due today" : " due in " + d + " day" + (d === 1 ? "" : "s")) + (i.deal ? " \u00b7 " + i.deal : "") });
+    });
+    return out;
+  }
+
+  /* ----- overdue escalation ----- */
+  function warmLead(l) { return !!l && l.stage !== "Closed Lost" && l.stage !== "Committed" && (l.outcome === "interested" || l.outcome === "callback" || (!!l.stage && l.stage !== "New Lead")); }
+  function overdueWarm() {
+    var now = Date.now(), m = leadMap();
+    return state.tasks.filter(function (t) { return !t.done && t.leadId && warmLead(m[t.leadId]) && taskDueTs(t) < now - 86400000; })
+      .map(function (t) { return { t: t, l: m[t.leadId], a: assigneeOf(t), late: Math.floor((now - taskDueTs(t)) / 3600000) }; })
+      .sort(function (x, y) { return y.late - x.late; });
+  }
+  function lateText(h) { return h >= 48 ? Math.floor(h / 24) + " days late" : h + " hours late"; }
+  function overdueBannerHtml() {
+    if (!TEAM.on || !isAdmin()) return "";
+    var n = overdueWarm().length;
+    return n ? '<button class="num-warn" id="overdueWarnBtn"><b>' + n + ' interested follow-up' + (n === 1 ? ' is' : 's are') + ' more than a day late</b><span>Tap to see who and reassign with one tap.</span></button>' : "";
+  }
+  function openOverdue() {
+    var list = overdueWarm();
+    var members = Object.keys(TEAM.members).map(function (k) { return TEAM.members[k]; }).filter(function (m) { return m.active; });
+    var b = featOpen('<h3>Overdue follow-ups</h3><p class="modal-sub">Interested leads whose follow-up is more than a day late. Move any of them to someone who can call today.</p>' +
+      (list.length ? list.map(function (x, n) {
+        return '<div class="od-row"><div class="od-main"><b data-open-lead="' + x.l.id + '">' + escapeHtml(x.l.name) + '</b><span>' + escapeHtml(x.a ? x.a.name : "Unassigned") + ' \u00b7 ' + lateText(x.late) + ' \u00b7 ' + escapeHtml(x.l.stage || "") + (Number(x.l.amount) ? ' \u00b7 ' + fmtMoney(Number(x.l.amount)) : '') + '</span></div>' +
+          '<div class="od-move"><select data-od-sel="' + n + '">' + members.map(function (m) { return '<option value="' + m.uid + '"' + (x.a && x.a.uid === m.uid ? ' selected' : '') + '>' + escapeHtml(m.name || m.username) + '</option>'; }).join("") + '</select>' +
+          '<button class="btn-primary" data-od-go="' + n + '">Move</button></div></div>';
+      }).join("") : '<div class="pipe-empty">Nothing overdue. Nice.</div>'));
+    b.querySelectorAll("[data-od-go]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var x = list[+btn.getAttribute("data-od-go")], m = TEAM.members[b.querySelector('[data-od-sel="' + btn.getAttribute("data-od-go") + '"]').value];
+        if (!x || !m) return;
+        var to = { uid: m.uid, name: m.name || m.username };
+        x.l.owner = to;
+        state.tasks.forEach(function (t) { if (t.leadId === x.l.id && !t.done) t.assignee = to; });
+        saveState(); showToast(x.l.name + " moved to " + to.name); openOverdue(); render();
+      });
+    });
+  }
+
+  /* ----- fair lead sharing ----- */
+  var FAIR_DAYS = 14, FAIR_NOTICE = 3;
+  function fairCandidates() {
+    var now = Date.now(), touch = {}, planned = {};
+    state.callLog.forEach(function (c) { var t = new Date(c.timestamp).getTime(); if (!touch[c.leadId] || t > touch[c.leadId]) touch[c.leadId] = t; });
+    state.tasks.forEach(function (t) { if (!t.done && t.leadId && taskDueTs(t) > now) planned[t.leadId] = true; });
+    return state.leads.filter(function (l) {
+      if (!l.owner || !warmLead(l) || planned[l.id]) return false;
+      var last = Math.max(touch[l.id] || 0, l.calledAt ? (new Date(l.calledAt).getTime() || 0) : 0);
+      return !last || now - last > FAIR_DAYS * 86400000;
+    });
+  }
+  function fairSweep() {
+    if (!TEAM.on || !TEAM.me || !TEAM.ready) return 0;
+    var now = Date.now(), changed = 0, cand = {};
+    fairCandidates().forEach(function (l) {
+      cand[l.id] = true;
+      if (!l.staleSince) { l.staleSince = now; changed++; return; }
+      if (now - l.staleSince >= FAIR_NOTICE * 86400000) {
+        l.released = { from: l.owner.name, at: now };
+        l.owner = null; l.status = "pending"; l.claim = null; l.staleSince = null;
+        state.tasks.forEach(function (t) { if (t.leadId === l.id && !t.done) { t.done = true; t.doneAt = now; t.note = (t.note ? t.note + " \u00b7 " : "") + "Returned to the team pool"; } });
+        changed++;
+      }
+    });
+    state.leads.forEach(function (l) { if (l.staleSince && !cand[l.id]) { l.staleSince = null; changed++; } });
+    if (changed) saveState();
+    return changed;
+  }
+  function returningSoon(uidOrNull) {
+    return state.leads.filter(function (l) { return l.staleSince && l.owner && (uidOrNull ? l.owner.uid === uidOrNull : true); })
+      .map(function (l) { return { l: l, days: Math.max(0, FAIR_NOTICE - Math.floor((Date.now() - l.staleSince) / 86400000)) }; });
+  }
+
+  /* ----- monthly goals ----- */
+  function monthStart() { var d = new Date(); return new Date(d.getFullYear(), d.getMonth(), 1).getTime(); }
+  function bizDays(from, to) { var n = 0, d = new Date(from); while (d.getTime() < to) { var w = d.getDay(); if (w !== 0 && w !== 6) n++; d.setDate(d.getDate() + 1); } return n; }
+  function goalsAll() { return (TEAM.on ? (TEAM.infoCfg || {}).goals : state.goals) || {}; }
+  function goalFor(uid) { return goalsAll()[uid || "me"] || null; }
+  function monthProgress(uid) {
+    var from = monthStart(), p = { calls: 0, interested: 0, committed: 0 };
+    state.callLog.forEach(function (c) {
+      if (new Date(c.timestamp).getTime() < from) return;
+      if (uid ? !(c.by && c.by.uid === uid) : !myCall(c)) return;
+      p.calls++; if (c.outcomeKey === "interested") p.interested++;
+    });
+    state.leads.forEach(function (l) {
+      if (l.stage !== "Committed" || !(l.stageLog || []).some(function (x) { return x.s === "Committed" && x.at >= from; })) return;
+      if (uid ? !(l.owner && l.owner.uid === uid) : !pipeScope(l)) return;
+      p.committed += Number(l.amount) || 0;
+    });
+    return p;
+  }
+  function paceFraction() {
+    var s = monthStart(), now = new Date(), e = new Date(now.getFullYear(), now.getMonth() + 1, 1).getTime();
+    return Math.min(1, bizDays(s, dayStart(1)) / (bizDays(s, e) || 1));
+  }
+  function goalBarsHtml(uid) {
+    var g = goalFor(uid); if (!g) return "";
+    var pr = monthProgress(uid), f = paceFraction();
+    var bars = [["calls", "Calls", false], ["interested", "Interested", false], ["committed", "Committed", true]].filter(function (x) { return Number(g[x[0]]) > 0; });
+    if (!bars.length) return "";
+    return '<div class="goal-bars">' + bars.map(function (x) {
+      var target = Number(g[x[0]]), have = pr[x[0]], pct = Math.min(100, Math.round(have / target * 100)), need = Math.ceil(target * f - have), onPace = need <= 0 || have >= target * f * 0.95;
+      return '<div class="gb"><div class="gb-top"><span>' + x[1] + '</span><b>' + (x[2] ? fmtMoney(have) + ' / ' + fmtMoney(target) : have + ' / ' + target) + '</b></div>' +
+        '<div class="gb-track"><span style="width:' + pct + '%"></span><i style="left:' + Math.round(f * 100) + '%"></i></div>' +
+        '<small class="' + (onPace ? 'ok' : 'behind') + '">' + (onPace ? 'On pace' : 'Behind pace \u2014 ' + (x[2] ? fmtMoney(need) : need) + ' to catch up') + '</small></div>';
+    }).join("") + '</div>';
+  }
+  function openGoals() {
+    var members = Object.keys(TEAM.members).map(function (k) { return TEAM.members[k]; }).filter(function (m) { return m.active; })
+      .sort(function (a, b) { return String(a.name).localeCompare(String(b.name)); });
+    var all = goalsAll();
+    var b = featOpen('<h3>Monthly goals</h3><p class="modal-sub">Set each rep\u2019s targets for this month. They see their progress and whether they\u2019re on pace in My coach.</p>' +
+      members.map(function (m) {
+        var g = all[m.uid] || {};
+        return '<div class="goal-rep"><b>' + escapeHtml(m.name || m.username) + '</b>' +
+          '<div class="goal-in"><label>Calls<input type="number" inputmode="numeric" data-g="' + m.uid + '|calls" value="' + (g.calls || "") + '"></label>' +
+          '<label>Interested<input type="number" inputmode="numeric" data-g="' + m.uid + '|interested" value="' + (g.interested || "") + '"></label>' +
+          '<label>Committed $<input type="number" inputmode="numeric" data-g="' + m.uid + '|committed" value="' + (g.committed || "") + '"></label></div>' +
+          goalBarsHtml(m.uid) + '</div>';
+      }).join("") +
+      '<div class="field-error" id="goalErr"></div><div class="modal-actions"><button class="btn-primary" id="goalSave" style="width:100%">Save goals</button></div>');
+    document.getElementById("goalSave").addEventListener("click", function () {
+      var out = {};
+      b.querySelectorAll("[data-g]").forEach(function (inp) {
+        var p = inp.getAttribute("data-g").split("|"), v = Math.max(0, Math.round(Number(inp.value) || 0));
+        out[p[0]] = out[p[0]] || {}; if (v) out[p[0]][p[1]] = v;
+      });
+      var gref = TEAM.db.collection("leadChunks").doc("_team");
+      gref.update({ goals: out }).catch(function (e) { if (e && e.code === "not-found") return gref.set({ goals: out }, { merge: true }); throw e; }).then(function () { TEAM.infoCfg = Object.assign({}, TEAM.infoCfg || {}, { goals: out }); showToast("Goals saved"); openGoals(); })
+        .catch(function () { document.getElementById("goalErr").textContent = "Couldn\u2019t save. Check your connection."; });
+    });
+  }
+
+  /* ----- list ROI ----- */
+  function openListRoi() {
+    var lists = {}, idx = {};
+    state.leads.forEach(function (l) {
+      var k = l.source || "Original list"; idx[l.id] = k;
+      var r = lists[k] || (lists[k] = { name: k, leads: 0, calls: 0, reached: 0, interested: 0, committed: 0, dialed: {} });
+      r.leads++; if (l.stage === "Committed") r.committed += Number(l.amount) || 0;
+    });
+    state.callLog.forEach(function (c) {
+      var k = idx[c.leadId]; if (!k) return; var r = lists[k];
+      r.calls++; r.dialed[c.leadId] = 1; if (CONTACT_OUTCOMES[c.outcomeKey]) r.reached++; if (c.outcomeKey === "interested") r.interested++;
+    });
+    var rows = Object.keys(lists).map(function (k) { var r = lists[k]; r.per100 = r.calls ? r.interested / r.calls * 100 : 0; r.perLead = r.leads ? r.committed / r.leads : 0; return r; })
+      .sort(function (a, b) { return (b.perLead - a.perLead) || (b.per100 - a.per100); });
+    featOpen('<h3>List ROI</h3><p class="modal-sub">Which lead lists produce investors. Calls and interested leads are from the last ' + CALL_DAYS + ' days; committed dollars are all-time.</p>' +
+      rows.map(function (r, n) {
+        return '<div class="coach-card' + (n === 0 && rows.length > 1 && (r.committed || r.interested) ? ' team' : '') + '"><div class="coach-top"><b>' + escapeHtml(r.name) + '</b><span>' + r.leads + ' leads \u00b7 ' + Object.keys(r.dialed).length + ' dialed</span></div>' +
+          '<div class="sb-stats"><span><b>' + r.calls + '</b> calls</span><span><b>' + pctN(r.reached, r.calls) + '%</b> conversations</span>' +
+          '<span><b>' + r.per100.toFixed(1) + '</b> interested per 100 dials</span><span><b>' + fmtMoney(r.committed) + '</b> committed</span><span><b>' + fmtMoney(Math.round(r.perLead)) + '</b> per lead</span></div></div>';
+      }).join("") || '<div class="pipe-empty">No lists yet.</div>');
+  }
+
+  /* ----- morning briefing ----- */
+  function briefData() {
+    var me = TEAM.on && TEAM.me ? TEAM.me.uid : null, now = Date.now(), endToday = dayStart(1);
+    var due = state.tasks.filter(function (t) { return !t.done && t.leadId && taskDueTs(t) < endToday && myTask(t); });
+    var m = leadMap(), closing = [];
+    vaultRecords().forEach(function (r) { if (TEAM.on && TEAM.me && r.ownerUid !== TEAM.me.uid && !isAdmin()) return; closingDue(r).forEach(function (c) { if (c.days <= 0) closing.push({ r: r, c: c }); }); });
+    var am = answerModel(), hrs = [];
+    for (var h = 8; h <= 20; h++) hrs.push({ h: h, s: am.learned ? am.score[h] : (HOUR_SCORE[h] || 0) });
+    hrs.sort(function (a, b) { return b.s - a.s; });
+    var first = [], seen = {};
+    hotLeads().concat(due.map(function (t) { return m[t.leadId]; }).filter(Boolean).sort(function (a, b) { return (Number(b.amount) || 0) - (Number(a.amount) || 0); }))
+      .forEach(function (l) { if (!seen[l.id] && first.length < 5) { seen[l.id] = true; first.push(l); } });
+    return { due: due, closing: closing, hot: hotLeads(), best: hrs.slice(0, 2).map(function (x) { return hourLabel(x.h); }).sort(), first: first, soon: returningSoon(me), overdue: TEAM.on && isAdmin() ? overdueWarm() : [] };
+  }
+  function briefCardHtml() {
+    var hr = new Date().getHours(), today = localDateStr(new Date());
+    if (hr < 5 || hr >= 13 || state.briefSeen === today || (TEAM.on && !TEAM.me)) return "";
+    var d = briefData(), name = TEAM.on && TEAM.me ? firstName(TEAM.me.name) : "";
+    var bits = [d.due.length + " follow-up" + (d.due.length === 1 ? "" : "s")];
+    if (d.hot.length) bits.push(d.hot.length + " hot");
+    if (d.closing.length) bits.push(d.closing.length + " closing step" + (d.closing.length === 1 ? "" : "s"));
+    bits.push("best at " + d.best.join(" & "));
+    return '<div class="brief-card"><div class="brief-txt"><b>Good morning' + (name ? ", " + escapeHtml(name) : "") + '</b><span>' + escapeHtml(bits.join(" \u00b7 ")) + '</span></div>' +
+      '<div class="brief-btns"><button class="btn-primary" id="briefOpen">My day</button><button class="skip-btn" id="briefHide">Hide</button></div></div>';
+  }
+  function openBrief() {
+    state.briefSeen = localDateStr(new Date()); saveState(); render();
+    var d = briefData(), name = TEAM.on && TEAM.me ? firstName(TEAM.me.name) : "";
+    var sec = function (title, body) { return body ? '<div class="settings-heading" style="margin:14px 0 6px">' + title + '</div>' + body : ""; };
+    var b = featOpen('<h3>' + (new Date().getHours() < 12 ? "Good morning" : "Your day") + (name ? ", " + escapeHtml(name) : "") + '</h3><p class="modal-sub">' + new Date().toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" }) + ' \u00b7 your investors answer best at ' + escapeHtml(d.best.join(" & ")) + ' their time.</p>' +
+      sec("Call first", d.first.map(function (l) {
+        return '<div class="hot-row"><button class="hot-name" data-open-lead="' + l.id + '"><b>' + escapeHtml(l.name) + '</b><span>' + escapeHtml(isHot(l.id) ? "\u2605 Hot list" : "Follow-up due") + ' \u00b7 ' + escapeHtml(l.stage || "New Lead") + (Number(l.amount) ? ' \u00b7 ' + fmtMoney(Number(l.amount)) : '') + '</span></button>' + callLinkHtml(l, "dial", null, "copy-btn hot-call", callIconSvg()) + '</div>';
+      }).join("")) +
+      sec("Today", '<ul class="coach-list">' +
+        '<li class="ci info"><span class="ci-dot">i</span><span>' + d.due.length + ' follow-up' + (d.due.length === 1 ? '' : 's') + ' due today</span></li>' +
+        (d.closing.length ? '<li class="ci warn"><span class="ci-dot">!</span><span>' + escapeHtml(d.closing.map(function (x) { return x.r.name + ": " + x.c.text; }).slice(0, 3).join("; ")) + '</span></li>' : '') +
+        (d.soon.length ? '<li class="ci warn"><span class="ci-dot">!</span><span>' + d.soon.length + ' of your lead' + (d.soon.length === 1 ? ' goes' : 's go') + ' back to the team pool soon unless you call: ' + escapeHtml(d.soon.slice(0, 3).map(function (x) { return x.l.name; }).join(", ")) + '</span></li>' : '') +
+        (d.overdue.length ? '<li class="ci warn"><span class="ci-dot">!</span><span>' + d.overdue.length + ' interested follow-up' + (d.overdue.length === 1 ? ' is' : 's are') + ' over a day late across the team</span></li>' : '') +
+        '</ul>') +
+      sec("This month", goalBarsHtml(TEAM.on && TEAM.me ? TEAM.me.uid : null)) +
+      '<div class="modal-actions">' + (dueTasks().length ? '<button class="btn-primary" id="briefStart">Start follow-ups (' + dueTasks().length + ')</button>' : '') + '<button class="btn-secondary" id="briefDone">Let\u2019s go</button></div>');
+    var bs = document.getElementById("briefStart"); if (bs) bs.addEventListener("click", function () { featClose(); startFollowupRun(); });
+    document.getElementById("briefDone").addEventListener("click", function () { featClose(); render(); });
+    b.querySelectorAll(".hot-call").forEach(function (a) { a.addEventListener("click", function () { setTimeout(featClose, 50); }); });
+  }
+
+  /* ----- Face ID lock ----- */
+  var LOCK = { locked: false, lastActive: Date.now(), hiddenAt: 0 };
+  function lockKey() { return "dovetail_lock_" + (TEAM.on && TEAM.me ? TEAM.me.uid : "solo"); }
+  function lockCred() { try { return window.localStorage.getItem(lockKey()) || ""; } catch (e) { return ""; } }
+  function lockSupported() { return !!(window.PublicKeyCredential && navigator.credentials && window.isSecureContext); }
+  function secCfg() { var c = (TEAM.on ? (TEAM.infoCfg || {}).security : state.securityCfg) || {}; return { requireLock: !!c.requireLock, idleMin: Number(c.idleMin) || 5 }; }
+  function b64u(buf) { var s = "", a = new Uint8Array(buf); for (var i = 0; i < a.length; i++) s += String.fromCharCode(a[i]); return btoa(s).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, ""); }
+  function unb64u(s) { s = s.replace(/-/g, "+").replace(/_/g, "/"); while (s.length % 4) s += "="; var b = atob(s), a = new Uint8Array(b.length); for (var i = 0; i < b.length; i++) a[i] = b.charCodeAt(i); return a; }
+  function rnd(n) { var a = new Uint8Array(n); crypto.getRandomValues(a); return a; }
+  async function lockSetup() {
+    if (!lockSupported()) { showToast("This phone doesn\u2019t support Face ID unlock here"); return false; }
+    try {
+      var cred = await navigator.credentials.create({ publicKey: { challenge: rnd(32), rp: { name: "Dovetail" },
+        user: { id: rnd(16), name: TEAM.me ? TEAM.me.username : "dovetail", displayName: TEAM.me ? TEAM.me.name : "Dovetail" },
+        pubKeyCredParams: [{ type: "public-key", alg: -7 }, { type: "public-key", alg: -257 }],
+        authenticatorSelection: { authenticatorAttachment: "platform", userVerification: "required", residentKey: "preferred" }, timeout: 60000, attestation: "none" } });
+      window.localStorage.setItem(lockKey(), b64u(cred.rawId));
+      LOCK.lastActive = Date.now();
+      showToast("Face ID lock is on");
+      return true;
+    } catch (e) { showToast("Face ID setup was cancelled"); return false; }
+  }
+  function lockNow() {
+    if (!lockCred() || LOCK.locked) return;
+    LOCK.locked = true;
+    document.getElementById("lockMsg").style.display = "none";
+    document.getElementById("lockPwWrap").style.display = "none";
+    document.getElementById("lockScreen").style.display = "";
+  }
+  function unlockDone() { LOCK.locked = false; LOCK.lastActive = Date.now(); document.getElementById("lockScreen").style.display = "none"; document.getElementById("lockPw").value = ""; }
+  async function unlockFace() {
+    try {
+      await navigator.credentials.get({ publicKey: { challenge: rnd(32), allowCredentials: [{ type: "public-key", id: unb64u(lockCred()), transports: ["internal"] }], userVerification: "required", timeout: 60000 } });
+      unlockDone();
+    } catch (e) {
+      var msg = document.getElementById("lockMsg");
+      msg.textContent = "Face ID didn\u2019t work. Try again, or use your password."; msg.style.display = "";
+      document.getElementById("lockPwWrap").style.display = "";
+    }
+  }
+  async function unlockPassword() {
+    var u = TEAM.on && TEAM.auth ? TEAM.auth.currentUser : null, msg = document.getElementById("lockMsg");
+    if (!u) { unlockDone(); return; }
+    try { await u.reauthenticateWithCredential(firebase.auth.EmailAuthProvider.credential(u.email, document.getElementById("lockPw").value)); unlockDone(); }
+    catch (e) { msg.textContent = "That password didn\u2019t work."; msg.style.display = ""; }
+  }
+  function lockShould(idleMs) { return !!(lockCred() && (!TEAM.on || TEAM.me) && !state.awaitingOutcome && idleMs >= secCfg().idleMin * 60000); }
+  ["pointerdown", "keydown", "touchstart"].forEach(function (ev) { document.addEventListener(ev, function () { LOCK.lastActive = Date.now(); }, true); });
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden) { LOCK.hiddenAt = Date.now(); return; }
+    if (LOCK.hiddenAt && lockShould(Date.now() - LOCK.hiddenAt)) lockNow();
+    LOCK.hiddenAt = 0; LOCK.lastActive = Date.now();
+  });
+  setInterval(function () { if (!document.hidden && lockShould(Date.now() - LOCK.lastActive)) lockNow(); }, 30000);
+  function lockReqBannerHtml() {
+    return TEAM.on && TEAM.me && secCfg().requireLock && !lockCred() && lockSupported()
+      ? '<button class="num-warn soft" id="lockReqBtn"><b>Your admin requires Face ID lock.</b><span>Tap to turn it on. It takes a few seconds.</span></button>' : "";
+  }
+  function updateLockBtn() {
+    var b = document.getElementById("lockToggleBtn"); if (!b) return;
+    b.style.display = lockSupported() ? "" : "none";
+    b.textContent = lockCred() ? "Face ID lock: On (tap to turn off)" : "Turn on Face ID lock";
+  }
+  function openSecurity() {
+    var c = secCfg();
+    var b = featOpen('<h3>Security</h3><p class="modal-sub">Face ID lock keeps investor data safe on a lost or borrowed phone. The app locks after a few idle minutes and reopens with Face ID (never during a call).</p>' +
+      '<label class="up-check"><input type="checkbox" id="secReq"' + (c.requireLock ? ' checked' : '') + '> Require Face ID lock for everyone</label>' +
+      '<label for="secIdle">Lock after</label><select id="secIdle">' + [2, 5, 10, 15].map(function (n) { return '<option value="' + n + '"' + (c.idleMin === n ? ' selected' : '') + '>' + n + ' idle minutes</option>'; }).join("") + '</select>' +
+      '<div class="field-error" id="secErr"></div><div class="modal-actions"><button class="btn-primary" id="secSave" style="width:100%">Save</button></div>');
+    document.getElementById("secSave").addEventListener("click", function () {
+      var v = { requireLock: document.getElementById("secReq").checked, idleMin: Number(document.getElementById("secIdle").value) };
+      TEAM.db.collection("leadChunks").doc("_team").set({ security: v }, { merge: true })
+        .then(function () { TEAM.infoCfg = Object.assign({}, TEAM.infoCfg || {}, { security: v }); featClose(); showToast("Security settings saved"); render(); })
+        .catch(function () { document.getElementById("secErr").textContent = "Couldn\u2019t save. Check your connection."; });
+    });
+  }
+
   /** ---------- Admin controls ---------- **/
   function closeAdminHub() { document.getElementById("adminModal").classList.remove("show"); }
   function openAdminHub() {
@@ -7018,7 +7691,14 @@
       tile("hubCoach", I('<path d="M4 19l5-5 4 4 7-8"/><path d="M15 10h5v5"/>'), "Sales coach", "What\u2019s working, what isn\u2019t, and who needs help") +
       tile("hubVault", I('<rect x="3" y="5" width="18" height="15" rx="2"/><circle cx="12" cy="12.5" r="3"/><path d="M12 9.5V8M7 5V3.5M17 5V3.5"/>'), "Investor Vault",
         vaultPending().length ? vaultPending().length + " removal request" + (vaultPending().length === 1 ? "" : "s") + " waiting for you" : (VAULT.status === "rules" ? "One step left to switch it on" : "Every investor, their deals and key dates"), vaultPending().length > 0 || VAULT.status === "rules") +
+      tile("hubPacing", I('<path d="M12 3v3M12 18v3M4.2 7l2.6 1.5M17.2 15.5l2.6 1.5M4.2 17l2.6-1.5M17.2 8.5l2.6-1.5"/><circle cx="12" cy="12" r="3.5"/>'), "Call pacing",
+        "Keeps your team\u2019s numbers from being labeled spam \u00b7 " + pacingCfg().perDay + " calls a day per phone") +
+      tile("hubSecurity", I('<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>'), "Security", secCfg().requireLock ? "Face ID lock required for everyone" : "Face ID lock for your team") +
       tile("hubInfo", I('<path d="M21 3L10 14"/><path d="M21 3l-7 18-4-7-7-4 18-7z"/>'), "Info links", (infoCfg().links.length ? infoCfg().links.length + " link" + (infoCfg().links.length === 1 ? "" : "s") + " your team can text with Send info" : "Add the pages your team can text to leads")) +
+      tile("hubOverdue", I('<circle cx="12" cy="12" r="9"/><path d="M12 7v5"/><path d="M12 16h.01"/>'), "Overdue follow-ups",
+        overdueWarm().length ? overdueWarm().length + " interested lead" + (overdueWarm().length === 1 ? "" : "s") + " more than a day late" : "None right now", overdueWarm().length > 0) +
+      tile("hubGoals", I('<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>'), "Monthly goals", "Targets and pace for each rep") +
+      tile("hubRoi", I('<path d="M4 20h16"/><path d="M7 16l4-4 3 3 5-6"/>'), "List ROI", "Which lead lists produce investors") +
       tile("hubAnswers", I('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'), "Answer times", "When your investors actually pick up") +
       tile("hubLeads", I('<path d="M12 5v14M5 12h14"/>'), "Add leads", "Upload Excel, CSV, text or contacts") +
       tile("hubExport", I('<path d="M12 4v11M7 10l5 5 5-5"/><path d="M5 20h14"/>'), "Export call log", "A CSV of every call, for your records") +
@@ -7030,7 +7710,12 @@
     document.getElementById("hubScore").addEventListener("click", function () { closeAdminHub(); openScoreboard(); });
     document.getElementById("hubCoach").addEventListener("click", function () { closeAdminHub(); openCoach("team"); });
     document.getElementById("hubVault").addEventListener("click", function () { closeAdminHub(); state.activeView = "vault"; saveState(); render(); });
+    document.getElementById("hubPacing").addEventListener("click", function () { closeAdminHub(); openPacingEditor(); });
     document.getElementById("hubInfo").addEventListener("click", function () { closeAdminHub(); openInfoEditor(); });
+    document.getElementById("hubOverdue").addEventListener("click", openOverdue);
+    document.getElementById("hubGoals").addEventListener("click", openGoals);
+    document.getElementById("hubRoi").addEventListener("click", openListRoi);
+    document.getElementById("hubSecurity").addEventListener("click", openSecurity);
     document.getElementById("hubAnswers").addEventListener("click", function () { closeAdminHub(); openScoreboard("answers"); });
     document.getElementById("hubLeads").addEventListener("click", function () { closeAdminHub(); openLoadModal(); switchTab("upload"); });
     document.getElementById("hubExport").addEventListener("click", function () { closeAdminHub(); document.getElementById("menuExportBtn").click(); });
@@ -7140,6 +7825,7 @@
       updShow();
       if (TEAM.on) applyTeamVisibility();
       updateCoachHeadline();
+      updateLockBtn();
       openMenuModal();
     });
     document.getElementById("closeMenuModal").addEventListener("click", closeMenuModal);
@@ -7230,9 +7916,15 @@
         return;
       }
       var callA = e.target.closest("a[data-call-lead]");
-      if (callA) { startCall(callA.getAttribute("data-call-lead"), callA.getAttribute("data-from"), callA.getAttribute("data-task"), callA.getAttribute("href")); return; }
+      if (callA) {
+        var gl = findLeadById(callA.getAttribute("data-call-lead"));
+        if (gl && !callGate(gl, e, callA.getAttribute("data-force") === "1")) return;
+        startCall(callA.getAttribute("data-call-lead"), callA.getAttribute("data-from"), callA.getAttribute("data-task"), callA.getAttribute("href")); return;
+      }
       if (e.target.closest("#startFollowupsBtn")) { startFollowupRun(); return; }
       if (e.target.closest("#focusBackBtn")) { endFocus(); return; }
+      var stb = e.target.closest("[data-star]");
+      if (stb) { toggleHot(stb.getAttribute("data-star")); return; }
       var op = e.target.closest("[data-open-lead]");
       if (op) { openLeadProfile(op.getAttribute("data-open-lead")); return; }
     });
@@ -7265,6 +7957,18 @@
     document.getElementById("teamBtn").addEventListener("click", openAdminHub);
     document.getElementById("adminBtn").addEventListener("click", openAdminHub);
     document.getElementById("openThemesBtn").addEventListener("click", openThemes);
+    document.getElementById("openBriefBtn").addEventListener("click", openBrief);
+    document.getElementById("lockToggleBtn").addEventListener("click", function () {
+      if (lockCred()) {
+        if (secCfg().requireLock) { showToast("Your admin requires Face ID lock"); return; }
+        try { window.localStorage.removeItem(lockKey()); } catch (e) {}
+        showToast("Face ID lock is off"); updateLockBtn(); return;
+      }
+      lockSetup().then(updateLockBtn);
+    });
+    document.getElementById("lockGo").addEventListener("click", unlockFace);
+    document.getElementById("lockPwGo").addEventListener("click", unlockPassword);
+    document.getElementById("featModal").addEventListener("click", function (e) { if (e.target === this) featClose(); });
     var mt = document.getElementById("motionToggle");
     mt.checked = motionOn();
     mt.addEventListener("change", function () {
@@ -7303,7 +8007,7 @@
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape") {
         closeLoadModal(); closeMenuModal(); closeTaskModal(); closeConfirm(); closeLeadProfile();
-        ["themeModal", "adminModal", "teamModal", "scoreModal", "acctModal", "coachModal", "infoModal", "vaultModal"].forEach(function (id) { var el = document.getElementById(id); if (el) el.classList.remove("show"); });
+        ["themeModal", "adminModal", "teamModal", "scoreModal", "acctModal", "coachModal", "infoModal", "vaultModal", "featModal"].forEach(function (id) { var el = document.getElementById(id); if (el) el.classList.remove("show", "gate"); });
       }
     });
 
