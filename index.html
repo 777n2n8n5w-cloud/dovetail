@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script id="customerConfig" type="application/json">{}</script>
 <meta charset="UTF-8">
-<meta name="dovetail-build" content="2026-10-23">
+<meta name="dovetail-build" content="2026-10-28">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -1395,10 +1396,10 @@
   .hist-name {
     font-weight: 600;
     font-size: 14.5px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    min-width: 0;
+    overflow-wrap: anywhere;
   }
+  .hist-top .qi-status { flex: none; }
   .hist-phone {
     font-size: 12.5px;
     color: var(--text-faint);
@@ -2363,9 +2364,9 @@
   body.team-mode .settings-section.admin-only { display: none !important; }
   .settings-row { width: 100%; display: flex; align-items: center; gap: 10px; padding: 13px 14px; border-radius: 10px; border: 1px solid var(--border);
     background: var(--surface-raised); color: var(--text); font-family: inherit; font-size: 15px; cursor: pointer; text-align: left; }
-  .settings-row .sr-l { font-weight: 600; flex: none; }
-  .settings-row .sr-v { flex: 1; min-width: 0; text-align: right; color: var(--text-dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .settings-row .sr-c { color: var(--text-faint); font-size: 20px; line-height: 1; }
+  .settings-row .sr-l { font-weight: 600; flex: 0 1 auto; min-width: 0; text-align: left; overflow-wrap: anywhere; }
+  .settings-row .sr-v { flex: 1 1 40%; min-width: 0; text-align: right; color: var(--text-dim); line-height: 1.3; overflow-wrap: anywhere; }
+  .settings-row .sr-c { flex: none; color: var(--text-faint); font-size: 20px; line-height: 1; }
   .theme-cats { padding-top: 0; margin-bottom: 4px; }
   .hub-tile { width: 100%; display: flex; align-items: center; gap: 12px; padding: 13px 12px; margin-bottom: 8px; border-radius: 12px; cursor: pointer;
     border: 1px solid var(--border); background: var(--surface-raised); color: var(--text); font-family: inherit; text-align: left; }
@@ -2483,7 +2484,7 @@
     border: 1px solid var(--border); background: var(--surface); color: var(--text); font-family: inherit; text-align: left; }
   .vr-main, .vi-row > span:first-child { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
   .vr-main b, .vi-row b { font-size: 14.5px; }
-  .vr-main > span, .vi-row small { font-size: 12px; color: var(--text-faint); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .vr-main > span, .vi-row small { font-size: 12px; color: var(--text-faint); line-height: 1.35; overflow-wrap: anywhere; }
   .vr-main .vr-alert { color: var(--accent); font-weight: 600; }
   .vr-main .vr-flag { color: var(--notinterested); font-weight: 700; }
   .vr-amt { flex: none; font-weight: 700; font-variant-numeric: tabular-nums; font-size: 14.5px; }
@@ -2572,6 +2573,48 @@
 
   .theme-search { width: 100%; box-sizing: border-box; margin: 2px 0 8px; font-size: 16px; }
 
+  .demo-pill { position: relative; z-index: 5; display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap;
+    padding: 6px 12px; background: #111827; color: #F9FAFB; font-size: 12.5px; font-weight: 600; }
+  .demo-pill button { border: 0; border-radius: 999px; padding: 6px 12px; background: #E9C46A; color: #111827; font-weight: 700; font-size: 12.5px; font-family: inherit; cursor: pointer; }
+  .cu-steps { margin: 0; padding-left: 20px; font-size: 13.5px; color: var(--text-dim); display: flex; flex-direction: column; gap: 6px; }
+  .cu-steps b { color: var(--text); }
+
+  .rp-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-right: 34px; } .rp-head select { width: auto; }
+  .rp-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 10px; }
+  .rp-kpi { display: flex; flex-direction: column; gap: 1px; padding: 10px 8px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface-raised); min-width: 0; }
+  .rp-kpi b { font-size: 18px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; } .rp-kpi span { font-size: 11.5px; color: var(--text-dim); }
+  .rp-kpi i { font-style: normal; font-size: 11px; color: var(--text-faint); } .rp-kpi i.up { color: var(--interested); } .rp-kpi i.down { color: var(--notinterested); }
+  .rp-bars { width: 100%; height: 70px; display: block; } .rp-bars rect { fill: var(--accent); }
+  .rp-rep { display: flex; justify-content: space-between; gap: 10px; padding: 8px 0; border-top: 1px solid var(--border); font-size: 13.5px; } .rp-rep span { color: var(--text-dim); text-align: right; }
+  .rp-rep.me b { color: var(--accent); }
+  .rp-actions { flex-wrap: wrap; }
+  .contest-bar { display: flex; flex-direction: column; gap: 2px; width: 100%; text-align: left; margin: 0 0 10px; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--voicemail);
+    background: var(--surface-raised); color: var(--text); font-family: inherit; cursor: pointer; } .contest-bar b { font-size: 14px; } .contest-bar span { font-size: 12.5px; color: var(--text-dim); }
+  .badge-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .badge { padding: 5px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; border: 1px solid var(--border); color: var(--text-faint); }
+  .badge.on { color: var(--text); border-color: var(--voicemail); background: var(--surface-raised); }
+  .tour-layer { position: fixed; inset: 0; z-index: 400; }
+  .tour-hole { position: fixed; border-radius: 12px; box-shadow: 0 0 0 9999px rgba(0,0,0,0.62); transition: all 0.2s ease; pointer-events: none; }
+  .tour-card { position: fixed; left: 16px; right: 16px; max-width: 420px; margin: 0 auto; padding: 14px 16px; border-radius: 14px; background: var(--surface); color: var(--text);
+    border: 1px solid var(--border); box-shadow: 0 16px 40px rgba(0,0,0,0.4); display: flex; flex-direction: column; gap: 4px; }
+  .tour-card small { font-size: 11.5px; color: var(--text-faint); } .tour-card b { font-size: 16px; } .tour-card p { margin: 0; font-size: 13.5px; color: var(--text-dim); }
+  .tour-btns { display: flex; justify-content: flex-end; gap: 8px; margin-top: 8px; }
+  @media print {
+    body.print-report > *:not(#featModal) { display: none !important; }
+    body.print-report #featModal { position: static !important; display: block !important; background: #fff !important; }
+    body.print-report #featModal .modal { max-height: none !important; overflow: visible !important; box-shadow: none !important; background: #fff !important; border: 0 !important; }
+    body.print-report #featModal * { color: #111 !important; } body.print-report #featModal select, body.print-report #featModal .modal-actions, body.print-report #featModal .close-x { display: none !important; }
+  }
+
+  body.team-manager #adminBtn { display: flex !important; }
+  .tm-role { width: auto; min-height: 36px; padding: 4px 8px; font-size: 13px; }
+  .tm-closer { display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--text-dim); margin-top: 4px; }
+  .tm-closer input { width: 18px; height: 18px; margin: 0; }
+  .handoff-info { display: flex; flex-direction: column; gap: 4px; align-items: flex-start; margin: 4px 0 10px; padding: 10px 12px; border-radius: 10px;
+    background: var(--surface-raised); border: 1px solid var(--border); font-size: 13px; color: var(--text-dim); }
+  .handoff-info b { color: var(--text); } .handoff-info span { font-style: italic; }
+  .lp-star.dnc-on { color: var(--notinterested); border-color: var(--notinterested); }
+
   ::-webkit-scrollbar { width: 8px; }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 8px; }
 
@@ -2631,6 +2674,7 @@
       </div>
       <button class="btn-primary" id="authGo">Sign in</button>
       <button class="auth-link" id="authSetup" type="button" style="display:none">First time? Set up the admin account</button>
+      <button class="auth-link" id="authDemo" type="button">See a demo office</button>
       <div class="auth-note" id="authNote"></div>
       <div class="auth-note" id="authBuild"></div>
     </div>
@@ -2775,6 +2819,9 @@
       <div class="settings-heading">Coaching</div>
       <button class="settings-row" id="openCoachBtn" type="button"><span class="sr-l">My coach</span><span class="sr-v" id="coachHeadline"></span><span class="sr-c">›</span></button>
       <button class="settings-row" id="openBriefBtn" type="button" style="margin-top:8px"><span class="sr-l">My day</span><span class="sr-v">Follow-ups, hot list, who to call first</span><span class="sr-c">›</span></button>
+      <button class="settings-row" id="openInstallBtn" type="button" style="margin-top:8px"><span class="sr-l">Install on your phone</span><span class="sr-v">Home screen icon, full screen</span><span class="sr-c">›</span></button>
+      <button class="settings-row" id="openReportBtn" type="button" style="margin-top:8px"><span class="sr-l">Results report</span><span class="sr-v">Your numbers this week, shareable</span><span class="sr-c">›</span></button>
+      <button class="settings-row" id="openTourBtn" type="button" style="margin-top:8px"><span class="sr-l">Take the tour</span><span class="sr-v">A 1-minute walkthrough</span><span class="sr-c">›</span></button>
     </div>
 
     <div class="settings-section">
@@ -2831,7 +2878,7 @@
     </div>
 
     <div style="margin-top:22px;padding-top:14px;border-top:1px solid var(--border);text-align:center;">
-      <div style="font-size:11px;color:var(--text-faint);">Build 2026-10-23 · Team · Updates install automatically after midnight.</div>
+      <div style="font-size:11px;color:var(--text-faint);">Build 2026-10-28 · Team · Updates install automatically after midnight.</div>
       <div id="updNote"></div>
     </div>
   </div>
@@ -2949,6 +2996,290 @@
 <div class="toast" id="toast"></div>
 
 <script>
+  /** ---------- Customer copies (white-label) and demo office ---------- **/
+  var CUSTOMER = (function () { try { var el = document.getElementById("customerConfig"); return (el && JSON.parse(el.textContent || "{}")) || {}; } catch (e) { return {}; } })();
+  var APP_NAME = CUSTOMER.app || "Dovetail Suite", SHORT_NAME = CUSTOMER.app || "Dovetail", COMPANY = CUSTOMER.company || "Dovetail Investment Group";
+  var BASE_DOMAIN = (CUSTOMER.firebase && CUSTOMER.firebase.authDomain) || "dovetail-f863c.firebaseapp.com";
+  if (CUSTOMER.theme) { try { if (!window.localStorage.getItem("dovetail_dialer_theme_v1")) window.localStorage.setItem("dovetail_dialer_theme_v1", CUSTOMER.theme); } catch (e) {} }
+  var DEMO = (function () { try { if (/demo/i.test(location.hash)) window.localStorage.setItem("dovetail_demo", "1"); return window.localStorage.getItem("dovetail_demo") === "1"; } catch (e) { return false; } })();
+  /* ----- industry editions: same program, the words and steps of each kind of sales ----- */
+  var INDUSTRIES = {
+    investments: { name: "Investments", one: "Investor", many: "Investors", deal: "Investment", deals: "Investments", example: "SambaNova", fund: "funded",
+      words: {}, steps: [["docs", "Docs sent", 1], ["returned", "Docs returned", 5], ["funded", "Account funded", 10]],
+      demo: { lists: ["Spring list", "Referral list"], note: function (n, st) { return "Account value $" + (50 + n % 900) + ",000 | " + st; }, deals: ["Pre-IPO AI chips", "Series E fintech", "Defense tech", "Payments platform", "Data platform"], amt: 25000 } },
+    realestate: { name: "Real estate", one: "Client", many: "Clients", deal: "Deal", deals: "Deals", example: "14 Oak St", fund: "closed",
+      words: { Pitched: "Showing", Committed: "Under contract", Funded: "Sold", Closed: "Commission paid" },
+      steps: [["offer", "Offer accepted", 1], ["inspect", "Inspection done", 10], ["appraisal", "Appraisal in", 21], ["closed", "Deal closed", 30]],
+      demo: { lists: ["Expired listings", "FSBO"], note: function (n, st) { return (n % 2 ? "Expired listing" : "For sale by owner") + " | " + (2 + n % 4) + " bd, asking $" + (300 + n % 600) + "K | " + st; }, deals: ["14 Oak St", "88 Shore Rd", "7 Elm Ct", "210 Bay Ave", "35 Park Pl"], amt: 50000 } },
+    mca: { name: "MCA / business funding", one: "Merchant", many: "Merchants", deal: "Funding", deals: "Fundings", example: "$75K advance", fund: "funded",
+      words: { Pitched: "Offer sent", Committed: "Approved", Closed: "Paid off" },
+      steps: [["app", "Application in", 1], ["stmts", "Bank statements in", 2], ["contract", "Contract signed", 4], ["funded", "Funded", 6]],
+      demo: { lists: ["UCC leads", "Aged leads"], note: function (n, st) { return ["Restaurant", "Trucking", "Auto repair", "Dental office", "Retail"][n % 5] + " | $" + (20 + n % 180) + "K/mo revenue | " + st; }, deals: ["$75K advance", "$120K advance", "$40K advance", "$250K advance", "$60K renewal"], amt: 10000 } },
+    auto: { name: "Auto sales", one: "Customer", many: "Customers", deal: "Sale", deals: "Sales", example: "2024 Camry LE", fund: "delivered",
+      words: { Pitched: "Test drive", Committed: "Sold", Funded: "Delivered", Closed: "Completed" },
+      steps: [["credit", "Credit app in", 1], ["approved", "Approved", 2], ["signed", "Deal signed", 3], ["delivered", "Delivered", 5]],
+      demo: { lists: ["Website leads", "Service drive"], note: function (n, st) { return "Wants: " + ["2024 Camry", "2023 RAV4", "2024 F-150", "2022 Accord", "2024 Tahoe"][n % 5] + " | trade-in: " + (2012 + n % 10) + " | " + st; }, deals: ["2024 Camry LE", "2023 RAV4 XLE", "2024 F-150 XLT", "2022 Accord EX", "2024 Tahoe LT"], amt: 2000 } },
+    insurance: { name: "Insurance", one: "Client", many: "Clients", deal: "Policy", deals: "Policies", example: "Term life $500K", fund: "issued",
+      words: { Pitched: "Quoted", Committed: "Applied", Funded: "Issued", Closed: "In force" },
+      steps: [["app", "Application signed", 1], ["uw", "Underwriting done", 14], ["issued", "Policy issued", 21], ["paid", "First premium paid", 30]],
+      demo: { lists: ["Aged leads", "Turning 65"], note: function (n, st) { return ["Term life", "Final expense", "Medicare supplement", "Home + auto", "IUL"][n % 5] + " | age " + (30 + n % 45) + " | " + st; }, deals: ["Term life $500K", "Final expense $15K", "Medicare supplement", "Home + auto bundle", "IUL $250K"], amt: 1000 } },
+    solar: { name: "Solar / home improvement", one: "Homeowner", many: "Homeowners", deal: "Project", deals: "Projects", example: "8.2 kW system", fund: "install",
+      words: { Pitched: "Proposal sent", Committed: "Signed", Funded: "Installed", Closed: "Activated" },
+      steps: [["site", "Site survey", 7], ["permit", "Permit approved", 30], ["install", "Installed", 60], ["pto", "Permission to operate", 90]],
+      demo: { lists: ["Door knock leads", "Web leads"], note: function (n, st) { return "Electric bill $" + (120 + n % 280) + "/mo | " + (n % 3 ? "owns home" : "south-facing roof") + " | " + st; }, deals: ["8.2 kW system", "6.4 kW system", "10.5 kW + battery", "Roof + 7 kW", "12 kW system"], amt: 5000 } }
+  };
+  var DEMO_IND = (function () { try { var m = /demo[-_]([a-z]+)/i.exec(location.hash); if (m && INDUSTRIES[m[1].toLowerCase()]) window.localStorage.setItem("dovetail_demo_ind", m[1].toLowerCase()); return window.localStorage.getItem("dovetail_demo_ind") || ""; } catch (e) { return ""; } })();
+  var IND_KEY = INDUSTRIES[CUSTOMER.industry] ? CUSTOMER.industry : (DEMO && INDUSTRIES[DEMO_IND] ? DEMO_IND : "investments");
+  var IND = INDUSTRIES[IND_KEY];
+  // Display-only word swaps: what's stored (stages, statuses) never changes, so every feature keeps working.
+  var WORDMAP = (function () {
+    var w = {}, one = IND.one, many = IND.many;
+    if (IND_KEY === "investments" && CUSTOMER.term === "clients") { one = "Client"; many = "Clients"; }
+    if (one !== "Investor") { w.Investor = one; w.Investors = many; w.investor = one.toLowerCase(); w.investors = many.toLowerCase(); }
+    if (IND.deal !== "Investment") { w.Investment = IND.deal; w.Investments = IND.deals; w.investment = IND.deal.toLowerCase(); w.investments = IND.deals.toLowerCase(); w.SambaNova = IND.example; }
+    Object.keys(IND.words).forEach(function (k) { w[k] = IND.words[k]; if (k === "Committed" || k === "Funded") w[k.toLowerCase()] = IND.words[k].toLowerCase(); });
+    // Safeguard: a new word must never itself be a word that gets swapped, or a redraw would swap it twice.
+    Object.keys(w).forEach(function (k) { if (Object.keys(w).some(function (j) { return new RegExp("\\b" + j + "\\b").test(w[k]); })) delete w[k]; });
+    return w;
+  })();
+  var WORD_RE = Object.keys(WORDMAP).length ? new RegExp("\\b(" + Object.keys(WORDMAP).sort(function (a, b) { return b.length - a.length; }).join("|") + ")\\b", "g") : null;
+  function installDemoBackend() {
+    (function () {
+      var FS = "__mockfs", AU = "__mockauth";
+      function load(k) { try { return JSON.parse(localStorage.getItem(k) || "{}"); } catch (e) { return {}; } }
+      function save(k, v) { localStorage.setItem(k, JSON.stringify(v)); }
+      function clone(x) { return x === undefined ? undefined : JSON.parse(JSON.stringify(x)); }
+      var DEL = { __del: true };
+      function err(code, msg) { var e = new Error(msg || code); e.code = code; return e; }
+      function split(p) { var out = [], cur = "", q = false; for (var i = 0; i < p.length; i++) { var ch = p[i]; if (ch === "`") { q = !q; continue; } if (ch === "." && !q) { out.push(cur); cur = ""; continue; } cur += ch; } out.push(cur); return out; }
+      function setIn(o, path, v) { var ps = split(path); for (var i = 0; i < ps.length - 1; i++) { if (typeof o[ps[i]] !== "object" || o[ps[i]] === null) o[ps[i]] = {}; o = o[ps[i]]; } if (v === DEL) delete o[ps[ps.length - 1]]; else o[ps[ps.length - 1]] = clone(v); }
+      function merge(t, s) { Object.keys(s).forEach(function (k) { var v = s[k]; if (v === DEL) { delete t[k]; return; } if (v && typeof v === "object" && !Array.isArray(v) && t[k] && typeof t[k] === "object" && !Array.isArray(t[k])) merge(t[k], v); else t[k] = clone(v); }); }
+      var apps = [], listeners = [];
+      function allowed(app, path, op, filters) {
+        var u = app._user; if (!u) return false;
+        if (app._authBroken) return false;
+        if (path === "vault" || path.indexOf("vault/") === 0) {           // the Vault's rules
+          if (window.__noVaultRules) return false;
+          if (isAdminUser(app)) return true;
+          var vm = load(FS)["members/" + u.uid]; if (!(vm && vm.active)) return false;
+          if (path === "vault") return !!(filters && filters.some(function (f) { return f[0] === "ownerUid" && f[1] === u.uid; }));
+          if (op === "read") { var vd = load(FS)[path]; return !!(vd && vd.ownerUid === u.uid); }
+          return true;
+        }
+        if (u.email.indexOf("vincent@") === 0) return true;
+        var db = load(FS), m = db["members/" + u.uid];
+        var admin = m && m.active && m.role === "admin";
+        if (path === "members") return !!admin;
+        if (path.indexOf("members/") === 0) return admin || path === "members/" + u.uid;
+        return !!(m && m.active);
+      }
+      function snapDoc(path, d) { return { id: path.split("/").pop(), exists: d !== undefined, data: function () { return clone(d); }, metadata: { fromCache: false, hasPendingWrites: false } }; }
+      function fire(l) {
+        if (!l.app._user) return;
+        if (!allowed(l.app, l.path, "read", l.filters)) { var ix = listeners.indexOf(l); if (ix > -1) listeners.splice(ix, 1); if (l.err) l.err(err("permission-denied")); return; }
+        var db = load(FS);
+        if (l.kind === "doc") {
+          var d = db[l.path], js = JSON.stringify(d === undefined ? null : d);
+          if (js === l.last) return; l.last = js; l.cb(snapDoc(l.path, d));
+        } else {
+          var depth = l.path.split("/").length + 1;
+          var docs = Object.keys(db).filter(function (k) { return k.indexOf(l.path + "/") === 0 && k.split("/").length === depth; })
+            .filter(function (k) { return !(l.filters || []).some(function (f) { return (db[k] || {})[f[0]] !== f[1]; }); }).sort().map(function (k) { return snapDoc(k, db[k]); });
+          var js2 = JSON.stringify(docs.map(function (d) { return [d.id, d.data()]; }));
+          if (js2 === l.last) return; l.last = js2;
+          l.cb({ docs: docs, empty: !docs.length, size: docs.length, forEach: function (f) { docs.forEach(f); }, metadata: { fromCache: false, hasPendingWrites: false } });
+        }
+      }
+      function notify() { listeners.slice().forEach(fire); }
+      window.addEventListener("storage", function (e) { if (e.key === FS) notify(); });
+      window.__mockListenerCount = function () { return listeners.length; };
+      function isAdminUser(app) { var u = app._user; if (!u) return false; if (u.email.indexOf("vincent@") === 0) return true; var mm = load(FS)["members/" + u.uid]; return !!(mm && mm.active && mm.role === "admin"); }
+      function sameKeys(a, b) { var ka = Object.keys(a || {}).sort(), kb = Object.keys(b || {}).sort(); return ka.join("|") === kb.join("|"); }
+      function superset(nw, old) { var n = nw || {}; return Object.keys(old || {}).every(function (k) { return k in n; }); }
+      function write(app, path, fn) {
+        return Promise.resolve().then(function () {
+          if (window.__offline) throw err("unavailable");
+          if (!allowed(app, path, "write")) throw err("permission-denied");
+          var db = load(FS), before = clone(db[path]); fn(db); var after = db[path];
+          window.__mockWrites = (window.__mockWrites || 0) + 1;
+          if (path.indexOf("vault/") === 0 && !isAdminUser(app)) {
+            var me = app._user.uid, inv = function (x) { return (x && x.investments || []).length; };
+            if (!before) { if (!after || after.ownerUid !== me) throw err("permission-denied"); }
+            else if (!after) throw err("permission-denied");
+            else if (before.ownerUid !== me || after.ownerUid !== me || inv(after) < inv(before)) throw err("permission-denied");
+          }
+          if (!isAdminUser(app)) {
+            if (path.indexOf("leadChunks/") === 0) {
+              if (!before && after) throw err("permission-denied");
+              if (before && !after) throw err("permission-denied");                                   // only the admin deletes (as in the real rules)
+              if (before && after && (!before.leads || !after.leads || !sameKeys(before.leads, after.leads))) throw err("permission-denied");   // team settings: admin only
+            }
+            if (path.indexOf("callDays/") === 0 && before && !after) throw err("permission-denied");
+            if (path.indexOf("callDays/") === 0 && before && after && !superset(after.calls, before.calls)) throw err("permission-denied");
+          }
+          if (after && JSON.stringify(after).length > 1048576) throw err("invalid-argument", "Document exceeds the 1 MB limit");   // the real database's limit
+          save(FS, db); setTimeout(notify, 0);
+        });
+      }
+      function DocRef(app, path) { this.app = app; this.path = path; this.id = path.split("/").pop(); }
+      DocRef.prototype.get = function (opts) { var a = this.app, p = this.path, cache = opts && opts.source === "cache"; return Promise.resolve().then(function () {
+        if (cache) { var d = load(FS)[p]; if (d === undefined) throw err("unavailable"); return snapDoc(p, d); }
+        if (window.__offline) throw err("unavailable");
+        if (!allowed(a, p, "read")) throw err("permission-denied"); return snapDoc(p, load(FS)[p]); }); };
+      DocRef.prototype.set = function (data, opts) { var p = this.path; return write(this.app, p, function (db) { if (!(opts && opts.merge && db[p])) db[p] = {}; merge(db[p], data); }); };
+      DocRef.prototype.update = function (obj) { var p = this.path, args = arguments; return write(this.app, p, function (db) {
+        if (!db[p]) throw err("not-found", "No document to update");
+        if (typeof obj === "string") { for (var i = 0; i < args.length; i += 2) setIn(db[p], args[i], args[i + 1]); }
+        else Object.keys(obj).forEach(function (k) { setIn(db[p], k, obj[k]); });
+      }); };
+      DocRef.prototype.delete = function () { var p = this.path; return write(this.app, p, function (db) { delete db[p]; }); };
+      DocRef.prototype.onSnapshot = function (cb, e) { var l = { kind: "doc", path: this.path, cb: cb, err: e, app: this.app }; listeners.push(l); setTimeout(function () { fire(l); }, 0); return function () { var i = listeners.indexOf(l); if (i > -1) listeners.splice(i, 1); }; };
+      function ColRef(app, path) { this.app = app; this.path = path; }
+      ColRef.prototype.doc = function (id) { return new DocRef(this.app, this.path + "/" + id); };
+      ColRef.prototype.where = function (field, op, val) { var q = new ColRef(this.app, this.path); q.filters = (this.filters || []).concat([[field, val]]); return q; };
+      ColRef.prototype.onSnapshot = function (cb, e) { var l = { kind: "col", path: this.path, cb: cb, err: e, app: this.app, filters: this.filters }; listeners.push(l); setTimeout(function () { fire(l); }, 0); return function () { var i = listeners.indexOf(l); if (i > -1) listeners.splice(i, 1); }; };
+      function Firestore(app) { this.app = app; }
+      Firestore.prototype.collection = function (p) { return new ColRef(this.app, p); };
+      Firestore.prototype.enablePersistence = function () { return Promise.resolve(); };
+      Firestore.prototype.runTransaction = function (fn) {
+        var writes = [], t = { get: function (ref) { return ref.get(); }, update: function (ref, obj) { writes.push(function () { return ref.update(obj); }); return t; }, set: function (ref, d, o) { writes.push(function () { return ref.set(d, o); }); return t; } };
+        return Promise.resolve(fn(t)).then(function (res) { return writes.reduce(function (p, w) { return p.then(w); }, Promise.resolve()).then(function () { return res; }); });
+      };
+      function mkUser(app, rec) {
+        return { uid: rec.uid, email: rec.email,
+          getIdToken: function (force) {
+            if (window.__tokenRefreshFails) return Promise.reject(err("auth/network-request-failed"));
+            if (force) { app._authBroken = false; setTimeout(notify, 0); }
+            return Promise.resolve("token");
+          },
+          reauthenticateWithCredential: function (c) { var u = load(AU)[rec.email]; return u && u.pw === c.pw ? Promise.resolve() : Promise.reject(err("auth/wrong-password")); },
+          updatePassword: function (pw) { var a = load(AU); a[rec.email].pw = pw; save(AU, a); return Promise.resolve(); } };
+      }
+      function Auth(app) {
+        this.app = app; this.cbs = []; var self = this;
+        if (app.name === "[DEFAULT]") { try { var s = JSON.parse(sessionStorage.getItem("__mocksess") || "null"); if (s) app._user = mkUser(app, s); } catch (e) {}
+          if (sessionStorage.getItem("__mockAuthBrokenAtStart") === "1") app._authBroken = true;
+          window.__breakAuth = function () { app._authBroken = true; notify(); }; }
+        Object.defineProperty(this, "currentUser", { get: function () { return self.app._user || null; } });
+      }
+      Auth.prototype._emit = function () { var u = this.app._user || null, cbs = this.cbs; setTimeout(function () { cbs.forEach(function (c) { c(u); }); }, 0); };
+      Auth.prototype._set = function (rec) { this.app._user = rec ? mkUser(this.app, rec) : null; if (this.app.name === "[DEFAULT]") { if (rec) sessionStorage.setItem("__mocksess", JSON.stringify(rec)); else sessionStorage.removeItem("__mocksess"); } this._emit(); if (rec) setTimeout(notify, 0); };
+      Auth.prototype.onAuthStateChanged = function (cb) { this.cbs.push(cb); var u = this.app._user || null; setTimeout(function () { cb(u); }, 0); return function () {}; };
+      Auth.prototype.setPersistence = function () { return Promise.resolve(); };
+      Auth.prototype.signInWithEmailAndPassword = function (email, pw) { var self = this; return new Promise(function (res, rej) { setTimeout(function () { var u = load(AU)[email]; if (!u || u.pw !== pw) return rej(err("auth/invalid-credential")); var rec = { uid: u.uid, email: email }; self._set(rec); res({ user: self.app._user }); }, 30); }); };
+      Auth.prototype.createUserWithEmailAndPassword = function (email, pw) { var self = this; return new Promise(function (res, rej) { setTimeout(function () { var a = load(AU); if (a[email]) return rej(err("auth/email-already-in-use")); if (pw.length < 6) return rej(err("auth/weak-password")); var rec = { uid: "u" + Math.random().toString(36).slice(2, 10), email: email }; a[email] = { uid: rec.uid, pw: pw }; save(AU, a); self._set(rec); res({ user: self.app._user }); }, 30); }); };
+      Auth.prototype.signOut = function () { this._set(null); return Promise.resolve(); };
+      function App(name) { this.name = name; this._user = null; this._auth = null; this._fs = null; }
+      App.prototype.auth = function () { return this._auth || (this._auth = new Auth(this)); };
+      App.prototype.firestore = function () { return this._fs || (this._fs = new Firestore(this)); };
+      if (sessionStorage.getItem("__mockOffline") === "1") window.__offline = true;
+      window.firebase = {
+        apps: apps,
+        initializeApp: function (cfg, name) { var a = new App(name || "[DEFAULT]"); apps.push(a); return a; },
+        app: function (name) { name = name || "[DEFAULT]"; return apps.filter(function (a) { return a.name === name; })[0]; },
+        auth: { Auth: { Persistence: { LOCAL: "local", NONE: "none", SESSION: "session" } }, EmailAuthProvider: { credential: function (e, p) { return { email: e, pw: p }; } } },
+        firestore: { FieldValue: { delete: function () { return DEL; } } }
+      };
+      window.firebase.auth.Auth = window.firebase.auth.Auth;
+    })();
+    
+  }
+  function demoSeed() {
+    var now = Date.now(), db = {}, me = { uid: "dAdm", name: "You" };
+    var reps = [{ uid: "dR1", name: "Jordan Lee" }, { uid: "dR2", name: "Sam Ortiz" }, { uid: "dR3", name: "Mia Chen" }];
+    var FN = "James Olivia Robert Emma Michael Sophia David Isabella William Mia Richard Charlotte Joseph Amelia Thomas Harper Charles Evelyn Daniel Abigail Matthew Emily Anthony Ella Mark Grace Steven Chloe Andrew Lily".split(" ");
+    var LN = "Walsh Bennett Carter Hughes Foster Graham Reyes Patel Kim Morgan Brooks Price Sanders Ross Coleman Jenkins Perry Powell Long Butler Barnes Fisher Hayes Myers Ford Hamilton Stone Wallace Cole West".split(" ");
+    var ST = [["NY", 212], ["NJ", 201], ["FL", 305], ["CA", 415], ["TX", 713], ["IL", 312], ["MA", 617], ["GA", 404], ["AZ", 602], ["CO", 303]];
+    var s = 42, rnd = function () { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; }, pick = function (a) { return a[Math.floor(rnd() * a.length)]; };
+    db["members/dAdm"] = { username: "demo", name: "You", role: "admin", active: true, lastSeen: now };
+    reps.forEach(function (r, i) { db["members/" + r.uid] = { username: ["jordan", "sam", "mia"][i], name: r.name, role: "rep", active: true, lastSeen: now }; });
+    var leads = {}, ids = [];
+    for (var i = 0; i < 240; i++) {
+      var st = ST[i % ST.length], id = "dm" + i, ph = String(st[1]) + String(200 + Math.floor(rnd() * 700)) + String(10000 + i).slice(-4);
+      leads[id] = { id: id, name: pick(FN) + " " + pick(LN), phoneRaw: "(" + ph.slice(0, 3) + ") " + ph.slice(3, 6) + "-" + ph.slice(6), phone: "+1" + ph,
+        notes: IND.demo.note(Math.floor(rnd() * 1000), st[0]), st: st[0], stage: "New Lead", amount: 0, status: "pending", outcome: null,
+        calledAt: null, seq: i, tasks: [], texts: [], source: IND.demo.lists[i < 140 ? 0 : 1] };
+      ids.push(id);
+    }
+    var OUT = [["noanswer", "No answer", 46], ["voicemail", "Voicemail", 22], ["notinterested", "Not interested", 14], ["interested", "Interested", 8], ["callback", "Callback", 6], ["badnum", "Bad number", 4]];
+    var outcome = function () { var x = rnd() * 100, a = 0; for (var k = 0; k < OUT.length; k++) { a += OUT[k][2]; if (x < a) return OUT[k]; } return OUT[0]; };
+    var days = {}, n = 0, worked = ids.slice(0, 150);
+    for (var d = 13; d >= 0; d--) {
+      var day = new Date(now - d * 86400000); if (day.getDay() === 0 || day.getDay() === 6) continue;
+      reps.concat([me]).forEach(function (r) {
+        var count = r === me ? 5 + Math.floor(rnd() * 6) : 28 + Math.floor(rnd() * 30);
+        for (var c = 0; c < count; c++) {
+          var lid = worked[Math.floor(rnd() * worked.length)], o = outcome(), t = new Date(day);
+          t.setHours(9 + Math.floor(rnd() * 8), Math.floor(rnd() * 60), 0, 0);
+          if (t.getTime() > now) continue;
+          var cid = "dc" + (n++), key = t.toISOString().slice(0, 10);
+          (days[key] = days[key] || {})[cid] = { id: cid, leadId: lid, name: leads[lid].name, outcomeKey: o[0], outcome: o[1], attempt: 1 + Math.floor(rnd() * 3), timestamp: t.toISOString(), by: { uid: r.uid, name: r.name },
+            talk: o[0] === "noanswer" ? 15 + Math.floor(rnd() * 15) : o[0] === "voicemail" ? 30 + Math.floor(rnd() * 25) : 60 + Math.floor(rnd() * 420) };
+          var L = leads[lid];
+          if (!L.calledAt || L.calledAt < t.toISOString()) { L.calledAt = t.toISOString(); L.outcome = o[0]; L.status = "done"; L.owner = { uid: r.uid, name: r.name }; }
+        }
+      });
+    }
+    Object.keys(days).forEach(function (k) { db["callDays/" + k] = { calls: days[k] }; });
+    var stages = ["Qualified", "Pitched", "Qualified", "Pitched", "Objection", "Pitched", "Committed", "Committed"], due = [-2, 0, 1, 3];
+    worked.filter(function (id) { return leads[id].outcome === "interested" || leads[id].outcome === "callback"; }).slice(0, 22).forEach(function (id, k) {
+      var L = leads[id], sg = stages[k % stages.length], at = now + due[k % 4] * 86400000 + (k % 3) * 3600000;
+      L.stage = sg; L.amount = (2 + Math.floor(rnd() * 20)) * IND.demo.amt;
+      L.stageLog = [{ s: "Qualified", at: now - 8 * 86400000 }].concat(sg !== "Qualified" ? [{ s: sg, at: now - (k % 6) * 86400000 }] : []);
+      if (sg !== "Committed") L.tasks = [{ id: "dt" + k, leadId: id, leadName: L.name, type: "Call", priority: "High", due: new Date(at).toISOString().slice(0, 10), dueAt: at, note: "Follow up on the overview", done: false, auto: true, assignee: L.owner || me }];
+    });
+    var chunk = function (a, b) { var o = {}; ids.slice(a, b).forEach(function (id) { o[id] = leads[id]; }); return { leads: o }; };
+    db["leadChunks/c001"] = chunk(0, 150); db["leadChunks/c002"] = chunk(150, 240);
+    db["leadChunks/_team"] = { goals: { dR1: { calls: 900, interested: 45, committed: 1000000 }, dR2: { calls: 800, interested: 40, committed: 750000 }, dR3: { calls: 900, interested: 45, committed: 1000000 } } };
+    [["Catherine Hughes", 250000, "Funded", 20, "Pre-IPO AI chips"], ["Marcus Bennett", 500000, "Committed", 4, "Series E fintech"], ["Priya Patel", 150000, "Closed", 60, "Defense tech"],
+     ["Daniel Ross", 100000, "Committed", 11, "Payments platform"], ["Elena Morgan", 350000, "Funded", 35, "Data platform"]].forEach(function (v, k) {
+      var o = k % 2 ? reps[k % 3] : me;
+      db["vault/dv" + k] = { name: v[0], phone: "+1212555" + (1200 + k), phoneRaw: "(212) 555-" + (1200 + k), state: "NY", leadId: "", ownerUid: o.uid, ownerName: o.name, createdAt: now - v[3] * 86400000,
+        investments: [{ id: "di" + k, deal: IND.demo.deals[k], amount: Math.round(v[1] / 25000 * IND.demo.amt), date: new Date(now - v[3] * 86400000).toISOString().slice(0, 10), status: v[2], done: v[2] === "Committed" ? (k === 1 ? (function () { var o = {}; o[IND.steps[0][0]] = now; return o; })() : {}) : {} }],
+        keyDates: [], interests: "Late-stage tech", notes: "", lastContactAt: now - k * 9 * 86400000, nextReachOut: "", removalRequest: null, updatedAt: now };
+    });
+    return db;
+  }
+  if (DEMO) {
+    installDemoBackend();
+    try {
+      if (!window.localStorage.getItem("__mockfs") || window.localStorage.getItem("dovetail_demo_v") !== "1:" + IND_KEY) {
+        window.localStorage.setItem("__mockfs", JSON.stringify(demoSeed()));
+        var da = {}; da["demo@" + BASE_DOMAIN] = { uid: "dAdm", pw: "demo" };
+        window.localStorage.setItem("__mockauth", JSON.stringify(da)); window.localStorage.setItem("dovetail_demo_v", "1:" + IND_KEY);
+      }
+      window.sessionStorage.setItem("__mocksess", JSON.stringify({ uid: "dAdm", email: "demo@" + BASE_DOMAIN }));
+    } catch (e) {}
+  }
+  function exitDemo() {
+    ["__mockfs", "__mockauth", "dovetail_demo", "dovetail_demo_v", "dovetail_demo_ind", "dovetail_team_dAdm"].forEach(function (k) { try { window.localStorage.removeItem(k); } catch (e) {} });
+    try { window.sessionStorage.removeItem("__mocksess"); } catch (e) {}
+    location.replace(location.pathname);
+  }
+  function enterDemo() { try { window.localStorage.setItem("dovetail_demo", "1"); } catch (e) {} location.hash = "demo"; location.reload(); }
+  // Brand words and vocabulary for customer copies: rewrites visible text, so every screen follows automatically.
+  function brandText(t) {
+    if (CUSTOMER.app || CUSTOMER.company) t = t.replace(/Dovetail Investment Group/g, COMPANY).replace(/Dovetail Suite/g, APP_NAME).replace(/\bDovetail\b/g, SHORT_NAME);
+    if (WORD_RE) t = t.replace(WORD_RE, function (m, w, off, str) { return w === "Closed" && str.substr(off + 6, 5) === " Lost" ? w : WORDMAP[w]; });
+    return t;
+  }
+  function brandNode(n) {
+    if (n.nodeType === 3) { var p = n.parentNode; if (p && /^(TEXTAREA|SCRIPT|STYLE)$/.test(p.nodeName)) return; var v = brandText(n.nodeValue); if (v !== n.nodeValue) n.nodeValue = v; return; }
+    if (n.nodeType !== 1 || /^(SCRIPT|STYLE|TEXTAREA)$/.test(n.nodeName)) return;
+    if (n.nodeName === "OPTION" && !n.hasAttribute("value")) n.setAttribute("value", n.textContent);   // relabel only; the stored value stays
+    ["placeholder", "aria-label", "title"].forEach(function (a) { if (n.hasAttribute(a)) { var v = brandText(n.getAttribute(a)); if (v !== n.getAttribute(a)) n.setAttribute(a, v); } });
+    for (var c = n.firstChild; c; c = c.nextSibling) brandNode(c);
+  }
+  if (CUSTOMER.app || CUSTOMER.company || WORD_RE) {
+    document.title = APP_NAME;
+    var startBrand = function () {
+      brandNode(document.body);
+      new MutationObserver(function (ms) { ms.forEach(function (m) { if (m.type === "characterData") brandNode(m.target); else m.addedNodes.forEach(brandNode); }); })
+        .observe(document.body, { childList: true, subtree: true, characterData: true });
+    };
+    if (document.body) startBrand(); else document.addEventListener("DOMContentLoaded", startBrand);
+  }
+
 (function () {
   "use strict";
 
@@ -3454,7 +3785,7 @@
 
   /** ---------- Core queue logic ---------- **/
   function allPendingLeads() {
-    return state.leads.filter(function (l) { return l.status === "pending" && !claimedByOther(l) && inPrefWindow(l); });
+    return state.leads.filter(function (l) { return l.status === "pending" && !claimedByOther(l) && inPrefWindow(l) && !isDnc(l); });
   }
 
   function pendingLeads() {
@@ -3538,6 +3869,7 @@
       id: uid(), leadId: lead.id, name: lead.name, phone: lead.phone, phoneRaw: lead.phoneRaw, notes: lead.notes,
       outcomeKey: outcome, outcome: outcomeLabel(outcome), attempt: attempt, timestamp: lead.calledAt, talk: talkFor(lead.id)
     };
+    if (outcome === "interested") state.lastInterested = { id: lead.id, at: Date.now() };
     if (TEAM.on && TEAM.me) {
       callEntry.by = meRef();
       if (!lead.owner) lead.owner = meRef();
@@ -3797,7 +4129,7 @@
   }
   function dueTasks() {
     var now = Date.now();
-    return state.tasks.filter(function (t) { return !t.done && t.leadId && taskDueTs(t) <= now && myTask(t) && inPrefWindow(findLeadById(t.leadId)); })
+    return state.tasks.filter(function (t) { return !t.done && t.leadId && taskDueTs(t) <= now && myTask(t) && !isDnc(findLeadById(t.leadId)) && inPrefWindow(findLeadById(t.leadId)); })
       .sort(function (a, b) { return taskDueTs(a) - taskDueTs(b); });
   }
   function dayLabel(d) {
@@ -3896,9 +4228,9 @@
     myName: "Vincent",
     noAnswerOn: true,
     afterVoicemail: false,
-    noAnswerTpl: "Hi {first}, this is {me} with Dovetail Investment Group. Sorry I missed you. I\u2019d love to find a better time to connect. Reply STOP and I won\u2019t reach out again.",
+    noAnswerTpl: "Hi {first}, this is {me} with " + COMPANY + ". Sorry I missed you. I\u2019d love to find a better time to connect. Reply STOP and I won\u2019t reach out again.",
     interestedOn: true,
-    interestedTpl: "Hi {first}, it\u2019s {me} from Dovetail Investment Group. Thank you for taking the time to speak with me today. I\u2019ll follow up {next} as we discussed. Feel free to text me here anytime. Reply STOP to opt out."
+    interestedTpl: "Hi {first}, it\u2019s {me} from " + COMPANY + ". Thank you for taking the time to speak with me today. I\u2019ll follow up {next} as we discussed. Feel free to text me here anytime. Reply STOP to opt out."
   };
   var pendingText = null;
   var leftAppCount = 0;
@@ -4123,6 +4455,8 @@
     var lead = findLeadById(id);
     if (!lead) { showToast("That lead was removed"); return; }
     profileLeadId = id;
+    var hl0 = findLeadById(id);
+    if (hl0 && hl0.handoff && TEAM.me && hl0.handoff.to && hl0.handoff.to.uid === TEAM.me.uid && !hl0.handoff.seen) { hl0.handoff.seen = true; saveState(); }
     var calls = callsForLead(id);
     var tasks = state.tasks.filter(function (t) { return t.leadId === id; });
     var last = calls[calls.length - 1];
@@ -4146,6 +4480,9 @@
       '<button class="close-x" id="lpClose">&times;</button>' +
       '<h3 class="lp-name">' + escapeHtml(lead.name) + '</h3>' +
       '<button class="star-btn lp-star' + (isHot(lead.id) ? ' on' : '') + '" data-star="' + lead.id + '">\u2605 ' + (isHot(lead.id) ? 'On your hot list' : 'Add to hot list') + '</button>' +
+      (TEAM.on && !isDnc(lead) && closers().some(function (m) { return !TEAM.me || m.uid !== TEAM.me.uid; }) ? '<button class="star-btn lp-star" data-handoff="' + lead.id + '">\u21aa Hand off to a closer</button>' : '') +
+      '<button class="star-btn lp-star' + (isDnc(lead) ? ' dnc-on' : '') + '" data-dnc-toggle="' + lead.id + '">' + (isDnc(lead) ? '\u26d4 On the Do Not Call list' : 'Do not call') + '</button>' +
+      handoffInfoHtml(lead) +
       '<div class="lp-phone">' + escapeHtml(formatPhoneDisplay(lead.phoneRaw)) + '</div>' +
       (lead.source ? '<div class="lp-src">List: ' + escapeHtml(lead.source) + (lead.addedAt ? ' \u00b7 added ' + escapeHtml(dayLabel(new Date(lead.addedAt))) : '') + '</div>' : '') +
       (TEAM.on ? '<div class="lp-src">' + (lead.owner ? 'Owner: ' + escapeHtml(lead.owner.name) : 'Not assigned yet') + (claimedByOther(lead) ? ' \u00b7 <b>' + escapeHtml(lead.claim.name) + ' is on this lead now</b>' : '') + '</div>' : '') +
@@ -4171,7 +4508,7 @@
       '<input id="lpAmount" type="number" min="0" step="1000" inputmode="numeric" value="' + (Number(lead.amount) || 0) + '">' +
       '<label for="lpNotes">Notes</label>' +
       '<textarea id="lpNotes" style="min-height:70px">' + escapeHtml(lead.notes || "") + '</textarea>' +
-      (TEAM.on && isAdmin() ? '<label for="lpOwner">Assigned to</label><select id="lpOwner">' +
+      (TEAM.on && canSeeTeam() ? '<label for="lpOwner">Assigned to</label><select id="lpOwner">' +
         Object.keys(TEAM.members).map(function (k) { return TEAM.members[k]; }).filter(function (m) { return m.active || (lead.owner && lead.owner.uid === m.uid); })
           .map(function (m) { return '<option value="' + m.uid + '"' + (lead.owner && lead.owner.uid === m.uid ? ' selected' : '') + '>' + escapeHtml(m.name || m.username) + '</option>'; }).join("") +
         (lead.owner ? '' : '<option value="" selected>Not assigned yet</option>') + '</select>' : '') +
@@ -4249,7 +4586,7 @@
         (key === "all" ? "All" : outcomeLabel(key)) + ' <span class="chip-n">' + (counts[key] || 0) + '</span></button>';
     }).join("");
     main.innerHTML =
-      (TEAM.on && isAdmin() ? repSelectHtml() : '') +
+      (TEAM.on && canSeeTeam() ? repSelectHtml() : '') +
       '<div class="crm-search"><input type="search" id="histSearch" placeholder="Search name or number" autocomplete="off" value="' + escapeHtml(historyQuery) + '"></div>' +
       '<div class="filter-row" id="filterRow">' + chips + '</div>' +
       '<div id="histListWrap"></div>';
@@ -4448,7 +4785,7 @@
       { title: "No date", cls: "noanswer", items: open.filter(function (t) { return !t.due && !t.dueAt; }) }
     ];
     var doneList = state.tasks.filter(function (t) { return t.done && taskScope(t); }).sort(function (a, b) { return (b.doneAt || 0) - (a.doneAt || 0); });
-    var html = header + (TEAM.on && isAdmin() ? '<div class="filter-row tscope"><button class="filter-chip' + (TEAM.taskScope === "mine" ? " active" : "") + '" data-tscope="mine">Mine</button><button class="filter-chip' + (TEAM.taskScope === "all" ? " active" : "") + '" data-tscope="all">Everyone\u2019s</button></div>' : '');
+    var html = header + (TEAM.on && canSeeTeam() ? '<div class="filter-row tscope"><button class="filter-chip' + (TEAM.taskScope === "mine" ? " active" : "") + '" data-tscope="mine">Mine</button><button class="filter-chip' + (TEAM.taskScope === "all" ? " active" : "") + '" data-tscope="all">Everyone\u2019s</button></div>' : '');
     sections.forEach(function (sec) {
       if (!sec.items.length) return;
       html += '<div class="task-section-head" style="color:var(--' + sec.cls + ')">' + sec.title + ' (' + sec.items.length + ')</div>';
@@ -4734,7 +5071,7 @@
     if (enterCls && lastShownLeadId !== null) setTimeout(revealCard, 30);
     lastShownLeadId = lead.id;
     main.innerHTML =
-      (focus ? '' : followupBannerHtml()) + spamBannerHtml() + overdueBannerHtml() + lockReqBannerHtml() + (focus ? '' : briefCardHtml() + hotStripHtml(lead.id)) +
+      (focus ? '' : followupBannerHtml()) + spamBannerHtml() + overdueBannerHtml() + handoffBannerHtml() + contestBannerHtml() + lockReqBannerHtml() + (focus ? '' : briefCardHtml() + installCardHtml() + hotStripHtml(lead.id)) +
       '<div class="card' + enterCls + '">' +
         '<div class="eyebrow-row">' +
           (focus
@@ -4812,7 +5149,8 @@
     var swb = document.getElementById("spamWarnBtn");
     if (swb) swb.addEventListener("click", function () { openCoach("me"); });
     if (pacingWait(Date.now()) > 0) pacingTick();
-    [["briefOpen", openBrief], ["overdueWarnBtn", openOverdue], ["lockReqBtn", function () { lockSetup().then(function () { render(); }); }],
+    checkBadges(); maybeAutoTour();
+    [["briefOpen", openBrief], ["contestBtn", openContestBoard], ["installHow", openInstall], ["installHide", function () { state.installHideUntil = Date.now() + 14 * 86400000; saveState(); render(); }], ["overdueWarnBtn", openOverdue], ["lockReqBtn", function () { lockSetup().then(function () { render(); }); }],
      ["briefHide", function () { state.briefSeen = localDateStr(new Date()); saveState(); render(); }]].forEach(function (x) {
       var el = document.getElementById(x[0]); if (el) el.addEventListener("click", x[1]);
     });
@@ -4855,6 +5193,7 @@
   }
 
   function hasImportData() {
+    if (CUSTOMER.company) return false;
     return typeof ELITE_INVESTORS_DATA !== "undefined" && ELITE_INVESTORS_DATA.length > 0;
   }
 
@@ -5260,7 +5599,9 @@
     last: /^(last|last ?name|surname|family ?name|lname)$/i,
     phone: /(phone|mobile|cell|tel\b|telephone|number|contact ?#)/i,
     email: /e-?mail/i,
-    company: /(company|firm|organi[sz]ation|employer|business)/i,
+    company: /(company|firm|organi[sz]ation|employer|business|account ?name)/i,
+    title: /^(title|job ?title|position)$/i,
+    status: /^(lead ?status|status|lifecycle ?stage|stage|deal ?stage|disposition)$/i,
     address: /(address|street)/i,
     city: /^(city|town)$/i,
     state: /^(state|st|province|region)$/i,
@@ -5276,6 +5617,7 @@
       rows[r].forEach(function (cell, c) {
         var h = String(cell).trim();
         if (!h || h.length > 40 || /\d{5,}/.test(h)) return;
+        if (/(account|lead|record|order|deal|customer|employee)\s*(number|no\.?|#|id)|number of|^id$/i.test(h)) return;
         var keys = Object.keys(HEAD);
         for (var i = 0; i < keys.length; i++) {
           var k = keys[i];
@@ -5287,16 +5629,23 @@
       });
       if (m.phone.length && hits >= 2) { map = m; hIdx = r; }
     }
+    if (map) {   // exports from other CRMs: Close's "Lead Name" is the company; mobile numbers are tried first
+      var hr = rows[hIdx].map(function (x) { return String(x == null ? "" : x).trim(); });
+      var ci = hr.findIndex(function (h) { return /^contact ?name$/i.test(h); }), li = hr.findIndex(function (h) { return /^lead ?name$/i.test(h); });
+      if (ci > -1 && li > -1) { map.name = ci; map.company = li; }
+      map.phone.sort(function (a, b) { return (/mobile|cell/i.test(hr[b]) ? 1 : 0) - (/mobile|cell/i.test(hr[a]) ? 1 : 0); });
+    }
     function at(row, c) { return c === undefined ? "" : String(row[c] == null ? "" : row[c]).trim(); }
     var leads = [], skipped = 0;
     rows.slice(hIdx + 1).forEach(function (row) {
-      var name = "", phones = [], parts = [], st = "";
+      var name = "", phones = [], parts = [], st = "", stg = "";
       if (map) {
         name = map.name !== undefined ? at(row, map.name) : [at(row, map.first), at(row, map.last)].join(" ").trim();
         phones = map.phone.map(function (c) { return at(row, c); }).filter(uploadPhoneOk);
         st = stateCode(at(row, map.state));
         var place = [at(row, map.address), at(row, map.city), at(row, map.state), at(row, map.zip)].filter(Boolean).join(" ");
-        parts = [at(row, map.company), at(row, map.email), place, at(row, map.notes)];
+        stg = crmStage(at(row, map.status));
+        parts = [at(row, map.company), at(row, map.title), at(row, map.email), place, at(row, map.notes), at(row, map.status) ? "Status: " + at(row, map.status) : ""];
       } else {
         row.forEach(function (cell) {
           var v = String(cell == null ? "" : cell).trim();
@@ -5308,9 +5657,9 @@
       }
       if (!phones.length) { skipped++; return; }
       if (phones.length > 1) parts.push("Alt: " + phones.slice(1).join(", "));
-      leads.push(makeLead(name, phones[0], parts.filter(Boolean).join(" | "), st));
+      var nl = makeLead(name, phones[0], parts.filter(Boolean).join(" | "), st); if (stg) nl.stage = stg; leads.push(nl);
     });
-    return { leads: leads, skipped: skipped };
+    return { leads: leads, skipped: skipped, crm: map ? crmDetect(rows[hIdx]) : "" };
   }
 
   var pendingUpload = null;
@@ -5350,9 +5699,10 @@
         : "Couldn\u2019t read that file. Save it as Excel (.xlsx) or CSV and try again.");
     }
     if (!result.leads.length && !result.skipped) return uploadFail("No leads found in that file. Make sure it has a column of phone numbers.");
-    var have = {}, seen = {}, fresh = [], dupes = 0;
+    var have = {}, seen = {}, fresh = [], dupes = 0, dncSkip = 0;
     state.leads.forEach(function (l) { have[l.phone] = true; });
     result.leads.forEach(function (l) {
+      if (isDnc(l)) { dncSkip++; return; }
       if (have[l.phone] || seen[l.phone]) { dupes++; return; }
       seen[l.phone] = true;
       fresh.push(l);
@@ -5363,12 +5713,12 @@
         : !sk ? "Every lead in that file is already in your list. Nothing new to add."
         : "Nothing new to add: " + dupes + " already in your list, " + sk + " row" + (sk === 1 ? "" : "s") + " without a usable phone number.");
     }
-    pendingUpload = { leads: fresh, dupes: dupes, skipped: result.skipped, source: base, fileName: fname };
+    pendingUpload = { leads: fresh, dupes: dupes, skipped: result.skipped, source: base, fileName: fname, crm: result.crm || "", dnc: dncSkip };
     renderUploadPreview();
   }
   function renderUploadPreview() {
     var pu = pendingUpload, n = pu.leads.length, s = n === 1 ? "" : "s";
-    var notes = [pu.dupes ? pu.dupes + " already in your list (skipped)" : "",
+    var notes = [pu.crm ? "Read as a " + pu.crm + " export" : "", pu.dnc ? pu.dnc + " on your Do Not Call list (skipped)" : "", pu.dupes ? pu.dupes + " already in your list (skipped)" : "",
       pu.skipped ? pu.skipped + " row" + (pu.skipped === 1 ? "" : "s") + " without a usable phone number" : ""].filter(Boolean).join(" \u00b7 ");
     var sample = pu.leads.slice(0, 5).map(function (l) {
       return '<div class="up-row"><span>' + escapeHtml(l.name) + '</span><span>' + escapeHtml(formatPhoneDisplay(l.phoneRaw)) + '</span><span>' + escapeHtml(leadState(l) || "\u2014") + '</span></div>';
@@ -5755,7 +6105,7 @@
   /** ---------- Team mode: logins, one shared list, lead locks ---------- **/
   // Everything shared (leads, notes, pipeline, follow-ups, calls) lives in your
   // private Firebase database; only signed-in, active team members can read it.
-  var FIREBASE_CONFIG = {
+  var FIREBASE_CONFIG = CUSTOMER.firebase || {
     apiKey: "AIzaSyAdtYFpI6YkpGXdgSIGrmCOQvSxqs9jPac",
     authDomain: "dovetail-f863c.firebaseapp.com",
     projectId: "dovetail-f863c",
@@ -5763,9 +6113,9 @@
     messagingSenderId: "49612256344",
     appId: "1:49612256344:web:5b2ace3e051f6654ec862d"
   };
-  var TEAM_OWNER = "vincent";
-  var TEAM_DOMAIN = "dovetail-f863c.firebaseapp.com";
-  var TEAM_LINK = "https://777n2n8n5w-cloud.github.io/dovetail/";
+  var TEAM_OWNER = CUSTOMER.owner || "vincent";
+  var TEAM_DOMAIN = BASE_DOMAIN;
+  var TEAM_LINK = CUSTOMER.firebase ? location.origin + location.pathname : "https://777n2n8n5w-cloud.github.io/dovetail/";
   var CHUNK_MAX = 150, CHUNK_BYTES = 600000;
   var CLAIM_TTL = 20 * 60 * 1000;
   var CALL_DAYS = 45;
@@ -5809,7 +6159,7 @@
     if (isAdmin()) return TEAM.histRep === "all" || !!(c.by && c.by.uid === TEAM.histRep);
     return myCall(c);
   }
-  function pipeScope(l) { return !TEAM.on || isAdmin() || !!(l.owner && TEAM.me && l.owner.uid === TEAM.me.uid); }
+  function pipeScope(l) { return !TEAM.on || canSeeTeam() || !!(l.owner && TEAM.me && l.owner.uid === TEAM.me.uid); }
   function teamPayload(lead, tasks, texts) {
     var p = {};
     Object.keys(lead).forEach(function (k) { if (k !== "ck" && lead[k] !== undefined) p[k] = lead[k]; });
@@ -6037,7 +6387,7 @@
     if (!m || m.active !== true) { await forceSignOut("Your access has been turned off. Contact your admin.", "start:" + (m ? "inactive" : "removed")); return; }
     document.getElementById("authConnecting").textContent = "Connecting\u2026";
     TEAM.startDenied = 0;
-    TEAM.me = { uid: user.uid, username: m.username || username, name: m.name || username, role: m.role || "rep" };
+    TEAM.me = { uid: user.uid, username: m.username || username, name: m.name || username, role: m.role || "rep", createdAt: m.createdAt || 0, closer: !!m.closer };
     STORAGE_KEY = "dovetail_team_" + user.uid;
     state = loadTeamPrefs();
     if (!state.textSettings) { textSettings(); state.textSettings.myName = firstName(TEAM.me.name); }
@@ -6098,10 +6448,11 @@
   function applyTeamVisibility() {
     document.body.classList.toggle("team-admin", TEAM.on && isAdmin());
     document.body.classList.toggle("team-rep", TEAM.on && !!TEAM.me && !isAdmin());
+    document.body.classList.toggle("team-manager", TEAM.on && isManager());
     var acct = document.getElementById("accountSection");
     if (acct) acct.style.display = TEAM.on && TEAM.me ? "" : "none";
     var who = document.getElementById("acctWho");
-    if (who && TEAM.me) who.textContent = TEAM.me.name + " \u00b7 " + (isAdmin() ? "Admin" : "Rep") + " \u00b7 username: " + TEAM.me.username;
+    if (who && TEAM.me) who.textContent = TEAM.me.name + " \u00b7 " + (isAdmin() ? "Admin" : isManager() ? "Manager" : "Rep") + (TEAM.me.closer ? " \u00b7 Closer" : "") + " \u00b7 username: " + TEAM.me.username;
   }
 
   /* ----- live listeners ----- */
@@ -6127,6 +6478,7 @@
       var m = {};
       qs.docs.forEach(function (d) { var x = d.data() || {}; x.uid = d.id; m[d.id] = x; });
       TEAM.members = m;
+      if (isAdmin()) syncRoster();
       if (teamModalOpen()) renderTeamPanel();
     }, function () {});
   }
@@ -6177,7 +6529,7 @@
   function teamApplyChunks(qs) {
     var remote = {}, sizes = {};
     qs.docs.forEach(function (d) {
-      if (d.id.charAt(0) === "_") { if (d.id === "_team") TEAM.infoCfg = d.data() || {}; return; }
+      if (d.id.charAt(0) === "_") { if (d.id === "_team") TEAM.infoCfg = d.data() || {}; if (d.id === "_dnc") TEAM.dnc = (d.data() || {}).nums || {}; return; }
       var leads = (d.data() || {}).leads || {};
       sizes[d.id] = Object.keys(leads).length;
       Object.keys(leads).forEach(function (id) { remote[id] = { ck: d.id, v: leads[id] }; });
@@ -6509,11 +6861,14 @@
       var self = TEAM.me && m.uid === TEAM.me.uid, owner = m.username === TEAM_OWNER;
       return '<div class="tm-row' + (m.active ? '' : ' off') + '">' +
         '<div class="tm-main"><b>' + escapeHtml(m.name || m.username) + '</b>' +
-          '<span>' + escapeHtml(m.username) + ' \u00b7 ' + (m.role === "admin" ? "Admin" : "Rep") + (m.active ? '' : ' \u00b7 <em>access off</em>') + '</span>' +
+          '<span>' + escapeHtml(m.username) + ' \u00b7 ' + ({ admin: "Admin", manager: "Manager" }[m.role] || "Rep") + (m.closer ? " \u00b7 Closer" : "") + (m.active ? '' : ' \u00b7 <em>access off</em>') + '</span>' +
           '<span>' + (m.lastSeen ? 'Active ' + escapeHtml(agoStr(new Date(m.lastSeen).toISOString())) : 'Hasn\u2019t signed in yet') +
-            ' \u00b7 ' + (callsBy[m.uid] || 0) + ' calls today' + (onLead[m.uid] ? ' \u00b7 on ' + escapeHtml(onLead[m.uid]) : '') + '</span></div>' +
+            ' \u00b7 ' + (callsBy[m.uid] || 0) + ' calls today' + (onLead[m.uid] ? ' \u00b7 on ' + escapeHtml(onLead[m.uid]) : '') + '</span>' +
+          (m.active ? '<label class="tm-closer"><input type="checkbox" data-tm-closer="' + m.uid + '"' + (m.closer ? ' checked' : '') + '> Closer (takes handoffs)</label>' : '') + '</div>' +
         (self || owner ? '<span class="tm-you">' + (self ? 'You' : 'Owner') + '</span>'
-          : '<div class="tm-actions"><button class="btn-secondary" data-tm-toggle="' + m.uid + '">' + (m.active ? 'Turn off' : 'Turn on') + '</button>' +
+          : '<div class="tm-actions"><select class="tm-role" data-tm-role="' + m.uid + '" aria-label="Role">' + ["rep", "manager", "admin"].map(function (r) {
+              return '<option value="' + r + '"' + ((m.role || "rep") === r ? ' selected' : '') + '>' + { rep: "Rep", manager: "Manager", admin: "Admin" }[r] + '</option>'; }).join("") + '</select>' +
+            '<button class="btn-secondary" data-tm-toggle="' + m.uid + '">' + (m.active ? 'Turn off' : 'Turn on') + '</button>' +
             '<button class="btn-secondary danger-link" data-tm-remove="' + m.uid + '">Remove</button></div>') +
       '</div>';
     }).join("");
@@ -6533,6 +6888,25 @@
     document.getElementById("teamClose").addEventListener("click", function () { document.getElementById("teamModal").classList.remove("show"); });
     document.getElementById("tmGen").addEventListener("click", function () { document.getElementById("tmPw").value = genPassword(); });
     document.getElementById("tmAdd").addEventListener("click", teamAddRep);
+    body.querySelectorAll("[data-tm-role]").forEach(function (sel) {
+      sel.addEventListener("change", function () {
+        var id = sel.getAttribute("data-tm-role"), m = TEAM.members[id] || {}, role = sel.value, prev = m.role || "rep", nm = m.name || m.username || "This person";
+        var go = function () {
+          TEAM.db.collection("members").doc(id).update({ role: role }).then(function () {
+            if (TEAM.members[id]) TEAM.members[id].role = role; syncRoster();
+            showToast(nm + " is now " + (role === "admin" ? "an admin" : role === "manager" ? "a manager" : "a rep")); renderTeamPanel();
+          }).catch(function () { sel.value = prev; showToast("Couldn\u2019t change the role. Check your connection."); });
+        };
+        if (role === "admin") { sel.value = prev; showConfirm("Give " + nm + " full admin access? They can add and remove people and change every setting.", go, "Make admin"); } else go();
+      });
+    });
+    body.querySelectorAll("[data-tm-closer]").forEach(function (c) {
+      c.addEventListener("change", function () {
+        var id = c.getAttribute("data-tm-closer"), on = c.checked;
+        TEAM.db.collection("members").doc(id).update({ closer: on }).then(function () { if (TEAM.members[id]) TEAM.members[id].closer = on; syncRoster(); showToast(on ? "Marked as a closer" : "No longer a closer"); })
+          .catch(function () { c.checked = !on; showToast("Couldn\u2019t save. Check your connection."); });
+      });
+    });
     body.querySelectorAll("[data-tm-toggle]").forEach(function (b) {
       b.addEventListener("click", function () {
         var id = b.getAttribute("data-tm-toggle"), m = TEAM.members[id];
@@ -6773,7 +7147,7 @@
       nextLabel: offset === 0 ? "tomorrow" : "today" };
   }
   function recapText(rec) {
-    var lines = ["Dovetail recap \u2014 " + rec.label,
+    var lines = [SHORT_NAME + " recap \u2014 " + rec.label,
       "Team: " + rec.tot.calls + " calls \u00b7 " + rec.tot.reached + " conversations (" + pct(rec.tot.reached, rec.tot.calls) + ") \u00b7 " + rec.tot.interested + " interested \u00b7 " + rec.tot.dueNext + " follow-ups " + rec.nextLabel, ""];
     rec.rows.forEach(function (r) {
       lines.push(r.name + ": " + r.calls + " calls, " + r.reached + " conversations (" + pct(r.reached, r.calls) + "), " + r.interested + " interested" +
@@ -7042,7 +7416,7 @@
       html += '<h3>My coach</h3><p class="modal-sub">Your own numbers' + (ctx.callers >= 3 ? ', compared with the team average' : '') + '. Only you see this.</p>' +
         '<div class="coach-stats"><div><b>' + me.s.today + '</b><span>calls today</span></div><div><b>' + pctN(me.s.r14, me.s.c14) + '%</b><span>reach, ' + COACH_DAYS + ' days</span></div><div><b>' + me.s.week + '</b><span>calls this week</span></div></div>' +
         (goalBarsHtml(TEAM.on && TEAM.me ? TEAM.me.uid : null) ? '<div class="coach-card"><b>This month</b>' + goalBarsHtml(TEAM.on && TEAM.me ? TEAM.me.uid : null) + '</div>' : '') +
-        '<div class="coach-card">' + insightHtml(me.insights) + '</div>' + protectNumberHtml();
+        '<div class="coach-card">' + insightHtml(me.insights) + '</div>' + badgesHtml() + protectNumberHtml();
     }
     body.innerHTML = html;
     document.getElementById("coachClose").addEventListener("click", function () { document.getElementById("coachModal").classList.remove("show"); });
@@ -7078,7 +7452,7 @@
   /** ---------- Send info: text a few approved links to a lead ---------- **/
   // The admin keeps one link library for the whole team (stored beside the lead lists,
   // so the existing database rules already cover it: everyone reads, only the admin edits).
-  var INFO_DEFAULT = { intro: "Hi {first}, it\u2019s {me} from Dovetail Investment Group. Here\u2019s the information I mentioned:", outro: "Reply STOP to opt out.", links: [] };
+  var INFO_DEFAULT = { intro: "Hi {first}, it\u2019s {me} from " + COMPANY + ". Here\u2019s the information I mentioned:", outro: "Reply STOP to opt out.", links: [] };
   var infoSel = {};
   function infoCfg() {
     var c = (TEAM.on ? TEAM.infoCfg : state.infoCfg) || {};
@@ -7480,8 +7854,8 @@
       return '<div class="vi-form"><input type="text" id="' + idp + 'Deal" placeholder="Deal (e.g. SambaNova)" value="' + escapeHtml(i.deal || "") + '">' +
         '<div class="vi-2"><input type="number" inputmode="decimal" id="' + idp + 'Amt" placeholder="Amount $" value="' + (i.amount || "") + '"><input type="date" id="' + idp + 'Date" value="' + escapeHtml(i.date || localDateStr(new Date())) + '"></div>' +
         '<select id="' + idp + 'Status">' + VAULT_STATUSES.map(function (s) { return '<option' + (i.status === s ? ' selected' : '') + '>' + s + '</option>'; }).join("") + '</select>' +
-        '<div class="vi-steps"><b>Closing checklist</b>' + CLOSE_STEPS.map(function (st) {
-          return '<label class="up-check vi-step"><input type="checkbox" data-step="' + st[0] + '"' + (invDone(i)[st[0]] ? ' checked' : '') + '> ' + st[1] + ' <small>by ' + escapeHtml(shortDate(invBase(i) + st[2] * 86400000)) + '</small></label>';
+        '<div class="vi-steps"><b>Closing checklist</b>' + CLOSE_STEPS.map(function (st, n) {
+          return '<label class="up-check vi-step"><input type="checkbox" data-step="' + st[0] + '"' + (invDone(i)[st[0]] ? ' checked' : '') + '> <span class="vi-step-t">' + (n + 1) + '. ' + st[1] + '</span> <small>by ' + escapeHtml(shortDate(invBase(i) + st[2] * 86400000)) + '</small></label>';
         }).join("") + '</div>' +
         '<div class="vi-btns"><button class="btn-secondary" data-vi-cancel="1">Cancel</button>' + (admin && i.id ? '<button class="btn-secondary danger-link" data-vi-del="' + i.id + '">Remove</button>' : '') + '<button class="btn-primary" data-vi-save="' + (i.id || "") + '">Save</button></div></div>';
     }
@@ -7496,7 +7870,7 @@
     html += '<div class="settings-heading" style="margin:14px 0 6px">Investments</div>' +
       (invs.length ? invs.map(function (i) {
         if (VAULT.editInv === i.id) return invForm(i, "vie");
-        return '<button class="vi-row" data-vi-edit="' + i.id + '"><span><b>' + escapeHtml(i.deal || "Deal not named") + '</b><small>' + escapeHtml(i.date || "") + ' \u00b7 ' + escapeHtml(i.status || "") + (i.status === "Cancelled" || (!i.done && i.status !== "Closed") ? '' : ' \u00b7 ' + (invNextStep(i) ? invStepsDone(i) + '/5 steps \u00b7 next: ' + escapeHtml(invNextStep(i).label) + ' by ' + escapeHtml(shortDate(invNextStep(i).due)) : 'all steps done')) + '</small></span><span class="vr-amt' + (i.status === "Cancelled" ? ' cancelled' : '') + '">' + fmtMoney(Number(i.amount) || 0) + '</span></button>';
+        return '<button class="vi-row" data-vi-edit="' + i.id + '"><span><b>' + escapeHtml(i.deal || "Deal not named") + '</b><small>' + escapeHtml(i.date || "") + ' \u00b7 ' + escapeHtml(i.status || "") + (i.status === "Cancelled" || (!i.done && i.status !== "Closed") ? '' : ' \u00b7 ' + (invNextStep(i) ? invStepsDone(i) + '/' + CLOSE_STEPS.length + ' steps \u00b7 next: ' + escapeHtml(invNextStep(i).label) + ' by ' + escapeHtml(shortDate(invNextStep(i).due)) : 'all steps done')) + '</small></span><span class="vr-amt' + (i.status === "Cancelled" ? ' cancelled' : '') + '">' + fmtMoney(Number(i.amount) || 0) + '</span></button>';
       }).join("") : '<div class="pipe-empty">No investments recorded yet.</div>') +
       (VAULT.addInv ? invForm({ status: "Committed" }, "via") : '<button class="btn-secondary" id="vAddInv" style="width:100%;margin-top:6px">+ Add investment</button>') +
       '<div class="settings-heading" style="margin:14px 0 6px">Key dates</div>' +
@@ -7542,9 +7916,10 @@
         if (!amt && !deal) { showToast("Add a deal name or an amount"); return; }
         var data = { deal: deal, amount: amt, date: document.getElementById(p + "Date").value || localDateStr(new Date()), status: document.getElementById(p + "Status").value };
         var prev = existingId ? (r.investments.filter(function (x) { return x.id === existingId; })[0] || {}) : {}, form = el.closest(".vi-form"), done = {};
-        form.querySelectorAll("[data-step]").forEach(function (cb) { var k = cb.getAttribute("data-step"); if (cb.checked) done[k] = (prev.done && prev.done[k]) || Date.now(); });
+        var pd = invDone(prev);
+        form.querySelectorAll("[data-step]").forEach(function (cb) { var k = cb.getAttribute("data-step"); if (cb.checked) done[k] = pd[k] > 1 ? pd[k] : Date.now(); });
         data.done = done;
-        if (data.status !== "Cancelled") { if (done.shares) data.status = "Closed"; else if (done.wire && data.status === "Committed") data.status = "Funded"; }
+        if (done[IND.fund] && data.status === "Committed") data.status = "Funded";
         if (existingId) { r.investments.forEach(function (i) { if (i.id === existingId) Object.assign(i, data); }); }
         else { data.id = uid(); data.note = ""; r.investments.push(data); }
         VAULT.editInv = null; VAULT.addInv = false;
@@ -7631,6 +8006,7 @@
   }
   // Every Call button goes through here. Returns false (and stops the dial) when it should wait.
   function callGate(lead, e, force) {
+    if (isDnc(lead)) { if (e && e.preventDefault) e.preventDefault(); showToast(lead.name + " is on your team\u2019s Do Not Call list"); return false; }
     var now = Date.now(), cfg = pacingCfg(), st = dialStats(now);
     if (cfg.dayMode === "pause" && st.today >= Number(cfg.perDay)) {
       e.preventDefault();
@@ -7836,14 +8212,15 @@
   }
 
   /* ----- closing checklist (Vault investments) ----- */
-  var CLOSE_STEPS = [["docs", "Docs sent", 1], ["accred", "Accreditation verified", 3], ["signed", "Docs signed", 5], ["wire", "Wire received", 10], ["shares", "Shares delivered", 30]];
+  var CLOSE_STEPS = IND.steps;
   function invBase(i) { var t = i.date ? new Date(i.date + "T00:00:00").getTime() : Date.now(); return isNaN(t) ? Date.now() : t; }
   // Investments recorded before the checklist existed have no "done" field and aren't flagged.
-  // Funded implies the first four steps; Closed implies all five.
+  // Funded or Closed implies all three steps. Ticks from the older 5-step checklist carry over:
+  // "Docs signed" counts as Docs returned; "Wire received" or "Shares delivered" counts as Account funded.
   function invDone(i) {
     var d = Object.assign({}, (i && i.done) || {});
-    if (i && (i.status === "Funded" || i.status === "Closed")) ["docs", "accred", "signed", "wire"].forEach(function (k) { d[k] = d[k] || 1; });
-    if (i && i.status === "Closed") d.shares = d.shares || 1;
+    d.returned = d.returned || d.signed; d.funded = d.funded || d.wire || d.shares;
+    if (i && (i.status === "Funded" || i.status === "Closed")) ["docs", "returned", "funded"].forEach(function (k) { d[k] = d[k] || 1; });
     return d;
   }
   function invNextStep(i) {
@@ -7874,13 +8251,13 @@
   }
   function lateText(h) { return h >= 48 ? Math.floor(h / 24) + " days late" : h + " hours late"; }
   function overdueBannerHtml() {
-    if (!TEAM.on || !isAdmin()) return "";
+    if (!TEAM.on || !canSeeTeam()) return "";
     var n = overdueWarm().length;
     return n ? '<button class="num-warn" id="overdueWarnBtn"><b>' + n + ' interested follow-up' + (n === 1 ? ' is' : 's are') + ' more than a day late</b><span>Tap to see who and reassign with one tap.</span></button>' : "";
   }
   function openOverdue() {
     var list = overdueWarm();
-    var members = Object.keys(TEAM.members).map(function (k) { return TEAM.members[k]; }).filter(function (m) { return m.active; });
+    var members = Object.keys(rosterMap()).map(function (k) { return rosterMap()[k]; }).filter(function (m) { return m.active; });
     var b = featOpen('<h3>Overdue follow-ups</h3><p class="modal-sub">Interested leads whose follow-up is more than a day late. Move any of them to someone who can call today.</p>' +
       (list.length ? list.map(function (x, n) {
         return '<div class="od-row"><div class="od-main"><b data-open-lead="' + x.l.id + '">' + escapeHtml(x.l.name) + '</b><span>' + escapeHtml(x.a ? x.a.name : "Unassigned") + ' \u00b7 ' + lateText(x.late) + ' \u00b7 ' + escapeHtml(x.l.stage || "") + (Number(x.l.amount) ? ' \u00b7 ' + fmtMoney(Number(x.l.amount)) : '') + '</span></div>' +
@@ -7889,7 +8266,7 @@
       }).join("") : '<div class="pipe-empty">Nothing overdue. Nice.</div>'));
     b.querySelectorAll("[data-od-go]").forEach(function (btn) {
       btn.addEventListener("click", function () {
-        var x = list[+btn.getAttribute("data-od-go")], m = TEAM.members[b.querySelector('[data-od-sel="' + btn.getAttribute("data-od-go") + '"]').value];
+        var x = list[+btn.getAttribute("data-od-go")], m = rosterMap()[b.querySelector('[data-od-sel="' + btn.getAttribute("data-od-go") + '"]').value];
         if (!x || !m) return;
         var to = { uid: m.uid, name: m.name || m.username };
         x.l.owner = to;
@@ -8139,6 +8516,423 @@
     });
   }
 
+  /* ----- customer copies ----- */
+  function isOwnerMaster() { return !CUSTOMER.firebase && !DEMO && TEAM.on && TEAM.me && usernameClean(TEAM.me.username) === TEAM_OWNER; }
+  function parseFbConfig(t) {
+    var o = {};
+    ["apiKey", "authDomain", "projectId", "storageBucket", "messagingSenderId", "appId"].forEach(function (k) {
+      var m = String(t || "").match(new RegExp("[\"']?" + k + "[\"']?\\s*:\\s*[\"']([^\"']+)[\"']")); if (m) o[k] = m[1];
+    });
+    return o.apiKey && o.authDomain && o.projectId && o.appId ? o : null;
+  }
+  function customerRules(ownerEmail) { return VAULT_RULES.replace(/vincent@dovetail-f863c\.firebaseapp\.com/g, ownerEmail); }
+  function clipCopy(t, done) {
+    var fallback = function () { var ta = document.createElement("textarea"); ta.value = t; document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); } catch (e) {} ta.remove(); done(); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(done, fallback); else fallback();
+  }
+  function openCustomerCopy() {
+    featOpen('<h3>Make a customer copy</h3><p class="modal-sub">Creates a branded app file for another office, connected to their own database. Their data never touches yours.</p>' +
+      '<label for="cuCompany">Company name</label><input id="cuCompany" type="text" placeholder="Acme Insurance Group">' +
+      '<label for="cuApp">App name</label><input id="cuApp" type="text" placeholder="Acme Dialer">' +
+      '<label for="cuOwner">Their admin username</label><input id="cuOwner" type="text" autocapitalize="none" spellcheck="false" placeholder="pat">' +
+      '<label for="cuInd">Industry</label><select id="cuInd">' + Object.keys(INDUSTRIES).map(function (k) { return '<option value="' + k + '">' + escapeHtml(INDUSTRIES[k].name) + ' (' + INDUSTRIES[k].many + ')</option>'; }).join("") +
+        '<option value="investments:clients">Investments (Clients)</option></select>' +
+      '<label for="cuTheme">Starting theme</label><select id="cuTheme">' + THEMES.map(function (t) { return '<option value="' + t.id + '">' + escapeHtml(t.name) + '</option>'; }).join("") + '</select>' +
+      '<label for="cuFb">Their Firebase web config</label><textarea id="cuFb" rows="6" placeholder="Paste the firebaseConfig block from their Firebase console (Project settings \u2192 Your apps)"></textarea>' +
+      '<div class="field-error" id="cuErr"></div>' +
+      '<div class="modal-actions"><button class="btn-primary" id="cuMake">Download their app</button><button class="btn-secondary" id="cuRules">Copy their security rules</button></div>' +
+      '<div class="settings-heading" style="margin:14px 0 6px">Setup steps</div><ol class="cu-steps">' +
+      '<li>In their Google account, create a Firebase project, add a Web app, and copy its config.</li>' +
+      '<li>Turn on Authentication \u2192 Email/Password, and create the Firestore database.</li>' +
+      '<li>Paste the config above, tap <b>Copy their security rules</b>, and publish them in Firestore \u2192 Rules.</li>' +
+      '<li>Tap <b>Download their app</b> and deploy the file with Firebase Hosting at their web address.</li>' +
+      '<li>Open their address with <b>#setup</b> at the end to create their admin login, then add their reps.</li></ol>');
+    var val = function (id) { return document.getElementById(id).value.trim(); }, err = document.getElementById("cuErr");
+    var collect = function () {
+      var co = val("cuCompany"), ap = val("cuApp") || co, ow = usernameClean(val("cuOwner")), fb = parseFbConfig(val("cuFb"));
+      if (!co) { err.textContent = "Add their company name."; return null; }
+      if (!ow) { err.textContent = "Add the username their admin will sign in with."; return null; }
+      if (!fb) { err.textContent = "That doesn\u2019t look like a Firebase config. It needs apiKey, authDomain, projectId and appId."; return null; }
+      err.textContent = "";
+      var iv = val("cuInd").split(":");
+      return { company: co, app: ap, owner: ow, industry: iv[0], term: iv[1] || "", theme: val("cuTheme"), firebase: fb };
+    };
+    document.getElementById("cuRules").addEventListener("click", function () {
+      var c = collect(); if (!c) return;
+      clipCopy(customerRules(c.owner + "@" + c.firebase.authDomain), function () { showToast("Security rules copied for " + c.company); });
+    });
+    document.getElementById("cuMake").addEventListener("click", function () {
+      var c = collect(); if (!c) return;
+      fetch(location.pathname, { cache: "no-store" }).then(function (r) { return r.text(); }).then(function (src) {
+        var json = JSON.stringify(c).replace(/</g, "\\u003c"), hi = src.indexOf("</head>");
+        if (hi < 0) throw new Error("no head");
+        // Only the page header changes; the app code below is copied exactly as is.
+        var out = src.slice(0, hi).replace(/<script id="customerConfig" type="application\/json">[\s\S]*?<\/script>/, function () { return '<script id="customerConfig" type="application/json">' + json + '<\/script>'; })
+          .replace(/<title>[^<]*<\/title>/, function () { return "<title>" + escapeHtml(c.app) + "</title>"; })
+          .replace(/(apple-mobile-web-app-title" content=")[^"]*/g, function (m0, a) { return a + escapeHtml(c.app); }) + src.slice(hi);
+        if (out.indexOf("var CUSTOMER = ") < 0 || out.length < src.length * 0.99) throw new Error("copy check");
+        var a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([out], { type: "text/html" })); a.download = "index.html";
+        document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+        showToast(c.app + " is ready. Deploy it to their Firebase Hosting.");
+      }).catch(function () { err.textContent = "Couldn\u2019t read the app file. Check your connection and try again."; });
+    });
+  }
+  /* ----- install like a real app ----- */
+  function isStandalone() { return !!(window.navigator.standalone || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches)); }
+  function phoneKind() { var u = navigator.userAgent || ""; return /iPhone|iPad|iPod/.test(u) ? "ios" : /Android/.test(u) ? "android" : ""; }
+  function installCardHtml() {
+    if (!phoneKind() || isStandalone() || DEMO || (state.installHideUntil || 0) > Date.now()) return "";
+    if (state.callLog.filter(myCall).length < 5) return "";
+    return '<div class="brief-card install-card"><div class="brief-txt"><b>Put ' + escapeHtml(SHORT_NAME) + ' on your home screen</b><span>Opens full screen like a regular app, one tap away.</span></div>' +
+      '<div class="brief-btns"><button class="btn-primary" id="installHow">How</button><button class="skip-btn" id="installHide">Later</button></div></div>';
+  }
+  function openInstall() {
+    var k = phoneKind();
+    featOpen('<h3>Install on your phone</h3><p class="modal-sub">Takes about 10 seconds. After that, ' + escapeHtml(SHORT_NAME) + ' opens full screen from its own icon.</p>' +
+      (k !== "android" ? '<div class="settings-heading" style="margin:12px 0 6px">iPhone (Safari)</div><ol class="cu-steps"><li>Tap the <b>Share</b> button (the square with an arrow) at the bottom of Safari.</li><li>Scroll down and tap <b>Add to Home Screen</b>.</li><li>Tap <b>Add</b>, then open it from your home screen and sign in once.</li></ol>' : '') +
+      (k !== "ios" ? '<div class="settings-heading" style="margin:12px 0 6px">Android (Chrome)</div><ol class="cu-steps"><li>Tap the <b>\u22ee</b> menu at the top right.</li><li>Tap <b>Add to Home screen</b> or <b>Install app</b>.</li><li>Tap <b>Add</b>, then sign in once from the new icon.</li></ol>' : '') +
+      '<div class="modal-actions"><button class="btn-secondary" id="installDone" style="width:100%">Got it</button></div>');
+    document.getElementById("installDone").addEventListener("click", function () { state.installHideUntil = Date.now() + 30 * 86400000; saveState(); featClose(); render(); });
+  }
+  (function makeAppIcon() {
+    try {
+      var c = document.createElement("canvas"); c.width = c.height = 180; var g = c.getContext("2d"), grd = g.createLinearGradient(0, 0, 180, 180);
+      grd.addColorStop(0, "#1B2A41"); grd.addColorStop(1, "#0B1220"); g.fillStyle = grd; g.fillRect(0, 0, 180, 180);
+      g.strokeStyle = "#C9A227"; g.lineWidth = 6; g.strokeRect(16, 16, 148, 148);
+      g.fillStyle = "#E9C46A"; g.font = "bold 96px Georgia, serif"; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText(SHORT_NAME.charAt(0).toUpperCase(), 90, 98);
+      var url = c.toDataURL("image/png");
+      ["apple-touch-icon", "icon"].forEach(function (rel) { var l = document.querySelector('link[rel="' + rel + '"]'); if (!l) { l = document.createElement("link"); l.rel = rel; document.head.appendChild(l); } l.href = url; });
+    } catch (e) {}
+  })();
+  if (DEMO) {
+    var demoPill = document.createElement("div"); demoPill.className = "demo-pill";
+    demoPill.innerHTML = '<span>Demo office \u00b7 ' + (IND_KEY === "investments" ? 'sample data' : escapeHtml(IND.name)) + '</span><button type="button" id="demoExit">Exit demo</button>';
+    document.body.insertBefore(demoPill, document.body.firstChild); document.getElementById("demoExit").addEventListener("click", exitDemo);
+  }
+
+  function isManager() { return !!(TEAM.me && TEAM.me.role === "manager"); }
+  function canSeeTeam() { return !TEAM.on || isAdmin() || isManager(); }
+  /* ----- results report ----- */
+  function reportRange(kind) {
+    var ws = weekStart(), now = Date.now();
+    if (kind === "lastweek") return { a: ws - 7 * 86400000, b: ws, label: "Last week" };
+    if (kind === "30") return { a: dayStart(0) - 29 * 86400000, b: now + 1, label: "Last 30 days" };
+    return { a: ws, b: now + 1, label: "This week" };
+  }
+  function reportStats(a, b) {
+    var r = { calls: 0, reached: 0, interested: 0, callbacks: 0, talk: 0, committed: 0, deals: 0, handoffs: 0, reps: {}, days: {} };
+    state.callLog.forEach(function (c) {
+      var t = new Date(c.timestamp).getTime(); if (t < a || t >= b) return;
+      if (TEAM.on && !canSeeTeam() && !myCall(c)) return;
+      r.calls++; if (CONTACT_OUTCOMES[c.outcomeKey]) r.reached++; if (c.outcomeKey === "interested") r.interested++; if (c.outcomeKey === "callback") r.callbacks++; r.talk += c.talk || 0;
+      var k = c.by ? c.by.uid : "me", p = r.reps[k] || (r.reps[k] = { name: c.by ? c.by.name : "You", calls: 0, reached: 0, interested: 0 });
+      p.calls++; if (CONTACT_OUTCOMES[c.outcomeKey]) p.reached++; if (c.outcomeKey === "interested") p.interested++;
+      var dk = localDateStr(new Date(t)); r.days[dk] = (r.days[dk] || 0) + 1;
+    });
+    state.leads.forEach(function (l) {
+      if ((l.stageLog || []).some(function (x) { return x.s === "Committed" && x.at >= a && x.at < b; }) && l.stage === "Committed" && (canSeeTeam() || pipeScope(l))) { r.deals++; r.committed += Number(l.amount) || 0; }
+      if (l.handoff && l.handoff.at >= a && l.handoff.at < b && (canSeeTeam() || (TEAM.me && l.handoff.from && l.handoff.from.uid === TEAM.me.uid))) r.handoffs++;
+    });
+    return r;
+  }
+  function trendHtml(now, before) {
+    if (!before && !now) return "";
+    if (!before) return '<i class="up">new</i>';
+    var pct = Math.round((now - before) / before * 100);
+    return pct === 0 ? '<i>even</i>' : '<i class="' + (pct > 0 ? 'up' : 'down') + '">' + (pct > 0 ? '\u25b2 ' : '\u25bc ') + Math.abs(pct) + '%</i>';
+  }
+  function reportText(rg, r) {
+    return [SHORT_NAME + " results \u2014 " + rg.label, r.calls + " calls \u00b7 " + r.reached + " conversations (" + pctN(r.reached, r.calls) + "%)",
+      r.interested + " interested \u00b7 " + r.callbacks + " callbacks" + (r.handoffs ? " \u00b7 " + r.handoffs + " handoffs" : ""),
+      fmtMoney(r.committed) + " committed (" + r.deals + " deal" + (r.deals === 1 ? "" : "s") + ")",
+      r.talk ? fmtTalk(r.talk) + " on the phone" : ""].filter(Boolean).map(brandText).join("\n");
+  }
+  function openReport(kind) {
+    kind = kind || "week";
+    // Compare like with like: the same days last week (or the 30 days before).
+    var rg = reportRange(kind), r = reportStats(rg.a, rg.b), back = kind === "30" ? 30 * 86400000 : 7 * 86400000, pr = reportStats(rg.a - back, rg.b - back);
+    var days = [], t = rg.a; while (t < Math.min(rg.b, Date.now() + 1) && days.length < 31) { var dk = localDateStr(new Date(t)); days.push([dk, r.days[dk] || 0]); t += 86400000; }
+    var mx = Math.max.apply(null, days.map(function (d) { return d[1]; }).concat([1])), w = 300, bw = Math.max(4, Math.floor(w / Math.max(days.length, 1)) - 3);
+    var bars = '<svg class="rp-bars" viewBox="0 0 ' + w + ' 70" preserveAspectRatio="none" role="img" aria-label="Calls per day">' + days.map(function (d, i) {
+      var h = Math.round(d[1] / mx * 62); return '<rect x="' + (i * (bw + 3)) + '" y="' + (66 - h) + '" width="' + bw + '" height="' + Math.max(h, 1) + '" rx="2"></rect>'; }).join("") + '</svg>';
+    var kpi = function (label, v, now, before) { return '<div class="rp-kpi"><b>' + v + '</b><span>' + label + '</span>' + trendHtml(now, before) + '</div>'; };
+    var reps = Object.keys(r.reps).map(function (k) { return r.reps[k]; }).sort(function (x, y) { return y.reached - x.reached || y.calls - x.calls; });
+    var b = featOpen('<div class="rp-head"><h3>Results report</h3><select id="rpKind"><option value="week">This week</option><option value="lastweek">Last week</option><option value="30">Last 30 days</option></select></div>' +
+      '<p class="modal-sub">' + escapeHtml(COMPANY) + ' \u00b7 ' + rg.label + ' \u00b7 compared with the period before</p>' +
+      '<div class="rp-grid">' + kpi("calls", r.calls, r.calls, pr.calls) + kpi("conversations", r.reached, r.reached, pr.reached) + kpi("interested", r.interested, r.interested, pr.interested) +
+      kpi("committed", fmtMoney(r.committed), r.committed, pr.committed) + kpi("reach rate", pctN(r.reached, r.calls) + "%", 0, 0) + kpi("on the phone", r.talk ? fmtTalk(r.talk) : "\u2014", r.talk, pr.talk) + '</div>' +
+      '<div class="settings-heading" style="margin:12px 0 4px">Calls per day</div>' + bars +
+      (reps.length > 1 || (reps.length && TEAM.on) ? '<div class="settings-heading" style="margin:12px 0 4px">By rep</div>' + reps.map(function (p) {
+        return '<div class="rp-rep"><b>' + escapeHtml(p.name) + '</b><span>' + p.calls + ' calls \u00b7 ' + p.reached + ' conversations \u00b7 ' + p.interested + ' interested</span></div>'; }).join("") : '') +
+      '<div class="modal-actions rp-actions"><button class="btn-secondary" id="rpCopy">Copy as text</button>' + (navigator.share ? '<button class="btn-secondary" id="rpShare">Share</button>' : '') + '<button class="btn-primary" id="rpPrint">Save as PDF</button></div>');
+    var sel = document.getElementById("rpKind"); sel.value = kind; sel.addEventListener("change", function () { openReport(sel.value); });
+    document.getElementById("rpCopy").addEventListener("click", function () { clipCopy(reportText(rg, r), function () { showToast("Report copied"); }); });
+    var sh = document.getElementById("rpShare"); if (sh) sh.addEventListener("click", function () { navigator.share({ title: SHORT_NAME + " results", text: reportText(rg, r) }).catch(function () {}); });
+    document.getElementById("rpPrint").addEventListener("click", function () { document.body.classList.add("print-report"); setTimeout(function () { window.print(); document.body.classList.remove("print-report"); }, 50); });
+  }
+
+  /* ----- contests and badges ----- */
+  var CONTEST_METRICS = { reached: "Most conversations", calls: "Most calls", interested: "Most interested", handoffs: "Most appointments set" };
+  function contestCfg() { return (TEAM.on ? (TEAM.infoCfg || {}).contest : state.contest) || null; }
+  function contestBoard(c) {
+    var tally = {};
+    if (c.metric === "handoffs") state.leads.forEach(function (l) { var h = l.handoff; if (h && h.from && h.at >= c.start && h.at < c.end) { var t = tally[h.from.uid] || (tally[h.from.uid] = { name: h.from.name, n: 0 }); t.n++; } });
+    else state.callLog.forEach(function (x) {
+      var ts = new Date(x.timestamp).getTime(); if (ts < c.start || ts >= c.end || !x.by) return;
+      if (c.metric === "reached" && !CONTACT_OUTCOMES[x.outcomeKey]) return; if (c.metric === "interested" && x.outcomeKey !== "interested") return;
+      var t = tally[x.by.uid] || (tally[x.by.uid] = { name: x.by.name, n: 0 }); t.n++;
+    });
+    return Object.keys(tally).map(function (k) { return { uid: k, name: tally[k].name, n: tally[k].n }; }).sort(function (a, b) { return b.n - a.n; });
+  }
+  function contestBannerHtml() {
+    var c = contestCfg(); if (!c || !c.end) return "";
+    var now = Date.now(), board = contestBoard(c), me = TEAM.me ? TEAM.me.uid : "", pos = board.map(function (x) { return x.uid; }).indexOf(me);
+    if (now >= c.end) {
+      if (now > c.end + 86400000 || !board.length) return "";
+      return '<button class="contest-bar done" id="contestBtn"><b>\uD83C\uDFC6 ' + escapeHtml(board[0].name) + ' won ' + escapeHtml(CONTEST_METRICS[c.metric] || "") + ' (' + board[0].n + ')</b>' + (c.prize ? '<span>Prize: ' + escapeHtml(c.prize) + '</span>' : '') + '</button>';
+    }
+    if (now < c.start) return "";
+    var lead = board[0], mine = pos >= 0 ? board[pos] : null;
+    return '<button class="contest-bar" id="contestBtn"><b>\uD83C\uDFC6 ' + escapeHtml(CONTEST_METRICS[c.metric] || "Contest") + (c.end - c.start <= 86400000 ? ' today' : ' this week') + '</b><span>' +
+      (mine ? (pos === 0 ? 'You\u2019re in the lead with ' + mine.n : 'You\u2019re #' + (pos + 1) + ' with ' + mine.n + ' \u00b7 ' + escapeHtml(firstName(lead.name)) + ' leads with ' + lead.n) : lead ? escapeHtml(firstName(lead.name)) + ' leads with ' + lead.n + ' \u00b7 get on the board' : 'No one on the board yet \u2014 be first') +
+      (c.prize ? ' \u00b7 Prize: ' + escapeHtml(c.prize) : '') + '</span></button>';
+  }
+  function openContestBoard() {
+    var c = contestCfg(); if (!c) return;
+    var board = contestBoard(c);
+    featOpen('<h3>\uD83C\uDFC6 ' + escapeHtml(CONTEST_METRICS[c.metric] || "Contest") + '</h3><p class="modal-sub">' + (Date.now() >= c.end ? 'Final results' : 'Live standings, ends ' + escapeHtml(new Date(c.end - 1).toLocaleString(undefined, { weekday: "short", hour: "numeric", minute: "2-digit" }))) + (c.prize ? ' \u00b7 Prize: ' + escapeHtml(c.prize) : '') + '</p>' +
+      (board.length ? board.map(function (x, i) { return '<div class="rp-rep' + (TEAM.me && x.uid === TEAM.me.uid ? ' me' : '') + '"><b>' + (i < 3 ? ["\uD83E\uDD47", "\uD83E\uDD48", "\uD83E\uDD49"][i] + ' ' : (i + 1) + '. ') + escapeHtml(x.name) + '</b><span>' + x.n + '</span></div>'; }).join("") : '<div class="pipe-empty">No one on the board yet.</div>'));
+  }
+  function openContestSetup() {
+    var c = contestCfg() || {};
+    var b = featOpen('<h3>Contest</h3><p class="modal-sub">Run a competition everyone sees on their dial screen, with live standings.</p>' +
+      '<label for="ctMetric">Who wins</label><select id="ctMetric">' + Object.keys(CONTEST_METRICS).map(function (k) { return '<option value="' + k + '"' + (c.metric === k ? ' selected' : '') + '>' + CONTEST_METRICS[k] + '</option>'; }).join("") + '</select>' +
+      '<label for="ctLen">How long</label><select id="ctLen"><option value="day">Today</option><option value="week">Rest of this week</option></select>' +
+      '<label for="ctPrize">Prize (optional)</label><input id="ctPrize" type="text" maxlength="60" placeholder="Lunch on me" value="' + escapeHtml(c.prize || "") + '">' +
+      '<div class="field-error" id="ctErr"></div><div class="modal-actions"><button class="btn-primary" id="ctGo">Start contest</button>' + (c.end && Date.now() < c.end ? '<button class="btn-secondary" id="ctStop">End it now</button>' : '') + '</div>');
+    var save = function (v, msg) {
+      TEAM.db.collection("leadChunks").doc("_team").set({ contest: v }, { merge: true }).then(function () { TEAM.infoCfg = Object.assign({}, TEAM.infoCfg || {}, { contest: v }); featClose(); showToast(msg); render(); })
+        .catch(function () { document.getElementById("ctErr").textContent = "Couldn\u2019t save. Check your connection."; });
+    };
+    document.getElementById("ctGo").addEventListener("click", function () {
+      var len = document.getElementById("ctLen").value;
+      save({ metric: document.getElementById("ctMetric").value, prize: document.getElementById("ctPrize").value.trim(), start: dayStart(0), end: len === "day" ? dayStart(1) : weekStart() + 7 * 86400000 - 2 * 86400000 }, "Contest is live on everyone\u2019s dial screen");
+    });
+    var st = document.getElementById("ctStop"); if (st) st.addEventListener("click", function () { save(Object.assign({}, c, { end: Date.now() }), "Contest ended"); });
+  }
+  var BADGES = [["first", "First call", "Made your first call"], ["first_int", "First yes", "First interested prospect"], ["c50", "50 in a day", "50 calls in one day"],
+    ["c100", "100 club", "100 calls"], ["streak5", "5-day streak", "Calls 5 weekdays in a row"], ["long", "Deep talk", "A 10-minute conversation"], ["closer", "Closer", "A deal you own committed"]];
+  function myBadges() {
+    var mine = state.callLog.filter(myCall), got = {}, perDay = {};
+    if (mine.length) got.first = 1;
+    if (mine.length >= 100) got.c100 = 1;
+    mine.forEach(function (c) { var d = localDateStr(new Date(c.timestamp)); perDay[d] = (perDay[d] || 0) + 1; if (c.outcomeKey === "interested") got.first_int = 1; if ((c.talk || 0) >= 600) got.long = 1; });
+    if (Object.keys(perDay).some(function (d) { return perDay[d] >= 50; })) got.c50 = 1;
+    var run = 0, d = new Date(); d.setHours(12, 0, 0, 0);
+    for (var i = 0; i < 20 && run < 5; i++) { var wd = d.getDay(); if (wd !== 0 && wd !== 6) { if (perDay[localDateStr(d)]) run++; else if (i > 0) break; } d.setDate(d.getDate() - 1); }
+    if (run >= 5) got.streak5 = 1;
+    if (state.leads.some(function (l) { return l.stage === "Committed" && pipeScope(l) && (!TEAM.on || (l.owner && TEAM.me && l.owner.uid === TEAM.me.uid)); })) got.closer = 1;
+    return got;
+  }
+  function badgesHtml() {
+    var got = myBadges();
+    return '<div class="coach-card"><b>Badges</b><div class="badge-row">' + BADGES.map(function (bd) {
+      return '<span class="badge' + (got[bd[0]] ? ' on' : '') + '" title="' + escapeHtml(bd[2]) + '">' + (got[bd[0]] ? '\uD83C\uDFC5 ' : '\uD83D\uDD12 ') + escapeHtml(bd[1]) + '</span>'; }).join("") + '</div></div>';
+  }
+  function checkBadges() {
+    if (TEAM.on && !TEAM.me) return;
+    var got = myBadges(), keys = Object.keys(got);
+    if (!state.badgesSeen) { state.badgesSeen = keys; saveState(); return; }
+    var fresh = keys.filter(function (k) { return state.badgesSeen.indexOf(k) === -1; });
+    if (!fresh.length) return;
+    state.badgesSeen = state.badgesSeen.concat(fresh); saveState();
+    var bd = BADGES.filter(function (x) { return x[0] === fresh[0]; })[0];
+    if (bd) setTimeout(function () { showToast("\uD83C\uDFC5 Badge earned: " + bd[1]); }, 900);
+  }
+
+  /* ----- first-day walkthrough ----- */
+  var TOUR = [["#callBtn", "Tap to call", "Your phone dials the number. When you hang up, come right back here."],
+    ["[data-outcome]", "Log what happened", "One tap. Follow-ups and retries schedule themselves.", function (e) { return e.parentElement; }],
+    [".lead-name-row .star-btn", "Star your hottest leads", "Starred leads stay pinned at the top until they close."],
+    ["#viewTabTasks", "Your follow-ups", "Every callback and retry lands here at the right time in the lead\u2019s time zone."],
+    ["#menuBtn", "Coach, goals and settings", "My coach shows your best hours and what to work on. Your daily goal lives here too."]];
+  var tourQueued = false;
+  function startTour() {
+    tourQueued = false;
+    if (document.getElementById("tourLayer")) return;   // only ever one walkthrough at a time
+    closeMenuModal(); featClose();
+    var steps = TOUR.filter(function (s) { var e = document.querySelector(s[0]); return e && e.checkVisibility && e.checkVisibility(); }); if (!steps.length) return;
+    var lay = document.createElement("div"); lay.className = "tour-layer"; lay.id = "tourLayer";
+    lay.innerHTML = '<div class="tour-hole"></div><div class="tour-card"><small></small><b></b><p></p><div class="tour-btns"><button class="skip-btn" id="tourSkip">Skip</button><button class="btn-primary" id="tourNext">Next</button></div></div>';
+    document.body.appendChild(lay);
+    var i = 0, hole = lay.querySelector(".tour-hole"), card = lay.querySelector(".tour-card");
+    var end = function () { lay.remove(); state.tourDone = true; saveState(); };
+    var show = function () {
+      var s = steps[i], el = document.querySelector(s[0]); if (el && s[3]) el = s[3](el) || el;
+      if (!el) { end(); return; }
+      el.scrollIntoView({ block: "center" });
+      setTimeout(function () {
+        var r = el.getBoundingClientRect(), pad = 6;
+        hole.style.cssText = "top:" + (r.top - pad) + "px;left:" + (r.left - pad) + "px;width:" + (r.width + pad * 2) + "px;height:" + (r.height + pad * 2) + "px";
+        card.querySelector("small").textContent = (i + 1) + " of " + steps.length; card.querySelector("b").textContent = s[1]; card.querySelector("p").textContent = s[2];
+        card.style.top = (r.bottom + 14 + 170 < window.innerHeight ? r.bottom + 14 : Math.max(12, r.top - 184)) + "px";
+        document.getElementById("tourNext").textContent = i === steps.length - 1 ? "Let\u2019s go" : "Next";
+      }, 120);
+    };
+    document.getElementById("tourNext").addEventListener("click", function () { i++; if (i >= steps.length) end(); else show(); });
+    document.getElementById("tourSkip").addEventListener("click", end);
+    show();
+  }
+  function maybeAutoTour() {
+    if (navigator.webdriver || state.tourDone || !TEAM.on || !TEAM.me || !TEAM.me.createdAt || Date.now() - TEAM.me.createdAt > 7 * 86400000) return;
+    if (tourQueued || document.getElementById("tourLayer") || !document.getElementById("callBtn") || state.callLog.filter(myCall).length) return;
+    tourQueued = true; setTimeout(startTour, 700);
+  }
+
+  /* ----- easy switching from other CRMs ----- */
+  function crmDetect(h) {
+    var t = h.map(function (x) { return String(x || "").trim().toLowerCase(); }), has = function (s) { return t.indexOf(s) !== -1; };
+    if (has("record id") && (has("lifecycle stage") || has("contact owner"))) return "HubSpot";
+    if (has("contact name") && has("lead name")) return "Close";
+    if (has("lead source") || has("lead owner") || has("account name") || has("lead status") && has("title")) return "Salesforce";
+    if (has("tags") && (has("phone") || has("cell phone")) && (has("first name") || has("last name"))) return "PhoneBurner";
+    return "";
+  }
+  function crmStage(v) {
+    v = String(v || "").toLowerCase(); if (!v) return "";
+    if (/closed ?won|\bwon\b|customer|committed|funded/.test(v)) return "Committed";
+    if (/closed ?lost|\blost\b|unqualified|disqualified|dead|not interested|do not/.test(v)) return "Closed Lost";
+    if (/negotiat|proposal|pitched|presentation|demo/.test(v)) return "Pitched";
+    if (/qualified|opportunity|\bsql\b|working|contacted|interested|in progress/.test(v)) return "Qualified";
+    return "";
+  }
+
+  /* ----- shared roster: names, roles and closers everyone can see ----- */
+  function rosterFromMembers() {
+    return Object.keys(TEAM.members || {}).map(function (k) { var m = TEAM.members[k]; return { uid: m.uid || k, name: m.name || m.username || "", role: m.role || "rep", closer: !!m.closer, active: !!m.active }; })
+      .sort(function (a, b) { return a.uid < b.uid ? -1 : 1; });
+  }
+  function roster() {
+    var r = isAdmin() && Object.keys(TEAM.members || {}).length ? rosterFromMembers() : ((TEAM.infoCfg || {}).roster || []);
+    return r.filter(function (m) { return m.active !== false; });
+  }
+  function syncRoster() {
+    if (!TEAM.on || !isAdmin() || !TEAM.db) return;
+    var r = rosterFromMembers(), j = JSON.stringify(r);
+    if (j === TEAM.rosterJson || j === JSON.stringify((TEAM.infoCfg || {}).roster || null)) { TEAM.rosterJson = j; return; }
+    TEAM.rosterJson = j;
+    TEAM.db.collection("leadChunks").doc("_team").set({ roster: r }, { merge: true }).catch(function () { TEAM.rosterJson = ""; });
+  }
+  function closers() { return roster().filter(function (m) { return m.closer; }); }
+
+  /* ----- setter -> closer handoff ----- */
+  function fmtAppt(ts) { return new Date(ts).toLocaleString(undefined, { weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }); }
+  function toLocalInput(d) { var p = function (n) { return String(n).padStart(2, "0"); }; return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate()) + "T" + p(d.getHours()) + ":" + p(d.getMinutes()); }
+  function openHandoff(lead) {
+    var cl = closers().filter(function (m) { return !TEAM.me || m.uid !== TEAM.me.uid; });
+    if (!cl.length) { showToast(isAdmin() ? "Mark someone as a closer in Team & access first" : "Your admin hasn\u2019t set up closers yet"); return; }
+    if (profileLeadId) closeLeadProfile(true);
+    var d0 = new Date(); d0.setDate(d0.getDate() + (d0.getDay() === 5 ? 3 : d0.getDay() === 6 ? 2 : 1)); d0.setHours(10, 0, 0, 0);
+    featOpen('<h3>Hand off to a closer</h3><p class="modal-sub">' + escapeHtml(lead.name) + ' moves to the closer with the full history. You get credit for the appointment.</p>' +
+      '<label for="hoTo">Closer</label><select id="hoTo">' + cl.map(function (m) { return '<option value="' + escapeHtml(m.uid) + '">' + escapeHtml(m.name) + '</option>'; }).join("") + '</select>' +
+      '<label for="hoAt">Appointment (your time)</label><input type="datetime-local" id="hoAt" value="' + toLocalInput(d0) + '">' +
+      '<label for="hoNote">Note for the closer</label><textarea id="hoNote" rows="3" maxlength="500" placeholder="What they care about, anything you promised"></textarea>' +
+      '<div class="field-error" id="hoErr"></div><div class="modal-actions"><button class="btn-primary" id="hoGo" style="width:100%">Hand off</button></div>');
+    document.getElementById("hoGo").addEventListener("click", function () {
+      var tv = document.getElementById("hoTo").value, to = cl.filter(function (m) { return m.uid === tv; })[0], at = new Date(document.getElementById("hoAt").value).getTime();
+      if (!to || !at || isNaN(at)) { document.getElementById("hoErr").textContent = "Pick a closer and an appointment time."; return; }
+      var me = meRef() || { uid: "me", name: "You" }, now = Date.now(), note = document.getElementById("hoNote").value.trim();
+      lead.handoff = { from: me, to: { uid: to.uid, name: to.name }, at: now, apptAt: at, note: note, seen: false };
+      lead.owner = { uid: to.uid, name: to.name };
+      if (!lead.stage || lead.stage === "New Lead") setStage(lead, "Qualified");
+      state.tasks.forEach(function (t) { if (t.leadId === lead.id && !t.done) { t.done = true; t.doneAt = now; t.note = (t.note ? t.note + " \u00b7 " : "") + "Handed off to " + to.name; } });
+      state.tasks.push({ id: uid(), leadId: lead.id, leadName: lead.name, type: "Call", priority: "High", due: localDateStr(new Date(at)), dueAt: at,
+        note: "Appointment \u2014 handoff from " + me.name + (note ? ": " + note : ""), done: false, auto: false, assignee: { uid: to.uid, name: to.name } });
+      if (state.lastInterested && state.lastInterested.id === lead.id) state.lastInterested = null;
+      saveState(); featClose(); showToast(lead.name + " handed to " + firstName(to.name) + " for " + fmtAppt(at)); render();
+    });
+  }
+  function handoffBannerHtml() {
+    if (!TEAM.on || !TEAM.me) return "";
+    var out = "", now = Date.now();
+    var mine = state.leads.filter(function (l) { return l.handoff && l.handoff.to && l.handoff.to.uid === TEAM.me.uid && !l.handoff.seen && now - l.handoff.at < 14 * 86400000; });
+    if (mine.length) {
+      var h = mine[0].handoff;
+      out += '<button class="num-warn soft" id="handoffSeeBtn" data-open-lead="' + mine[0].id + '"><b>New handoff from ' + escapeHtml(firstName(h.from.name)) + ': ' + escapeHtml(mine[0].name) + '</b><span>Appointment ' + escapeHtml(fmtAppt(h.apptAt)) +
+        (mine.length > 1 ? ' \u00b7 +' + (mine.length - 1) + ' more' : '') + ' \u00b7 tap to open</span></button>';
+    }
+    var li = state.lastInterested, l = li && now - li.at < 15 * 60000 ? findLeadById(li.id) : null;
+    if (l && !l.handoff && closers().some(function (m) { return m.uid !== TEAM.me.uid; }))
+      out += '<button class="num-warn soft" id="handoffAskBtn" data-handoff="' + l.id + '"><b>Hand ' + escapeHtml(l.name) + ' to a closer?</b><span>Book the appointment while it\u2019s warm.</span></button>';
+    return out;
+  }
+  function downloadIcs(lead) {
+    var h = lead && lead.handoff; if (!h) return;
+    var z = function (t) { return new Date(t).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, ""); }, clean = function (t) { return String(t).replace(/[,;\\]/g, " ").replace(/[\r\n]+/g, " "); };
+    var ics = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//" + clean(SHORT_NAME) + "//EN", "BEGIN:VEVENT", "UID:" + lead.id + "-" + h.at + "@app", "DTSTAMP:" + z(Date.now()),
+      "DTSTART:" + z(h.apptAt), "DTEND:" + z(h.apptAt + 30 * 60000), "SUMMARY:" + clean("Call " + lead.name + " (from " + h.from.name + ")"),
+      "DESCRIPTION:" + clean(formatPhoneDisplay(lead.phoneRaw) + (h.note ? " - " + h.note : "")), "END:VEVENT", "END:VCALENDAR"].join("\r\n");
+    var a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([ics], { type: "text/calendar" })); a.download = "appointment.ics";
+    document.body.appendChild(a); a.click(); setTimeout(function () { a.remove(); }, 500);
+  }
+  function handoffInfoHtml(lead) {
+    var h = lead.handoff; if (!h) return "";
+    return '<div class="handoff-info"><b>\u21aa Handed off</b> by ' + escapeHtml(h.from.name) + ' to ' + escapeHtml(h.to.name) + ' \u00b7 appointment ' + escapeHtml(fmtAppt(h.apptAt)) +
+      (h.note ? '<span>\u201c' + escapeHtml(h.note) + '\u201d</span>' : '') + '<button class="copy-btn" data-ics="' + lead.id + '">Add to calendar</button></div>';
+  }
+
+  /* ----- team Do Not Call list ----- */
+  function dncKey(phone) { var d = String(phone || "").replace(/\D/g, ""); if (d.length === 11 && d.charAt(0) === "1") d = d.slice(1); return d.length === 10 ? "n" + d : ""; }
+  function dncNums() { return (TEAM.on ? TEAM.dnc : state.dncNums) || {}; }
+  function isDnc(l) { return !!(l && (l.dnc || dncNums()[dncKey(l.phone)])); }
+  function toggleLeadDnc(lead) {
+    if (lead.dnc) {
+      if (TEAM.on && !isAdmin()) { showToast("Only your admin can take someone off the Do Not Call list"); return; }
+      lead.dnc = null; saveState(); showToast(lead.name + " is off the Do Not Call list"); render(); if (profileLeadId === lead.id) openLeadProfile(lead.id); return;
+    }
+    showConfirm(lead.name + " asked not to be called? They\u2019ll be blocked for everyone on the team.", function () {
+      var now = Date.now();
+      lead.dnc = { at: now, by: meRef() || { uid: "me", name: "You" } }; lead.status = "done";
+      state.tasks.forEach(function (t) { if (t.leadId === lead.id && !t.done) { t.done = true; t.doneAt = now; t.note = (t.note ? t.note + " \u00b7 " : "") + "Do not call"; } });
+      saveState(); showToast(lead.name + " is on the Do Not Call list"); render(); if (profileLeadId === lead.id) openLeadProfile(lead.id);
+    }, "Do not call");
+  }
+  function saveDnc(change, msg) {
+    if (!TEAM.on) { state.dncNums = Object.assign({}, state.dncNums || {}); Object.keys(change).forEach(function (k) { if (change[k]) state.dncNums[k] = change[k]; else delete state.dncNums[k]; }); saveState(); showToast(msg); openDnc(); render(); return; }
+    var ref = TEAM.db.collection("leadChunks").doc("_dnc"), adds = {}, dels = {};
+    Object.keys(change).forEach(function (k) { if (change[k]) adds[k] = change[k]; else dels["nums." + k] = firebase.firestore.FieldValue.delete(); });
+    var p = Object.keys(adds).length ? ref.set({ nums: adds }, { merge: true }) : Promise.resolve();
+    p.then(function () { return Object.keys(dels).length ? ref.update(dels) : null; }).then(function () {
+      TEAM.dnc = Object.assign({}, TEAM.dnc || {}); Object.keys(change).forEach(function (k) { if (change[k]) TEAM.dnc[k] = change[k]; else delete TEAM.dnc[k]; });
+      showToast(msg); openDnc(); render();
+    }).catch(function () { var e = document.getElementById("dncErr"); if (e) e.textContent = "Couldn\u2019t save. Check your connection."; });
+  }
+  function openDnc(q) {
+    q = q || ""; var nums = dncNums(), keys = Object.keys(nums).sort(), flagged = state.leads.filter(function (l) { return l.dnc; }), qd = q.replace(/\D/g, "");
+    var shown = keys.filter(function (k) { return !qd || k.indexOf(qd) !== -1; }).slice(0, 50);
+    var row = function (main, sub, attr) { return '<div class="rp-rep"><b>' + main + '</b><span>' + sub + ' <button class="copy-btn" ' + attr + '>Remove</button></span></div>'; };
+    var b = featOpen('<h3>Do Not Call list</h3><p class="modal-sub">No one on the team can call, text or upload these numbers. ' + (keys.length + flagged.length) + ' on the list.</p>' +
+      '<label for="dncAdd">Add numbers (one per line, or paste a column)</label><textarea id="dncAdd" rows="4" placeholder="(212) 555-0101"></textarea>' +
+      '<div class="field-error" id="dncErr"></div><div class="modal-actions"><button class="btn-primary" id="dncSave" style="width:100%">Add to list</button></div>' +
+      (flagged.length ? '<div class="settings-heading" style="margin:14px 0 4px">Marked by your team</div>' + flagged.map(function (l) {
+        return row(escapeHtml(l.name), escapeHtml(formatPhoneDisplay(l.phoneRaw)) + (l.dnc.by ? ' \u00b7 ' + escapeHtml(firstName(l.dnc.by.name)) : ''), 'data-dnc-lead="' + l.id + '"'); }).join("") : '') +
+      '<div class="settings-heading" style="margin:14px 0 4px">Uploaded numbers</div><input type="search" id="dncFind" placeholder="Search a number" value="' + escapeHtml(q) + '">' +
+      (shown.length ? shown.map(function (k) { return row(escapeHtml(formatPhoneDisplay(k.slice(1))), escapeHtml(nums[k].by ? firstName(nums[k].by.name) : ''), 'data-dnc-num="' + k + '"'); }).join("") : '<div class="pipe-empty">' + (q ? 'Not on the list.' : 'None yet.') + '</div>') +
+      (keys.length > shown.length ? '<div class="pipe-empty">+ ' + (keys.length - shown.length) + ' more \u2014 search to find one</div>' : ''));
+    document.getElementById("dncSave").addEventListener("click", function () {
+      var ch = {}, bad = 0, by = meRef() || { uid: "me", name: "You" };
+      document.getElementById("dncAdd").value.split(/[\n,;\t]+/).forEach(function (v) { if (!v.trim()) return; var k = dncKey(v); if (k) ch[k] = { at: Date.now(), by: by }; else bad++; });
+      var n = Object.keys(ch).length;
+      if (!n) { document.getElementById("dncErr").textContent = "No US phone numbers found. Put one number per line."; return; }
+      saveDnc(ch, n + " number" + (n === 1 ? "" : "s") + " added to Do Not Call" + (bad ? " (" + bad + " skipped)" : ""));
+    });
+    var f = document.getElementById("dncFind"); f.addEventListener("change", function () { openDnc(f.value); });
+    b.querySelectorAll("[data-dnc-num]").forEach(function (x) { x.addEventListener("click", function () { var c = {}; c[x.getAttribute("data-dnc-num")] = null; saveDnc(c, "Removed from Do Not Call"); }); });
+    b.querySelectorAll("[data-dnc-lead]").forEach(function (x) { x.addEventListener("click", function () { var l = findLeadById(x.getAttribute("data-dnc-lead")); if (l) { l.dnc = null; saveState(); showToast(l.name + " is off the Do Not Call list"); openDnc(); render(); } }); });
+  }
+
+
+  function rosterMap() { var o = {}; roster().forEach(function (m) { o[m.uid] = m; }); return o; }
   /** ---------- Admin controls ---------- **/
   function closeAdminHub() { document.getElementById("adminModal").classList.remove("show"); }
   function openAdminHub() {
@@ -8164,11 +8958,16 @@
       tile("hubPacing", I('<path d="M12 3v3M12 18v3M4.2 7l2.6 1.5M17.2 15.5l2.6 1.5M4.2 17l2.6-1.5M17.2 8.5l2.6-1.5"/><circle cx="12" cy="12" r="3.5"/>'), "Call pacing",
         "Keeps your team\u2019s numbers from being labeled spam \u00b7 " + pacingCfg().perDay + " calls a day per phone") +
       tile("hubSecurity", I('<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>'), "Security", secCfg().requireLock ? "Face ID lock required for everyone" : "Face ID lock for your team") +
+      (isOwnerMaster() ? tile("hubCustomer", I('<rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 18v3"/>'), "Customer copy", "Make a branded app for another office") : "") +
       tile("hubInfo", I('<path d="M21 3L10 14"/><path d="M21 3l-7 18-4-7-7-4 18-7z"/>'), "Info links", (infoCfg().links.length ? infoCfg().links.length + " link" + (infoCfg().links.length === 1 ? "" : "s") + " your team can text with Send info" : "Add the pages your team can text to leads")) +
       tile("hubOverdue", I('<circle cx="12" cy="12" r="9"/><path d="M12 7v5"/><path d="M12 16h.01"/>'), "Overdue follow-ups",
         overdueWarm().length ? overdueWarm().length + " interested lead" + (overdueWarm().length === 1 ? "" : "s") + " more than a day late" : "None right now", overdueWarm().length > 0) +
       tile("hubGoals", I('<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>'), "Monthly goals", "Targets and pace for each rep") +
       tile("hubRoi", I('<path d="M4 20h16"/><path d="M7 16l4-4 3 3 5-6"/>'), "List ROI", "Which lead lists produce investors") +
+      tile("hubReport", I('<path d="M6 3h9l3 3v15H6z"/><path d="M9 13h6"/><path d="M9 17h6"/><path d="M9 9h2"/>'), "Results report", "Weekly results to share or save as PDF") +
+      tile("hubContest", I('<path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 6h3v2a3 3 0 0 1-3 3"/><path d="M7 6H4v2a3 3 0 0 0 3 3"/>'), "Contest",
+        contestCfg() && contestCfg().end > Date.now() ? "Live now: " + (CONTEST_METRICS[contestCfg().metric] || "") : "Start a competition for the team", !!(contestCfg() && contestCfg().end > Date.now())) +
+      tile("hubDnc", I('<circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/>'), "Do Not Call list", (Object.keys(dncNums()).length + state.leads.filter(function (l) { return l.dnc; }).length) + " blocked for everyone") +
       tile("hubAnswers", I('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'), "Answer times", "When your investors actually pick up") +
       tile("hubLeads", I('<path d="M12 5v14M5 12h14"/>'), "Add leads", "Upload Excel, CSV, text or contacts") +
       tile("hubExport", I('<path d="M12 4v11M7 10l5 5 5-5"/><path d="M5 20h14"/>'), "Export call log", "A CSV of every call, for your records") +
@@ -8186,10 +8985,16 @@
     document.getElementById("hubGoals").addEventListener("click", openGoals);
     document.getElementById("hubRoi").addEventListener("click", openListRoi);
     document.getElementById("hubSecurity").addEventListener("click", openSecurity);
+    document.getElementById("hubReport").addEventListener("click", function () { openReport("week"); });
+    document.getElementById("hubContest").addEventListener("click", openContestSetup);
+    document.getElementById("hubDnc").addEventListener("click", function () { openDnc(); });
+    var hcu = document.getElementById("hubCustomer"); if (hcu) hcu.addEventListener("click", openCustomerCopy);
     document.getElementById("hubAnswers").addEventListener("click", function () { closeAdminHub(); openScoreboard("answers"); });
     document.getElementById("hubLeads").addEventListener("click", function () { closeAdminHub(); openLoadModal(); switchTab("upload"); });
     document.getElementById("hubExport").addEventListener("click", function () { closeAdminHub(); document.getElementById("menuExportBtn").click(); });
     document.getElementById("hubBackup").addEventListener("click", function () { closeAdminHub(); document.getElementById("menuBackupBtn").click(); });
+    if (!isAdmin()) ["hubTeam", "hubInfo", "hubPacing", "hubSecurity", "hubLeads", "hubExport", "hubBackup", "hubGoals", "hubContest", "hubCustomer", "hubVault", "hubDnc"]
+      .forEach(function (id) { var e = document.getElementById(id); if (e) e.remove(); });
   }
 
   /** ---------- Automatic updates, installed overnight ---------- **/
@@ -8395,6 +9200,12 @@
       if (e.target.closest("#focusBackBtn")) { endFocus(); return; }
       var stb = e.target.closest("[data-star]");
       if (stb) { toggleHot(stb.getAttribute("data-star")); return; }
+      var hob = e.target.closest("[data-handoff]");
+      if (hob) { var hol = findLeadById(hob.getAttribute("data-handoff")); if (hol) openHandoff(hol); return; }
+      var icb = e.target.closest("[data-ics]");
+      if (icb) { downloadIcs(findLeadById(icb.getAttribute("data-ics"))); return; }
+      var dnb = e.target.closest("[data-dnc-toggle]");
+      if (dnb) { var dnl = findLeadById(dnb.getAttribute("data-dnc-toggle")); if (dnl) toggleLeadDnc(dnl); return; }
       var op = e.target.closest("[data-open-lead]");
       if (op) { openLeadProfile(op.getAttribute("data-open-lead")); return; }
     });
@@ -8433,6 +9244,10 @@
       if (q && !g.querySelector(".theme-card")) g.innerHTML = '<div class="pipe-empty">No themes match \u201c' + escapeHtml(q) + '\u201d.</div>';
     });
     document.getElementById("openBriefBtn").addEventListener("click", openBrief);
+    document.getElementById("openInstallBtn").addEventListener("click", function () { closeMenuModal(); openInstall(); });
+    document.getElementById("openReportBtn").addEventListener("click", function () { closeMenuModal(); openReport("week"); });
+    document.getElementById("openTourBtn").addEventListener("click", function () { closeMenuModal(); setTimeout(startTour, 250); });
+    document.getElementById("authDemo").addEventListener("click", enterDemo);
     document.getElementById("lockToggleBtn").addEventListener("click", function () {
       if (lockCred()) {
         if (secCfg().requireLock) { showToast("Your admin requires Face ID lock"); return; }
