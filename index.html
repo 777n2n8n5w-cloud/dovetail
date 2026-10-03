@@ -3,7 +3,7 @@
 <head>
 <script id="customerConfig" type="application/json">{}</script>
 <meta charset="UTF-8">
-<meta name="dovetail-build" content="2026-10-28">
+<meta name="dovetail-build" content="2026-11-01">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -1283,6 +1283,16 @@
     display: flex;
     flex-direction: column;
     gap: 2px;
+    flex: 1 1 auto;
+    min-width: 0;   /* the title area shrinks and wraps; the buttons never get pushed off the screen */
+  }
+  .brand .name, .brand .sub { overflow-wrap: anywhere; }
+  header.top { gap: 8px; }
+  .header-right { flex: none; }
+  @media (max-width: 360px) {
+    .header-right { gap: 4px !important; }
+    .header-right .icon-btn { width: 32px; height: 32px; }
+    .brand .name { font-size: 15.5px; }
   }
   .brand .name {
     font-weight: 700;
@@ -1396,9 +1406,11 @@
   .hist-name {
     font-weight: 600;
     font-size: 14.5px;
+    flex: 1 1 120px;
     min-width: 0;
     overflow-wrap: anywhere;
   }
+  .hist-top { flex-wrap: wrap; row-gap: 4px; }   /* the outcome tag drops to the next line instead of crushing the name */
   .hist-top .qi-status { flex: none; }
   .hist-phone {
     font-size: 12.5px;
@@ -2384,8 +2396,8 @@
   .coach-card { border: 1px solid var(--border); background: var(--surface-raised); border-radius: 12px; padding: 11px 12px; margin-bottom: 9px; }
   .coach-card.team { border-color: var(--accent); }
   .coach-card > b { font-size: 14.5px; }
-  .coach-top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
-  .coach-top b { font-size: 14.5px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .coach-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 2px 8px; }   /* numbers drop below a long name instead of cutting it */
+  .coach-top b { font-size: 14.5px; flex: 1 1 120px; min-width: 0; overflow-wrap: anywhere; }
   .coach-top em { font-weight: 500; font-size: 12px; color: var(--text-faint); }
   .coach-top span { flex: none; font-size: 12px; color: var(--text-faint); font-weight: 600; }
   .coach-list { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
@@ -2511,6 +2523,8 @@
   .kd-row span { display: flex; flex-direction: column; } .kd-row b { font-size: 13.5px; } .kd-row small { font-size: 12px; color: var(--text-faint); }
   .kd-del { background: none; border: 0; color: var(--text-faint); font-size: 22px; line-height: 1; cursor: pointer; padding: 4px 8px; min-width: 38px; min-height: 38px; }
   #vaultModalBody input, #vaultModalBody select, #vaultModalBody textarea { width: 100%; box-sizing: border-box; }
+  #vaultModalBody .up-check input { width: 20px; height: 20px; flex: none; }   /* checkboxes keep their size so labels have room */
+  .vi-step-t { flex: 1; min-width: 0; }
 
   .upd-note { margin-top: 10px; padding: 11px 12px; border-radius: 10px; border: 1px solid var(--accent); background: var(--surface-raised); display: flex; flex-direction: column; gap: 4px; }
   .upd-note b { font-size: 13.5px; } .upd-note span { font-size: 12.5px; color: var(--text-dim); }
@@ -2615,6 +2629,21 @@
   .handoff-info b { color: var(--text); } .handoff-info span { font-style: italic; }
   .lp-star.dnc-on { color: var(--notinterested); border-color: var(--notinterested); }
 
+  .ll-card { padding: 12px; margin: 10px 0 0; border: 1px solid var(--border); border-radius: 12px; background: var(--surface-raised); display: flex; flex-direction: column; gap: 6px; }
+  .ll-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 2px 10px; }
+  .ll-top b { font-size: 15px; flex: 1 1 140px; min-width: 0; overflow-wrap: anywhere; } .ll-top span { font-size: 12.5px; color: var(--text-dim); }
+  .ll-who { font-size: 13px; color: var(--text-dim); overflow-wrap: anywhere; } .ll-who b { color: var(--text); }
+  .ll-btns { display: flex; flex-wrap: wrap; gap: 6px; } .ll-btns .copy-btn { width: auto; min-width: 0; flex: 0 0 auto; white-space: nowrap; padding: 7px 12px; } .ll-del, .ll-del-go { color: var(--notinterested) !important; }
+  .ll-label { margin: 12px 0 4px; font-size: 13px; font-weight: 600; }
+  .ll-reps { display: flex; flex-direction: column; gap: 6px; margin-top: 6px; } .ll-reps .up-check span { min-width: 0; overflow-wrap: anywhere; }
+  .ll-hint { margin: 6px 0 0; font-size: 12px; color: var(--text-faint); }
+
+  .gs-out { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
+  .gs-head { margin: 8px 0 0; font-size: 12px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.04em; }
+  .gs-row { width: 100%; text-align: left; display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border);
+    background: var(--surface-raised); color: var(--text); font-family: inherit; cursor: pointer; }
+  .gs-row b { font-size: 15px; overflow-wrap: anywhere; } .gs-row span { font-size: 12.5px; color: var(--text-dim); overflow-wrap: anywhere; }
+
   ::-webkit-scrollbar { width: 8px; }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 8px; }
 
@@ -2691,6 +2720,7 @@
     <div class="header-right">
       <span class="save-pill" id="savePill"></span>
       <button class="icon-btn team-admin-only score-btn" id="adminBtn" aria-label="Admin controls" title="Admin controls"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 9.5C8 19.2 5 15.5 5 11V6l7-3z"/><path d="M9.5 12l1.8 1.8L15 10"/></svg></button>
+      <button class="icon-btn" id="searchBtn" aria-label="Search" title="Search"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg></button>
       <button class="icon-btn add-leads-btn" id="addLeadsBtn" aria-label="Add leads" title="Add leads">+</button>
       <button class="icon-btn" id="menuBtn" aria-label="Settings" title="Settings">☰</button>
     </div>
@@ -2878,7 +2908,7 @@
     </div>
 
     <div style="margin-top:22px;padding-top:14px;border-top:1px solid var(--border);text-align:center;">
-      <div style="font-size:11px;color:var(--text-faint);">Build 2026-10-28 · Team · Updates install automatically after midnight.</div>
+      <div style="font-size:11px;color:var(--text-faint);">Build 2026-11-01 · Team · Updates install automatically after midnight.</div>
       <div id="updNote"></div>
     </div>
   </div>
@@ -3785,7 +3815,7 @@
 
   /** ---------- Core queue logic ---------- **/
   function allPendingLeads() {
-    return state.leads.filter(function (l) { return l.status === "pending" && !claimedByOther(l) && inPrefWindow(l) && !isDnc(l); });
+    return state.leads.filter(function (l) { return l.status === "pending" && !claimedByOther(l) && inPrefWindow(l) && !isDnc(l) && listAllowed(l); });
   }
 
   function pendingLeads() {
@@ -5727,7 +5757,8 @@
       '<div class="up-summary"><b>' + n + ' new lead' + s + '</b> in ' + escapeHtml(pu.fileName) + (notes ? '<span>' + escapeHtml(notes) + '</span>' : '') + '</div>' +
       (n ? '<div class="up-table">' + sample + (n > 5 ? '<div class="up-more">+ ' + (n - 5) + ' more</div>' : '') + '</div>' +
         '<label for="uploadListName">List name</label><input type="text" id="uploadListName" value="' + escapeHtml(pu.source) + '">' +
-        '<label class="up-check"><input type="checkbox" id="uploadFirst" checked> Put these at the front of my queue</label>' : '');
+        '<label class="up-check"><input type="checkbox" id="uploadFirst" checked> Put these at the front of my queue</label>' +
+        (TEAM.on && isAdmin() && roster().length > 1 ? '<div class="ll-label">Who calls this list</div>' + repPickerHtml((listCfg()[pu.source] || {}).reps || []) : '') : '');
     document.getElementById("uploadActions").style.display = "";
     var btn = document.getElementById("submitUpload");
     btn.disabled = !n;
@@ -5745,13 +5776,23 @@
     var src = (nameEl && nameEl.value.trim()) || pendingUpload.source;
     var first = !firstEl || firstEl.checked;
     var n = pendingUpload.leads.length;
-    addLeadsToQueue(pendingUpload.leads, { source: src, first: first });
-    if (first) { state.queueFilter = "all"; state.queueList = "all"; }
-    resetUploadTab();
-    saveState();
-    closeLoadModal();
-    render();
-    showToast("Added " + n + " lead" + (n === 1 ? "" : "s") + " from " + src + (first ? " \u2014 they\u2019re up next" : ""));
+    var upRoot = document.getElementById("uploadPreview"), upReps = upRoot && upRoot.querySelector("[data-pick-rep]") ? pickedReps(upRoot) : null;
+    var leadsIn = pendingUpload.leads, sb = document.getElementById("submitUpload");
+    if (sb && sb.disabled) return;   // one tap, one upload
+    if (sb) sb.disabled = true;
+    var finish = function () {
+      if (sb) sb.disabled = false;
+      addLeadsToQueue(leadsIn, { source: src, first: first });
+      if (first) { state.queueFilter = "all"; state.queueList = "all"; }
+      resetUploadTab();
+      saveState();
+      closeLoadModal();
+      render();
+      showToast("Added " + n + " lead" + (n === 1 ? "" : "s") + " from " + src + (first ? " \u2014 they\u2019re up next" : ""));
+    };
+    // Who calls the list is saved first, so no one else's queue ever sees these leads unassigned.
+    if (upReps && TEAM.on && isAdmin() && upReps.slice().sort().join(",") !== ((listCfg()[src] || {}).reps || []).slice().sort().join(",")) saveListCfg(src, upReps, finish, function () { if (sb) sb.disabled = false; });
+    else finish();
   }
   function resetUploadTab() {
     pendingUpload = null;
@@ -8933,6 +8974,145 @@
 
 
   function rosterMap() { var o = {}; roster().forEach(function (m) { o[m.uid] = m; }); return o; }
+  /* ----- lead lists: who calls each list, download a copy, delete a list ----- */
+  var NO_LIST = "(no list name)";
+  function listOf(l) { return l.source || NO_LIST; }
+  function listCfg() { return (TEAM.on ? (TEAM.infoCfg || {}).lists : state.listCfg) || {}; }
+  function listAllowed(l) {
+    if (!TEAM.on || !TEAM.me) return true;
+    var c = listCfg()[listOf(l)];
+    return !c || !c.reps || !c.reps.length || c.reps.indexOf(TEAM.me.uid) !== -1;
+  }
+  function saveListCfg(name, reps, done, fail) {
+    var all = Object.assign({}, listCfg());
+    if (reps && reps.length) all[name] = { reps: reps }; else delete all[name];
+    if (!TEAM.on) { state.listCfg = all; saveState(); if (done) done(); return; }
+    var ref = TEAM.db.collection("leadChunks").doc("_team");
+    ref.update({ lists: all }).catch(function (e) { if (e && e.code === "not-found") return ref.set({ lists: all }, { merge: true }); throw e; })
+      .then(function () { TEAM.infoCfg = Object.assign({}, TEAM.infoCfg || {}, { lists: all }); if (done) done(); render(); })
+      .catch(function () { showToast("Couldn\u2019t save. Check your connection."); if (fail) fail(); });
+  }
+  function listsSummary() {
+    var open = {}, m = {};
+    state.tasks.forEach(function (t) { if (!t.done && t.leadId) open[t.leadId] = true; });
+    state.leads.forEach(function (l) {
+      var k = listOf(l), x = m[k] || (m[k] = { name: k, total: 0, left: 0, keep: 0, ids: [], keepIds: {}, addedAt: 0 });
+      x.total++; x.ids.push(l.id); if (l.status === "pending") x.left++;
+      if ((l.stage && l.stage !== "New Lead" && l.stage !== "Closed Lost") || open[l.id] || isHot(l.id)) { x.keep++; x.keepIds[l.id] = true; }
+      x.addedAt = Math.max(x.addedAt, l.addedAt || 0);
+    });
+    return Object.keys(m).map(function (k) { return m[k]; }).sort(function (a, b) { return b.addedAt - a.addedAt || a.name.localeCompare(b.name); });
+  }
+  function listWho(name) {
+    var reps = (listCfg()[name] || {}).reps || [], rm = rosterMap();
+    return reps.length ? reps.map(function (u) { return rm[u] ? firstName(rm[u].name) : "a removed rep"; }).join(", ") : "Everyone";
+  }
+  function repPickerHtml(chosen) {
+    return '<div class="ll-reps">' + roster().map(function (m) {
+      return '<label class="up-check"><input type="checkbox" data-pick-rep="' + escapeHtml(m.uid) + '"' + (chosen.indexOf(m.uid) !== -1 ? ' checked' : '') + '> <span>' + escapeHtml(m.name) + (m.role === "admin" ? ' (admin)' : '') + '</span></label>';
+    }).join("") + '</div><p class="ll-hint">Leave everyone unticked and the whole team calls it.</p>';
+  }
+  function pickedReps(root) { return [].slice.call(root.querySelectorAll("[data-pick-rep]:checked")).map(function (c) { return c.getAttribute("data-pick-rep"); }); }
+  function downloadListCsv(x) {
+    var q = function (v) { v = String(v == null ? "" : v); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
+    var rows = [["Name", "Phone", "State", "Stage", "Last outcome", "Last called", "Notes"]].concat(state.leads.filter(function (l) { return listOf(l) === x.name; }).map(function (l) {
+      return [l.name, formatPhoneDisplay(l.phoneRaw), l.st || "", l.stage || "", l.outcome ? outcomeLabel(l.outcome) : "", l.calledAt ? String(l.calledAt).slice(0, 10) : "", l.notes || ""]; }));
+    var a = document.createElement("a"); a.href = URL.createObjectURL(new Blob(["\ufeff" + rows.map(function (r) { return r.map(q).join(","); }).join("\r\n")], { type: "text/csv" }));
+    a.download = x.name.replace(/[^\w\- ]+/g, "").trim().replace(/\s+/g, "-") + ".csv" || "list.csv"; document.body.appendChild(a); a.click(); setTimeout(function () { a.remove(); }, 500);
+  }
+  function removeLeadsByIds(ids) {
+    var gone = {}; ids.forEach(function (id) { gone[id] = true; });
+    state.leads = state.leads.filter(function (l) { return !gone[l.id]; });
+    state.tasks = state.tasks.filter(function (t) { return !gone[t.leadId]; });
+    state.completedStack = (state.completedStack || []).filter(function (cid) { return !gone[cid]; });
+    if (gone[state.recallLeadId]) state.recallLeadId = null;
+    if (gone[state.focusLeadId]) { state.focusLeadId = null; state.focusTaskId = null; state.awaitingOutcome = false; state.followupRun = false; }
+    if (gone[state.activeLeadId]) { state.activeLeadId = null; state.awaitingOutcome = false; state.paused = false; }
+    if (state.hotIds) state.hotIds = state.hotIds.filter(function (id) { return !gone[id]; });
+    saveState(); render();
+  }
+  function openLists() {
+    var lists = listsSummary();
+    var b = featOpen('<h3>Lead lists</h3><p class="modal-sub">Choose who calls each list, download a copy, or delete a list you\u2019re done with.</p>' +
+      (lists.length ? lists.map(function (x, i) {
+        return '<div class="ll-card"><div class="ll-top"><b>' + escapeHtml(x.name) + '</b><span>' + x.total + ' lead' + (x.total === 1 ? '' : 's') + ' \u00b7 ' + x.left + ' left to call</span></div>' +
+          (TEAM.on ? '<div class="ll-who">Called by: <b>' + escapeHtml(listWho(x.name)) + '</b></div>' : '') +
+          '<div class="ll-btns">' + (TEAM.on ? '<button class="copy-btn" data-ll-assign="' + i + '">Choose reps</button>' : '') +
+          '<button class="copy-btn" data-ll-csv="' + i + '">Download</button><button class="copy-btn ll-del" data-ll-del="' + i + '">Delete</button></div></div>';
+      }).join("") : '<div class="pipe-empty">No lists yet. Add leads to create one.</div>'));
+    b.querySelectorAll("[data-ll-assign]").forEach(function (x) { x.addEventListener("click", function () { openListAssign(lists[+x.getAttribute("data-ll-assign")]); }); });
+    b.querySelectorAll("[data-ll-csv]").forEach(function (x) { x.addEventListener("click", function () { downloadListCsv(lists[+x.getAttribute("data-ll-csv")]); }); });
+    b.querySelectorAll("[data-ll-del]").forEach(function (x) { x.addEventListener("click", function () { openListDelete(lists[+x.getAttribute("data-ll-del")]); }); });
+  }
+  function openListAssign(x) {
+    var b = featOpen('<h3>Who calls \u201c' + escapeHtml(x.name) + '\u201d?</h3><p class="modal-sub">Only the people you tick get these leads in their queue. Leads someone already worked keep their owner and follow-ups.</p>' +
+      repPickerHtml((listCfg()[x.name] || {}).reps || []) + '<div class="modal-actions"><button class="btn-secondary" id="llBack">Back</button><button class="btn-primary" id="llSave">Save</button></div>');
+    document.getElementById("llBack").addEventListener("click", openLists);
+    document.getElementById("llSave").addEventListener("click", function () {
+      var reps = pickedReps(b);
+      saveListCfg(x.name, reps, function () { showToast(x.name + ": " + (reps.length ? "called by " + listWho(x.name) : "the whole team calls it")); openLists(); });
+    });
+  }
+  function openListDelete(x) {
+    var b = featOpen('<h3>Delete \u201c' + escapeHtml(x.name) + '\u201d?</h3><p class="modal-sub">Its leads leave everyone\u2019s queue. Past calls stay in History and reports. This can\u2019t be undone, so download a copy first if you might need it.</p>' +
+      (x.keep ? '<label class="up-check"><input type="checkbox" id="llKeep" checked> <span>Keep the ' + x.keep + ' lead' + (x.keep === 1 ? '' : 's') + ' someone is working (in a pipeline, with a follow-up, or starred)</span></label>' : '') +
+      '<div class="modal-actions"><button class="btn-secondary" id="llCsv2">Download first</button><button class="btn-primary ll-del-go" id="llGo"></button></div>');
+    var keepEl = document.getElementById("llKeep"), go = document.getElementById("llGo");
+    var ids = function () { var keep = keepEl && keepEl.checked; return x.ids.filter(function (id) { return !(keep && x.keepIds[id]); }); };
+    var label = function () { var n = ids().length; go.textContent = "Delete " + n + " lead" + (n === 1 ? "" : "s"); go.disabled = !n; };
+    label(); if (keepEl) keepEl.addEventListener("change", label);
+    document.getElementById("llCsv2").addEventListener("click", function () { downloadListCsv(x); });
+    go.addEventListener("click", function () {
+      var del = ids(), n = del.length, kept = x.total - n;
+      removeLeadsByIds(del);
+      var done = function () { showToast("Deleted " + n + " lead" + (n === 1 ? "" : "s") + " from " + x.name + (kept ? " \u00b7 kept " + kept + " being worked" : "")); openLists(); };
+      if (!kept && listCfg()[x.name]) saveListCfg(x.name, [], done); else done();
+    });
+  }
+
+  /* ----- search everything: investors in the Vault and every lead you can see ----- */
+  function searchAll(q) {
+    q = String(q || "").trim(); var ql = q.toLowerCase(), qd = q.replace(/\D/g, "");
+    if (ql.length < 2 && qd.length < 3) return null;
+    var hit = function (name, phone, extra) {
+      if (qd.length >= 3 && String(phone || "").replace(/\D/g, "").indexOf(qd) !== -1) return true;
+      return ql.length >= 2 && (String(name || "").toLowerCase().indexOf(ql) !== -1 || String(extra || "").toLowerCase().indexOf(ql) !== -1);
+    };
+    var me = TEAM.me ? TEAM.me.uid : null;
+    var inv = vaultRecords().filter(function (r) {
+      return hit(r.name, (r.phone || "") + " " + (r.phoneRaw || ""), (r.investments || []).map(function (i) { return i.deal; }).join(" ") + " " + (r.interests || "") + " " + (r.notes || ""));
+    }).sort(function (a, b) { return String(a.name).localeCompare(String(b.name)); });
+    var leads = state.leads.filter(function (l) { return (!TEAM.on || canSeeTeam() || !l.owner || l.owner.uid === me) && hit(l.name, l.phone, l.notes); })
+      .sort(function (a, b) { return String(a.name).localeCompare(String(b.name)); });
+    return { inv: inv.slice(0, 25), invN: inv.length, leads: leads.slice(0, 40), leadN: leads.length };
+  }
+  function openSearch() {
+    var hint = '<p class="ll-hint">Search your investors and every lead you can see, by name, phone, company or deal.</p>';
+    featOpen('<h3>Search</h3><input type="search" id="gsQ" placeholder="Name, phone, company or deal" autocomplete="off" autocapitalize="none" spellcheck="false" enterkeyhint="search"><div id="gsOut" class="gs-out">' + hint + '</div>');
+    var inp = document.getElementById("gsQ"), out = document.getElementById("gsOut"), timer = null;
+    var draw = function () {
+      var r = searchAll(inp.value);
+      if (!r) { out.innerHTML = hint; return; }
+      if (!r.invN && !r.leadN) { out.innerHTML = '<div class="pipe-empty">No one matches \u201c' + escapeHtml(inp.value.trim()) + '\u201d.</div>'; return; }
+      out.innerHTML =
+        (r.invN ? '<div class="gs-head">Investors \u00b7 ' + r.invN + '</div>' + r.inv.map(function (v) {
+          var deals = (v.investments || []).map(function (i) { return i.deal; }).filter(Boolean).slice(0, 2).join(", ");
+          return '<button class="gs-row" data-gs-vault="' + escapeHtml(v.id) + '"><b>' + escapeHtml(v.name) + '</b><span>' +
+            escapeHtml([formatPhoneDisplay(v.phoneRaw || v.phone || ""), deals, TEAM.on && canSeeTeam() && v.ownerName ? v.ownerName : ""].filter(Boolean).join(" \u00b7 ")) + '</span></button>';
+        }).join("") + (r.invN > r.inv.length ? '<p class="ll-hint">Showing ' + r.inv.length + ' of ' + r.invN + '. Type more to narrow it down.</p>' : '') : '') +
+        (r.leadN ? '<div class="gs-head">Leads \u00b7 ' + r.leadN + '</div>' + r.leads.map(function (l) {
+          var where = l.stage && l.stage !== "New Lead" ? l.stage : l.status === "pending" ? "Not called yet" : l.outcome ? outcomeLabel(l.outcome) : "";
+          return '<button class="gs-row" data-gs-lead="' + escapeHtml(l.id) + '"><b>' + escapeHtml(l.name) + '</b><span>' +
+            escapeHtml([formatPhoneDisplay(l.phoneRaw), where, TEAM.on && l.owner ? firstName(l.owner.name) : "", l.source || ""].filter(Boolean).join(" \u00b7 ")) + '</span></button>';
+        }).join("") + (r.leadN > r.leads.length ? '<p class="ll-hint">Showing ' + r.leads.length + ' of ' + r.leadN + '. Type more to narrow it down.</p>' : '') : '');
+      out.querySelectorAll("[data-gs-vault]").forEach(function (b) { b.addEventListener("click", function () { featClose(); openVault(b.getAttribute("data-gs-vault")); }); });
+      out.querySelectorAll("[data-gs-lead]").forEach(function (b) { b.addEventListener("click", function () { featClose(); openLeadProfile(b.getAttribute("data-gs-lead")); }); });
+    };
+    inp.addEventListener("input", function () { clearTimeout(timer); timer = setTimeout(draw, 120); });
+    inp.focus();   // same tap, so the iPhone keyboard opens right away
+  }
+  document.getElementById("searchBtn").addEventListener("click", openSearch);
+
   /** ---------- Admin controls ---------- **/
   function closeAdminHub() { document.getElementById("adminModal").classList.remove("show"); }
   function openAdminHub() {
@@ -8969,6 +9149,7 @@
         contestCfg() && contestCfg().end > Date.now() ? "Live now: " + (CONTEST_METRICS[contestCfg().metric] || "") : "Start a competition for the team", !!(contestCfg() && contestCfg().end > Date.now())) +
       tile("hubDnc", I('<circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/>'), "Do Not Call list", (Object.keys(dncNums()).length + state.leads.filter(function (l) { return l.dnc; }).length) + " blocked for everyone") +
       tile("hubAnswers", I('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'), "Answer times", "When your investors actually pick up") +
+      tile("hubLists", I('<path d="M8 6h13"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/>'), "Lead lists", "Choose who calls each list, or delete one") +
       tile("hubLeads", I('<path d="M12 5v14M5 12h14"/>'), "Add leads", "Upload Excel, CSV, text or contacts") +
       tile("hubExport", I('<path d="M12 4v11M7 10l5 5 5-5"/><path d="M5 20h14"/>'), "Export call log", "A CSV of every call, for your records") +
       tile("hubBackup", I('<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 4v6h8V4"/>'), "Download full backup", "Leads, calls and follow-ups in one file") +
@@ -8988,12 +9169,13 @@
     document.getElementById("hubReport").addEventListener("click", function () { openReport("week"); });
     document.getElementById("hubContest").addEventListener("click", openContestSetup);
     document.getElementById("hubDnc").addEventListener("click", function () { openDnc(); });
+    document.getElementById("hubLists").addEventListener("click", openLists);
     var hcu = document.getElementById("hubCustomer"); if (hcu) hcu.addEventListener("click", openCustomerCopy);
     document.getElementById("hubAnswers").addEventListener("click", function () { closeAdminHub(); openScoreboard("answers"); });
     document.getElementById("hubLeads").addEventListener("click", function () { closeAdminHub(); openLoadModal(); switchTab("upload"); });
     document.getElementById("hubExport").addEventListener("click", function () { closeAdminHub(); document.getElementById("menuExportBtn").click(); });
     document.getElementById("hubBackup").addEventListener("click", function () { closeAdminHub(); document.getElementById("menuBackupBtn").click(); });
-    if (!isAdmin()) ["hubTeam", "hubInfo", "hubPacing", "hubSecurity", "hubLeads", "hubExport", "hubBackup", "hubGoals", "hubContest", "hubCustomer", "hubVault", "hubDnc"]
+    if (!isAdmin()) ["hubTeam", "hubInfo", "hubPacing", "hubSecurity", "hubLeads", "hubExport", "hubBackup", "hubGoals", "hubContest", "hubCustomer", "hubVault", "hubDnc", "hubLists"]
       .forEach(function (id) { var e = document.getElementById(id); if (e) e.remove(); });
   }
 
