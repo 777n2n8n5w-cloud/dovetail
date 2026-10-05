@@ -3,7 +3,7 @@
 <head>
 <script id="customerConfig" type="application/json">{}</script>
 <meta charset="UTF-8">
-<meta name="dovetail-build" content="2026-11-05">
+<meta name="dovetail-build" content="2026-11-06">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2662,6 +2662,13 @@
   ::-webkit-scrollbar { width: 8px; }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 8px; }
 
+  .last-follow { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 0 0 10px; padding: 9px 12px;
+    border-radius: var(--radius-s); background: var(--surface); border: 1px solid var(--border); font-size: 12.5px; color: var(--text-dim); line-height: 1.45; }
+  .last-follow .lf-txt { min-width: 0; overflow-wrap: break-word; }
+  .last-follow .lf-txt b { color: var(--text); font-weight: 600; }
+  .last-follow .lf-act { display: flex; align-items: center; gap: 12px; flex: none; }
+  .last-follow .link-btn { background: none; border: none; padding: 6px 0; color: var(--accent); font: inherit; font-weight: 600; text-decoration: underline; cursor: pointer; }
+  .last-follow .lf-x { background: none; border: 1px solid var(--border); color: var(--text-dim); border-radius: 50%; width: 28px; height: 28px; font-size: 13px; cursor: pointer; }
   .toast {
     position: fixed;
     bottom: calc(20px + env(safe-area-inset-bottom, 0px));
@@ -2922,7 +2929,7 @@
     </div>
 
     <div style="margin-top:22px;padding-top:14px;border-top:1px solid var(--border);text-align:center;">
-      <div style="font-size:11px;color:var(--text-faint);">Build 2026-11-05 · Team · Updates install automatically after midnight.</div>
+      <div style="font-size:11px;color:var(--text-faint);">Build 2026-11-06 · Team · Updates install automatically after midnight.</div>
       <div id="updNote"></div>
     </div>
   </div>
@@ -3747,6 +3754,28 @@
     });
   }
 
+  function alertsHtml() { return overdueBannerHtml() + handoffBannerHtml() + lockReqBannerHtml(); }
+  function wireAlerts() {
+    [["overdueWarnBtn", openOverdue], ["lockReqBtn", function () { lockSetup().then(function () { render(); }); }]].forEach(function (x) {
+      var el = document.getElementById(x[0]); if (el) el.addEventListener("click", x[1]);
+    });
+  }
+  function lastFollowHtml() {
+    var lf = state.lastFollow; if (!lf) return "";
+    var t = state.tasks.filter(function (x) { return x.id === lf.taskId; })[0], lead = t && findLeadById(t.leadId);
+    if (!t || t.done || !lead) return "";
+    return '<div class="last-follow"><span class="lf-txt">\u21BA ' + (lf.kind === "callback" ? "Callback" : "Follow-up") + ' for <b>' + escapeHtml(lead.name) + '</b> set for ' + escapeHtml(taskWhen(t, lead)) + '</span>' +
+      '<span class="lf-act"><button class="link-btn" id="lfChange">Change</button><button class="lf-x" id="lfDone" aria-label="Looks right">\u2713</button></span></div>';
+  }
+  document.addEventListener("click", function (e) {
+    var ch = e.target.closest && e.target.closest("#lfChange"), ok = e.target.closest && e.target.closest("#lfDone");
+    if (!ch && !ok) return;
+    var lf = state.lastFollow; if (!lf) return;
+    if (ok) { state.lastFollow = null; saveState(); render(); return; }
+    var lead = findLeadById(lf.leadId);
+    openTaskModal(lf.taskId, { title: lf.kind === "callback" ? "When should we call back?" : "When should we follow up?", sub: "Enter it in your time." + tzHint(lead) });
+  });
+
   function showToast(msg) {
     var t = document.getElementById("toast");
     t.textContent = msg;
@@ -3966,6 +3995,9 @@
     state.completedStack.push(lead.id);
     state.awaitingOutcome = false;
     var followMsg = applyFollowupRules(lead, outcome, focusTaskId);
+    var newest = null;
+    state.tasks.forEach(function (t) { if (!t.done && t.auto && t.leadId === lead.id && (!newest || (t.createdAt || 0) >= (newest.createdAt || 0))) newest = t; });
+    state.lastFollow = (outcome === "callback" || outcome === "interested") && newest ? { taskId: newest.id, leadId: lead.id, kind: outcome } : null;
     var offer = maybeOfferText(lead, outcome);
     pendingText = offer && !offer.skipped ? offer : null;
     if (offer && offer.skipped) followMsg = (followMsg ? followMsg + " \u00b7 " : "") + "too late in their day to text";
@@ -4174,9 +4206,37 @@
   // A time slot `bizDays` business days out, at `hour` o'clock in the lead's own time zone.
   function slotAt(lead, bizDays, hour) {
     var iana = leadIana(lead);
+    var w = lead && lead.callWindow && CALL_WINDOWS[lead.callWindow];
+    if (w && (hour < w[1] || hour >= w[2])) hour = w[1];          // the rep said when this person likes to be called
     var p = zonedParts(Date.now(), iana);
     var day = addBusinessDays(p.y, p.m, p.d, bizDays);
-    return zonedToUtc(day.y, day.m, day.d, hour, 0, iana);
+    var ts = zonedToUtc(day.y, day.m, day.d, hour, 0, iana);
+    if (ts < Date.now()) { day = addBusinessDays(day.y, day.m, day.d, 1); ts = zonedToUtc(day.y, day.m, day.d, hour, 0, iana); }
+    return ts;
+  }
+  // When a rep sets or changes someone's preferred time, move their open automatic follow-ups into it.
+  // Times a rep chose by hand (pinned) are never moved.
+  function fitTasksToWindow(lead) {
+    var w = lead && lead.callWindow && CALL_WINDOWS[lead.callWindow]; if (!w) return [];
+    var iana = leadIana(lead), moved = [];
+    state.tasks.forEach(function (t) {
+      if (t.done || t.leadId !== lead.id || !t.auto || t.pinned || !t.dueAt) return;
+      var q = zonedParts(t.dueAt, iana);
+      if (q.h >= w[1] && q.h < w[2]) return;
+      var ts = zonedToUtc(q.y, q.m, q.d, w[1], 0, iana);
+      if (ts < Date.now()) { var d = addBusinessDays(q.y, q.m, q.d, 1); ts = zonedToUtc(d.y, d.m, d.d, w[1], 0, iana); }
+      t.dueAt = ts; t.due = localDateStr(new Date(ts)); moved.push(t);
+    });
+    return moved;
+  }
+  // "It's 7:24 AM for Sophia right now (3 hours behind you)" so reps enter callback times correctly.
+  function tzHint(lead) {
+    var z = lead ? leadZone(lead) : null; if (!z || !z.iana) return "";
+    var now = Date.now(), q = zonedParts(now, z.iana), me = new Date(now);
+    var diff = Math.round((Date.UTC(q.y, q.m, q.d, q.h, q.mi) - Date.UTC(me.getFullYear(), me.getMonth(), me.getDate(), me.getHours(), me.getMinutes())) / 3600000);
+    if (!diff) return "";
+    var theirs = new Date(now).toLocaleTimeString("en-US", { timeZone: z.iana, hour: "numeric", minute: "2-digit" });
+    return " It\u2019s " + theirs + " for " + firstName(lead.name) + " right now (" + Math.abs(diff) + " hour" + (Math.abs(diff) === 1 ? "" : "s") + " " + (diff < 0 ? "behind" : "ahead of") + " you).";
   }
   // Next retry after n unanswered attempts: switch the time of day they're
   // tried (morning <-> afternoon peak) and widen the gap each time.
@@ -4218,7 +4278,7 @@
   }
   function dueTasks() {
     var now = Date.now();
-    return state.tasks.filter(function (t) { return !t.done && t.leadId && taskDueTs(t) <= now && myTask(t) && !isDnc(findLeadById(t.leadId)) && inPrefWindow(findLeadById(t.leadId)); })
+    return state.tasks.filter(function (t) { return !t.done && t.leadId && taskDueTs(t) <= now && myTask(t) && !isDnc(findLeadById(t.leadId)) && (t.pinned || inPrefWindow(findLeadById(t.leadId))); })
       .sort(function (a, b) { return taskDueTs(a) - taskDueTs(b); });
   }
   function dayLabel(d) {
@@ -4519,7 +4579,7 @@
     if (!n) return "";
     return '<button class="fu-banner" id="startFollowupsBtn"><span class="fu-ico">' + callIconSvg() + '</span>' +
       '<span class="fu-txt"><b>' + n + ' follow-up call' + (n === 1 ? '' : 's') + ' due now</b>' +
-      '<span>Scheduled by your 6-attempt cadence</span></span><span class="fu-go">Start \u2192</span></button>';
+      '<span>Callbacks, follow-ups and retries, in order</span></span><span class="fu-go">Start \u2192</span></button>';
   }
   function leadTrackHtml(lead) {
     var last = lastCallFor(lead.id);
@@ -4620,8 +4680,10 @@
     });
     document.getElementById("lpVault").addEventListener("click", function () { closeLeadProfile(true); vaultAddFromLead(lead); });
     document.getElementById("lpWindow").addEventListener("change", function (e) {
-      lead.callWindow = e.target.value; saveState();
-      showToast(lead.callWindow ? lead.name + " only comes up " + windowLabel(lead).toLowerCase() : lead.name + " can be called any time");
+      lead.callWindow = e.target.value;
+      var moved = fitTasksToWindow(lead);
+      saveState();
+      showToast(lead.callWindow ? lead.name + " only comes up " + windowLabel(lead).toLowerCase() + (moved.length ? " \u00b7 follow-up moved to " + fmtWhen(moved[0].dueAt) : "") : lead.name + " can be called any time");
     });
     document.getElementById("lpAmount").addEventListener("change", function (e) {
       lead.amount = Math.max(0, Number(e.target.value) || 0); saveState(); showToast("Amount saved");
@@ -4948,8 +5010,9 @@
   function openTaskModal(taskId, defaults) {
     defaults = defaults || {};
     var task = taskId ? state.tasks.find(function (t) { return t.id === taskId; }) : null;
-    document.getElementById("taskModalTitle").textContent = task ? "Edit follow-up" : (defaults.title || "Add follow-up");
-    document.getElementById("taskModalSub").textContent = defaults.sub || "Tied to one lead. Time is in your time zone.";
+    document.getElementById("taskModalTitle").textContent = defaults.title || (task ? "Edit follow-up" : "Add follow-up");
+    var hintLead = task ? findLeadById(task.leadId) : findLeadById(defaults.leadId) || currentLead();
+    document.getElementById("taskModalSub").textContent = defaults.sub || ("Tied to one lead. Time is in your time zone." + tzHint(hintLead));
     var sel = document.getElementById("taskLeadSelect");
     sel.innerHTML = state.leads.map(function (l) { return '<option value="' + l.id + '">' + escapeHtml(l.name) + '</option>'; }).join("");
     sel.value = task ? task.leadId : (defaults.leadId || (currentLead() ? currentLead().id : (state.leads[0] ? state.leads[0].id : "")));
@@ -4988,7 +5051,11 @@
     };
     if (editingId) {
       var existing = state.tasks.find(function (t) { return t.id === editingId; });
-      if (existing) { data.done = existing.done; Object.assign(existing, data); }
+      if (existing) {
+        data.done = existing.done;
+        if (existing.dueAt !== dueAt || existing.due !== due) data.pinned = true;      // a time the rep chose; automatic changes leave it alone
+        Object.assign(existing, data);
+      }
     } else {
       data.id = uid();
       data.createdAt = Date.now();
@@ -5087,7 +5154,7 @@
 
     if (!lead && state.queueFilter === "int") {
       var poolN = interestedPool().length;
-      main.innerHTML =
+      main.innerHTML = lastFollowHtml() +
         '<div class="card done-panel card-enter">' +
           '<div class="glyph">\u2713</div>' +
           '<h2>' + (poolN ? 'Every interested lead called' : 'No interested leads yet') + '</h2>' +
@@ -5126,17 +5193,17 @@
           var w = CALL_WINDOWS[l.callWindow], z = leadZone(l); if (!w || !z.iana) return;
           var d = (w[1] - zoneTime(z.iana).hour + 24) % 24; if (soon === null || d < soon) soon = d;
         });
-        main.innerHTML = followupBannerHtml() + spamBannerHtml() + (focus ? '' : briefCardHtml() + hotStripHtml(null)) +
+        main.innerHTML = followupBannerHtml() + spamBannerHtml() + alertsHtml() + lastFollowHtml() + (focus ? '' : briefCardHtml() + hotStripHtml(null)) +
           '<div class="card done-panel card-enter"><div class="glyph">\uD83D\uDD53</div><h2>Waiting for the right time</h2><p>' +
           (win.length ? win.length + ' lead' + (win.length === 1 ? ' prefers' : 's prefer') + ' a different time of day' + (soon !== null ? ' \u2014 the next window opens in about ' + Math.max(1, soon) + ' hour' + (Math.max(1, soon) === 1 ? '' : 's') : '') + '. ' : '') +
           (taken ? taken + ' lead' + (taken === 1 ? ' is' : 's are') + ' being called by a teammate right now.' : '') + '</p>' +
           (state.completedStack.length ? '<div style="margin-top:12px">' + prevButtonHtml() + '</div>' : '') + '</div>';
-        wirePrevButton();
+        wirePrevButton(); wireAlerts();
         [["briefOpen", openBrief], ["briefHide", function () { state.briefSeen = localDateStr(new Date()); saveState(); render(); }]].forEach(function (x) { var el = document.getElementById(x[0]); if (el) el.addEventListener("click", x[1]); });
         return;
       }
       main.innerHTML =
-        followupBannerHtml() +
+        followupBannerHtml() + alertsHtml() + lastFollowHtml() +
         '<div class="card done-panel">' +
           '<div class="glyph">✓</div>' +
           '<h2>Queue complete</h2>' +
@@ -5153,6 +5220,7 @@
       var dpi = document.getElementById("donePanelInt");
       if (dpi) dpi.addEventListener("click", function () { if (startInterestedRun(false)) { saveState(); render(); } });
       document.getElementById("donePanelExport").addEventListener("click", exportCsv);
+      wireAlerts();
       wireAutoAdvanceToggle();
       wirePrevButton();
       return;
@@ -5160,7 +5228,7 @@
 
     if (state.paused) {
       var justLogged = state.callLog[state.callLog.length - 1];
-      main.innerHTML =
+      main.innerHTML = lastFollowHtml() +
         '<div class="card done-panel">' +
           '<div class="glyph">✓</div>' +
           '<h2>Logged: ' + escapeHtml(justLogged ? justLogged.outcome : "") + '</h2>' +
@@ -5186,6 +5254,7 @@
     lastShownLeadId = lead.id;
     main.innerHTML =
       (focus ? '' : followupBannerHtml()) + spamBannerHtml() + overdueBannerHtml() + handoffBannerHtml() + contestBannerHtml() + lockReqBannerHtml() + (focus ? '' : briefCardHtml() + installCardHtml() + hotStripHtml(lead.id)) +
+      lastFollowHtml() +
       '<div class="card' + enterCls + '">' +
         '<div class="eyebrow-row">' +
           (focus
