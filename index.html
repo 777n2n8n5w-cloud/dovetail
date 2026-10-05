@@ -3,7 +3,7 @@
 <head>
 <script id="customerConfig" type="application/json">{}</script>
 <meta charset="UTF-8">
-<meta name="dovetail-build" content="2026-11-01">
+<meta name="dovetail-build" content="2026-11-04">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -1286,7 +1286,14 @@
     flex: 1 1 auto;
     min-width: 0;   /* the title area shrinks and wraps; the buttons never get pushed off the screen */
   }
-  .brand .name, .brand .sub { overflow-wrap: anywhere; }
+  .brand .name, .brand .sub { overflow-wrap: break-word; }   /* wrap at spaces first; never one letter per line */
+  .brand .sub-line { display: flex; flex-wrap: wrap; align-items: center; column-gap: 8px; row-gap: 1px; min-width: 0; }
+  .brand .sub-line .sub { min-width: 0; }
+  /* Safety net: the name block never gets narrower than ~12 characters. If a long name, big text or a wide
+     theme font would squeeze it, the buttons move to a second row instead of crushing the text. */
+  header.top { flex-wrap: wrap; row-gap: 8px; }
+  .brand { flex: 1 1 0; min-width: min(120px, 100%); }
+  @media (max-width: 360px) { .brand .name { letter-spacing: 0.01em !important; } }
   header.top { gap: 8px; }
   .header-right { flex: none; }
   @media (max-width: 360px) {
@@ -1330,7 +1337,8 @@
     padding: 4px;
   }
   .view-tab {
-    flex: 1;
+    flex: 1 1 auto;   /* sized by its label, so a badge like "Tasks 73" always shows */
+    min-width: 0;
     padding: 9px 2px;
     border: none;
     background: transparent;
@@ -2186,7 +2194,9 @@
     color: var(--text); border-radius: 6px; padding: 9px 12px; font-size: 16px; font-family: inherit;
   }
   #lpNotes { width: 100%; box-sizing: border-box; }
-  .lp-name { margin: 0 32px 2px 0; }
+  .lp-name, .modal h3.lp-name { margin: 0 36px 2px 0; }   /* long names wrap before the close button, never under it */
+  .close-x { z-index: 2; }
+  .modal .close-x ~ h3 { margin-right: 36px; }   /* every popup title leaves room for its close button */
   .lp-phone { font-size: 16px; color: var(--text-dim); margin-bottom: 10px; font-variant-numeric: tabular-nums; }
   .lp-call-row { margin: 4px 0 14px; }
   .lp-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 6px; }
@@ -2227,7 +2237,7 @@
   .up-check input { width: 20px; height: 20px; flex: none; }
   .lp-src { font-size: 12px; color: var(--text-faint); margin: -6px 0 10px; }
   #submitUpload:disabled { opacity: 0.5; }
-  @media (max-width: 360px) { .save-pill { font-size: 0; gap: 0; } }
+  @media (max-width: 360px) { .save-pill.ok { font-size: 0; gap: 0; } }   /* small phones: a dot when all is well; warnings always spelled out */
 
   /* ---- Theme details ---- */
   body { background-color: var(--bg); background-image: var(--bg-image, none); background-attachment: fixed;
@@ -2237,7 +2247,7 @@
   .call-btn { background: var(--call-bg, var(--accent)); box-shadow: var(--call-shadow, none); }
   .lead-name, .brand .name, .lp-name, .tasks-title, .done-panel h2, .empty h2, .modal h3 { font-family: var(--font-display, inherit); }
   .theme-group-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-faint); margin: 10px 0 6px; grid-column: 1 / -1; }
-  .brand .name { white-space: nowrap; }
+  .brand .name { white-space: normal; }
   :root[data-theme="terminal"] .brand .name { font-size: 15px; letter-spacing: -0.03em; }
   .theme-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 6px; }
   .theme-card {
@@ -2535,7 +2545,8 @@
   #mainArea, #mainArea *, .modal, .modal *, .text-prompt, .text-prompt *, #toast { overflow-wrap: anywhere; }
   select { max-width: 100%; }
   .qc-order { min-width: 0; }
-  .qc-order select { min-width: 0; max-width: 62vw; text-overflow: ellipsis; }
+  .qc-order { flex-wrap: wrap; row-gap: 6px; }
+  .qc-order select { flex: 1 1 auto; min-width: 0; max-width: 100%; text-overflow: ellipsis; }   /* drops to its own full-width line when the choice wouldn't fit beside the label */
   .modal { box-sizing: border-box; max-width: min(560px, 100vw); }
   .va-row b, .va-row span, .vr-main, .vi-row > span:first-child, .kd-row span, .vq-row > span:first-child, .tm-main, .is-txt, .info-item span { min-width: 0; }
 
@@ -2715,10 +2726,9 @@
   <header class="top">
     <div class="brand">
       <div class="name">Dovetail Suite</div>
-      <div class="sub" id="headerSub">No leads loaded</div>
+      <div class="sub-line"><div class="sub" id="headerSub">No leads loaded</div><span class="save-pill" id="savePill"></span></div>
     </div>
     <div class="header-right">
-      <span class="save-pill" id="savePill"></span>
       <button class="icon-btn team-admin-only score-btn" id="adminBtn" aria-label="Admin controls" title="Admin controls"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 9.5C8 19.2 5 15.5 5 11V6l7-3z"/><path d="M9.5 12l1.8 1.8L15 10"/></svg></button>
       <button class="icon-btn" id="searchBtn" aria-label="Search" title="Search"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg></button>
       <button class="icon-btn add-leads-btn" id="addLeadsBtn" aria-label="Add leads" title="Add leads">+</button>
@@ -2908,7 +2918,7 @@
     </div>
 
     <div style="margin-top:22px;padding-top:14px;border-top:1px solid var(--border);text-align:center;">
-      <div style="font-size:11px;color:var(--text-faint);">Build 2026-11-01 · Team · Updates install automatically after midnight.</div>
+      <div style="font-size:11px;color:var(--text-faint);">Build 2026-11-04 · Team · Updates install automatically after midnight.</div>
       <div id="updNote"></div>
     </div>
   </div>
@@ -3036,28 +3046,29 @@
   var INDUSTRIES = {
     investments: { name: "Investments", one: "Investor", many: "Investors", deal: "Investment", deals: "Investments", example: "SambaNova", fund: "funded",
       words: {}, steps: [["docs", "Docs sent", 1], ["returned", "Docs returned", 5], ["funded", "Account funded", 10]],
-      demo: { lists: ["Spring list", "Referral list"], note: function (n, st) { return "Account value $" + (50 + n % 900) + ",000 | " + st; }, deals: ["Pre-IPO AI chips", "Series E fintech", "Defense tech", "Payments platform", "Data platform"], amt: 25000 } },
-    realestate: { name: "Real estate", one: "Client", many: "Clients", deal: "Deal", deals: "Deals", example: "14 Oak St", fund: "closed",
-      words: { Pitched: "Showing", Committed: "Under contract", Funded: "Sold", Closed: "Commission paid" },
+      demo: { lists: ["Spring list", "Referral list"], note: function (n, st) { return "Account value $" + (50 + n % 900) + ",000 | " + st; }, deals: ["Pre-IPO AI chips", "Series E fintech", "Defense tech", "Payments platform", "Data platform"], amt: 25000, interest: "Late-stage tech" } },
+    realestate: { target: 3000000, name: "Real estate", one: "Client", many: "Clients", deal: "Deal", deals: "Deals", example: "14 Oak St", fund: "closed", money: "in sales", amount: "Sale price", wants: "e.g. 3 bd in Holmdel, under $700K", dateLabel: "Add a closing anniversary or date",
+      words: { Pitched: "Showing", Objection: "Negotiating", Committed: "Under contract", Funded: "Sold", Closed: "Commission paid" },
       steps: [["offer", "Offer accepted", 1], ["inspect", "Inspection done", 10], ["appraisal", "Appraisal in", 21], ["closed", "Deal closed", 30]],
-      demo: { lists: ["Expired listings", "FSBO"], note: function (n, st) { return (n % 2 ? "Expired listing" : "For sale by owner") + " | " + (2 + n % 4) + " bd, asking $" + (300 + n % 600) + "K | " + st; }, deals: ["14 Oak St", "88 Shore Rd", "7 Elm Ct", "210 Bay Ave", "35 Park Pl"], amt: 50000 } },
-    mca: { name: "MCA / business funding", one: "Merchant", many: "Merchants", deal: "Funding", deals: "Fundings", example: "$75K advance", fund: "funded",
-      words: { Pitched: "Offer sent", Committed: "Approved", Closed: "Paid off" },
+      demo: { lists: ["Expired listings", "FSBO"], note: function (n, st) { return (n % 2 ? "Expired listing" : "For sale by owner") + " | " + (2 + n % 4) + " bd, asking $" + (300 + n % 600) + "K | " + st; }, deals: ["14 Oak St", "88 Shore Rd", "7 Elm Ct", "210 Bay Ave", "35 Park Pl"], amt: 50000, company: "Shoreline Realty Group", interest: "Move-up buyer in 2 years" } },
+    mca: { target: 500000, name: "MCA / business funding", one: "Merchant", many: "Merchants", deal: "Advance", deals: "Advances", example: "$75K advance", fund: "funded", money: "funded", amount: "Advance amount", wants: "e.g. renewal at 50% paid, equipment", dateLabel: "Add a renewal date",
+      words: { Pitched: "Offer sent", Objection: "Negotiating", Committed: "Approved", Closed: "Paid off" },
       steps: [["app", "Application in", 1], ["stmts", "Bank statements in", 2], ["contract", "Contract signed", 4], ["funded", "Funded", 6]],
-      demo: { lists: ["UCC leads", "Aged leads"], note: function (n, st) { return ["Restaurant", "Trucking", "Auto repair", "Dental office", "Retail"][n % 5] + " | $" + (20 + n % 180) + "K/mo revenue | " + st; }, deals: ["$75K advance", "$120K advance", "$40K advance", "$250K advance", "$60K renewal"], amt: 10000 } },
-    auto: { name: "Auto sales", one: "Customer", many: "Customers", deal: "Sale", deals: "Sales", example: "2024 Camry LE", fund: "delivered",
-      words: { Pitched: "Test drive", Committed: "Sold", Funded: "Delivered", Closed: "Completed" },
+      demo: { lists: ["UCC leads", "Aged leads"], note: function (n, st) { return ["Restaurant", "Trucking", "Auto repair", "Dental office", "Retail"][n % 5] + " | $" + (20 + n % 180) + "K/mo revenue | " + st; }, deals: ["$75K advance", "$120K advance", "$40K advance", "$250K advance", "$60K renewal"], amt: 10000, company: "Summit Business Funding", interest: "Renewal when 50% paid" } },
+    auto: { target: 150000, name: "Auto sales", one: "Customer", many: "Customers", deal: "Sale", deals: "Sales", example: "2024 Camry LE", fund: "delivered", money: "in sales", amount: "Vehicle price", wants: "e.g. SUV under $40K, trade-in 2016 Accord", dateLabel: "Add a lease-end or service date",
+      words: { Qualified: "Appointment set", Pitched: "Test drive", Objection: "Negotiating", Committed: "Sold", Funded: "Delivered", Closed: "Completed" },
       steps: [["credit", "Credit app in", 1], ["approved", "Approved", 2], ["signed", "Deal signed", 3], ["delivered", "Delivered", 5]],
-      demo: { lists: ["Website leads", "Service drive"], note: function (n, st) { return "Wants: " + ["2024 Camry", "2023 RAV4", "2024 F-150", "2022 Accord", "2024 Tahoe"][n % 5] + " | trade-in: " + (2012 + n % 10) + " | " + st; }, deals: ["2024 Camry LE", "2023 RAV4 XLE", "2024 F-150 XLT", "2022 Accord EX", "2024 Tahoe LT"], amt: 2000 } },
-    insurance: { name: "Insurance", one: "Client", many: "Clients", deal: "Policy", deals: "Policies", example: "Term life $500K", fund: "issued",
-      words: { Pitched: "Quoted", Committed: "Applied", Funded: "Issued", Closed: "In force" },
+      demo: { lists: ["Website leads", "Service drive"], note: function (n, st) { return "Wants: " + ["2024 Camry", "2023 RAV4", "2024 F-150", "2022 Accord", "2024 Tahoe"][n % 5] + " | trade-in: " + (2012 + n % 10) + " | " + st; }, deals: ["2024 Camry LE", "2023 RAV4 XLE", "2024 F-150 XLT", "2022 Accord EX", "2024 Tahoe LT"], amt: 2000, company: "Route 9 Motors", interest: "Lease ends next spring" } },
+    insurance: { target: 50000, name: "Insurance", one: "Client", many: "Clients", deal: "Policy", deals: "Policies", example: "Term life $500K", fund: "issued", money: "in premium", amount: "Annual premium", wants: "e.g. term life review, add umbrella", dateLabel: "Add a renewal or review date",
+      words: { Pitched: "Quoted", Objection: "Considering", Committed: "Applied", Funded: "Issued", Closed: "In force" },
       steps: [["app", "Application signed", 1], ["uw", "Underwriting done", 14], ["issued", "Policy issued", 21], ["paid", "First premium paid", 30]],
-      demo: { lists: ["Aged leads", "Turning 65"], note: function (n, st) { return ["Term life", "Final expense", "Medicare supplement", "Home + auto", "IUL"][n % 5] + " | age " + (30 + n % 45) + " | " + st; }, deals: ["Term life $500K", "Final expense $15K", "Medicare supplement", "Home + auto bundle", "IUL $250K"], amt: 1000 } },
-    solar: { name: "Solar / home improvement", one: "Homeowner", many: "Homeowners", deal: "Project", deals: "Projects", example: "8.2 kW system", fund: "install",
-      words: { Pitched: "Proposal sent", Committed: "Signed", Funded: "Installed", Closed: "Activated" },
+      demo: { lists: ["Aged leads", "Turning 65"], note: function (n, st) { return ["Term life", "Final expense", "Medicare supplement", "Home + auto", "IUL"][n % 5] + " | age " + (30 + n % 45) + " | " + st; }, deals: ["Term life $500K", "Final expense $15K", "Medicare supplement", "Home + auto bundle", "IUL $250K"], amt: 1000, company: "Harbor Insurance Group", interest: "Annual review in March" } },
+    solar: { target: 250000, name: "Solar / home improvement", one: "Homeowner", many: "Homeowners", deal: "Project", deals: "Projects", example: "8.2 kW system", fund: "install", money: "in contracts", amount: "Contract value", wants: "e.g. battery add-on, EV charger", dateLabel: "Add an install anniversary or date",
+      words: { Pitched: "Proposal sent", Objection: "Financing", Committed: "Signed", Funded: "Installed", Closed: "Activated" },
       steps: [["site", "Site survey", 7], ["permit", "Permit approved", 30], ["install", "Installed", 60], ["pto", "Permission to operate", 90]],
-      demo: { lists: ["Door knock leads", "Web leads"], note: function (n, st) { return "Electric bill $" + (120 + n % 280) + "/mo | " + (n % 3 ? "owns home" : "south-facing roof") + " | " + st; }, deals: ["8.2 kW system", "6.4 kW system", "10.5 kW + battery", "Roof + 7 kW", "12 kW system"], amt: 5000 } }
+      demo: { lists: ["Door knock leads", "Web leads"], note: function (n, st) { return "Electric bill $" + (120 + n % 280) + "/mo | " + (n % 3 ? "owns home" : "south-facing roof") + " | " + st; }, deals: ["8.2 kW system", "6.4 kW system", "10.5 kW + battery", "Roof + 7 kW", "12 kW system"], amt: 5000, company: "Bright Sun Solar", interest: "Battery add-on next year" } }
   };
+  function reEsc(t) { return String(t).replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
   var DEMO_IND = (function () { try { var m = /demo[-_]([a-z]+)/i.exec(location.hash); if (m && INDUSTRIES[m[1].toLowerCase()]) window.localStorage.setItem("dovetail_demo_ind", m[1].toLowerCase()); return window.localStorage.getItem("dovetail_demo_ind") || ""; } catch (e) { return ""; } })();
   var IND_KEY = INDUSTRIES[CUSTOMER.industry] ? CUSTOMER.industry : (DEMO && INDUSTRIES[DEMO_IND] ? DEMO_IND : "investments");
   var IND = INDUSTRIES[IND_KEY];
@@ -3068,11 +3079,16 @@
     if (one !== "Investor") { w.Investor = one; w.Investors = many; w.investor = one.toLowerCase(); w.investors = many.toLowerCase(); }
     if (IND.deal !== "Investment") { w.Investment = IND.deal; w.Investments = IND.deals; w.investment = IND.deal.toLowerCase(); w.investments = IND.deals.toLowerCase(); w.SambaNova = IND.example; }
     Object.keys(IND.words).forEach(function (k) { w[k] = IND.words[k]; if (k === "Committed" || k === "Funded") w[k.toLowerCase()] = IND.words[k].toLowerCase(); });
+    if (IND.money) w.invested = IND.money;
+    if (IND.amount) w["Deal amount"] = IND.amount;
+    if (IND.wants) w["e.g. AI, late-stage tech, $50K+ tickets"] = IND.wants;
+    if (IND.dateLabel) w["Add a birthday or date"] = IND.dateLabel;
     // Safeguard: a new word must never itself be a word that gets swapped, or a redraw would swap it twice.
-    Object.keys(w).forEach(function (k) { if (Object.keys(w).some(function (j) { return new RegExp("\\b" + j + "\\b").test(w[k]); })) delete w[k]; });
+    Object.keys(w).forEach(function (k) { if (Object.keys(w).some(function (j) { return new RegExp("\\b" + reEsc(j) + "\\b").test(w[k]); })) delete w[k]; });
     return w;
   })();
-  var WORD_RE = Object.keys(WORDMAP).length ? new RegExp("\\b(" + Object.keys(WORDMAP).sort(function (a, b) { return b.length - a.length; }).join("|") + ")\\b", "g") : null;
+  var WORD_RE = Object.keys(WORDMAP).length ? new RegExp("\\b(" + Object.keys(WORDMAP).sort(function (a, b) { return b.length - a.length; }).map(reEsc).join("|") + ")\\b", "g") : null;
+  if (DEMO && !CUSTOMER.company && IND.demo.company) COMPANY = IND.demo.company;   // a believable company for each industry's demo
   function installDemoBackend() {
     (function () {
       var FS = "__mockfs", AU = "__mockauth";
@@ -3266,17 +3282,18 @@
       var o = k % 2 ? reps[k % 3] : me;
       db["vault/dv" + k] = { name: v[0], phone: "+1212555" + (1200 + k), phoneRaw: "(212) 555-" + (1200 + k), state: "NY", leadId: "", ownerUid: o.uid, ownerName: o.name, createdAt: now - v[3] * 86400000,
         investments: [{ id: "di" + k, deal: IND.demo.deals[k], amount: Math.round(v[1] / 25000 * IND.demo.amt), date: new Date(now - v[3] * 86400000).toISOString().slice(0, 10), status: v[2], done: v[2] === "Committed" ? (k === 1 ? (function () { var o = {}; o[IND.steps[0][0]] = now; return o; })() : {}) : {} }],
-        keyDates: [], interests: "Late-stage tech", notes: "", lastContactAt: now - k * 9 * 86400000, nextReachOut: "", removalRequest: null, updatedAt: now };
+        keyDates: [], interests: IND.demo.interest, notes: "", lastContactAt: now - k * 9 * 86400000, nextReachOut: "", removalRequest: null, updatedAt: now };
     });
     return db;
   }
   if (DEMO) {
     installDemoBackend();
     try {
-      if (!window.localStorage.getItem("__mockfs") || window.localStorage.getItem("dovetail_demo_v") !== "1:" + IND_KEY) {
+      if (!window.localStorage.getItem("__mockfs") || window.localStorage.getItem("dovetail_demo_v") !== "2:" + IND_KEY) {
+        window.localStorage.removeItem("dovetail_team_dAdm");
         window.localStorage.setItem("__mockfs", JSON.stringify(demoSeed()));
         var da = {}; da["demo@" + BASE_DOMAIN] = { uid: "dAdm", pw: "demo" };
-        window.localStorage.setItem("__mockauth", JSON.stringify(da)); window.localStorage.setItem("dovetail_demo_v", "1:" + IND_KEY);
+        window.localStorage.setItem("__mockauth", JSON.stringify(da)); window.localStorage.setItem("dovetail_demo_v", "2:" + IND_KEY);
       }
       window.sessionStorage.setItem("__mocksess", JSON.stringify({ uid: "dAdm", email: "demo@" + BASE_DOMAIN }));
     } catch (e) {}
@@ -3342,7 +3359,7 @@
       recallLeadId: null, // id of the completed lead currently being recalled/viewed (non-destructive)
       activeView: "dial", // 'dial' | 'history' | 'pipeline' | 'tasks'
       historyFilter: "all",
-      dealTarget: 10000000,
+      dealTarget: IND.target || 10000000,
       dailyGoal: 100,
       queueFilter: "all",
       queueOrder: "imported",
