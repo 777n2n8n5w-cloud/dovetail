@@ -3,7 +3,7 @@
 <head>
 <script id="customerConfig" type="application/json">{}</script>
 <meta charset="UTF-8">
-<meta name="dovetail-build" content="2026-11-04">
+<meta name="dovetail-build" content="2026-11-05">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2120,6 +2120,10 @@
   }
   .qc-note strong { color: var(--accent); }
   .now-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--interested); display: inline-block; }
+  .int-dot { width: 7px; height: 7px; background: var(--interested); display: inline-block; transform: rotate(45deg); margin: 0 2px 1px 1px; }
+  .filter-chip.active .int-dot { background: var(--accent-text); }
+  .int-run-btn { display: block; width: 100%; margin: 4px 0 12px; padding: 12px 14px; border-radius: var(--radius-s); }
+  .int-note .link-btn { background: none; border: none; padding: 0; color: var(--accent); font: inherit; font-weight: 600; text-decoration: underline; cursor: pointer; }
   .filter-chip.active .now-dot { background: var(--accent-text); }
   .lead-where {
     display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 600;
@@ -2918,7 +2922,7 @@
     </div>
 
     <div style="margin-top:22px;padding-top:14px;border-top:1px solid var(--border);text-align:center;">
-      <div style="font-size:11px;color:var(--text-faint);">Build 2026-11-04 · Team · Updates install automatically after midnight.</div>
+      <div style="font-size:11px;color:var(--text-faint);">Build 2026-11-05 · Team · Updates install automatically after midnight.</div>
       <div id="updNote"></div>
     </div>
   </div>
@@ -3835,7 +3839,41 @@
     return state.leads.filter(function (l) { return l.status === "pending" && !claimedByOther(l) && inPrefWindow(l) && !isDnc(l) && listAllowed(l); });
   }
 
+  // ---- Interested run: be fed your own Interested leads, longest-waiting first ----
+  // A lead qualifies while its latest outcome is Interested and it hasn't moved to
+  // Committed or Closed Lost. Calls logged during the run drop the lead off the run.
+  function intMine(l) { return !TEAM.on || !TEAM.me || !l.owner || l.owner.uid === TEAM.me.uid; }
+  function interestedPool() {
+    return state.leads.filter(function (l) {
+      return l.status === "done" && l.outcome === "interested" && !l.retired && !l.badNumber && !isDnc(l) && !claimedByOther(l) && intMine(l) &&
+        l.stage !== "Committed" && l.stage !== "Closed Lost";
+    });
+  }
+  function interestedLeads() {
+    var since = state.intSince || "", skipped = state.intSkipped || [];
+    var list = interestedPool().filter(function (l) { return !(since && l.calledAt && l.calledAt >= since); });
+    var ql = state.queueList || "all";
+    if (ql !== "all") list = list.filter(function (l) { return (l.source || "Original list") === ql; });
+    var o = state.queueOrder || "imported";
+    if (o === "imported" || o === "smart") list = list.slice().sort(function (a, b) { return (a.calledAt || "") < (b.calledAt || "") ? -1 : (a.calledAt || "") > (b.calledAt || "") ? 1 : 0; });
+    if (o === "smart") list = smartSort(list);
+    if (skipped.length) {
+      var later = skipped.map(function (id) { return list.filter(function (l) { return l.id === id; })[0]; }).filter(Boolean);
+      list = list.filter(function (l) { return skipped.indexOf(l.id) === -1; }).concat(later);
+    }
+    return list;
+  }
+  // Resumes today's run where you left off; a new day (or "Start over") begins a fresh round.
+  function startInterestedRun(fresh) {
+    if (state.awaitingOutcome) { showToast("Log the outcome for this call first"); return false; }
+    var today = localDateStr(new Date());
+    if (fresh || !state.intSince || state.intDay !== today) { state.intSince = new Date().toISOString(); state.intSkipped = []; state.intDay = today; }
+    state.queueFilter = "int"; state.focusLeadId = null; state.focusTaskId = null; state.followupRun = false; state.recallLeadId = null; state.paused = false;
+    return true;
+  }
+
   function pendingLeads() {
+    if ((state.queueFilter || "all") === "int") return interestedLeads();
     var all = allPendingLeads();
     var f = state.queueFilter || "all";
     var list = f === "all" ? all : all.filter(function (l) {
@@ -3883,7 +3921,7 @@
     // the clock would otherwise move it, so the outcome lands on the right person.
     if (state.awaitingOutcome && state.activeLeadId) {
       var a = findLeadById(state.activeLeadId);
-      if (a && a.status === "pending") return a;
+      if (a && (a.status === "pending" || state.queueFilter === "int")) return a;
     }
     var pending = pendingLeads();
     var l = pending.length ? pending[0] : null;
@@ -3980,6 +4018,10 @@
     var pending = pendingLeads();
     if (pending.length <= 1) { showToast("No other leads to skip to"); return; }
     state.awaitingOutcome = false;
+    if (state.queueFilter === "int") {
+      state.intSkipped = (state.intSkipped || []).filter(function (id) { return id !== lead.id; }).concat([lead.id]);
+      saveState(); render(); return;
+    }
     if (TEAM.on) { lead.claim = null; TEAM.myClaimId = null; }
     // move this lead to the end of the pending queue
     var idx = state.leads.indexOf(lead);
@@ -4636,6 +4678,7 @@
       (TEAM.on && canSeeTeam() ? repSelectHtml() : '') +
       '<div class="crm-search"><input type="search" id="histSearch" placeholder="Search name or number" autocomplete="off" value="' + escapeHtml(historyQuery) + '"></div>' +
       '<div class="filter-row" id="filterRow">' + chips + '</div>' +
+      (filter === "interested" && interestedPool().length ? '<button class="btn-primary int-run-btn" id="histIntRun">Call my ' + interestedPool().length + ' interested lead' + (interestedPool().length === 1 ? '' : 's') + ' in Dial</button>' : '') +
       '<div id="histListWrap"></div>';
     document.querySelectorAll("#filterRow .filter-chip").forEach(function (btn) {
       btn.addEventListener("click", function () {
@@ -4645,6 +4688,8 @@
         render();
       });
     });
+    var hir = document.getElementById("histIntRun");
+    if (hir) hir.addEventListener("click", function () { if (startInterestedRun(false)) { state.activeView = "dial"; saveState(); render(); window.scrollTo(0, 0); } });
     var hrs = document.getElementById("histRepSelect");
     if (hrs) hrs.addEventListener("change", function (e) { TEAM.histRep = e.target.value; historyLimit = 150; render(); });
     document.getElementById("histSearch").addEventListener("input", function (e) {
@@ -5040,6 +5085,25 @@
       return;
     }
 
+    if (!lead && state.queueFilter === "int") {
+      var poolN = interestedPool().length;
+      main.innerHTML =
+        '<div class="card done-panel card-enter">' +
+          '<div class="glyph">\u2713</div>' +
+          '<h2>' + (poolN ? 'Every interested lead called' : 'No interested leads yet') + '</h2>' +
+          '<p>' + (poolN ? 'You\u2019ve reached all ' + poolN + ' of your interested leads in this round.' + ((state.queueList || "all") !== "all" ? ' (This list only.)' : '') + ' Start over to go through them again, or go back to your regular queue.'
+                         : 'Leads you mark Interested will be waiting here.') + '</p>' +
+          '<div class="modal-actions">' + (poolN ? '<button class="btn-secondary" id="intRestartBtn">Start over</button>' : '') +
+            '<button class="btn-primary" id="intExitBtn">Back to all leads</button></div>' +
+          (state.completedStack.length ? '<div style="margin-top:12px">' + prevButtonHtml() + '</div>' : '') +
+        '</div>';
+      var rb = document.getElementById("intRestartBtn");
+      if (rb) rb.addEventListener("click", function () { if (startInterestedRun(true)) { saveState(); render(); } });
+      document.getElementById("intExitBtn").addEventListener("click", function () { state.queueFilter = "all"; saveState(); render(); });
+      wirePrevButton();
+      return;
+    }
+
     if (!lead && allPendingLeads().length > 0) {
       main.innerHTML =
         '<div class="card done-panel card-enter">' +
@@ -5077,6 +5141,7 @@
           '<div class="glyph">✓</div>' +
           '<h2>Queue complete</h2>' +
           '<p>You worked every lead in this session. Load more, or export today\'s log.</p>' +
+          (interestedPool().length ? '<button class="btn-primary int-run-btn" id="donePanelInt" style="margin:4px 0 10px;">Call my ' + interestedPool().length + ' interested lead' + (interestedPool().length === 1 ? '' : 's') + '</button>' : '') +
           '<div class="modal-actions">' +
             '<button class="btn-secondary" id="donePanelLoad">Load more</button>' +
             '<button class="btn-primary" id="donePanelExport">Export log</button>' +
@@ -5085,6 +5150,8 @@
         '</div>' +
         autoAdvanceToggleHtml();
       document.getElementById("donePanelLoad").addEventListener("click", openLoadModal);
+      var dpi = document.getElementById("donePanelInt");
+      if (dpi) dpi.addEventListener("click", function () { if (startInterestedRun(false)) { saveState(); render(); } });
       document.getElementById("donePanelExport").addEventListener("click", exportCsv);
       wireAutoAdvanceToggle();
       wirePrevButton();
@@ -5125,10 +5192,10 @@
             ? '<div class="eyebrow-left"><button class="prev-pill" id="focusBackBtn">\u2039 Back</button>' +
                 '<span class="queue-tag">' + (state.followupRun ? 'Follow-ups \u00b7 ' + dueTasks().length + ' due' : 'Follow-up call') + '</span></div>' +
               '<div class="eyebrow-right"><button class="skip-btn" data-open-lead="' + lead.id + '">Full profile</button></div>'
-            : '<div class="eyebrow-left">' + prevButtonHtml() + '<span class="queue-tag">' + pendingCount + ' left in queue</span></div>' +
+            : '<div class="eyebrow-left">' + prevButtonHtml() + '<span class="queue-tag">' + (state.queueFilter === "int" ? 'Interested \u00b7 ' + pendingCount + ' left' : pendingCount + ' left in queue') + '</span></div>' +
               '<div class="eyebrow-right">' +
                 (pendingCount > 1 ? '<button class="skip-btn" id="skipBtn">Skip for now</button>' : '') +
-                '<button class="skip-btn danger-link" id="removeLeadBtn">Remove lead</button>' +
+                (state.queueFilter === "int" ? '' : '<button class="skip-btn danger-link" id="removeLeadBtn">Remove lead</button>') +
               '</div>') +
         '</div>' +
         '<div class="lead-name-row"><div class="lead-name" data-open-lead="' + lead.id + '">' + escapeHtml(lead.name) + '</div>' + starBtnHtml(lead) + '</div>' +
@@ -6079,8 +6146,8 @@
   function renderQueueControls() {
     var box = document.getElementById("queueControls");
     if (!box) return;
-    var all = allPendingLeads();
-    if (!state.leads.length || state.recallLeadId || state.focusLeadId || !all.length) { box.style.display = "none"; return; }
+    var all = allPendingLeads(), intPool = interestedPool();
+    if (!state.leads.length || state.recallLeadId || state.focusLeadId || (!all.length && !intPool.length && state.queueFilter !== "int")) { box.style.display = "none"; return; }
     box.style.display = "";
     var counts = { all: all.length, now: 0, E: 0, C: 0, M: 0, P: 0, X: 0, U: 0 };
     all.forEach(function (l) {
@@ -6091,11 +6158,13 @@
     });
     var f = state.queueFilter || "all";
     var chips = [["all", "All"], ["now", "Callable now"], ["E", "Eastern"], ["C", "Central"], ["M", "Mountain"], ["P", "Pacific"], ["X", "AK / HI"], ["U", "Unknown"]];
+    chips.splice(2, 0, ["int", "Interested"]);
+    counts.int = f === "int" ? interestedLeads().length : intPool.length;
     var chipHtml = chips.filter(function (c) {
       return c[0] === "all" || c[0] === "now" || counts[c[0]] > 0 || c[0] === f;
     }).map(function (c) {
       return '<button class="filter-chip' + (f === c[0] ? " active" : "") + '" data-qfilter="' + c[0] + '">' +
-        (c[0] === "now" ? '<span class="now-dot"></span>' : '') + c[1] +
+        (c[0] === "now" ? '<span class="now-dot"></span>' : c[0] === "int" ? '<span class="int-dot"></span>' : '') + c[1] +
         ' <span class="chip-n">' + (counts[c[0]] || 0) + '</span></button>';
     }).join("");
     var o = state.queueOrder || "imported";
@@ -6105,16 +6174,19 @@
       orders.map(function (x) { return '<option value="' + x[0] + '"' + (o === x[0] ? " selected" : "") + '>' + x[1] + '</option>'; }).join("") +
       '</select></div>' +
       (function () {
-        var srcs = {};
-        all.forEach(function (l) { var k = l.source || "Original list"; srcs[k] = (srcs[k] || 0) + 1; });
+        var srcs = {}, base = f === "int" ? intPool : all;
+        base.forEach(function (l) { var k = l.source || "Original list"; srcs[k] = (srcs[k] || 0) + 1; });
         var names = Object.keys(srcs);
         var cur = state.queueList || "all";
         if (names.length < 2 && cur === "all") return "";
-        return '<div class="qc-order"><span>List</span><select id="queueListSelect"><option value="all">All lists (' + all.length + ')</option>' +
+        return '<div class="qc-order"><span>List</span><select id="queueListSelect"><option value="all">All lists (' + base.length + ')</option>' +
           names.map(function (k) { return '<option value="' + escapeHtml(k) + '"' + (cur === k ? ' selected' : '') + '>' + escapeHtml(k) + ' (' + srcs[k] + ')</option>'; }).join("") +
           '</select></div>';
       })() +
-      (o === "smart" ? '<div class="qc-note">' + smartNoteText(counts.prime || 0) + '</div>' : '');
+      (f === "int" ? '<div class="qc-note int-note">Your interested leads, ' + (o === "smart" ? 'best answer hours first' : o === "imported" ? 'longest-waiting first' : 'in your call order') + '. Each one drops off this list once you log the call. <button class="link-btn" id="intExitLink">Back to all leads</button></div>' : '') +
+      (o === "smart" && f !== "int" ? '<div class="qc-note">' + smartNoteText(counts.prime || 0) + '</div>' : '');
+    var iel = document.getElementById("intExitLink");
+    if (iel) iel.addEventListener("click", function () { if (state.awaitingOutcome) { showToast("Log the outcome for this call first"); return; } state.queueFilter = "all"; saveState(); render(); });
     var qls = document.getElementById("queueListSelect");
     if (qls) qls.addEventListener("change", function (e) {
       if (state.awaitingOutcome) { showToast("Log the outcome for this call first"); render(); return; }
@@ -6125,7 +6197,8 @@
     box.querySelectorAll("[data-qfilter]").forEach(function (b) {
       b.addEventListener("click", function () {
         if (state.awaitingOutcome) { showToast("Log the outcome for this call first"); return; }
-        state.queueFilter = b.getAttribute("data-qfilter");
+        var qf = b.getAttribute("data-qfilter");
+        if (qf === "int") { if (!startInterestedRun(false)) return; } else state.queueFilter = qf;
         saveState();
         render();
       });
