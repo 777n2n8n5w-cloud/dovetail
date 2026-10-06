@@ -3,7 +3,7 @@
 <head>
 <script id="customerConfig" type="application/json">{}</script>
 <meta charset="UTF-8">
-<meta name="dovetail-build" content="2026-11-07">
+<meta name="dovetail-build" content="2026-11-09">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2662,6 +2662,43 @@
   ::-webkit-scrollbar { width: 8px; }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 8px; }
 
+  .gs-tools { display: flex; gap: 8px; }
+  .gs-tools .qd-open { flex: 1 1 0; min-width: 0; font-size: 13px; padding: 11px 8px; }
+  .ls-pick { display: block; position: relative; text-align: center; margin-top: 10px; padding: 12px; cursor: pointer; }
+  .ls-file { position: absolute; left: 0; top: 0; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
+  .ls-thumb { display: block; max-width: 100%; max-height: 150px; margin: 8px auto; border-radius: 8px; border: 1px solid var(--border); }
+  .ls-status, .ls-hint { margin: 8px 0; font-size: 13px; line-height: 1.5; color: var(--text-dim); }
+  .ls-row { border: 1px solid var(--border); border-radius: var(--radius-s); padding: 8px 10px; margin: 8px 0; background: var(--surface); }
+  .ls-row.skip { opacity: 0.55; }
+  .ls-top { display: flex; align-items: center; justify-content: space-between; }
+  .ls-on { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--text); }
+  .ls-x { background: none; border: none; color: var(--text-faint); font-size: 20px; line-height: 1; cursor: pointer; padding: 2px 6px; }
+  .ls-row input[type="text"], .ls-row input[type="tel"] { display: block; width: 100%; box-sizing: border-box; margin-top: 6px; }
+  .ls-flag { margin-top: 5px; font-size: 12px; color: var(--text-faint); }
+  .ls-flag.bad { color: var(--accent); font-weight: 600; }
+  .ls-tools { display: flex; gap: 8px; margin: 8px 0; }
+  .ls-tools button { flex: 1 1 0; }
+  #lsPasteTxt { width: 100%; box-sizing: border-box; min-height: 90px; margin-bottom: 8px; }
+  .ls-full { display: block; width: 100%; border-radius: 8px; border: 1px solid var(--border); }
+  .ls-meta { margin: 8px 0 0; font-size: 12.5px; color: var(--text-dim); }
+  .ls-view { display: block; margin: 8px 0 4px; padding: 0; background: none; border: none; color: var(--accent); font: inherit; font-size: 13px; font-weight: 600; text-decoration: underline; cursor: pointer; }
+  .loc-card { margin: 0 0 10px; padding: 12px 14px; border-radius: var(--radius-s); background: var(--surface); border: 1px solid var(--accent); }
+  .loc-card b { display: block; color: var(--text); font-size: 14px; }
+  .loc-card span { display: block; color: var(--text-dim); font-size: 12px; margin-top: 2px; }
+  .loc-btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .loc-btn { flex: 1 1 auto; padding: 10px 12px; border-radius: var(--radius-s); border: 1px solid var(--border); background: var(--surface-raised, var(--surface)); color: var(--text); font: inherit; font-weight: 600; cursor: pointer; }
+  .loc-btn.active { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+  .loc-chip { border: 1px solid var(--border); background: none; color: var(--text-dim); border-radius: 999px; padding: 1px 8px; font: inherit; font-size: 11px; cursor: pointer; }
+  .loc-badge { display: inline-block; font-size: 10.5px; font-weight: 600; padding: 1px 7px; border-radius: 999px; border: 1px solid var(--border); color: var(--text-dim); vertical-align: 1px; }
+  .loc-badge.loc-remote, .loc-chip.loc-remote { color: var(--accent); border-color: var(--accent); }
+  .loc-badge.loc-out, .loc-chip.loc-out { opacity: 0.7; }
+  .tm-loc { display: flex; align-items: center; gap: 8px; margin-top: 6px; font-size: 12px; color: var(--text-dim); }
+  .sb-locs { margin: 10px 0 4px; }
+  .sb-cmp table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 6px; }
+  .sb-cmp th { text-align: left; font-weight: 600; color: var(--text-dim); padding: 4px 4px 6px; font-size: 11.5px; }
+  .sb-cmp td { padding: 5px 4px; border-top: 1px solid var(--border); vertical-align: top; }
+  .sb-cmp td:first-child { color: var(--text-dim); }
+  .sb-cmp td small { display: block; color: var(--text-faint); font-size: 10.5px; }
   .qd-open { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; margin: 10px 0 4px; padding: 11px 14px;
     border-radius: var(--radius-s); border: 1px dashed var(--border); background: var(--surface); color: var(--text); font: inherit; font-weight: 600; cursor: pointer; }
   .qd-ico { font-size: 15px; }
@@ -2748,7 +2785,7 @@
   <header class="top">
     <div class="brand">
       <div class="name">Dovetail Suite</div>
-      <div class="sub-line"><div class="sub" id="headerSub">No leads loaded</div><span class="save-pill" id="savePill"></span></div>
+      <div class="sub-line"><div class="sub" id="headerSub">No leads loaded</div><button class="loc-chip" id="locChip" type="button" hidden></button><span class="save-pill" id="savePill"></span></div>
     </div>
     <div class="header-right">
       <button class="icon-btn team-admin-only score-btn" id="adminBtn" aria-label="Admin controls" title="Admin controls"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 9.5C8 19.2 5 15.5 5 11V6l7-3z"/><path d="M9.5 12l1.8 1.8L15 10"/></svg></button>
@@ -2940,7 +2977,7 @@
     </div>
 
     <div style="margin-top:22px;padding-top:14px;border-top:1px solid var(--border);text-align:center;">
-      <div style="font-size:11px;color:var(--text-faint);">Build 2026-11-07 · Team · Updates install automatically after midnight.</div>
+      <div style="font-size:11px;color:var(--text-faint);">Build 2026-11-09 · Team · Updates install automatically after midnight.</div>
       <div id="updNote"></div>
     </div>
   </div>
@@ -3765,7 +3802,7 @@
     });
   }
 
-  function alertsHtml() { return overdueBannerHtml() + handoffBannerHtml() + lockReqBannerHtml(); }
+  function alertsHtml() { return locCardHtml() + overdueBannerHtml() + handoffBannerHtml() + lockReqBannerHtml(); }
   function wireAlerts() {
     [["overdueWarnBtn", openOverdue], ["lockReqBtn", function () { lockSetup().then(function () { render(); }); }]].forEach(function (x) {
       var el = document.getElementById(x[0]); if (el) el.addEventListener("click", x[1]);
@@ -4100,6 +4137,8 @@
     document.getElementById("headerSub").textContent =
       total === 0 ? "No leads loaded" : ((function (n) { return n + (n === 1 ? " call today" : " calls today"); })(callsToday()) + " · " + done + "/" + total + " worked");
     if (TEAM.on && TEAM.me) document.getElementById("headerSub").textContent = firstName(TEAM.me.name) + " \u00b7 " + document.getElementById("headerSub").textContent;
+    var lcp = document.getElementById("locChip"), myLoc = TEAM.on && TEAM.me ? repLoc(TEAM.me.uid) : "";
+    if (lcp) { lcp.hidden = !myLoc; lcp.textContent = myLoc ? LOCS[myLoc] : ""; lcp.className = "loc-chip loc-" + myLoc; }
 
     document.getElementById("viewTabs").style.display = total > 0 ? "" : "none";
     document.getElementById("viewTabDial").classList.toggle("active", state.activeView === "dial");
@@ -4668,6 +4707,7 @@
       '<input id="lpAmount" type="number" min="0" step="1000" inputmode="numeric" value="' + (Number(lead.amount) || 0) + '">' +
       '<label for="lpNotes">Notes</label>' +
       '<textarea id="lpNotes" style="min-height:70px">' + escapeHtml(lead.notes || "") + '</textarea>' +
+      (lead.sheetId ? '<button class="ls-view" type="button" data-sheet="' + escapeHtml(lead.sheetId) + '">View the original lead sheet</button>' : '') +
       (TEAM.on && canSeeTeam() ? '<label for="lpOwner">Assigned to</label><select id="lpOwner">' +
         Object.keys(TEAM.members).map(function (k) { return TEAM.members[k]; }).filter(function (m) { return m.active || (lead.owner && lead.owner.uid === m.uid); })
           .map(function (m) { return '<option value="' + m.uid + '"' + (lead.owner && lead.owner.uid === m.uid ? ' selected' : '') + '>' + escapeHtml(m.name || m.username) + '</option>'; }).join("") +
@@ -4700,6 +4740,7 @@
       lead.amount = Math.max(0, Number(e.target.value) || 0); saveState(); showToast("Amount saved");
     });
     document.getElementById("lpNotes").addEventListener("input", function (e) { lead.notes = e.target.value; saveState(); });
+    document.getElementById("lpNotes").addEventListener("change", function () { logNoteEvent(lead); });
     var lpo = document.getElementById("lpOwner");
     if (lpo) lpo.addEventListener("change", function (e) {
       var m = TEAM.members[e.target.value];
@@ -5265,7 +5306,7 @@
     lastShownLeadId = lead.id;
     main.innerHTML =
       (focus ? '' : followupBannerHtml()) + spamBannerHtml() + overdueBannerHtml() + handoffBannerHtml() + contestBannerHtml() + lockReqBannerHtml() + (focus ? '' : briefCardHtml() + installCardHtml() + hotStripHtml(lead.id)) +
-      lastFollowHtml() +
+      locCardHtml() + lastFollowHtml() +
       '<div class="card' + enterCls + '">' +
         '<div class="eyebrow-row">' +
           (focus
@@ -5313,6 +5354,7 @@
       autoAdvanceToggleHtml();
 
     var notesInput = document.getElementById("leadNotesInput");
+    notesInput.addEventListener("change", function () { logNoteEvent(lead); });
     notesInput.addEventListener("input", function () {
       lead.notes = notesInput.value;
       // Save without a full render() — a re-render here would rebuild the
@@ -6431,6 +6473,8 @@
     TEAM.unsub = [];
     Object.keys(TEAM.dayUnsub).forEach(function (k) { try { TEAM.dayUnsub[k](); } catch (e) {} });
     TEAM.dayUnsub = {};
+    Object.keys(TEAM.actUnsub || {}).forEach(function (k) { try { TEAM.actUnsub[k](); } catch (e) {} });
+    TEAM.actUnsub = {}; TEAM.acts = {};
     if (TEAM.membersUnsub) { try { TEAM.membersUnsub(); } catch (e) {} TEAM.membersUnsub = null; }
   }
   function teamRestartListeners() {
@@ -6708,7 +6752,68 @@
       }, teamListenError);
     });
   }
+  // ---- Work location (In office / Remote / Out of office) and note activity, kept per day ----
+  var LOCS = { office: "In office", remote: "Remote", out: "Out of office" };
+  var sbLoc = "all";
+  function actDocId(d) { return "act_" + localDateStr(d || new Date()); }
+  function repLoc(uid) { var a = (TEAM.acts || {})[actDocId()], v = a && a.locs && a.locs[uid]; return v && LOCS[v.loc] ? v.loc : ""; }
+  function actWrite(field, key, val) {
+    var id = actDocId(), ref = TEAM.db.collection("callDays").doc(id);
+    TEAM.acts = TEAM.acts || {}; var a = TEAM.acts[id] = TEAM.acts[id] || {}; (a[field] = a[field] || {})[key] = val;
+    var upd = {}; upd[field + "." + fp(key)] = val;
+    return ref.update(upd).catch(function (e) {
+      if (e && e.code === "not-found") { var o = { calls: {} }; o[field] = {}; o[field][key] = val; return ref.set(o, { merge: true }); }
+      throw e;
+    });
+  }
+  function setWorkLoc(uid, loc) {
+    if (!TEAM.on || !TEAM.me || !TEAM.db || !LOCS[loc]) return;
+    actWrite("locs", uid, { loc: loc, at: Date.now(), by: TEAM.me.uid }).catch(function () { showToast("Couldn\u2019t save that \u2014 check your connection"); });
+    render(); if (document.getElementById("scoreModal").classList.contains("show")) renderScoreboard();
+  }
+  function logNoteEvent(lead) {
+    if (!TEAM.on || !TEAM.me || !TEAM.db || !lead || !String(lead.notes || "").trim()) return;
+    actWrite("notes", TEAM.me.uid + "_" + lead.id, { by: TEAM.me.uid, name: TEAM.me.name, leadId: lead.id, at: Date.now() }).catch(function () {});
+  }
+  function teamActListen() {
+    if (!TEAM.on || !TEAM.db) return;
+    TEAM.acts = TEAM.acts || {}; TEAM.actUnsub = TEAM.actUnsub || {};
+    var want = {};
+    for (var i = 0; i < 8; i++) want[actDocId(new Date(Date.now() - i * 86400000))] = true;
+    Object.keys(TEAM.actUnsub).forEach(function (k) { if (!want[k]) { try { TEAM.actUnsub[k](); } catch (e) {} delete TEAM.actUnsub[k]; delete TEAM.acts[k]; } });
+    Object.keys(want).forEach(function (k) {
+      if (TEAM.actUnsub[k]) return;
+      TEAM.actUnsub[k] = TEAM.db.collection("callDays").doc(k).onSnapshot(function (snap) {
+        TEAM.acts[k] = snap.exists ? (snap.data() || {}) : {};
+        if (DEMO && k === actDocId() && isAdmin() && !(TEAM.acts[k].locs && TEAM.acts[k].locs.dR2)) {
+          [["dR2", "office"], ["dR3", "remote"], ["dR1", "remote"]].forEach(function (x) { actWrite("locs", x[0], { loc: x[1], at: Date.now(), by: "demo" }).catch(function () {}); });
+        }
+        teamRenderSoon();
+        var sm = document.getElementById("scoreModal"); if (sm && sm.classList.contains("show")) renderScoreboard();
+      }, teamListenError);
+    });
+  }
+  function locBtns(cur) {
+    return Object.keys(LOCS).map(function (k) { return '<button class="loc-btn' + (cur === k ? ' active' : '') + '" data-setloc="' + k + '" type="button">' + LOCS[k] + '</button>'; }).join("");
+  }
+  function locCardHtml() {
+    if (!TEAM.on || !TEAM.me || !TEAM.ready || repLoc(TEAM.me.uid)) return "";
+    return '<div class="loc-card"><b>Where are you working today?</b><span>Your manager sees this next to your numbers.</span><div class="loc-btns">' + locBtns("") + '</div></div>';
+  }
+  function locBadge(loc) { return loc ? ' <span class="loc-badge loc-' + loc + '">' + LOCS[loc] + '</span>' : ''; }
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest && e.target.closest("[data-setloc]"); if (!b || !TEAM.me) return;
+    setWorkLoc(TEAM.me.uid, b.getAttribute("data-setloc"));
+    if (b.closest("#featModal")) featClose();
+    showToast("Working today: " + LOCS[b.getAttribute("data-setloc")]);
+  });
+  document.addEventListener("change", function (e) {
+    var sel = e.target.closest && e.target.closest("[data-tm-loc]"); if (!sel || !sel.value) return;
+    setWorkLoc(sel.getAttribute("data-tm-loc"), sel.value);
+  });
+
   function teamRebuildCalls() {
+    teamActListen();
     var all = [];
     Object.keys(TEAM.days).forEach(function (k) {
       var m = TEAM.days[k];
@@ -6894,7 +6999,7 @@
         present[l.id] = true;
         var p = teamPayload(l, tBy[l.id], xBy[l.id]), js = stableJson(p);
         if (js === TEAM.lastSent[l.id]) return;
-        if (!l.ck) { if (!isAdmin()) return; l.ck = teamPickChunk(); }
+        if (!l.ck) l.ck = isAdmin() ? teamPickChunk() : "r_" + TEAM.me.uid;
         (byChunk[l.ck] = byChunk[l.ck] || {})["leads." + fp(l.id)] = p;
         sent[l.id] = js;
       });
@@ -7075,7 +7180,9 @@
           '<span>' + escapeHtml(m.username) + ' \u00b7 ' + ({ admin: "Admin", manager: "Manager" }[m.role] || "Rep") + (m.closer ? " \u00b7 Closer" : "") + (m.active ? '' : ' \u00b7 <em>access off</em>') + '</span>' +
           '<span>' + (m.lastSeen ? 'Active ' + escapeHtml(agoStr(new Date(m.lastSeen).toISOString())) : 'Hasn\u2019t signed in yet') +
             ' \u00b7 ' + (callsBy[m.uid] || 0) + ' calls today' + (onLead[m.uid] ? ' \u00b7 on ' + escapeHtml(onLead[m.uid]) : '') + '</span>' +
-          (m.active ? '<label class="tm-closer"><input type="checkbox" data-tm-closer="' + m.uid + '"' + (m.closer ? ' checked' : '') + '> Closer (takes handoffs)</label>' : '') + '</div>' +
+          (m.active ? '<label class="tm-closer"><input type="checkbox" data-tm-closer="' + m.uid + '"' + (m.closer ? ' checked' : '') + '> Closer (takes handoffs)</label>' : '') +
+          (m.active ? '<label class="tm-loc">Today <select data-tm-loc="' + m.uid + '" aria-label="Where ' + escapeHtml(m.name || m.username) + ' is working today"><option value="">Not set</option>' +
+            Object.keys(LOCS).map(function (k) { return '<option value="' + k + '"' + (repLoc(m.uid) === k ? ' selected' : '') + '>' + LOCS[k] + '</option>'; }).join("") + '</select></label>' : '') + '</div>' +
         (self || owner ? '<span class="tm-you">' + (self ? 'You' : 'Owner') + '</span>'
           : '<div class="tm-actions"><select class="tm-role" data-tm-role="' + m.uid + '" aria-label="Role">' + ["rep", "manager", "admin"].map(function (r) {
               return '<option value="' + r + '"' + ((m.role || "rep") === r ? ' selected' : '') + '>' + { rep: "Rep", manager: "Manager", admin: "Admin" }[r] + '</option>'; }).join("") + '</select>' +
@@ -7253,7 +7360,8 @@
     function row(ref) {
       var k = ref && ref.uid ? ref.uid : "_none";
       return by[k] || (by[k] = { uid: k, name: ref && ref.name ? ref.name : "Unassigned", calls: 0, reached: 0, interested: 0,
-        names: [], first: 0, last: 0, pipeline: 0, committed: 0, active: 0, dueNext: 0, overdue: 0, talk: 0, timed: 0, member: null });
+        names: [], first: 0, last: 0, pipeline: 0, committed: 0, active: 0, dueNext: 0, overdue: 0, talk: 0, timed: 0, member: null,
+        leads: 0, followups: 0, appts: 0, notes: 0, seen: {} });
     }
     Object.keys(TEAM.members).forEach(function (k) { var m = TEAM.members[k]; row({ uid: k, name: m.name || m.username }).member = m; });
     state.callLog.forEach(function (c) {
@@ -7264,6 +7372,8 @@
       if (c.talk) { r.talk += c.talk; r.timed++; }
       if (CONTACT_OUTCOMES[c.outcomeKey]) r.reached++;
       if (c.outcomeKey === "interested") { r.interested++; r.names.push(c.name); }
+      if (!r.seen[c.leadId]) { r.seen[c.leadId] = 1; r.leads++; }
+      if ((c.attempt || 1) > 1) r.followups++;
       if (!r.first || ts < r.first) r.first = ts;
       if (ts > r.last) r.last = ts;
     });
@@ -7273,6 +7383,11 @@
       r.active++;
       r.pipeline += Number(l.amount) || 0;
       if (l.stage === "Committed") r.committed += Number(l.amount) || 0;
+    });
+    state.leads.forEach(function (l) { var h = l.handoff; if (h && h.from && h.at >= from && h.at < to) row(h.from).appts++; });
+    Object.keys(TEAM.acts || {}).forEach(function (k) {
+      var nv = (TEAM.acts[k] || {}).notes || {};
+      Object.keys(nv).forEach(function (id) { var ev = nv[id]; if (ev && ev.by && ev.at >= from && ev.at < to) row({ uid: ev.by, name: ev.name }).notes++; });
     });
     var now = Date.now();
     state.tasks.forEach(function (t) {
@@ -7286,7 +7401,7 @@
       .sort(function (a, b) { return (b.calls - a.calls) || (b.reached - a.reached) || String(a.name).localeCompare(String(b.name)); });
   }
   function sumRows(rows) {
-    var t = { calls: 0, reached: 0, interested: 0, pipeline: 0, committed: 0, active: 0, dueNext: 0, overdue: 0, talk: 0, timed: 0 };
+    var t = { calls: 0, reached: 0, interested: 0, pipeline: 0, committed: 0, active: 0, dueNext: 0, overdue: 0, talk: 0, timed: 0, leads: 0, followups: 0, appts: 0, notes: 0 };
     rows.forEach(function (r) { Object.keys(t).forEach(function (k) { t[k] += r[k]; }); });
     return t;
   }
@@ -7307,16 +7422,32 @@
       '<div class="sb-seg">' + tabs.map(function (t) { return '<button class="sb-tab' + (scoreView === t[0] ? ' active' : '') + '" data-sbview="' + t[0] + '">' + t[1] + '</button>'; }).join("") + '</div>';
     if (scoreView === "today" || scoreView === "week") {
       var from = scoreView === "today" ? dayStart(0) : weekStart();
-      var rows = repStats(from, dayStart(1), localDateStr(new Date(Date.now() + 86400000)));
+      var allRows = repStats(from, dayStart(1), localDateStr(new Date(Date.now() + 86400000)));
+      var locOf = function (r) { return r.uid === "_none" ? "" : repLoc(r.uid); };
+      var lcount = { office: 0, remote: 0, out: 0, none: 0 };
+      allRows.forEach(function (r) { if (r.uid !== "_none") lcount[locOf(r) || "none"]++; });
+      var rows = sbLoc === "all" ? allRows : allRows.filter(function (r) { return r.uid !== "_none" && (locOf(r) || "none") === sbLoc; });
+      html += '<div class="filter-row sb-locs">' + [["all", "Everyone", allRows.filter(function (r) { return r.uid !== "_none"; }).length], ["office", "In office", lcount.office], ["remote", "Remote", lcount.remote], ["out", "Out of office", lcount.out], ["none", "Not set", lcount.none]]
+        .filter(function (x) { return x[0] === "all" || x[2] || sbLoc === x[0]; })
+        .map(function (x) { return '<button class="filter-chip' + (sbLoc === x[0] ? ' active' : '') + '" data-sbloc="' + x[0] + '">' + x[1] + ' <span class="chip-n">' + x[2] + '</span></button>'; }).join("") + '</div>';
+      if (sbLoc === "all" && lcount.office && lcount.remote) {
+        var grp = function (key) { var g = allRows.filter(function (r) { return locOf(r) === key; }), t = sumRows(g); t.n = g.length; return t; };
+        var O = grp("office"), R = grp("remote");
+        var cell = function (G, k) { return '<b>' + G[k] + '</b><small>' + (G.n ? (Math.round(G[k] / G.n * 10) / 10) + ' per rep' : '') + '</small>'; };
+        html += '<div class="sb-card sb-cmp"><div class="sb-top"><b>In office vs Remote</b></div><table><thead><tr><th></th><th>In office \u00b7 ' + O.n + '</th><th>Remote \u00b7 ' + R.n + '</th></tr></thead><tbody>' +
+          [["Calls", "calls"], ["Leads contacted", "leads"], ["Conversations", "reached"], ["Follow-up calls", "followups"], ["Appointments set", "appts"], ["Notes written", "notes"], ["Interested", "interested"]]
+            .map(function (x) { return '<tr><td>' + x[0] + '</td><td>' + cell(O, x[1]) + '</td><td>' + cell(R, x[1]) + '</td></tr>'; }).join("") + '</tbody></table></div>';
+      }
       var tot = sumRows(rows), maxCalls = Math.max.apply(null, rows.map(function (r) { return r.calls; }).concat([1]));
-      html += '<div class="sb-card sb-total"><div class="sb-top"><b>Team</b><span class="sb-big">' + tot.calls + '<small> calls</small></span></div>' +
+      html += '<div class="sb-card sb-total"><div class="sb-top"><b>' + ({ all: "Team", office: "In office", remote: "Remote", out: "Out of office", none: "Location not set" }[sbLoc]) + '</b><span class="sb-big">' + tot.calls + '<small> calls</small></span></div>' +
         '<div class="sb-stats"><span><b>' + tot.reached + '</b> reached \u00b7 ' + pct(tot.reached, tot.calls) + '</span><span><b>' + tot.interested + '</b> interested</span>' +
         '<span><b>' + shortMoney(tot.pipeline) + '</b> pipeline</span><span><b>' + shortMoney(tot.committed) + '</b> committed</span></div></div>';
       html += rows.map(function (r) {
         return '<div class="sb-card' + (r.member && !r.member.active ? ' off' : '') + '">' +
-          '<div class="sb-top"><b>' + escapeHtml(r.name) + (r.member && !r.member.active ? ' <em>(access off)</em>' : '') + '</b><span class="sb-big">' + r.calls + '<small> calls</small></span></div>' +
+          '<div class="sb-top"><b>' + escapeHtml(r.name) + locBadge(locOf(r)) + (r.member && !r.member.active ? ' <em>(access off)</em>' : '') + '</b><span class="sb-big">' + r.calls + '<small> calls</small></span></div>' +
           '<div class="sb-bar"><span style="width:' + Math.round((r.calls / maxCalls) * 100) + '%"></span></div>' +
           '<div class="sb-stats"><span><b>' + r.reached + '</b> reached \u00b7 ' + pct(r.reached, r.calls) + '</span><span><b>' + r.interested + '</b> interested</span>' +
+          '<span><b>' + r.leads + '</b> leads</span>' + (r.followups ? '<span><b>' + r.followups + '</b> follow-ups</span>' : '') + (r.appts ? '<span><b>' + r.appts + '</b> appts</span>' : '') + (r.notes ? '<span><b>' + r.notes + '</b> notes</span>' : '') +
           (r.talk ? '<span><b>' + fmtTalk(r.talk) + '</b> on calls</span>' : '') + '<span><b>' + shortMoney(r.pipeline) + '</b> pipeline</span>' + (r.overdue ? '<span class="warn"><b>' + r.overdue + '</b> overdue</span>' : '') + '</div></div>';
       }).join("");
     } else if (scoreView === "recap") {
@@ -7344,6 +7475,7 @@
     body.innerHTML = html;
     document.getElementById("scoreClose").addEventListener("click", function () { document.getElementById("scoreModal").classList.remove("show"); render(); });
     body.querySelectorAll("[data-sbview]").forEach(function (b) { b.addEventListener("click", function () { scoreView = b.getAttribute("data-sbview"); renderScoreboard(); }); });
+    body.querySelectorAll("[data-sbloc]").forEach(function (b) { b.addEventListener("click", function () { sbLoc = b.getAttribute("data-sbloc"); renderScoreboard(); }); });
     body.querySelectorAll("[data-recapday]").forEach(function (b) { b.addEventListener("click", function () { recapDay = Number(b.getAttribute("data-recapday")); renderScoreboard(); }); });
     var cp = document.getElementById("recapCopy");
     if (cp) cp.addEventListener("click", function () {
@@ -7829,7 +7961,7 @@
   // and a rep only the records assigned to them. Reps can't delete; they ask the admin.
   var VAULT = { list: {}, unsub: null, status: "", q: "", sort: "total", who: "all", openId: null, editInv: null, addInv: false, addDate: false, reqOpen: false };
   var VAULT_STATUSES = ["Committed", "Funded", "Closed", "Cancelled"];
-  var VAULT_RULES = "rules_version = '2';\nservice cloud.firestore {\n  match /databases/{database}/documents {\n    function signedIn() { return request.auth != null; }\n    function isOwner() {\n      return signedIn() && request.auth.token.email == 'vincent@dovetail-f863c.firebaseapp.com';\n    }\n    function memberPath() { return /databases/$(database)/documents/members/$(request.auth.uid); }\n    function isActive() {\n      return isOwner() || (signedIn() && exists(memberPath()) && get(memberPath()).data.active == true);\n    }\n    function isAdmin() {\n      return isOwner() || (isActive() && get(memberPath()).data.role == 'admin');\n    }\n    match /members/{uid} {\n      allow read: if isAdmin() || (signedIn() && request.auth.uid == uid);\n      allow create, delete: if isAdmin();\n      allow update: if isAdmin()\n        || (signedIn() && request.auth.uid == uid && isActive()\n            && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['lastSeen']));\n    }\n    match /leadChunks/{chunkId} {\n      allow read: if isActive();\n      allow create, delete: if isAdmin();\n      allow update: if isAdmin()\n        || (isActive() && chunkId != '_team'\n            && request.resource.data.leads.keys().hasAll(resource.data.leads.keys())\n            && resource.data.leads.keys().hasAll(request.resource.data.leads.keys()));\n    }\n    match /callDays/{day} {\n      allow read, create: if isActive();\n      allow update: if isAdmin()\n        || (isActive() && request.resource.data.calls.keys().hasAll(resource.data.calls.keys()));\n      allow delete: if isAdmin();\n    }\n    match /vault/{id} {\n      allow read: if isAdmin() || (isActive() && resource.data.ownerUid == request.auth.uid);\n      allow create: if isAdmin() || (isActive() && request.resource.data.ownerUid == request.auth.uid);\n      allow update: if isAdmin()\n        || (isActive()\n            && resource.data.ownerUid == request.auth.uid\n            && request.resource.data.ownerUid == request.auth.uid\n            && request.resource.data.investments.size() >= resource.data.investments.size());\n      allow delete: if isAdmin();\n    }\n  }\n}\n";
+  var VAULT_RULES = "rules_version = '2';\nservice cloud.firestore {\n  match /databases/{database}/documents {\n    function signedIn() { return request.auth != null; }\n    function isOwner() {\n      return signedIn() && request.auth.token.email == 'vincent@dovetail-f863c.firebaseapp.com';\n    }\n    function memberPath() { return /databases/$(database)/documents/members/$(request.auth.uid); }\n    function isActive() {\n      return isOwner() || (signedIn() && exists(memberPath()) && get(memberPath()).data.active == true);\n    }\n    function isAdmin() {\n      return isOwner() || (isActive() && get(memberPath()).data.role == 'admin');\n    }\n    match /members/{uid} {\n      allow read: if isAdmin() || (signedIn() && request.auth.uid == uid);\n      allow create, delete: if isAdmin();\n      allow update: if isAdmin()\n        || (signedIn() && request.auth.uid == uid && isActive()\n            && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['lastSeen']));\n    }\n    match /leadChunks/{chunkId} {\n      allow read: if isActive();\n      allow create: if isAdmin() || (isActive() && chunkId == 'r_' + request.auth.uid);\n      allow delete: if isAdmin();\n      allow update: if isAdmin()\n        || (isActive() && chunkId == 'r_' + request.auth.uid\n            && request.resource.data.leads.keys().hasAll(resource.data.leads.keys()))\n        || (isActive() && chunkId != '_team'\n            && request.resource.data.leads.keys().hasAll(resource.data.leads.keys())\n            && resource.data.leads.keys().hasAll(request.resource.data.leads.keys()));\n    }\n    match /callDays/{day} {\n      allow read, create: if isActive();\n      allow update: if isAdmin()\n        || (isActive() && request.resource.data.calls.keys().hasAll(resource.data.calls.keys()));\n      allow delete: if isAdmin();\n    }\n    match /vault/{id} {\n      allow read: if isAdmin() || (isActive() && resource.data.ownerUid == request.auth.uid);\n      allow create: if isAdmin() || (isActive() && request.resource.data.ownerUid == request.auth.uid);\n      allow update: if isAdmin()\n        || (isActive()\n            && resource.data.ownerUid == request.auth.uid\n            && request.resource.data.ownerUid == request.auth.uid\n            && request.resource.data.investments.size() >= resource.data.investments.size());\n      allow delete: if isAdmin();\n    }\n    match /sheets/{id} {\n      allow read: if isActive();\n      allow create: if isActive() && request.resource.data.byUid == request.auth.uid;\n      allow update, delete: if isAdmin();\n    }\n  }\n}\n";
   function vaultAdmin() { return !TEAM.on || isAdmin(); }
   function vaultSrc() { return TEAM.on ? VAULT.list : (state.vault || (state.vault = {})); }
   function vaultRecords() {
@@ -9150,6 +9282,7 @@
   function listCfg() { return (TEAM.on ? (TEAM.infoCfg || {}).lists : state.listCfg) || {}; }
   function listAllowed(l) {
     if (!TEAM.on || !TEAM.me) return true;
+    if (l.forUid && l.forUid !== TEAM.me.uid) return false;
     var c = listCfg()[listOf(l)];
     return !c || !c.reps || !c.reps.length || c.reps.indexOf(TEAM.me.uid) !== -1;
   }
@@ -9256,6 +9389,159 @@
       .sort(function (a, b) { return String(a.name).localeCompare(String(b.name)); });
     return { inv: inv.slice(0, 25), invN: inv.length, leads: leads.slice(0, 40), leadN: leads.length };
   }
+  /** ---------- Lead sheet photo: snap it, read it, check it, add it (the photo stays with the leads) ---------- **/
+  var OCR_SRC = "https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js";
+  function loadOcr() {
+    if (window.Tesseract) return Promise.resolve(window.Tesseract);
+    if (loadOcr.p) return loadOcr.p;
+    loadOcr.p = new Promise(function (res, rej) {
+      var sc = document.createElement("script"); sc.src = OCR_SRC; sc.async = true;
+      sc.onload = function () { if (window.Tesseract) res(window.Tesseract); else { loadOcr.p = null; rej(new Error("ocr")); } };
+      sc.onerror = function () { loadOcr.p = null; rej(new Error("ocr")); };
+      document.head.appendChild(sc);
+    });
+    return loadOcr.p;
+  }
+  function shrinkPhoto(file) {
+    return new Promise(function (res, rej) {
+      var url = URL.createObjectURL(file), img = new Image();
+      img.onload = function () {
+        var max = 1600, q = 0.72, out = "";
+        for (var t = 0; t < 6; t++) {
+          var k = Math.min(1, max / Math.max(img.naturalWidth || 1, img.naturalHeight || 1));
+          var cv = document.createElement("canvas"); cv.width = Math.max(1, Math.round(img.naturalWidth * k)); cv.height = Math.max(1, Math.round(img.naturalHeight * k));
+          var cx = cv.getContext("2d"); cx.fillStyle = "#fff"; cx.fillRect(0, 0, cv.width, cv.height); cx.drawImage(img, 0, 0, cv.width, cv.height);
+          out = cv.toDataURL("image/jpeg", q);
+          if (out.length <= 700000) break;
+          max = Math.round(max * 0.8); q = Math.max(0.5, q - 0.06);
+        }
+        URL.revokeObjectURL(url); res(out);
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); rej(new Error("img")); };
+      img.src = url;
+    });
+  }
+  var SHEET_PHONE = /(?:\+?1[\s.\-]*)?\(?\b(\d{3})\)?[\s.\-]*(\d{3})[\s.\-]*(\d{4})\b/;
+  function parseSheetText(text) {
+    var clean = function (t) { return String(t).replace(/[|\u2022\u00b7_]+/g, " ").replace(/\s+/g, " ").trim(); };
+    var nameOf = function (t) { return clean(t).replace(/^[#\d.)\-\s]+/, "").replace(/^(name|lead|client|prospect)\s*[:\-]\s*/i, "").replace(/[,:;\-\s]+$/, "").slice(0, 60); };
+    var lines = String(text || "").split(/\r?\n/).map(clean).filter(Boolean), rows = [], used = {};
+    lines.forEach(function (t, i) {
+      var m = SHEET_PHONE.exec(t); if (!m) return;
+      var before = nameOf(t.slice(0, m.index)), after = clean(t.slice(m.index + m[0].length)).replace(/^[,:;\-\s]+/, "");
+      if (!before && i > 0 && !used[i - 1] && !SHEET_PHONE.test(lines[i - 1])) { before = nameOf(lines[i - 1]); used[i - 1] = 1; }
+      rows.push({ name: before, phone: "(" + m[1] + ") " + m[2] + "-" + m[3], notes: after, line: i, on: true });
+      used[i] = 1;
+    });
+    lines.forEach(function (t, i) {
+      if (used[i]) return;
+      var owner = null; rows.forEach(function (r) { if (r.line < i) owner = r; });
+      if (owner && !(lines[i + 1] && SHEET_PHONE.test(lines[i + 1]) && !nameOf(lines[i + 1].slice(0, SHEET_PHONE.exec(lines[i + 1]).index)))) owner.notes = (owner.notes ? owner.notes + " | " : "") + t;
+    });
+    return rows;
+  }
+  function openSheetScan() {
+    featOpen('<h3>Scan a lead sheet</h3><p class="modal-sub">Take a photo of a paper lead sheet. The app reads the names and numbers, you check them, and only then are they added. The photo stays attached to the leads.</p>' +
+      '<div id="lsPick"><label class="btn-primary ls-pick">Take a photo<input type="file" accept="image/*" capture="environment" id="lsCam" class="ls-file"></label>' +
+      '<label class="btn-secondary ls-pick">Choose from your photos<input type="file" accept="image/*" id="lsLib" class="ls-file"></label></div><div id="lsBody"></div>');
+    ["lsCam", "lsLib"].forEach(function (id) {
+      document.getElementById(id).addEventListener("change", function (e) { var f = e.target.files && e.target.files[0]; if (f) readSheet(f); });
+    });
+  }
+  function readSheet(file) {
+    var body = document.getElementById("lsBody"), pick = document.getElementById("lsPick");
+    pick.hidden = true; body.innerHTML = '<p class="ls-status">Preparing the photo\u2026</p>';
+    var sheet = { img: "" };
+    shrinkPhoto(file).then(function (img) {
+      sheet.img = img;
+      body.innerHTML = '<img class="ls-thumb" src="' + img + '" alt="Lead sheet photo"><p class="ls-status" id="lsStatus">Reading the sheet\u2026</p>';
+      var st = document.getElementById("lsStatus");
+      return loadOcr().then(function (T) {
+        return T.recognize(img, "eng", { logger: function (m) { if (m && m.status === "recognizing text" && st) st.textContent = "Reading the sheet\u2026 " + Math.round((m.progress || 0) * 100) + "%"; } });
+      }).then(function (r) { return (r && r.data && r.data.text) || ""; }, function () { return null; });
+    }).then(function (text) {
+      var rows = text ? parseSheetText(text) : [];
+      sheetReview(sheet, rows, text === null ? "fail" : rows.length ? "" : "none");
+    }, function () {
+      pick.hidden = false; body.innerHTML = '<p class="ls-status">That photo couldn\u2019t be opened. Try taking it again.</p>';
+    });
+  }
+  function sheetReview(sheet, rows, why) {
+    var body = document.getElementById("lsBody");
+    if (!rows.length) rows.push({ name: "", phone: "", notes: "", on: true });
+    function flag(r) {
+      if (!String(r.phone).trim()) return { cls: "bad", txt: "Add a phone number" };
+      if (!isValidPhone(r.phone)) return { cls: "bad", txt: "Check this number" };
+      var norm = normalizePhone(r.phone);
+      if (dncNums()[dncKey(norm)]) return { cls: "bad", txt: "On your Do Not Call list, so it can\u2019t be added", block: true };
+      var dup = state.leads.filter(function (l) { return l.phone === norm; })[0];
+      if (dup) return { cls: "", txt: "Already in your leads: " + dup.name, dup: true };
+      return { cls: "ok", txt: "" };
+    }
+    function draw() {
+      var good = 0;
+      var list = rows.map(function (r, i) {
+        var f = flag(r), can = !f.block && f.cls !== "bad";
+        if (f.dup && r.on === true && !r.touched) r.on = false;
+        if (r.on && can && !f.dup) good++; else if (r.on && can && f.dup) good++;
+        return '<div class="ls-row' + (r.on && can ? '' : ' skip') + '" data-i="' + i + '"><div class="ls-top"><label class="ls-on"><input type="checkbox" data-ls-on="' + i + '"' + (r.on && can ? ' checked' : '') + (f.block ? ' disabled' : '') + '> Add</label>' +
+          '<button class="ls-x" type="button" data-ls-x="' + i + '" aria-label="Remove this row">\u00d7</button></div>' +
+          '<input type="text" data-ls-f="name" data-i="' + i + '" value="' + escapeHtml(r.name) + '" placeholder="Name" aria-label="Name">' +
+          '<input type="tel" data-ls-f="phone" data-i="' + i + '" value="' + escapeHtml(r.phone) + '" placeholder="Phone number" aria-label="Phone number">' +
+          '<input type="text" data-ls-f="notes" data-i="' + i + '" value="' + escapeHtml(r.notes) + '" placeholder="Notes" aria-label="Notes">' +
+          (f.txt ? '<div class="ls-flag ' + f.cls + '">' + escapeHtml(f.txt) + '</div>' : '') + '</div>';
+      }).join("");
+      body.innerHTML = '<img class="ls-thumb" src="' + sheet.img + '" alt="Lead sheet photo">' +
+        '<p class="ls-status">' + (why === "fail" ? 'The sheet couldn\u2019t be read automatically (this needs a connection the first time). Type the leads below, or paste the text.'
+          : why === "none" ? 'No phone numbers were found on this photo. Type the leads below, or paste the text.'
+          : 'Found ' + rows.length + ' lead' + (rows.length === 1 ? '' : 's') + '. Check each one and fix anything the camera misread.') + '</p>' + list +
+        '<div class="ls-tools"><button class="btn-secondary" type="button" id="lsAddRow">+ Add a row</button><button class="btn-secondary" type="button" id="lsPasteBtn">Paste text</button></div>' +
+        '<div id="lsPaste" hidden><p class="ls-hint">On iPhone, open the photo in Photos, press and hold the text to select and copy it, then paste it here.</p><textarea id="lsPasteTxt" placeholder="Paste names and numbers"></textarea><button class="btn-secondary" type="button" id="lsPasteGo">Read pasted text</button></div>' +
+        '<div class="modal-actions"><button class="btn-secondary" type="button" id="lsCancel">Cancel</button><button class="btn-primary" type="button" id="lsSave"' + (good ? '' : ' disabled') + '>Add ' + good + ' lead' + (good === 1 ? '' : 's') + '</button></div>';
+      body.querySelectorAll("[data-ls-f]").forEach(function (inp) {
+        inp.addEventListener("change", function () { var r = rows[+inp.getAttribute("data-i")]; r[inp.getAttribute("data-ls-f")] = inp.value; r.touched = true; if (inp.getAttribute("data-ls-f") === "phone") r.on = true; draw(); });
+      });
+      body.querySelectorAll("[data-ls-on]").forEach(function (c) { c.addEventListener("change", function () { var r = rows[+c.getAttribute("data-ls-on")]; r.on = c.checked; r.touched = true; draw(); }); });
+      body.querySelectorAll("[data-ls-x]").forEach(function (b) { b.addEventListener("click", function () { rows.splice(+b.getAttribute("data-ls-x"), 1); if (!rows.length) rows.push({ name: "", phone: "", notes: "", on: true }); draw(); }); });
+      document.getElementById("lsAddRow").addEventListener("click", function () { rows.push({ name: "", phone: "", notes: "", on: true }); draw(); });
+      document.getElementById("lsPasteBtn").addEventListener("click", function () { var b = document.getElementById("lsPaste"); b.hidden = !b.hidden; });
+      document.getElementById("lsPasteGo").addEventListener("click", function () {
+        var more = parseSheetText(document.getElementById("lsPasteTxt").value);
+        if (!more.length) { showToast("No phone numbers found in that text"); return; }
+        rows = rows.filter(function (r) { return String(r.phone).trim() || String(r.name).trim(); }).concat(more); why = ""; draw();
+      });
+      document.getElementById("lsCancel").addEventListener("click", function () { featClose(); });
+      document.getElementById("lsSave").addEventListener("click", function () { saveSheet(sheet, rows.filter(function (r) { var f = flag(r); return r.on && !f.block && f.cls !== "bad"; })); });
+    }
+    draw();
+  }
+  function saveSheet(sheet, picked) {
+    if (!picked.length) return;
+    var sheetId = uid(), d = new Date(), src = "Lead sheet " + d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+    var me = TEAM.on && TEAM.me ? meRef() : null;
+    var leads = picked.map(function (r) {
+      var l = makeLead(r.name, r.phone, r.notes, ""); l.sheetId = sheetId;
+      if (me) { l.forUid = me.uid; l.owner = me; }
+      return l;
+    });
+    addLeadsToQueue(leads, { source: src, first: false });
+    var rec = { byUid: me ? me.uid : "me", byName: me ? me.name : "You", at: Date.now(), img: sheet.img, count: leads.length, source: src, leadIds: leads.map(function (l) { return l.id; }) };
+    if (TEAM.on && TEAM.db) TEAM.db.collection("sheets").doc(sheetId).set(rec).catch(function () { showToast("Leads added, but the photo didn\u2019t upload. Check your connection."); });
+    else { state.sheets = state.sheets || {}; state.sheets[sheetId] = rec; }
+    saveState(); featClose(); render();
+    showToast("Added " + leads.length + " lead" + (leads.length === 1 ? "" : "s") + " from the sheet");
+  }
+  function openSheetPhoto(id) {
+    featOpen('<h3>Original lead sheet</h3><div id="lsPhoto"><p class="ls-status">Loading the photo\u2026</p></div>');
+    var get = TEAM.on && TEAM.db ? TEAM.db.collection("sheets").doc(id).get().then(function (sn) { return sn.exists ? sn.data() : null; }) : Promise.resolve((state.sheets || {})[id] || null);
+    get.then(function (d) {
+      var box = document.getElementById("lsPhoto"); if (!box) return;
+      box.innerHTML = d && d.img ? '<img class="ls-full" src="' + d.img + '" alt="Lead sheet photo"><p class="ls-meta">Scanned by ' + escapeHtml(d.byName || "a teammate") + ' \u00b7 ' + escapeHtml(new Date(d.at).toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })) + ' \u00b7 ' + d.count + ' lead' + (d.count === 1 ? '' : 's') + '</p>'
+        : '<p class="ls-status">This photo isn\u2019t available.</p>';
+    }, function () { var box = document.getElementById("lsPhoto"); if (box) box.innerHTML = '<p class="ls-status">Couldn\u2019t load the photo. Check your connection.</p>'; });
+  }
+  document.addEventListener("click", function (e) { var b = e.target.closest && e.target.closest("[data-sheet]"); if (b) openSheetPhoto(b.getAttribute("data-sheet")); });
+
   /** ---------- Quick dial: call any number without adding it first ---------- **/
   function openQuickDial(prefill) {
     featOpen('<h3>Dial a number</h3><p class="modal-sub">Call anyone without adding them first. Save them afterward only if you want to.</p>' +
@@ -9315,7 +9601,7 @@
 
   function openSearch() {
     var hint = '<p class="ll-hint">Search your investors and every lead you can see, by name, phone, company or deal.</p>';
-    featOpen('<h3>Search</h3><input type="search" id="gsQ" placeholder="Name, phone, company or deal" autocomplete="off" autocapitalize="none" spellcheck="false" enterkeyhint="search"><button class="qd-open" id="gsDial" type="button"><span class="qd-ico">\u260E</span> Dial a number</button><div id="gsOut" class="gs-out">' + hint + '</div>');
+    featOpen('<h3>Search</h3><input type="search" id="gsQ" placeholder="Name, phone, company or deal" autocomplete="off" autocapitalize="none" spellcheck="false" enterkeyhint="search"><div class="gs-tools"><button class="qd-open" id="gsDial" type="button"><span class="qd-ico">\u260E</span> Dial a number</button><button class="qd-open" id="gsScan" type="button"><span class="qd-ico">\u2398</span> Scan a lead sheet</button></div><div id="gsOut" class="gs-out">' + hint + '</div>');
     var inp = document.getElementById("gsQ"), out = document.getElementById("gsOut"), timer = null;
     var draw = function () {
       var r = searchAll(inp.value), typed = inp.value.trim();
@@ -9339,11 +9625,15 @@
       out.querySelectorAll("[data-gs-lead]").forEach(function (b) { b.addEventListener("click", function () { featClose(); openLeadProfile(b.getAttribute("data-gs-lead")); }); });
       if (dialRow) { out.insertAdjacentHTML("afterbegin", dialRow); wireDial(); }
     };
+    document.getElementById("gsScan").addEventListener("click", openSheetScan);
     document.getElementById("gsDial").addEventListener("click", function () { openQuickDial(/^[\d\s()+.\-]+$/.test(inp.value.trim()) ? inp.value.trim() : ""); });
     inp.addEventListener("input", function () { clearTimeout(timer); timer = setTimeout(draw, 120); });
     inp.focus();   // same tap, so the iPhone keyboard opens right away
   }
   document.getElementById("searchBtn").addEventListener("click", openSearch);
+  document.getElementById("locChip").addEventListener("click", function () {
+    featOpen('<h3>Where are you working today?</h3><p class="modal-sub">Your manager sees this next to your numbers. It resets each day.</p><div class="loc-btns">' + locBtns(TEAM.me ? repLoc(TEAM.me.uid) : "") + '</div>');
+  });
 
   /** ---------- Admin controls ---------- **/
   function closeAdminHub() { document.getElementById("adminModal").classList.remove("show"); }
