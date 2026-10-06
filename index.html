@@ -3,7 +3,7 @@
 <head>
 <script id="customerConfig" type="application/json">{}</script>
 <meta charset="UTF-8">
-<meta name="dovetail-build" content="2026-11-06">
+<meta name="dovetail-build" content="2026-11-07">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2662,6 +2662,17 @@
   ::-webkit-scrollbar { width: 8px; }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 8px; }
 
+  .qd-open { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; margin: 10px 0 4px; padding: 11px 14px;
+    border-radius: var(--radius-s); border: 1px dashed var(--border); background: var(--surface); color: var(--text); font: inherit; font-weight: 600; cursor: pointer; }
+  .qd-ico { font-size: 15px; }
+  #qdNum { font-size: 22px !important; letter-spacing: 0.5px; text-align: center; padding: 12px; margin-top: 6px; }
+  .qd-info { min-height: 20px; margin: 10px 0 12px; font-size: 13px; line-height: 1.5; color: var(--text-dim); overflow-wrap: break-word; }
+  .qd-info b { color: var(--text); }
+  .qd-dim { color: var(--text-faint); }
+  .qd-call { display: flex; justify-content: center; width: 100%; box-sizing: border-box; text-align: center; }
+  .qd-call.qd-off { opacity: 0.4; pointer-events: none; }
+  .qd-called { font-size: 14px; color: var(--text-dim); margin: 4px 0 12px; }
+  .gs-dial b { color: var(--accent); }
   .last-follow { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 0 0 10px; padding: 9px 12px;
     border-radius: var(--radius-s); background: var(--surface); border: 1px solid var(--border); font-size: 12.5px; color: var(--text-dim); line-height: 1.45; }
   .last-follow .lf-txt { min-width: 0; overflow-wrap: break-word; }
@@ -2929,7 +2940,7 @@
     </div>
 
     <div style="margin-top:22px;padding-top:14px;border-top:1px solid var(--border);text-align:center;">
-      <div style="font-size:11px;color:var(--text-faint);">Build 2026-11-06 · Team · Updates install automatically after midnight.</div>
+      <div style="font-size:11px;color:var(--text-faint);">Build 2026-11-07 · Team · Updates install automatically after midnight.</div>
       <div id="updNote"></div>
     </div>
   </div>
@@ -9245,13 +9256,73 @@
       .sort(function (a, b) { return String(a.name).localeCompare(String(b.name)); });
     return { inv: inv.slice(0, 25), invN: inv.length, leads: leads.slice(0, 40), leadN: leads.length };
   }
+  /** ---------- Quick dial: call any number without adding it first ---------- **/
+  function openQuickDial(prefill) {
+    featOpen('<h3>Dial a number</h3><p class="modal-sub">Call anyone without adding them first. Save them afterward only if you want to.</p>' +
+      '<input type="tel" id="qdNum" inputmode="tel" autocomplete="off" placeholder="(212) 555-0101" aria-label="Phone number" value="' + escapeHtml(prefill || "") + '">' +
+      '<div id="qdInfo" class="qd-info"></div><div id="qdGo"></div><div id="qdAfter" class="qd-after" hidden></div>');
+    var inp = document.getElementById("qdNum"), info = document.getElementById("qdInfo"), go = document.getElementById("qdGo");
+    var called = "";
+    function draw() {
+      var raw = inp.value.trim(), digits = raw.replace(/\D/g, ""), ok = isValidPhone(raw), norm = ok ? normalizePhone(raw) : "";
+      var match = ok ? state.leads.filter(function (l) { return l.phone === norm; })[0] : null;
+      if (!ok) {
+        info.innerHTML = digits.length ? '<span class="qd-dim">Keep typing: a full number has 10 digits.</span>' : '';
+        go.innerHTML = '<span class="call-btn qd-call qd-off">Call</span>'; return;
+      }
+      if (dncNums()[dncKey(norm)] || (match && isDnc(match))) {
+        info.innerHTML = '<b>On your team\u2019s Do Not Call list.</b> This number can\u2019t be called.';
+        go.innerHTML = '<span class="call-btn qd-call qd-off">Call</span>'; return;
+      }
+      if (match) {
+        var z = leadZone(match), t = z.iana ? zoneTime(z.iana) : null;
+        info.innerHTML = 'This is <b>' + escapeHtml(match.name) + '</b>' + (t ? ' \u00b7 ' + escapeHtml(t.label) + (t.ok ? ' their time' : ' their time, outside 8 AM\u20139 PM') : '') + '. The call is logged to their record.';
+        go.innerHTML = callLinkHtml(match, "dial", null, "call-btn qd-call", '<span>Call ' + escapeHtml(firstName(match.name)) + '</span>');
+        var a = go.querySelector("a"); if (a) a.addEventListener("click", function () { setTimeout(featClose, 0); });
+        return;
+      }
+      info.innerHTML = '<span class="qd-dim">New number. Its local time isn\u2019t known, so make sure it\u2019s between 8 AM and 9 PM for them.</span>';
+      go.innerHTML = '<a class="call-btn qd-call" id="qdCall" href="' + escapeHtml(telHref(norm)) + '" target="' + telTarget() + '"><span>Call ' + escapeHtml(formatPhoneDisplay(raw)) + '</span></a>';
+      document.getElementById("qdCall").addEventListener("click", function (e) {
+        var now = Date.now(), cfg = pacingCfg(), st = dialStats(now);
+        if (cfg.dayMode === "pause" && st.today >= Number(cfg.perDay)) { e.preventDefault(); showToast("Daily call limit reached (" + cfg.perDay + ")"); return; }
+        var w = pacingWait(now);
+        if (w > 0) { e.preventDefault(); showToast("One moment \u2014 next call in " + w + "s"); return; }
+        recordDial(); called = raw;
+        setTimeout(function () { if (!document.hidden) dialFallback(telHref(norm)); }, 400);
+        setTimeout(afterCall, 300);
+      });
+    }
+    function afterCall() {
+      inp.hidden = true; info.innerHTML = ""; go.innerHTML = "";
+      var box = document.getElementById("qdAfter"); box.hidden = false;
+      box.innerHTML = '<p class="qd-called">You called <b>' + escapeHtml(formatPhoneDisplay(called)) + '</b>. Keep them as a lead?</p>' +
+        '<label for="qdName">Name (optional)</label><input type="text" id="qdName" placeholder="Jordan Casey" autocomplete="off">' +
+        '<div class="modal-actions"><button class="btn-secondary" id="qdSkip">Don\u2019t save</button><button class="btn-primary" id="qdSave">Save and log the call</button></div>';
+      document.getElementById("qdSkip").addEventListener("click", function () { featClose(); });
+      document.getElementById("qdSave").addEventListener("click", function () {
+        var lead = makeLead(document.getElementById("qdName").value, called, "", "");
+        addLeadsToQueue([lead], { source: "Quick dial", first: false });
+        state.recallLeadId = null; state.focusLeadId = lead.id; state.focusTaskId = null; state.focusReturn = "dial";
+        state.awaitingOutcome = true; state.paused = false; state.activeView = "dial";
+        saveState(); featClose(); render(); window.scrollTo(0, 0);
+        showToast("Saved " + lead.name + " \u00b7 now log how the call went");
+      });
+    }
+    inp.addEventListener("input", draw);
+    draw(); inp.focus();
+  }
+
   function openSearch() {
     var hint = '<p class="ll-hint">Search your investors and every lead you can see, by name, phone, company or deal.</p>';
-    featOpen('<h3>Search</h3><input type="search" id="gsQ" placeholder="Name, phone, company or deal" autocomplete="off" autocapitalize="none" spellcheck="false" enterkeyhint="search"><div id="gsOut" class="gs-out">' + hint + '</div>');
+    featOpen('<h3>Search</h3><input type="search" id="gsQ" placeholder="Name, phone, company or deal" autocomplete="off" autocapitalize="none" spellcheck="false" enterkeyhint="search"><button class="qd-open" id="gsDial" type="button"><span class="qd-ico">\u260E</span> Dial a number</button><div id="gsOut" class="gs-out">' + hint + '</div>');
     var inp = document.getElementById("gsQ"), out = document.getElementById("gsOut"), timer = null;
     var draw = function () {
-      var r = searchAll(inp.value);
-      if (!r) { out.innerHTML = hint; return; }
+      var r = searchAll(inp.value), typed = inp.value.trim();
+      var dialRow = isValidPhone(typed) && /^[\d\s()+.\-]+$/.test(typed) ? '<button class="gs-row gs-dial" data-gs-dial="' + escapeHtml(typed) + '"><b>Call ' + escapeHtml(formatPhoneDisplay(typed)) + '</b><span>Dial this number without adding it first</span></button>' : '';
+      var wireDial = function () { out.querySelectorAll("[data-gs-dial]").forEach(function (b) { b.addEventListener("click", function () { openQuickDial(b.getAttribute("data-gs-dial")); }); }); };
+      if (!r) { out.innerHTML = dialRow || hint; wireDial(); return; }
+      if (!r.invN && !r.leadN && dialRow) { out.innerHTML = dialRow; wireDial(); return; }
       if (!r.invN && !r.leadN) { out.innerHTML = '<div class="pipe-empty">No one matches \u201c' + escapeHtml(inp.value.trim()) + '\u201d.</div>'; return; }
       out.innerHTML =
         (r.invN ? '<div class="gs-head">Investors \u00b7 ' + r.invN + '</div>' + r.inv.map(function (v) {
@@ -9266,7 +9337,9 @@
         }).join("") + (r.leadN > r.leads.length ? '<p class="ll-hint">Showing ' + r.leads.length + ' of ' + r.leadN + '. Type more to narrow it down.</p>' : '') : '');
       out.querySelectorAll("[data-gs-vault]").forEach(function (b) { b.addEventListener("click", function () { featClose(); openVault(b.getAttribute("data-gs-vault")); }); });
       out.querySelectorAll("[data-gs-lead]").forEach(function (b) { b.addEventListener("click", function () { featClose(); openLeadProfile(b.getAttribute("data-gs-lead")); }); });
+      if (dialRow) { out.insertAdjacentHTML("afterbegin", dialRow); wireDial(); }
     };
+    document.getElementById("gsDial").addEventListener("click", function () { openQuickDial(/^[\d\s()+.\-]+$/.test(inp.value.trim()) ? inp.value.trim() : ""); });
     inp.addEventListener("input", function () { clearTimeout(timer); timer = setTimeout(draw, 120); });
     inp.focus();   // same tap, so the iPhone keyboard opens right away
   }
