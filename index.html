@@ -3,7 +3,7 @@
 <head>
 <script id="customerConfig" type="application/json">{}</script>
 <meta charset="UTF-8">
-<meta name="dovetail-build" content="2026-11-11">
+<meta name="dovetail-build" content="2026-11-13">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2991,7 +2991,7 @@
     </div>
 
     <div style="margin-top:22px;padding-top:14px;border-top:1px solid var(--border);text-align:center;">
-      <div style="font-size:11px;color:var(--text-faint);">Build 2026-11-11 · Team · Updates install automatically after midnight.</div>
+      <div style="font-size:11px;color:var(--text-faint);">Build 2026-11-13 · Team · Updates install automatically after midnight.</div>
       <div id="updNote"></div>
     </div>
   </div>
@@ -3252,11 +3252,11 @@
         else Object.keys(obj).forEach(function (k) { setIn(db[p], k, obj[k]); });
       }); };
       DocRef.prototype.delete = function () { var p = this.path; return write(this.app, p, function (db) { delete db[p]; }); };
-      DocRef.prototype.onSnapshot = function (cb, e) { var l = { kind: "doc", path: this.path, cb: cb, err: e, app: this.app }; listeners.push(l); setTimeout(function () { fire(l); }, 0); return function () { var i = listeners.indexOf(l); if (i > -1) listeners.splice(i, 1); }; };
+      DocRef.prototype.onSnapshot = function (cb, e) { if (typeof cb !== "function") { cb = e; e = arguments[2]; } var l = { kind: "doc", path: this.path, cb: cb, err: e, app: this.app }; listeners.push(l); setTimeout(function () { fire(l); }, 0); return function () { var i = listeners.indexOf(l); if (i > -1) listeners.splice(i, 1); }; };
       function ColRef(app, path) { this.app = app; this.path = path; }
       ColRef.prototype.doc = function (id) { return new DocRef(this.app, this.path + "/" + id); };
       ColRef.prototype.where = function (field, op, val) { var q = new ColRef(this.app, this.path); q.filters = (this.filters || []).concat([[field, val]]); return q; };
-      ColRef.prototype.onSnapshot = function (cb, e) { var l = { kind: "col", path: this.path, cb: cb, err: e, app: this.app, filters: this.filters }; listeners.push(l); setTimeout(function () { fire(l); }, 0); return function () { var i = listeners.indexOf(l); if (i > -1) listeners.splice(i, 1); }; };
+      ColRef.prototype.onSnapshot = function (cb, e) { if (typeof cb !== "function") { cb = e; e = arguments[2]; } var l = { kind: "col", path: this.path, cb: cb, err: e, app: this.app, filters: this.filters }; listeners.push(l); setTimeout(function () { fire(l); }, 0); return function () { var i = listeners.indexOf(l); if (i > -1) listeners.splice(i, 1); }; };
       function Firestore(app) { this.app = app; }
       Firestore.prototype.collection = function (p) { return new ColRef(this.app, p); };
       Firestore.prototype.enablePersistence = function () { return Promise.resolve(); };
@@ -3357,6 +3357,23 @@
         investments: [{ id: "di" + k, deal: IND.demo.deals[k], amount: Math.round(v[1] / 25000 * IND.demo.amt), date: new Date(now - v[3] * 86400000).toISOString().slice(0, 10), status: v[2], done: v[2] === "Committed" ? (k === 1 ? (function () { var o = {}; o[IND.steps[0][0]] = now; return o; })() : {}) : {} }],
         keyDates: [], interests: IND.demo.interest, notes: "", lastContactAt: now - k * 9 * 86400000, nextReachOut: "", removalRequest: null, updatedAt: now };
     });
+    // A week of handoffs (appointments) and note activity, so the scoreboard's remote vs in-office numbers are real.
+    var closer = { uid: "dR2", name: "Sam Ortiz" };
+    worked.filter(function (id) { var L = leads[id]; return L.outcome === "interested" && L.owner && L.owner.uid !== "dR2" && Date.parse(L.calledAt) > now - 6 * 86400000; }).slice(0, 8).forEach(function (id, k) {
+      var L = leads[id], at = Date.parse(L.calledAt) + 120000;
+      L.handoff = { from: L.owner, to: closer, at: at, apptAt: at + (1 + k % 3) * 86400000, note: "Wants the details walked through", seen: true };
+      L.owner = closer;
+    });
+    var acts = {};
+    Object.keys(days).forEach(function (k) {
+      Object.keys(days[k]).forEach(function (cid) {
+        var c = days[k][cid], t = Date.parse(c.timestamp);
+        if (t < now - 6 * 86400000 || ["interested", "callback", "notinterested"].indexOf(c.outcomeKey) < 0) return;
+        var dd = new Date(t), dk = "act_" + dd.getFullYear() + "-" + String(dd.getMonth() + 1).padStart(2, "0") + "-" + String(dd.getDate()).padStart(2, "0");
+        (acts[dk] = acts[dk] || { calls: {}, notes: {} }).notes[c.by.uid + "_" + c.leadId] = { by: c.by.uid, name: c.by.name, leadId: c.leadId, at: t };
+      });
+    });
+    Object.keys(acts).forEach(function (k) { db["callDays/" + k] = acts[k]; });
     return db;
   }
   if (DEMO) {
@@ -6480,7 +6497,15 @@
     vaultStart();
     teamWatchMe();
     teamWatchMembers();
-    TEAM.unsub.push(TEAM.db.collection("leadChunks").onSnapshot(function (qs) {
+    // includeMetadataChanges: Firestore only tells us the server has confirmed cached data when we ask.
+    // Without it, opening the app showed "Offline \u00b7 will sync" until someone's data changed.
+    TEAM.unsub.push(TEAM.db.collection("leadChunks").onSnapshot({ includeMetadataChanges: true }, function (qs) {
+      if (TEAM.ready && typeof qs.docChanges === "function" && !qs.docChanges().length) {
+        var md = qs.metadata || {};
+        if (!md.fromCache && !md.hasPendingWrites && cloud.status === "teamoffline") setSaveStatus("teamsynced");
+        else if (md.fromCache && cloud.status === "teamsynced") setSaveStatus("teamoffline");
+        return;
+      }
       teamApplyChunks(qs);
       document.body.classList.remove("sync-lock");
     }, teamListenError));
