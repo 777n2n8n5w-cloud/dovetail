@@ -3,7 +3,7 @@
 <head>
 <script id="customerConfig" type="application/json">{}</script>
 <meta charset="UTF-8">
-<meta name="dovetail-build" content="2026-11-10">
+<meta name="dovetail-build" content="2026-11-11">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2684,6 +2684,9 @@
   .kp-call svg { width: 32px; height: 32px; }
   .kp-call.off { opacity: 0.35; }
   .kp-after { width: 100%; }
+  button, a, label, .kp, .kp-key, .kp-del, .md-bar { touch-action: manipulation; }
+  .kp-key, .kp-del, .kp-call { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+  .loc-chip { cursor: default; }
   .md-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; box-sizing: border-box; margin: 0 0 10px; padding: 10px 14px;
     border-radius: var(--radius-s); border: 1px solid var(--border); background: var(--surface); color: var(--text); font: inherit; text-align: left; cursor: pointer; }
   .md-bar.on { border-color: var(--accent); }
@@ -2796,7 +2799,7 @@
   <header class="top">
     <div class="brand">
       <div class="name">Dovetail Suite</div>
-      <div class="sub-line"><div class="sub" id="headerSub">No leads loaded</div><button class="loc-chip" id="locChip" type="button" hidden></button><span class="save-pill" id="savePill"></span></div>
+      <div class="sub-line"><div class="sub" id="headerSub">No leads loaded</div><span class="loc-chip" id="locChip" hidden></span><span class="save-pill" id="savePill"></span></div>
     </div>
     <div class="header-right">
       <button class="icon-btn team-admin-only score-btn" id="adminBtn" aria-label="Admin controls" title="Admin controls"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 9.5C8 19.2 5 15.5 5 11V6l7-3z"/><path d="M9.5 12l1.8 1.8L15 10"/></svg></button>
@@ -2988,7 +2991,7 @@
     </div>
 
     <div style="margin-top:22px;padding-top:14px;border-top:1px solid var(--border);text-align:center;">
-      <div style="font-size:11px;color:var(--text-faint);">Build 2026-11-10 · Team · Updates install automatically after midnight.</div>
+      <div style="font-size:11px;color:var(--text-faint);">Build 2026-11-11 · Team · Updates install automatically after midnight.</div>
       <div id="updNote"></div>
     </div>
   </div>
@@ -4212,6 +4215,10 @@
     renderMain(lead, total);
     renderStats();
     renderQueue();
+    if (state.manualDial && !state.focusLeadId && !state.recallLeadId && !state.awaitingOutcome) {
+      document.getElementById("statsBlock").style.display = "none";
+      document.getElementById("queueBlock").style.display = "none";
+    }
   }
 
   function prevButtonHtml() {
@@ -6654,7 +6661,7 @@
     if (!m || m.active !== true) { await forceSignOut("Your access has been turned off. Contact your admin.", "start:" + (m ? "inactive" : "removed")); return; }
     document.getElementById("authConnecting").textContent = "Connecting\u2026";
     TEAM.startDenied = 0;
-    TEAM.me = { uid: user.uid, username: m.username || username, name: m.name || username, role: m.role || "rep", createdAt: m.createdAt || 0, closer: !!m.closer };
+    TEAM.me = { uid: user.uid, username: m.username || username, name: m.name || username, role: m.role || "rep", createdAt: m.createdAt || 0, closer: !!m.closer, workLoc: m.workLoc || "" };
     STORAGE_KEY = "dovetail_team_" + user.uid;
     state = loadTeamPrefs();
     if (!state.textSettings) { textSettings(); state.textSettings.myName = firstName(TEAM.me.name); }
@@ -6733,6 +6740,7 @@
         forceSignOut("Your access has been turned off. Contact your admin.", "admin-" + (m ? "turned-off" : "removed"));
         return;
       }
+      if ((m.workLoc || "") !== (TEAM.me.workLoc || "")) { TEAM.me.workLoc = m.workLoc || ""; teamRenderSoon(); }
       var roleChanged = (m.role || "rep") !== TEAM.me.role;
       TEAM.me.name = m.name || TEAM.me.name;
       TEAM.me.role = m.role || "rep";
@@ -6745,6 +6753,10 @@
       var m = {};
       qs.docs.forEach(function (d) { var x = d.data() || {}; x.uid = d.id; m[d.id] = x; });
       TEAM.members = m;
+      if (DEMO && isAdmin() && m.dR2 && m.dR2.workLoc === undefined) [["dR2", "office"], ["dR3", "remote"], ["dR1", "remote"]].forEach(function (x) { setWorkLoc(x[0], x[1]); });
+      if (TEAM.me && m[TEAM.me.uid]) TEAM.me.workLoc = m[TEAM.me.uid].workLoc;
+      var smo = document.getElementById("scoreModal"); if (smo && smo.classList.contains("show")) renderScoreboard();
+      teamRenderSoon();
       if (isAdmin()) syncRoster();
       if (teamModalOpen()) renderTeamPanel();
     }, function () {});
@@ -6768,7 +6780,10 @@
   var LOCS = { office: "In office", remote: "Remote", out: "Out of office" };
   var sbLoc = "all";
   function actDocId(d) { return "act_" + localDateStr(d || new Date()); }
-  function repLoc(uid) { var a = (TEAM.acts || {})[actDocId()], v = a && a.locs && a.locs[uid]; return v && LOCS[v.loc] ? v.loc : ""; }
+  function repLoc(uid) {
+    var m = (TEAM.members || {})[uid] || (TEAM.me && TEAM.me.uid === uid ? TEAM.me : null);
+    return m && LOCS[m.workLoc] ? m.workLoc : "";
+  }
   function actWrite(field, key, val) {
     var id = actDocId(), ref = TEAM.db.collection("callDays").doc(id);
     TEAM.acts = TEAM.acts || {}; var a = TEAM.acts[id] = TEAM.acts[id] || {}; (a[field] = a[field] || {})[key] = val;
@@ -6779,9 +6794,10 @@
     });
   }
   function setWorkLoc(uid, loc) {
-    if (!TEAM.on || !TEAM.me || !TEAM.db || !LOCS[loc]) return;
-    actWrite("locs", uid, { loc: loc, at: Date.now(), by: TEAM.me.uid }).catch(function () { showToast("Couldn\u2019t save that \u2014 check your connection"); });
-    render(); if (document.getElementById("scoreModal").classList.contains("show")) renderScoreboard();
+    if (!TEAM.on || !TEAM.db || !isAdmin()) return;
+    if (TEAM.members[uid]) TEAM.members[uid].workLoc = loc || "";
+    TEAM.db.collection("members").doc(uid).update({ workLoc: loc || "" }).catch(function () { showToast("Couldn\u2019t save that \u2014 check your connection"); });
+    render(); var sm = document.getElementById("scoreModal"); if (sm && sm.classList.contains("show")) renderScoreboard();
   }
   function logNoteEvent(lead) {
     if (!TEAM.on || !TEAM.me || !TEAM.db || !lead || !String(lead.notes || "").trim()) return;
@@ -6797,9 +6813,6 @@
       if (TEAM.actUnsub[k]) return;
       TEAM.actUnsub[k] = TEAM.db.collection("callDays").doc(k).onSnapshot(function (snap) {
         TEAM.acts[k] = snap.exists ? (snap.data() || {}) : {};
-        if (DEMO && k === actDocId() && isAdmin() && !(TEAM.acts[k].locs && TEAM.acts[k].locs.dR2)) {
-          [["dR2", "office"], ["dR3", "remote"], ["dR1", "remote"]].forEach(function (x) { actWrite("locs", x[0], { loc: x[1], at: Date.now(), by: "demo" }).catch(function () {}); });
-        }
         teamRenderSoon();
         var sm = document.getElementById("scoreModal"); if (sm && sm.classList.contains("show")) renderScoreboard();
       }, teamListenError);
@@ -6809,6 +6822,7 @@
     return Object.keys(LOCS).map(function (k) { return '<button class="loc-btn' + (cur === k ? ' active' : '') + '" data-setloc="' + k + '" type="button">' + LOCS[k] + '</button>'; }).join("");
   }
   function locCardHtml() {
+    return "";
     if (!TEAM.on || !TEAM.me || !TEAM.ready || repLoc(TEAM.me.uid)) return "";
     return '<div class="loc-card"><b>Where are you working today?</b><span>Your manager sees this next to your numbers.</span><div class="loc-btns">' + locBtns("") + '</div></div>';
   }
@@ -6820,7 +6834,7 @@
     showToast("Working today: " + LOCS[b.getAttribute("data-setloc")]);
   });
   document.addEventListener("change", function (e) {
-    var sel = e.target.closest && e.target.closest("[data-tm-loc]"); if (!sel || !sel.value) return;
+    var sel = e.target.closest && e.target.closest("[data-tm-loc]"); if (!sel) return;
     setWorkLoc(sel.getAttribute("data-tm-loc"), sel.value);
   });
 
@@ -7193,7 +7207,7 @@
           '<span>' + (m.lastSeen ? 'Active ' + escapeHtml(agoStr(new Date(m.lastSeen).toISOString())) : 'Hasn\u2019t signed in yet') +
             ' \u00b7 ' + (callsBy[m.uid] || 0) + ' calls today' + (onLead[m.uid] ? ' \u00b7 on ' + escapeHtml(onLead[m.uid]) : '') + '</span>' +
           (m.active ? '<label class="tm-closer"><input type="checkbox" data-tm-closer="' + m.uid + '"' + (m.closer ? ' checked' : '') + '> Closer (takes handoffs)</label>' : '') +
-          (m.active ? '<label class="tm-loc">Today <select data-tm-loc="' + m.uid + '" aria-label="Where ' + escapeHtml(m.name || m.username) + ' is working today"><option value="">Not set</option>' +
+          (m.active && isAdmin() ? '<label class="tm-loc">Works from <select data-tm-loc="' + m.uid + '" aria-label="Where ' + escapeHtml(m.name || m.username) + ' works"><option value="">Not set</option>' +
             Object.keys(LOCS).map(function (k) { return '<option value="' + k + '"' + (repLoc(m.uid) === k ? ' selected' : '') + '>' + LOCS[k] + '</option>'; }).join("") + '</select></label>' : '') + '</div>' +
         (self || owner ? '<span class="tm-you">' + (self ? 'You' : 'Owner') + '</span>'
           : '<div class="tm-actions"><select class="tm-role" data-tm-role="' + m.uid + '" aria-label="Role">' + ["rep", "manager", "admin"].map(function (r) {
@@ -9424,10 +9438,12 @@
   document.addEventListener("click", function (e) {
     var b = e.target.closest && e.target.closest("#mdToggle"); if (!b) return;
     if (state.awaitingOutcome) { showToast("Log the outcome for this call first"); return; }
+    if (state.mdAfter) { showToast("Save or skip the number you just called first"); return; }
     state.manualDial = !state.manualDial; kpRaw = "";
     saveState(); render(); window.scrollTo(0, 0);
   });
   function renderManualDial(main) {
+    if (state.mdAfter && state.mdAfter.num) { renderMdAfter(main); return; }
     main.innerHTML = manualToggleHtml() + lastFollowHtml() + '<div class="kp">' +
       '<div class="kp-top"><input id="kpNum" class="kp-num" inputmode="none" autocomplete="off" autocorrect="off" spellcheck="false" aria-label="Phone number">' +
       '<button class="kp-del" id="kpDel" type="button" aria-label="Delete"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M9 5h11a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H9l-6-7z"/><path stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M12 9.5l5 5M17 9.5l-5 5"/></svg></button></div>' +
@@ -9471,20 +9487,25 @@
       recordDial();
       var called = kpRaw;
       setTimeout(function () { if (!document.hidden) dialFallback(telHref(norm)); }, 400);
-      setTimeout(function () { kpAfterCall(called); }, 300);
+      state.mdAfter = { num: called, at: Date.now(), name: "" }; kpRaw = ""; saveState();
+      setTimeout(render, 300);
     });
   }
-  function kpAfterCall(called) {
-    var box = document.getElementById("kpAfter"); if (!box) return;
-    document.getElementById("kpMain").hidden = true; box.hidden = false;
-    box.innerHTML = '<p class="qd-called">You called <b>' + escapeHtml(formatPhoneDisplay(called)) + '</b>. Keep them as a lead?</p>' +
-      '<label for="kpName">Name (optional)</label><input type="text" id="kpName" placeholder="Jordan Casey" autocomplete="off">' +
-      '<div class="modal-actions"><button class="btn-secondary" id="kpSkip" type="button">Don\u2019t save</button><button class="btn-primary" id="kpSave" type="button">Save and log the call</button></div>';
-    document.getElementById("kpSkip").addEventListener("click", function () { kpRaw = ""; render(); });
-    document.getElementById("kpSave").addEventListener("click", function () {
-      var lead = makeLead(document.getElementById("kpName").value, called, "", "");
+  // After a manual call to a new number: name is required to save. Kept in state, so it stays on screen
+  // through the app refreshing when you return from the phone call, until you choose.
+  function renderMdAfter(main) {
+    var md = state.mdAfter;
+    main.innerHTML = manualToggleHtml() + '<div class="kp-after"><p class="qd-called">You called <b>' + escapeHtml(formatPhoneDisplay(md.num)) + '</b>. Add them as a lead?</p>' +
+      '<label for="kpName">Name</label><input type="text" id="kpName" placeholder="Their name" autocomplete="off" autocapitalize="words" value="' + escapeHtml(md.name || "") + '">' +
+      '<div class="modal-actions"><button class="btn-secondary" id="kpSkip" type="button">Don\u2019t save</button><button class="btn-primary" id="kpSave" type="button"' + (String(md.name || "").trim() ? '' : ' disabled') + '>Save and log the call</button></div></div>';
+    var nm = document.getElementById("kpName"), sv = document.getElementById("kpSave");
+    nm.addEventListener("input", function () { md.name = nm.value; sv.disabled = !nm.value.trim(); saveState(); });
+    document.getElementById("kpSkip").addEventListener("click", function () { state.mdAfter = null; kpRaw = ""; saveState(); render(); });
+    sv.addEventListener("click", function () {
+      var name = nm.value.trim(); if (!name) { nm.focus(); return; }
+      var lead = makeLead(name, md.num, "", "");
       addLeadsToQueue([lead], { source: "Manual dial", first: false });
-      kpRaw = "";
+      state.mdAfter = null; kpRaw = "";
       state.recallLeadId = null; state.focusLeadId = lead.id; state.focusTaskId = null; state.focusReturn = "dial";
       state.awaitingOutcome = true; state.paused = false; state.activeView = "dial";
       saveState(); render(); window.scrollTo(0, 0);
@@ -9518,9 +9539,7 @@
     inp.focus();   // same tap, so the iPhone keyboard opens right away
   }
   document.getElementById("searchBtn").addEventListener("click", openSearch);
-  document.getElementById("locChip").addEventListener("click", function () {
-    featOpen('<h3>Where are you working today?</h3><p class="modal-sub">Your manager sees this next to your numbers. It resets each day.</p><div class="loc-btns">' + locBtns(TEAM.me ? repLoc(TEAM.me.uid) : "") + '</div>');
-  });
+
 
   /** ---------- Admin controls ---------- **/
   function closeAdminHub() { document.getElementById("adminModal").classList.remove("show"); }
