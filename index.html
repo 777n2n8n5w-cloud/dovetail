@@ -3,7 +3,7 @@
 <head>
 <script id="customerConfig" type="application/json">{}</script>
 <meta charset="UTF-8">
-<meta name="dovetail-build" content="2026-11-09">
+<meta name="dovetail-build" content="2026-11-10">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2662,26 +2662,38 @@
   ::-webkit-scrollbar { width: 8px; }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 8px; }
 
-  .gs-tools { display: flex; gap: 8px; }
-  .gs-tools .qd-open { flex: 1 1 0; min-width: 0; font-size: 13px; padding: 11px 8px; }
-  .ls-pick { display: block; position: relative; text-align: center; margin-top: 10px; padding: 12px; cursor: pointer; }
-  .ls-file { position: absolute; left: 0; top: 0; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
-  .ls-thumb { display: block; max-width: 100%; max-height: 150px; margin: 8px auto; border-radius: 8px; border: 1px solid var(--border); }
-  .ls-status, .ls-hint { margin: 8px 0; font-size: 13px; line-height: 1.5; color: var(--text-dim); }
-  .ls-row { border: 1px solid var(--border); border-radius: var(--radius-s); padding: 8px 10px; margin: 8px 0; background: var(--surface); }
-  .ls-row.skip { opacity: 0.55; }
-  .ls-top { display: flex; align-items: center; justify-content: space-between; }
-  .ls-on { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--text); }
-  .ls-x { background: none; border: none; color: var(--text-faint); font-size: 20px; line-height: 1; cursor: pointer; padding: 2px 6px; }
-  .ls-row input[type="text"], .ls-row input[type="tel"] { display: block; width: 100%; box-sizing: border-box; margin-top: 6px; }
-  .ls-flag { margin-top: 5px; font-size: 12px; color: var(--text-faint); }
-  .ls-flag.bad { color: var(--accent); font-weight: 600; }
-  .ls-tools { display: flex; gap: 8px; margin: 8px 0; }
-  .ls-tools button { flex: 1 1 0; }
-  #lsPasteTxt { width: 100%; box-sizing: border-box; min-height: 90px; margin-bottom: 8px; }
-  .ls-full { display: block; width: 100%; border-radius: 8px; border: 1px solid var(--border); }
-  .ls-meta { margin: 8px 0 0; font-size: 12.5px; color: var(--text-dim); }
-  .ls-view { display: block; margin: 8px 0 4px; padding: 0; background: none; border: none; color: var(--accent); font: inherit; font-size: 13px; font-weight: 600; text-decoration: underline; cursor: pointer; }
+  .kp { --kp: min(76px, 20vw); max-width: 340px; margin: 4px auto 0; display: flex; flex-direction: column; align-items: center; }
+  .kp-top { position: relative; width: 100%; min-height: 58px; display: flex; align-items: center; }
+  .kp-num { width: 100%; box-sizing: border-box; text-align: center; font-size: 32px !important; font-weight: 500; letter-spacing: 0.5px; padding: 8px 46px !important;
+    border: none !important; background: none !important; box-shadow: none !important; color: var(--text); outline: none; caret-color: var(--accent); }
+  .kp-del { position: absolute; right: 2px; top: 50%; transform: translateY(-50%); width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;
+    background: none; border: none; color: var(--text-dim); cursor: pointer; padding: 0; }
+  .kp-del svg { width: 26px; height: 26px; }
+  .kp-info { min-height: 20px; margin: 0 0 14px; font-size: 13px; text-align: center; color: var(--text-dim); overflow-wrap: break-word; }
+  .kp-info b { color: var(--text); }
+  .kp-warn { color: var(--accent); font-weight: 600; }
+  .kp-dim { color: var(--text-faint); }
+  .kp-pad { display: grid; grid-template-columns: repeat(3, var(--kp)); gap: 14px 24px; justify-content: center; }
+  .kp-key { width: var(--kp); height: var(--kp); border-radius: 50%; border: none; background: var(--surface-raised, var(--surface)); box-shadow: inset 0 0 0 1px var(--border);
+    color: var(--text); display: flex; flex-direction: column; align-items: center; justify-content: center; font: inherit; cursor: pointer; padding: 0; -webkit-tap-highlight-color: transparent; }
+  .kp-key:active { filter: brightness(1.35); }
+  .kp-key b { font-size: 30px; font-weight: 400; line-height: 1; }
+  .kp-key span { font-size: 9px; font-weight: 700; letter-spacing: 1.8px; color: var(--text-dim); margin-top: 3px; min-height: 10px; }
+  .kp-go { display: flex; justify-content: center; margin-top: 18px; }
+  .kp-call { width: var(--kp); height: var(--kp); border-radius: 50%; background: #34c759; color: #fff; display: flex; align-items: center; justify-content: center; text-decoration: none; border: none; }
+  .kp-call svg { width: 32px; height: 32px; }
+  .kp-call.off { opacity: 0.35; }
+  .kp-after { width: 100%; }
+  .md-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; box-sizing: border-box; margin: 0 0 10px; padding: 10px 14px;
+    border-radius: var(--radius-s); border: 1px solid var(--border); background: var(--surface); color: var(--text); font: inherit; text-align: left; cursor: pointer; }
+  .md-bar.on { border-color: var(--accent); }
+  .md-txt { min-width: 0; }
+  .md-txt b { display: block; font-size: 14px; }
+  .md-txt > span { display: block; font-size: 12px; color: var(--text-dim); margin-top: 1px; overflow-wrap: break-word; }
+  .md-switch { flex: none; width: 46px; height: 28px; border-radius: 999px; background: var(--border); position: relative; transition: background 0.2s; }
+  .md-switch span { position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.3); transition: left 0.2s; }
+  .md-bar.on .md-switch { background: #34c759; }
+  .md-bar.on .md-switch span { left: 21px; }
   .loc-card { margin: 0 0 10px; padding: 12px 14px; border-radius: var(--radius-s); background: var(--surface); border: 1px solid var(--accent); }
   .loc-card b { display: block; color: var(--text); font-size: 14px; }
   .loc-card span { display: block; color: var(--text-dim); font-size: 12px; margin-top: 2px; }
@@ -2709,7 +2721,6 @@
   .qd-call { display: flex; justify-content: center; width: 100%; box-sizing: border-box; text-align: center; }
   .qd-call.qd-off { opacity: 0.4; pointer-events: none; }
   .qd-called { font-size: 14px; color: var(--text-dim); margin: 4px 0 12px; }
-  .gs-dial b { color: var(--accent); }
   .last-follow { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 0 0 10px; padding: 9px 12px;
     border-radius: var(--radius-s); background: var(--surface); border: 1px solid var(--border); font-size: 12.5px; color: var(--text-dim); line-height: 1.45; }
   .last-follow .lf-txt { min-width: 0; overflow-wrap: break-word; }
@@ -2977,7 +2988,7 @@
     </div>
 
     <div style="margin-top:22px;padding-top:14px;border-top:1px solid var(--border);text-align:center;">
-      <div style="font-size:11px;color:var(--text-faint);">Build 2026-11-09 · Team · Updates install automatically after midnight.</div>
+      <div style="font-size:11px;color:var(--text-faint);">Build 2026-11-10 · Team · Updates install automatically after midnight.</div>
       <div id="updNote"></div>
     </div>
   </div>
@@ -4707,7 +4718,6 @@
       '<input id="lpAmount" type="number" min="0" step="1000" inputmode="numeric" value="' + (Number(lead.amount) || 0) + '">' +
       '<label for="lpNotes">Notes</label>' +
       '<textarea id="lpNotes" style="min-height:70px">' + escapeHtml(lead.notes || "") + '</textarea>' +
-      (lead.sheetId ? '<button class="ls-view" type="button" data-sheet="' + escapeHtml(lead.sheetId) + '">View the original lead sheet</button>' : '') +
       (TEAM.on && canSeeTeam() ? '<label for="lpOwner">Assigned to</label><select id="lpOwner">' +
         Object.keys(TEAM.members).map(function (k) { return TEAM.members[k]; }).filter(function (m) { return m.active || (lead.owner && lead.owner.uid === m.uid); })
           .map(function (m) { return '<option value="' + m.uid + '"' + (lead.owner && lead.owner.uid === m.uid ? ' selected' : '') + '>' + escapeHtml(m.name || m.username) + '</option>'; }).join("") +
@@ -5173,8 +5183,9 @@
   }
 
   function renderMain(lead, total) {
-    if (TEAM.on && lead && !state.focusLeadId && !state.recallLeadId) teamClaim(lead);
     var main = document.getElementById("mainArea");
+    if (state.manualDial && !state.focusLeadId && !state.recallLeadId && !state.awaitingOutcome) { renderManualDial(main); return; }
+    if (TEAM.on && lead && !state.focusLeadId && !state.recallLeadId) teamClaim(lead);
 
     if (state.recallLeadId) {
       renderRecallPanel(main);
@@ -5245,7 +5256,7 @@
           var w = CALL_WINDOWS[l.callWindow], z = leadZone(l); if (!w || !z.iana) return;
           var d = (w[1] - zoneTime(z.iana).hour + 24) % 24; if (soon === null || d < soon) soon = d;
         });
-        main.innerHTML = followupBannerHtml() + spamBannerHtml() + alertsHtml() + lastFollowHtml() + (focus ? '' : briefCardHtml() + hotStripHtml(null)) +
+        main.innerHTML = manualToggleHtml() + followupBannerHtml() + spamBannerHtml() + alertsHtml() + lastFollowHtml() + (focus ? '' : briefCardHtml() + hotStripHtml(null)) +
           '<div class="card done-panel card-enter"><div class="glyph">\uD83D\uDD53</div><h2>Waiting for the right time</h2><p>' +
           (win.length ? win.length + ' lead' + (win.length === 1 ? ' prefers' : 's prefer') + ' a different time of day' + (soon !== null ? ' \u2014 the next window opens in about ' + Math.max(1, soon) + ' hour' + (Math.max(1, soon) === 1 ? '' : 's') : '') + '. ' : '') +
           (taken ? taken + ' lead' + (taken === 1 ? ' is' : 's are') + ' being called by a teammate right now.' : '') + '</p>' +
@@ -5255,7 +5266,7 @@
         return;
       }
       main.innerHTML =
-        followupBannerHtml() + alertsHtml() + lastFollowHtml() +
+        manualToggleHtml() + followupBannerHtml() + alertsHtml() + lastFollowHtml() +
         '<div class="card done-panel">' +
           '<div class="glyph">✓</div>' +
           '<h2>Queue complete</h2>' +
@@ -5305,7 +5316,7 @@
     if (enterCls && lastShownLeadId !== null) setTimeout(revealCard, 30);
     lastShownLeadId = lead.id;
     main.innerHTML =
-      (focus ? '' : followupBannerHtml()) + spamBannerHtml() + overdueBannerHtml() + handoffBannerHtml() + contestBannerHtml() + lockReqBannerHtml() + (focus ? '' : briefCardHtml() + installCardHtml() + hotStripHtml(lead.id)) +
+      (focus ? '' : manualToggleHtml() + followupBannerHtml()) + spamBannerHtml() + overdueBannerHtml() + handoffBannerHtml() + contestBannerHtml() + lockReqBannerHtml() + (focus ? '' : briefCardHtml() + installCardHtml() + hotStripHtml(lead.id)) +
       locCardHtml() + lastFollowHtml() +
       '<div class="card' + enterCls + '">' +
         '<div class="eyebrow-row">' +
@@ -6268,6 +6279,7 @@
   function renderQueueControls() {
     var box = document.getElementById("queueControls");
     if (!box) return;
+    if (state.manualDial && !state.focusLeadId && !state.recallLeadId && !state.awaitingOutcome) { box.style.display = "none"; return; }
     var all = allPendingLeads(), intPool = interestedPool();
     if (!state.leads.length || state.recallLeadId || state.focusLeadId || (!all.length && !intPool.length && state.queueFilter !== "int")) { box.style.display = "none"; return; }
     box.style.display = "";
@@ -7961,7 +7973,7 @@
   // and a rep only the records assigned to them. Reps can't delete; they ask the admin.
   var VAULT = { list: {}, unsub: null, status: "", q: "", sort: "total", who: "all", openId: null, editInv: null, addInv: false, addDate: false, reqOpen: false };
   var VAULT_STATUSES = ["Committed", "Funded", "Closed", "Cancelled"];
-  var VAULT_RULES = "rules_version = '2';\nservice cloud.firestore {\n  match /databases/{database}/documents {\n    function signedIn() { return request.auth != null; }\n    function isOwner() {\n      return signedIn() && request.auth.token.email == 'vincent@dovetail-f863c.firebaseapp.com';\n    }\n    function memberPath() { return /databases/$(database)/documents/members/$(request.auth.uid); }\n    function isActive() {\n      return isOwner() || (signedIn() && exists(memberPath()) && get(memberPath()).data.active == true);\n    }\n    function isAdmin() {\n      return isOwner() || (isActive() && get(memberPath()).data.role == 'admin');\n    }\n    match /members/{uid} {\n      allow read: if isAdmin() || (signedIn() && request.auth.uid == uid);\n      allow create, delete: if isAdmin();\n      allow update: if isAdmin()\n        || (signedIn() && request.auth.uid == uid && isActive()\n            && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['lastSeen']));\n    }\n    match /leadChunks/{chunkId} {\n      allow read: if isActive();\n      allow create: if isAdmin() || (isActive() && chunkId == 'r_' + request.auth.uid);\n      allow delete: if isAdmin();\n      allow update: if isAdmin()\n        || (isActive() && chunkId == 'r_' + request.auth.uid\n            && request.resource.data.leads.keys().hasAll(resource.data.leads.keys()))\n        || (isActive() && chunkId != '_team'\n            && request.resource.data.leads.keys().hasAll(resource.data.leads.keys())\n            && resource.data.leads.keys().hasAll(request.resource.data.leads.keys()));\n    }\n    match /callDays/{day} {\n      allow read, create: if isActive();\n      allow update: if isAdmin()\n        || (isActive() && request.resource.data.calls.keys().hasAll(resource.data.calls.keys()));\n      allow delete: if isAdmin();\n    }\n    match /vault/{id} {\n      allow read: if isAdmin() || (isActive() && resource.data.ownerUid == request.auth.uid);\n      allow create: if isAdmin() || (isActive() && request.resource.data.ownerUid == request.auth.uid);\n      allow update: if isAdmin()\n        || (isActive()\n            && resource.data.ownerUid == request.auth.uid\n            && request.resource.data.ownerUid == request.auth.uid\n            && request.resource.data.investments.size() >= resource.data.investments.size());\n      allow delete: if isAdmin();\n    }\n    match /sheets/{id} {\n      allow read: if isActive();\n      allow create: if isActive() && request.resource.data.byUid == request.auth.uid;\n      allow update, delete: if isAdmin();\n    }\n  }\n}\n";
+  var VAULT_RULES = "rules_version = '2';\nservice cloud.firestore {\n  match /databases/{database}/documents {\n    function signedIn() { return request.auth != null; }\n    function isOwner() {\n      return signedIn() && request.auth.token.email == 'vincent@dovetail-f863c.firebaseapp.com';\n    }\n    function memberPath() { return /databases/$(database)/documents/members/$(request.auth.uid); }\n    function isActive() {\n      return isOwner() || (signedIn() && exists(memberPath()) && get(memberPath()).data.active == true);\n    }\n    function isAdmin() {\n      return isOwner() || (isActive() && get(memberPath()).data.role == 'admin');\n    }\n    match /members/{uid} {\n      allow read: if isAdmin() || (signedIn() && request.auth.uid == uid);\n      allow create, delete: if isAdmin();\n      allow update: if isAdmin()\n        || (signedIn() && request.auth.uid == uid && isActive()\n            && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['lastSeen']));\n    }\n    match /leadChunks/{chunkId} {\n      allow read: if isActive();\n      allow create: if isAdmin() || (isActive() && chunkId == 'r_' + request.auth.uid);\n      allow delete: if isAdmin();\n      allow update: if isAdmin()\n        || (isActive() && chunkId == 'r_' + request.auth.uid\n            && request.resource.data.leads.keys().hasAll(resource.data.leads.keys()))\n        || (isActive() && chunkId != '_team'\n            && request.resource.data.leads.keys().hasAll(resource.data.leads.keys())\n            && resource.data.leads.keys().hasAll(request.resource.data.leads.keys()));\n    }\n    match /callDays/{day} {\n      allow read, create: if isActive();\n      allow update: if isAdmin()\n        || (isActive() && request.resource.data.calls.keys().hasAll(resource.data.calls.keys()));\n      allow delete: if isAdmin();\n    }\n    match /vault/{id} {\n      allow read: if isAdmin() || (isActive() && resource.data.ownerUid == request.auth.uid);\n      allow create: if isAdmin() || (isActive() && request.resource.data.ownerUid == request.auth.uid);\n      allow update: if isAdmin()\n        || (isActive()\n            && resource.data.ownerUid == request.auth.uid\n            && request.resource.data.ownerUid == request.auth.uid\n            && request.resource.data.investments.size() >= resource.data.investments.size());\n      allow delete: if isAdmin();\n    }\n  }\n}\n";
   function vaultAdmin() { return !TEAM.on || isAdmin(); }
   function vaultSrc() { return TEAM.on ? VAULT.list : (state.vault || (state.vault = {})); }
   function vaultRecords() {
@@ -9282,7 +9294,6 @@
   function listCfg() { return (TEAM.on ? (TEAM.infoCfg || {}).lists : state.listCfg) || {}; }
   function listAllowed(l) {
     if (!TEAM.on || !TEAM.me) return true;
-    if (l.forUid && l.forUid !== TEAM.me.uid) return false;
     var c = listCfg()[listOf(l)];
     return !c || !c.reps || !c.reps.length || c.reps.indexOf(TEAM.me.uid) !== -1;
   }
@@ -9389,226 +9400,105 @@
       .sort(function (a, b) { return String(a.name).localeCompare(String(b.name)); });
     return { inv: inv.slice(0, 25), invN: inv.length, leads: leads.slice(0, 40), leadN: leads.length };
   }
-  /** ---------- Lead sheet photo: snap it, read it, check it, add it (the photo stays with the leads) ---------- **/
-  var OCR_SRC = "https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js";
-  function loadOcr() {
-    if (window.Tesseract) return Promise.resolve(window.Tesseract);
-    if (loadOcr.p) return loadOcr.p;
-    loadOcr.p = new Promise(function (res, rej) {
-      var sc = document.createElement("script"); sc.src = OCR_SRC; sc.async = true;
-      sc.onload = function () { if (window.Tesseract) res(window.Tesseract); else { loadOcr.p = null; rej(new Error("ocr")); } };
-      sc.onerror = function () { loadOcr.p = null; rej(new Error("ocr")); };
-      document.head.appendChild(sc);
-    });
-    return loadOcr.p;
+  /** ---------- Keypad: dial any number, like the iPhone keypad; save it afterward only if you want ---------- **/
+  var kpRaw = "";
+  var KP_KEYS = [["1", ""], ["2", "ABC"], ["3", "DEF"], ["4", "GHI"], ["5", "JKL"], ["6", "MNO"], ["7", "PQRS"], ["8", "TUV"], ["9", "WXYZ"], ["*", ""], ["0", "+"], ["#", ""]];
+  var KP_PHONE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1z"/></svg>';
+  function fullPhone(raw) { var d = String(raw || "").replace(/\D/g, ""); return d.length === 10 || (d.length === 11 && d.charAt(0) === "1"); }
+  function kpFormat(raw) {
+    if (/[^\d]/.test(raw)) return raw;
+    var d = raw;
+    if (d.length === 11 && d.charAt(0) === "1") return "1 (" + d.slice(1, 4) + ") " + d.slice(4, 7) + "-" + d.slice(7);
+    if (d.length <= 3) return d;
+    if (d.length <= 7) return d.slice(0, 3) + "-" + d.slice(3);
+    if (d.length <= 10) return "(" + d.slice(0, 3) + ") " + d.slice(3, 6) + "-" + d.slice(6);
+    return d;
   }
-  function shrinkPhoto(file) {
-    return new Promise(function (res, rej) {
-      var url = URL.createObjectURL(file), img = new Image();
-      img.onload = function () {
-        var max = 1600, q = 0.72, out = "";
-        for (var t = 0; t < 6; t++) {
-          var k = Math.min(1, max / Math.max(img.naturalWidth || 1, img.naturalHeight || 1));
-          var cv = document.createElement("canvas"); cv.width = Math.max(1, Math.round(img.naturalWidth * k)); cv.height = Math.max(1, Math.round(img.naturalHeight * k));
-          var cx = cv.getContext("2d"); cx.fillStyle = "#fff"; cx.fillRect(0, 0, cv.width, cv.height); cx.drawImage(img, 0, 0, cv.width, cv.height);
-          out = cv.toDataURL("image/jpeg", q);
-          if (out.length <= 700000) break;
-          max = Math.round(max * 0.8); q = Math.max(0.5, q - 0.06);
-        }
-        URL.revokeObjectURL(url); res(out);
-      };
-      img.onerror = function () { URL.revokeObjectURL(url); rej(new Error("img")); };
-      img.src = url;
-    });
+  function manualToggleHtml() {
+    if (state.awaitingOutcome || state.focusLeadId) return "";
+    var on = !!state.manualDial;
+    return '<button class="md-bar' + (on ? ' on' : '') + '" id="mdToggle" type="button" role="switch" aria-checked="' + on + '">' +
+      '<span class="md-txt"><b>Manual dial</b><span>' + (on ? 'On \u00b7 turn off to go back to your leads' : 'Dial any number with the keypad') + '</span></span>' +
+      '<span class="md-switch" aria-hidden="true"><span></span></span></button>';
   }
-  var SHEET_PHONE = /(?:\+?1[\s.\-]*)?\(?\b(\d{3})\)?[\s.\-]*(\d{3})[\s.\-]*(\d{4})\b/;
-  function parseSheetText(text) {
-    var clean = function (t) { return String(t).replace(/[|\u2022\u00b7_]+/g, " ").replace(/\s+/g, " ").trim(); };
-    var nameOf = function (t) { return clean(t).replace(/^[#\d.)\-\s]+/, "").replace(/^(name|lead|client|prospect)\s*[:\-]\s*/i, "").replace(/[,:;\-\s]+$/, "").slice(0, 60); };
-    var lines = String(text || "").split(/\r?\n/).map(clean).filter(Boolean), rows = [], used = {};
-    lines.forEach(function (t, i) {
-      var m = SHEET_PHONE.exec(t); if (!m) return;
-      var before = nameOf(t.slice(0, m.index)), after = clean(t.slice(m.index + m[0].length)).replace(/^[,:;\-\s]+/, "");
-      if (!before && i > 0 && !used[i - 1] && !SHEET_PHONE.test(lines[i - 1])) { before = nameOf(lines[i - 1]); used[i - 1] = 1; }
-      rows.push({ name: before, phone: "(" + m[1] + ") " + m[2] + "-" + m[3], notes: after, line: i, on: true });
-      used[i] = 1;
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest && e.target.closest("#mdToggle"); if (!b) return;
+    if (state.awaitingOutcome) { showToast("Log the outcome for this call first"); return; }
+    state.manualDial = !state.manualDial; kpRaw = "";
+    saveState(); render(); window.scrollTo(0, 0);
+  });
+  function renderManualDial(main) {
+    main.innerHTML = manualToggleHtml() + lastFollowHtml() + '<div class="kp">' +
+      '<div class="kp-top"><input id="kpNum" class="kp-num" inputmode="none" autocomplete="off" autocorrect="off" spellcheck="false" aria-label="Phone number">' +
+      '<button class="kp-del" id="kpDel" type="button" aria-label="Delete"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M9 5h11a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H9l-6-7z"/><path stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M12 9.5l5 5M17 9.5l-5 5"/></svg></button></div>' +
+      '<div class="kp-info" id="kpInfo"></div>' +
+      '<div id="kpMain"><div class="kp-pad">' + KP_KEYS.map(function (k) { return '<button class="kp-key" type="button" data-k="' + k[0] + '" aria-label="' + k[0] + '"><b>' + k[0] + '</b><span>' + (k[1] || "&nbsp;") + '</span></button>'; }).join("") + '</div>' +
+      '<div class="kp-go" id="kpGo"></div></div><div class="kp-after" id="kpAfter" hidden></div></div>';
+    var inp = document.getElementById("kpNum");
+    main.querySelectorAll("[data-k]").forEach(function (b) {
+      b.addEventListener("click", function () { if (kpRaw.length < 16) kpRaw += b.getAttribute("data-k"); kpDraw(); });
     });
-    lines.forEach(function (t, i) {
-      if (used[i]) return;
-      var owner = null; rows.forEach(function (r) { if (r.line < i) owner = r; });
-      if (owner && !(lines[i + 1] && SHEET_PHONE.test(lines[i + 1]) && !nameOf(lines[i + 1].slice(0, SHEET_PHONE.exec(lines[i + 1]).index)))) owner.notes = (owner.notes ? owner.notes + " | " : "") + t;
-    });
-    return rows;
+    document.getElementById("kpDel").addEventListener("click", function () { kpRaw = kpRaw.slice(0, -1); kpDraw(); });
+    inp.addEventListener("input", function () { kpRaw = inp.value.replace(/[^\d*#+]/g, "").slice(0, 16); kpDraw(); });
+    kpDraw();
   }
-  function openSheetScan() {
-    featOpen('<h3>Scan a lead sheet</h3><p class="modal-sub">Take a photo of a paper lead sheet. The app reads the names and numbers, you check them, and only then are they added. The photo stays attached to the leads.</p>' +
-      '<div id="lsPick"><label class="btn-primary ls-pick">Take a photo<input type="file" accept="image/*" capture="environment" id="lsCam" class="ls-file"></label>' +
-      '<label class="btn-secondary ls-pick">Choose from your photos<input type="file" accept="image/*" id="lsLib" class="ls-file"></label></div><div id="lsBody"></div>');
-    ["lsCam", "lsLib"].forEach(function (id) {
-      document.getElementById(id).addEventListener("change", function (e) { var f = e.target.files && e.target.files[0]; if (f) readSheet(f); });
-    });
-  }
-  function readSheet(file) {
-    var body = document.getElementById("lsBody"), pick = document.getElementById("lsPick");
-    pick.hidden = true; body.innerHTML = '<p class="ls-status">Preparing the photo\u2026</p>';
-    var sheet = { img: "" };
-    shrinkPhoto(file).then(function (img) {
-      sheet.img = img;
-      body.innerHTML = '<img class="ls-thumb" src="' + img + '" alt="Lead sheet photo"><p class="ls-status" id="lsStatus">Reading the sheet\u2026</p>';
-      var st = document.getElementById("lsStatus");
-      return loadOcr().then(function (T) {
-        return T.recognize(img, "eng", { logger: function (m) { if (m && m.status === "recognizing text" && st) st.textContent = "Reading the sheet\u2026 " + Math.round((m.progress || 0) * 100) + "%"; } });
-      }).then(function (r) { return (r && r.data && r.data.text) || ""; }, function () { return null; });
-    }).then(function (text) {
-      var rows = text ? parseSheetText(text) : [];
-      sheetReview(sheet, rows, text === null ? "fail" : rows.length ? "" : "none");
-    }, function () {
-      pick.hidden = false; body.innerHTML = '<p class="ls-status">That photo couldn\u2019t be opened. Try taking it again.</p>';
-    });
-  }
-  function sheetReview(sheet, rows, why) {
-    var body = document.getElementById("lsBody");
-    if (!rows.length) rows.push({ name: "", phone: "", notes: "", on: true });
-    function flag(r) {
-      if (!String(r.phone).trim()) return { cls: "bad", txt: "Add a phone number" };
-      if (!isValidPhone(r.phone)) return { cls: "bad", txt: "Check this number" };
-      var norm = normalizePhone(r.phone);
-      if (dncNums()[dncKey(norm)]) return { cls: "bad", txt: "On your Do Not Call list, so it can\u2019t be added", block: true };
-      var dup = state.leads.filter(function (l) { return l.phone === norm; })[0];
-      if (dup) return { cls: "", txt: "Already in your leads: " + dup.name, dup: true };
-      return { cls: "ok", txt: "" };
+  function kpDraw() {
+    var inp = document.getElementById("kpNum"), info = document.getElementById("kpInfo"), go = document.getElementById("kpGo");
+    if (!inp || !go) return;
+    inp.value = kpFormat(kpRaw);
+    document.getElementById("kpDel").style.visibility = kpRaw ? "visible" : "hidden";
+    var off = '<span class="kp-call off" aria-hidden="true">' + KP_PHONE + '</span>';
+    var ok = /^\d+$/.test(kpRaw) && fullPhone(kpRaw), norm = ok ? normalizePhone(kpRaw) : "";
+    var match = ok ? state.leads.filter(function (l) { return l.phone === norm; })[0] : null;
+    if (!ok) { info.innerHTML = ""; go.innerHTML = off; return; }
+    if (dncNums()[dncKey(norm)] || (match && isDnc(match))) {
+      info.innerHTML = '<span class="kp-warn">On your team\u2019s Do Not Call list</span>'; go.innerHTML = off; return;
     }
-    function draw() {
-      var good = 0;
-      var list = rows.map(function (r, i) {
-        var f = flag(r), can = !f.block && f.cls !== "bad";
-        if (f.dup && r.on === true && !r.touched) r.on = false;
-        if (r.on && can && !f.dup) good++; else if (r.on && can && f.dup) good++;
-        return '<div class="ls-row' + (r.on && can ? '' : ' skip') + '" data-i="' + i + '"><div class="ls-top"><label class="ls-on"><input type="checkbox" data-ls-on="' + i + '"' + (r.on && can ? ' checked' : '') + (f.block ? ' disabled' : '') + '> Add</label>' +
-          '<button class="ls-x" type="button" data-ls-x="' + i + '" aria-label="Remove this row">\u00d7</button></div>' +
-          '<input type="text" data-ls-f="name" data-i="' + i + '" value="' + escapeHtml(r.name) + '" placeholder="Name" aria-label="Name">' +
-          '<input type="tel" data-ls-f="phone" data-i="' + i + '" value="' + escapeHtml(r.phone) + '" placeholder="Phone number" aria-label="Phone number">' +
-          '<input type="text" data-ls-f="notes" data-i="' + i + '" value="' + escapeHtml(r.notes) + '" placeholder="Notes" aria-label="Notes">' +
-          (f.txt ? '<div class="ls-flag ' + f.cls + '">' + escapeHtml(f.txt) + '</div>' : '') + '</div>';
-      }).join("");
-      body.innerHTML = '<img class="ls-thumb" src="' + sheet.img + '" alt="Lead sheet photo">' +
-        '<p class="ls-status">' + (why === "fail" ? 'The sheet couldn\u2019t be read automatically (this needs a connection the first time). Type the leads below, or paste the text.'
-          : why === "none" ? 'No phone numbers were found on this photo. Type the leads below, or paste the text.'
-          : 'Found ' + rows.length + ' lead' + (rows.length === 1 ? '' : 's') + '. Check each one and fix anything the camera misread.') + '</p>' + list +
-        '<div class="ls-tools"><button class="btn-secondary" type="button" id="lsAddRow">+ Add a row</button><button class="btn-secondary" type="button" id="lsPasteBtn">Paste text</button></div>' +
-        '<div id="lsPaste" hidden><p class="ls-hint">On iPhone, open the photo in Photos, press and hold the text to select and copy it, then paste it here.</p><textarea id="lsPasteTxt" placeholder="Paste names and numbers"></textarea><button class="btn-secondary" type="button" id="lsPasteGo">Read pasted text</button></div>' +
-        '<div class="modal-actions"><button class="btn-secondary" type="button" id="lsCancel">Cancel</button><button class="btn-primary" type="button" id="lsSave"' + (good ? '' : ' disabled') + '>Add ' + good + ' lead' + (good === 1 ? '' : 's') + '</button></div>';
-      body.querySelectorAll("[data-ls-f]").forEach(function (inp) {
-        inp.addEventListener("change", function () { var r = rows[+inp.getAttribute("data-i")]; r[inp.getAttribute("data-ls-f")] = inp.value; r.touched = true; if (inp.getAttribute("data-ls-f") === "phone") r.on = true; draw(); });
-      });
-      body.querySelectorAll("[data-ls-on]").forEach(function (c) { c.addEventListener("change", function () { var r = rows[+c.getAttribute("data-ls-on")]; r.on = c.checked; r.touched = true; draw(); }); });
-      body.querySelectorAll("[data-ls-x]").forEach(function (b) { b.addEventListener("click", function () { rows.splice(+b.getAttribute("data-ls-x"), 1); if (!rows.length) rows.push({ name: "", phone: "", notes: "", on: true }); draw(); }); });
-      document.getElementById("lsAddRow").addEventListener("click", function () { rows.push({ name: "", phone: "", notes: "", on: true }); draw(); });
-      document.getElementById("lsPasteBtn").addEventListener("click", function () { var b = document.getElementById("lsPaste"); b.hidden = !b.hidden; });
-      document.getElementById("lsPasteGo").addEventListener("click", function () {
-        var more = parseSheetText(document.getElementById("lsPasteTxt").value);
-        if (!more.length) { showToast("No phone numbers found in that text"); return; }
-        rows = rows.filter(function (r) { return String(r.phone).trim() || String(r.name).trim(); }).concat(more); why = ""; draw();
-      });
-      document.getElementById("lsCancel").addEventListener("click", function () { featClose(); });
-      document.getElementById("lsSave").addEventListener("click", function () { saveSheet(sheet, rows.filter(function (r) { var f = flag(r); return r.on && !f.block && f.cls !== "bad"; })); });
+    if (match) {
+      var z = leadZone(match), t = z.iana ? zoneTime(z.iana) : null;
+      info.innerHTML = '<b>' + escapeHtml(match.name) + '</b>' + (t ? ' \u00b7 ' + escapeHtml(t.label) + (t.ok ? '' : ' (outside 8 AM\u20139 PM)') : '');
+      go.innerHTML = callLinkHtml(match, "dial", null, "kp-call", KP_PHONE);
+      var a = go.querySelector("a"); if (a) a.addEventListener("click", function () { kpRaw = ""; });
+      return;
     }
-    draw();
-  }
-  function saveSheet(sheet, picked) {
-    if (!picked.length) return;
-    var sheetId = uid(), d = new Date(), src = "Lead sheet " + d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
-    var me = TEAM.on && TEAM.me ? meRef() : null;
-    var leads = picked.map(function (r) {
-      var l = makeLead(r.name, r.phone, r.notes, ""); l.sheetId = sheetId;
-      if (me) { l.forUid = me.uid; l.owner = me; }
-      return l;
+    info.innerHTML = '<span class="kp-dim">New number \u00b7 check it\u2019s 8 AM\u20139 PM for them</span>';
+    go.innerHTML = '<a class="kp-call" id="kpCall" href="' + escapeHtml(telHref(norm)) + '" target="' + telTarget() + '" aria-label="Call ' + escapeHtml(formatPhoneDisplay(kpRaw)) + '">' + KP_PHONE + '</a>';
+    document.getElementById("kpCall").addEventListener("click", function (e) {
+      var now = Date.now(), cfg = pacingCfg(), st = dialStats(now);
+      if (cfg.dayMode === "pause" && st.today >= Number(cfg.perDay)) { e.preventDefault(); showToast("Daily call limit reached (" + cfg.perDay + ")"); return; }
+      var w = pacingWait(now);
+      if (w > 0) { e.preventDefault(); showToast("One moment \u2014 next call in " + w + "s"); return; }
+      recordDial();
+      var called = kpRaw;
+      setTimeout(function () { if (!document.hidden) dialFallback(telHref(norm)); }, 400);
+      setTimeout(function () { kpAfterCall(called); }, 300);
     });
-    addLeadsToQueue(leads, { source: src, first: false });
-    var rec = { byUid: me ? me.uid : "me", byName: me ? me.name : "You", at: Date.now(), img: sheet.img, count: leads.length, source: src, leadIds: leads.map(function (l) { return l.id; }) };
-    if (TEAM.on && TEAM.db) TEAM.db.collection("sheets").doc(sheetId).set(rec).catch(function () { showToast("Leads added, but the photo didn\u2019t upload. Check your connection."); });
-    else { state.sheets = state.sheets || {}; state.sheets[sheetId] = rec; }
-    saveState(); featClose(); render();
-    showToast("Added " + leads.length + " lead" + (leads.length === 1 ? "" : "s") + " from the sheet");
   }
-  function openSheetPhoto(id) {
-    featOpen('<h3>Original lead sheet</h3><div id="lsPhoto"><p class="ls-status">Loading the photo\u2026</p></div>');
-    var get = TEAM.on && TEAM.db ? TEAM.db.collection("sheets").doc(id).get().then(function (sn) { return sn.exists ? sn.data() : null; }) : Promise.resolve((state.sheets || {})[id] || null);
-    get.then(function (d) {
-      var box = document.getElementById("lsPhoto"); if (!box) return;
-      box.innerHTML = d && d.img ? '<img class="ls-full" src="' + d.img + '" alt="Lead sheet photo"><p class="ls-meta">Scanned by ' + escapeHtml(d.byName || "a teammate") + ' \u00b7 ' + escapeHtml(new Date(d.at).toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })) + ' \u00b7 ' + d.count + ' lead' + (d.count === 1 ? '' : 's') + '</p>'
-        : '<p class="ls-status">This photo isn\u2019t available.</p>';
-    }, function () { var box = document.getElementById("lsPhoto"); if (box) box.innerHTML = '<p class="ls-status">Couldn\u2019t load the photo. Check your connection.</p>'; });
-  }
-  document.addEventListener("click", function (e) { var b = e.target.closest && e.target.closest("[data-sheet]"); if (b) openSheetPhoto(b.getAttribute("data-sheet")); });
-
-  /** ---------- Quick dial: call any number without adding it first ---------- **/
-  function openQuickDial(prefill) {
-    featOpen('<h3>Dial a number</h3><p class="modal-sub">Call anyone without adding them first. Save them afterward only if you want to.</p>' +
-      '<input type="tel" id="qdNum" inputmode="tel" autocomplete="off" placeholder="(212) 555-0101" aria-label="Phone number" value="' + escapeHtml(prefill || "") + '">' +
-      '<div id="qdInfo" class="qd-info"></div><div id="qdGo"></div><div id="qdAfter" class="qd-after" hidden></div>');
-    var inp = document.getElementById("qdNum"), info = document.getElementById("qdInfo"), go = document.getElementById("qdGo");
-    var called = "";
-    function draw() {
-      var raw = inp.value.trim(), digits = raw.replace(/\D/g, ""), ok = isValidPhone(raw), norm = ok ? normalizePhone(raw) : "";
-      var match = ok ? state.leads.filter(function (l) { return l.phone === norm; })[0] : null;
-      if (!ok) {
-        info.innerHTML = digits.length ? '<span class="qd-dim">Keep typing: a full number has 10 digits.</span>' : '';
-        go.innerHTML = '<span class="call-btn qd-call qd-off">Call</span>'; return;
-      }
-      if (dncNums()[dncKey(norm)] || (match && isDnc(match))) {
-        info.innerHTML = '<b>On your team\u2019s Do Not Call list.</b> This number can\u2019t be called.';
-        go.innerHTML = '<span class="call-btn qd-call qd-off">Call</span>'; return;
-      }
-      if (match) {
-        var z = leadZone(match), t = z.iana ? zoneTime(z.iana) : null;
-        info.innerHTML = 'This is <b>' + escapeHtml(match.name) + '</b>' + (t ? ' \u00b7 ' + escapeHtml(t.label) + (t.ok ? ' their time' : ' their time, outside 8 AM\u20139 PM') : '') + '. The call is logged to their record.';
-        go.innerHTML = callLinkHtml(match, "dial", null, "call-btn qd-call", '<span>Call ' + escapeHtml(firstName(match.name)) + '</span>');
-        var a = go.querySelector("a"); if (a) a.addEventListener("click", function () { setTimeout(featClose, 0); });
-        return;
-      }
-      info.innerHTML = '<span class="qd-dim">New number. Its local time isn\u2019t known, so make sure it\u2019s between 8 AM and 9 PM for them.</span>';
-      go.innerHTML = '<a class="call-btn qd-call" id="qdCall" href="' + escapeHtml(telHref(norm)) + '" target="' + telTarget() + '"><span>Call ' + escapeHtml(formatPhoneDisplay(raw)) + '</span></a>';
-      document.getElementById("qdCall").addEventListener("click", function (e) {
-        var now = Date.now(), cfg = pacingCfg(), st = dialStats(now);
-        if (cfg.dayMode === "pause" && st.today >= Number(cfg.perDay)) { e.preventDefault(); showToast("Daily call limit reached (" + cfg.perDay + ")"); return; }
-        var w = pacingWait(now);
-        if (w > 0) { e.preventDefault(); showToast("One moment \u2014 next call in " + w + "s"); return; }
-        recordDial(); called = raw;
-        setTimeout(function () { if (!document.hidden) dialFallback(telHref(norm)); }, 400);
-        setTimeout(afterCall, 300);
-      });
-    }
-    function afterCall() {
-      inp.hidden = true; info.innerHTML = ""; go.innerHTML = "";
-      var box = document.getElementById("qdAfter"); box.hidden = false;
-      box.innerHTML = '<p class="qd-called">You called <b>' + escapeHtml(formatPhoneDisplay(called)) + '</b>. Keep them as a lead?</p>' +
-        '<label for="qdName">Name (optional)</label><input type="text" id="qdName" placeholder="Jordan Casey" autocomplete="off">' +
-        '<div class="modal-actions"><button class="btn-secondary" id="qdSkip">Don\u2019t save</button><button class="btn-primary" id="qdSave">Save and log the call</button></div>';
-      document.getElementById("qdSkip").addEventListener("click", function () { featClose(); });
-      document.getElementById("qdSave").addEventListener("click", function () {
-        var lead = makeLead(document.getElementById("qdName").value, called, "", "");
-        addLeadsToQueue([lead], { source: "Quick dial", first: false });
-        state.recallLeadId = null; state.focusLeadId = lead.id; state.focusTaskId = null; state.focusReturn = "dial";
-        state.awaitingOutcome = true; state.paused = false; state.activeView = "dial";
-        saveState(); featClose(); render(); window.scrollTo(0, 0);
-        showToast("Saved " + lead.name + " \u00b7 now log how the call went");
-      });
-    }
-    inp.addEventListener("input", draw);
-    draw(); inp.focus();
+  function kpAfterCall(called) {
+    var box = document.getElementById("kpAfter"); if (!box) return;
+    document.getElementById("kpMain").hidden = true; box.hidden = false;
+    box.innerHTML = '<p class="qd-called">You called <b>' + escapeHtml(formatPhoneDisplay(called)) + '</b>. Keep them as a lead?</p>' +
+      '<label for="kpName">Name (optional)</label><input type="text" id="kpName" placeholder="Jordan Casey" autocomplete="off">' +
+      '<div class="modal-actions"><button class="btn-secondary" id="kpSkip" type="button">Don\u2019t save</button><button class="btn-primary" id="kpSave" type="button">Save and log the call</button></div>';
+    document.getElementById("kpSkip").addEventListener("click", function () { kpRaw = ""; render(); });
+    document.getElementById("kpSave").addEventListener("click", function () {
+      var lead = makeLead(document.getElementById("kpName").value, called, "", "");
+      addLeadsToQueue([lead], { source: "Manual dial", first: false });
+      kpRaw = "";
+      state.recallLeadId = null; state.focusLeadId = lead.id; state.focusTaskId = null; state.focusReturn = "dial";
+      state.awaitingOutcome = true; state.paused = false; state.activeView = "dial";
+      saveState(); render(); window.scrollTo(0, 0);
+      showToast("Saved " + lead.name + " \u00b7 now log how the call went");
+    });
   }
 
   function openSearch() {
     var hint = '<p class="ll-hint">Search your investors and every lead you can see, by name, phone, company or deal.</p>';
-    featOpen('<h3>Search</h3><input type="search" id="gsQ" placeholder="Name, phone, company or deal" autocomplete="off" autocapitalize="none" spellcheck="false" enterkeyhint="search"><div class="gs-tools"><button class="qd-open" id="gsDial" type="button"><span class="qd-ico">\u260E</span> Dial a number</button><button class="qd-open" id="gsScan" type="button"><span class="qd-ico">\u2398</span> Scan a lead sheet</button></div><div id="gsOut" class="gs-out">' + hint + '</div>');
+    featOpen('<h3>Search</h3><input type="search" id="gsQ" placeholder="Name, phone, company or deal" autocomplete="off" autocapitalize="none" spellcheck="false" enterkeyhint="search"><div id="gsOut" class="gs-out">' + hint + '</div>');
     var inp = document.getElementById("gsQ"), out = document.getElementById("gsOut"), timer = null;
     var draw = function () {
-      var r = searchAll(inp.value), typed = inp.value.trim();
-      var dialRow = isValidPhone(typed) && /^[\d\s()+.\-]+$/.test(typed) ? '<button class="gs-row gs-dial" data-gs-dial="' + escapeHtml(typed) + '"><b>Call ' + escapeHtml(formatPhoneDisplay(typed)) + '</b><span>Dial this number without adding it first</span></button>' : '';
-      var wireDial = function () { out.querySelectorAll("[data-gs-dial]").forEach(function (b) { b.addEventListener("click", function () { openQuickDial(b.getAttribute("data-gs-dial")); }); }); };
-      if (!r) { out.innerHTML = dialRow || hint; wireDial(); return; }
-      if (!r.invN && !r.leadN && dialRow) { out.innerHTML = dialRow; wireDial(); return; }
+      var r = searchAll(inp.value);
+      if (!r) { out.innerHTML = hint; return; }
       if (!r.invN && !r.leadN) { out.innerHTML = '<div class="pipe-empty">No one matches \u201c' + escapeHtml(inp.value.trim()) + '\u201d.</div>'; return; }
       out.innerHTML =
         (r.invN ? '<div class="gs-head">Investors \u00b7 ' + r.invN + '</div>' + r.inv.map(function (v) {
@@ -9623,10 +9513,7 @@
         }).join("") + (r.leadN > r.leads.length ? '<p class="ll-hint">Showing ' + r.leads.length + ' of ' + r.leadN + '. Type more to narrow it down.</p>' : '') : '');
       out.querySelectorAll("[data-gs-vault]").forEach(function (b) { b.addEventListener("click", function () { featClose(); openVault(b.getAttribute("data-gs-vault")); }); });
       out.querySelectorAll("[data-gs-lead]").forEach(function (b) { b.addEventListener("click", function () { featClose(); openLeadProfile(b.getAttribute("data-gs-lead")); }); });
-      if (dialRow) { out.insertAdjacentHTML("afterbegin", dialRow); wireDial(); }
     };
-    document.getElementById("gsScan").addEventListener("click", openSheetScan);
-    document.getElementById("gsDial").addEventListener("click", function () { openQuickDial(/^[\d\s()+.\-]+$/.test(inp.value.trim()) ? inp.value.trim() : ""); });
     inp.addEventListener("input", function () { clearTimeout(timer); timer = setTimeout(draw, 120); });
     inp.focus();   // same tap, so the iPhone keyboard opens right away
   }
