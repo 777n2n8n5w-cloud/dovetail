@@ -3,7 +3,7 @@
 <head>
 <script id="customerConfig" type="application/json">{}</script>
 <meta charset="UTF-8">
-<meta name="dovetail-build" content="2026-11-13">
+<meta name="dovetail-build" content="2026-11-14">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2687,6 +2687,35 @@
   button, a, label, .kp, .kp-key, .kp-del, .md-bar { touch-action: manipulation; }
   .kp-key, .kp-del, .kp-call { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
   .loc-chip { cursor: default; }
+  .needs { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 10px; }
+  .need-pill { display: inline-flex; align-items: center; gap: 4px; max-width: 100%; min-height: 34px; padding: 6px 12px; border-radius: 999px;
+    border: 1px solid var(--border); background: var(--surface); color: var(--text); font: inherit; font-size: 13px; font-weight: 600; cursor: pointer;
+    text-align: left; line-height: 1.3; overflow-wrap: anywhere; }
+  .need-pill.go { background: var(--accent); border-color: var(--accent); color: var(--accent-text); }
+  .need-pill.warn { border-color: var(--notinterested, #c0392b); color: var(--notinterested, #c0392b); }
+  .hot-star { color: var(--voicemail); margin-right: 3px; font-size: 12px; }
+  .filter-chip.active .hot-star { color: var(--accent-text); }
+  .sort-chip { font-weight: 600; }
+  #featModal select#queueOrderSelect, #featModal select#queueListSelect { display: block; width: 100%; box-sizing: border-box; margin-top: 6px; }
+  .sort-note { font-size: 12.5px; line-height: 1.5; color: var(--text-dim); margin: 8px 0 0; }
+  .pipe-parked, .lp-parked { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 8px; padding: 7px 10px;
+    border-radius: var(--radius-s); background: var(--surface); border: 1px dashed var(--border); font-size: 12.5px; color: var(--text-dim); }
+  .lp-parked { margin: 6px 0 8px; }
+  .pipe-parked span, .lp-parked span { min-width: 0; overflow-wrap: break-word; }
+  .pipe-parked button, .lp-parked button { flex: none; background: none; border: 1px solid var(--accent); color: var(--accent); border-radius: 999px; padding: 5px 12px; font: inherit; font-size: 12.5px; font-weight: 600; cursor: pointer; }
+  .seg { display: flex; gap: 6px; margin: 6px 0 0; }
+  .seg-b { flex: 1 1 0; min-height: 40px; border-radius: var(--radius-s); border: 1px solid var(--border); background: var(--surface); color: var(--text); font: inherit; font-weight: 600; cursor: pointer; }
+  .seg-b.on { background: var(--accent); border-color: var(--accent); color: var(--accent-text); }
+  .fu-lbl { margin-top: 14px; font-size: 13px; font-weight: 600; color: var(--text); }
+  .fu-hint { margin: 6px 0 0; font-size: 12px; line-height: 1.5; color: var(--text-faint); }
+  .fu-facts { margin: 14px 0 0; padding-left: 18px; font-size: 12.5px; line-height: 1.5; color: var(--text-dim); }
+  .fu-facts li { margin-bottom: 4px; }
+  .set-toggle { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 14px; cursor: pointer; }
+  .set-toggle > span:first-child { min-width: 0; }
+  .set-toggle b { display: block; font-size: 14px; color: var(--text); }
+  .set-toggle > span:first-child > span { display: block; font-size: 12px; line-height: 1.45; color: var(--text-faint); margin-top: 2px; }
+  .set-toggle .switch { flex: none; }
+  .md-bar { padding: 8px 14px !important; }
   .md-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; box-sizing: border-box; margin: 0 0 10px; padding: 10px 14px;
     border-radius: var(--radius-s); border: 1px solid var(--border); background: var(--surface); color: var(--text); font: inherit; text-align: left; cursor: pointer; }
   .md-bar.on { border-color: var(--accent); }
@@ -2931,6 +2960,7 @@
     <div class="settings-section">
       <div class="settings-heading">Coaching</div>
       <button class="settings-row" id="openCoachBtn" type="button"><span class="sr-l">My coach</span><span class="sr-v" id="coachHeadline"></span><span class="sr-c">›</span></button>
+      <button class="settings-row" id="openMyDayBtn" type="button" style="margin-top:8px"><span class="sr-l">My day</span><span class="sr-v">Who to call first and your best hours</span><span class="sr-c">›</span></button>
       <button class="settings-row" id="openBriefBtn" type="button" style="margin-top:8px"><span class="sr-l">My day</span><span class="sr-v">Follow-ups, hot list, who to call first</span><span class="sr-c">›</span></button>
       <button class="settings-row" id="openInstallBtn" type="button" style="margin-top:8px"><span class="sr-l">Install on your phone</span><span class="sr-v">Home screen icon, full screen</span><span class="sr-c">›</span></button>
       <button class="settings-row" id="openReportBtn" type="button" style="margin-top:8px"><span class="sr-l">Results report</span><span class="sr-v">Your numbers this week, shareable</span><span class="sr-c">›</span></button>
@@ -2947,6 +2977,8 @@
       <label for="dailyGoalInput" style="display:block;font-size:12.5px;font-weight:600;color:var(--text-dim);margin-bottom:6px;">Daily call goal</label>
       <input type="number" id="dailyGoalInput" min="0" step="5" style="width:100%;background:var(--surface-raised);border:1px solid var(--border);border-radius:6px;color:var(--text);padding:9px 12px;font-size:14px;font-family:inherit;">
       <p style="font-size:12px;color:var(--text-faint);margin:8px 0 0;line-height:1.5;">Every lead shows their local time. Anyone outside 8 AM–9 PM their time is flagged in red — federal telemarketing rules restrict sales calls outside those hours.</p>
+      <label class="set-toggle" for="setAutoAdvance"><span><b>Auto-advance</b><span>Moves to the next lead once you log an outcome. You always tap Call yourself.</span></span><span class="switch"><input type="checkbox" id="setAutoAdvance"><span class="slider"></span></span></label>
+      <button class="settings-row" id="openFuRulesBtn" type="button" style="margin-top:10px"><span class="sr-l">Follow-up rules</span><span class="sr-v" id="fuRulesSummary"></span><span class="sr-c">›</span></button>
     </div>
 
     <div class="settings-section">
@@ -2991,7 +3023,7 @@
     </div>
 
     <div style="margin-top:22px;padding-top:14px;border-top:1px solid var(--border);text-align:center;">
-      <div style="font-size:11px;color:var(--text-faint);">Build 2026-11-13 · Team · Updates install automatically after midnight.</div>
+      <div style="font-size:11px;color:var(--text-faint);">Build 2026-11-14 · Team · Updates install automatically after midnight.</div>
       <div id="updNote"></div>
     </div>
   </div>
@@ -3833,7 +3865,38 @@
     });
   }
 
-  function alertsHtml() { return locCardHtml() + overdueBannerHtml() + handoffBannerHtml() + lockReqBannerHtml(); }
+  function alertsHtml() { return needsHtml(true); }
+  // Everything that needs the rep's attention, as one row of small tappable pills (only what applies right now).
+  function needsHtml(noDue) {
+    var p = [], now = Date.now();
+    var due = noDue ? 0 : dueTasks().length;
+    if (due) p.push('<button class="need-pill go" id="startFollowupsBtn" type="button">\u25b6 Start ' + due + ' follow-up' + (due === 1 ? '' : 's') + '</button>');
+    if (TEAM.on && TEAM.me) {
+      var mine = state.leads.filter(function (l) { return l.handoff && l.handoff.to && l.handoff.to.uid === TEAM.me.uid && !l.handoff.seen && now - l.handoff.at < 14 * 86400000; });
+      if (mine.length) p.push('<button class="need-pill" type="button" data-open-lead="' + mine[0].id + '">\u21aa New handoff: ' + escapeHtml(firstName(mine[0].name)) + (mine.length > 1 ? ' +' + (mine.length - 1) : '') + '</button>');
+      var li = state.lastInterested, l = li && now - li.at < 15 * 60000 ? findLeadById(li.id) : null;
+      if (l && !l.handoff && closers().some(function (m) { return m.uid !== TEAM.me.uid; })) p.push('<button class="need-pill" type="button" data-handoff="' + l.id + '">\u21aa Hand ' + escapeHtml(firstName(l.name)) + ' to a closer?</button>');
+      if (canSeeTeam()) { var od = overdueWarm().length; if (od) p.push('<button class="need-pill warn" type="button" data-need="overdue">' + od + ' late follow-up' + (od === 1 ? '' : 's') + '</button>'); }
+      if (secCfg().requireLock && !lockCred() && lockSupported()) p.push('<button class="need-pill warn" type="button" data-need="lock">Turn on Face ID</button>');
+    }
+    if (spamSignal(TEAM.on && TEAM.me ? TEAM.me.uid : null)) p.push('<button class="need-pill warn" type="button" data-need="spam">\u26a0 Spam risk \u00b7 slow down</button>');
+    var c = contestCfg();
+    if (c && c.end && now >= c.start && now < c.end + 86400000) {
+      var board = contestBoard(c), me = TEAM.me ? TEAM.me.uid : "", pos = board.map(function (x) { return x.uid; }).indexOf(me);
+      if (board.length || now < c.end) p.push('<button class="need-pill" type="button" data-need="contest">\uD83C\uDFC6 ' + (!board.length ? escapeHtml(CONTEST_METRICS[c.metric] || "Contest") + ' \u00b7 be the first' :
+        now >= c.end ? escapeHtml(firstName(board[0].name)) + ' won' :
+        pos === 0 ? 'You lead \u00b7 ' + board[0].n : (pos > 0 ? '#' + (pos + 1) + ' \u00b7 ' : '') + escapeHtml(firstName(board[0].name)) + ' ' + board[0].n) + '</button>');
+    }
+    return p.length ? '<div class="needs">' + p.join("") + '</div>' : "";
+  }
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest && e.target.closest("[data-need]"); if (!b) return;
+    var k = b.getAttribute("data-need");
+    if (k === "overdue") openOverdue();
+    else if (k === "lock") lockSetup().then(function () { render(); });
+    else if (k === "spam") openCoach("me");
+    else if (k === "contest") openContestBoard();
+  });
   function wireAlerts() {
     [["overdueWarnBtn", openOverdue], ["lockReqBtn", function () { lockSetup().then(function () { render(); }); }]].forEach(function (x) {
       var el = document.getElementById(x[0]); if (el) el.addEventListener("click", x[1]);
@@ -3953,17 +4016,34 @@
   function intMine(l) { return !TEAM.on || !TEAM.me || !l.owner || l.owner.uid === TEAM.me.uid; }
   function interestedPool() {
     return state.leads.filter(function (l) {
-      return l.status === "done" && l.outcome === "interested" && !l.retired && !l.badNumber && !isDnc(l) && !claimedByOther(l) && intMine(l) &&
+      return l.status === "done" && l.outcome === "interested" && !l.stalled && !l.retired && !l.badNumber && !isDnc(l) && !claimedByOther(l) && intMine(l) &&
         l.stage !== "Committed" && l.stage !== "Closed Lost";
     });
   }
-  function interestedLeads() {
-    var since = state.intSince || "", skipped = state.intSkipped || [];
-    var list = interestedPool().filter(function (l) { return !(since && l.calledAt && l.calledAt >= since); });
+  function isRun(f) { f = f === undefined ? state.queueFilter : f; return f === "int" || f === "hot"; }
+  function hotPool() {
+    return state.leads.filter(function (l) {
+      return hotOn(l) && !l.retired && !l.badNumber && !isDnc(l) && !claimedByOther(l) && l.stage !== "Committed" && l.stage !== "Closed Lost";
+    });
+  }
+  function runPool(f) { return (f || state.queueFilter) === "hot" ? hotPool() : interestedPool(); }
+  function closenessSort(list) {
+    return list.slice().sort(function (a, b) {
+      var r = stageRank(b.stage) - stageRank(a.stage); if (r) return r;
+      return (Number(b.amount) || 0) - (Number(a.amount) || 0);
+    });
+  }
+  function interestedLeads() { return runLeads("int"); }
+  function runLeads(kind) {
+    kind = kind || state.queueFilter;
+    var same = state.runKind === kind || (!state.runKind && kind === "int");
+    var since = same ? state.intSince || "" : "", skipped = same ? state.intSkipped || [] : [];
+    var list = runPool(kind).filter(function (l) { return !(since && l.calledAt && l.calledAt >= since); });
     var ql = state.queueList || "all";
     if (ql !== "all") list = list.filter(function (l) { return (l.source || "Original list") === ql; });
     var o = state.queueOrder || "imported";
-    if (o === "imported" || o === "smart") list = list.slice().sort(function (a, b) { return (a.calledAt || "") < (b.calledAt || "") ? -1 : (a.calledAt || "") > (b.calledAt || "") ? 1 : 0; });
+    if (kind === "hot") list = closenessSort(list);
+    else if (o === "imported" || o === "smart") list = list.slice().sort(function (a, b) { return (a.calledAt || "") < (b.calledAt || "") ? -1 : (a.calledAt || "") > (b.calledAt || "") ? 1 : 0; });
     if (o === "smart") list = smartSort(list);
     if (skipped.length) {
       var later = skipped.map(function (id) { return list.filter(function (l) { return l.id === id; })[0]; }).filter(Boolean);
@@ -3972,16 +4052,19 @@
     return list;
   }
   // Resumes today's run where you left off; a new day (or "Start over") begins a fresh round.
-  function startInterestedRun(fresh) {
+  function startInterestedRun(fresh) { return startRun("int", fresh); }
+  function startRun(kind, fresh) {
     if (state.awaitingOutcome) { showToast("Log the outcome for this call first"); return false; }
+    if (state.manualDial) state.manualDial = false;
     var today = localDateStr(new Date());
-    if (fresh || !state.intSince || state.intDay !== today) { state.intSince = new Date().toISOString(); state.intSkipped = []; state.intDay = today; }
-    state.queueFilter = "int"; state.focusLeadId = null; state.focusTaskId = null; state.followupRun = false; state.recallLeadId = null; state.paused = false;
+    if (fresh || !state.intSince || state.intDay !== today || (state.runKind || "int") !== kind) { state.intSince = new Date().toISOString(); state.intSkipped = []; state.intDay = today; }
+    state.runKind = kind;
+    state.queueFilter = kind; state.focusLeadId = null; state.focusTaskId = null; state.followupRun = false; state.recallLeadId = null; state.paused = false;
     return true;
   }
 
   function pendingLeads() {
-    if ((state.queueFilter || "all") === "int") return interestedLeads();
+    if (isRun()) return runLeads();
     var all = allPendingLeads();
     var f = state.queueFilter || "all";
     var list = f === "all" ? all : all.filter(function (l) {
@@ -4029,7 +4112,7 @@
     // the clock would otherwise move it, so the outcome lands on the right person.
     if (state.awaitingOutcome && state.activeLeadId) {
       var a = findLeadById(state.activeLeadId);
-      if (a && (a.status === "pending" || state.queueFilter === "int")) return a;
+      if (a && (a.status === "pending" || isRun())) return a;
     }
     var pending = pendingLeads();
     var l = pending.length ? pending[0] : null;
@@ -4129,7 +4212,7 @@
     var pending = pendingLeads();
     if (pending.length <= 1) { showToast("No other leads to skip to"); return; }
     state.awaitingOutcome = false;
-    if (state.queueFilter === "int") {
+    if (isRun()) {
       state.intSkipped = (state.intSkipped || []).filter(function (id) { return id !== lead.id; }).concat([lead.id]);
       saveState(); render(); return;
     }
@@ -4160,7 +4243,13 @@
   }
 
   /** ---------- Rendering ---------- **/
+  function syncSettingsBits() {
+    var aa = document.getElementById("setAutoAdvance"); if (aa) aa.checked = !!state.autoAdvance;
+    var fb = document.getElementById("openFuRulesBtn"); if (fb) fb.hidden = TEAM.on && !isAdmin();
+    var fs = document.getElementById("fuRulesSummary"); if (fs) fs.textContent = fuSummary();
+  }
   function render() {
+    migrateHot(); syncSettingsBits();
     var total = totalCount();
     var done = doneCount();
     var lead = currentLead();
@@ -4255,6 +4344,37 @@
   // in the lead's local time, skip weekends, stop after 6.
   var MAX_ATTEMPTS = 6;
   var RETRY_GAP_DAYS = [0, 1, 2, 3, 4];
+  // ---- Fast close: limit time spent on leads that aren't moving ----
+  // tries: unanswered calls before a lead is parked; stall: follow-up calls without moving a stage before a
+  // warm lead is parked (0 = never). Set by the admin in Follow-up rules.
+  var FU_DEFAULT = { tries: 4, stall: 3 };
+  var RETRY_GAPS = { 3: [0, 1], 4: [0, 1, 2], 6: [0, 1, 2, 3, 4] };
+  function fuCfg() {
+    var c = (TEAM.on ? (TEAM.infoCfg || {}).fu : state.fuCfg) || {};
+    var t = Number(c.tries), st = c.stall === 0 || c.stall === "0" ? 0 : Number(c.stall);
+    return { tries: RETRY_GAPS[t] ? t : FU_DEFAULT.tries, stall: [0, 2, 3, 5].indexOf(st) > -1 ? st : FU_DEFAULT.stall };
+  }
+  function maxTries() { return fuCfg().tries; }
+  var STAGE_RANK = { "New Lead": 0, "Qualified": 1, "Pitched": 2, "Objection": 3, "Committed": 4 };
+  function stageRank(st) { return STAGE_RANK[st || "New Lead"] !== undefined ? STAGE_RANK[st || "New Lead"] : -1; }
+  function parkedWhy(l) {
+    if (!l || !l.stalled) return "";
+    return l.stallWhy === "noanswer" ? "stopped answering" : (l.touches || 0) + " follow-up" + ((l.touches || 0) === 1 ? "" : "s") + ", no progress";
+  }
+  function reviveLead(l) {
+    if (!l) return;
+    l.stalled = null; l.stallWhy = null; l.touches = 0; l.touchAt = Date.now(); l.exhausted = false; l.restUntil = null;
+    if (!openTasksFor(l.id).length) addAutoTask(l, "Follow-up", "High", slotAt(l, 1, 10), "Revived \u2014 one more push to close");
+    saveState();
+    showToast(l.name + " is back in your follow-ups");
+  }
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest && e.target.closest("[data-revive]"); if (!b) return;
+    e.preventDefault(); e.stopPropagation();
+    reviveLead(findLeadById(b.getAttribute("data-revive")));
+    render();
+    if (typeof profileLeadId !== "undefined" && profileLeadId === b.getAttribute("data-revive") && document.getElementById("leadModal").classList.contains("show")) openLeadProfile(profileLeadId);
+  }, true);
   var CONTACT_OUTCOMES = { interested: 1, notinterested: 1, callback: 1 };
   var historyQuery = "";
   var showDoneTasks = false;
@@ -4328,7 +4448,8 @@
   function retrySlot(lead, n) {
     var p = zonedParts(Date.now(), leadIana(lead));
     var weekend = p.dow === 0 || p.dow === 6;
-    var gap = RETRY_GAP_DAYS[Math.min(Math.max(n, 1), 5) - 1];
+    var gaps = RETRY_GAPS[maxTries()] || RETRY_GAP_DAYS;
+    var gap = gaps[Math.min(Math.max(n, 1), gaps.length) - 1];
     var hour = p.h < 13 ? 16 : 10;
     if (gap === 0) {
       if (!weekend && hour === 16 && p.h <= 13) return slotAt(lead, 0, 16);
@@ -4363,8 +4484,15 @@
   }
   function dueTasks() {
     var now = Date.now();
-    return state.tasks.filter(function (t) { return !t.done && t.leadId && taskDueTs(t) <= now && myTask(t) && !isDnc(findLeadById(t.leadId)) && (t.pinned || inPrefWindow(findLeadById(t.leadId))); })
-      .sort(function (a, b) { return taskDueTs(a) - taskDueTs(b); });
+    var m = leadMap();
+    return state.tasks.filter(function (t) { return !t.done && t.leadId && taskDueTs(t) <= now && myTask(t) && !isDnc(m[t.leadId]) && (t.pinned || inPrefWindow(m[t.leadId])); })
+      .sort(function (a, b) {
+        if (!!a.pinned !== !!b.pinned) return a.pinned ? -1 : 1;              // times the lead asked for come first
+        var la = m[a.leadId] || {}, lb = m[b.leadId] || {};
+        var r = stageRank(lb.stage) - stageRank(la.stage); if (r) return r;   // then whoever is closest to closing
+        var d = (Number(lb.amount) || 0) - (Number(la.amount) || 0); if (d) return d;
+        return taskDueTs(a) - taskDueTs(b);
+      });
   }
   function dayLabel(d) {
     var ds = localDateStr(d);
@@ -4420,25 +4548,38 @@
       if (t.done || t.leadId !== lead.id) return;
       if (t.auto || t.id === focusTaskId || t.type === "Call") { t.done = true; t.doneAt = now; }
     });
-    var t;
+    var t, cfg = fuCfg();
     if (outcome === "voicemail" || outcome === "noanswer") {
       var n = noContactStreak(lead.id);
-      if (n >= MAX_ATTEMPTS) {
+      if (n >= cfg.tries) {
         lead.exhausted = true;
-        if ((lead.recycled || 0) >= RECYCLE_MAX) { lead.retired = true; return MAX_ATTEMPTS + " attempts made \u2014 retired"; }
+        if (warmLead(lead)) { lead.stalled = now; lead.stallWhy = "noanswer"; }
+        if ((lead.recycled || 0) >= RECYCLE_MAX) { lead.retired = true; return cfg.tries + " tries, no answer \u2014 retired"; }
         var rd = restDaysFrom(now);
         lead.restUntil = now + rd * 86400000;
-        return MAX_ATTEMPTS + " attempts made \u2014 back in the queue in " + rd + " days";
+        return cfg.tries + " tries, no answer \u2014 parked" + (lead.stalled ? "" : ", back in the queue in " + rd + " days");
       }
       lead.exhausted = false;
       t = addAutoTask(lead, "Call", n <= 2 ? "High" : "Medium", retrySlot(lead, n),
-        "Attempt " + (n + 1) + " of " + MAX_ATTEMPTS + " \u00b7 last try: " + outcomeLabel(outcome));
+        "Try " + (n + 1) + " of " + cfg.tries + " \u00b7 last try: " + outcomeLabel(outcome));
       return "Next try " + fmtWhen(t.dueAt);
     }
     lead.exhausted = false;
+    if (outcome === "interested" || outcome === "callback") {
+      if (outcome === "interested" && (!lead.stage || lead.stage === "New Lead")) setStage(lead, "Qualified");
+      // A follow-up only counts against the lead when their stage hasn't moved since the last one.
+      if (!((lead.progressAt || 0) > (lead.touchAt || 0))) lead.touches = (lead.touches || 0) + 1;
+      lead.touchAt = now;
+      if (cfg.stall && (lead.touches || 0) >= cfg.stall) {
+        lead.stalled = now; lead.stallWhy = "noprogress";
+        return "Parked \u2014 " + lead.touches + " follow-ups with no progress. Move their stage to keep going";
+      }
+      lead.stalled = null; lead.stallWhy = null;
+    }
     if (outcome === "interested") {
-      if (!lead.stage || lead.stage === "New Lead") setStage(lead, "Qualified");
-      t = addAutoTask(lead, "Follow-up", "High", slotAt(lead, 1, 10), "Interested \u2014 follow up while it\u2019s warm");
+      var tc = lead.touches || 0;
+      t = addAutoTask(lead, "Follow-up", "High", slotAt(lead, [1, 2, 3][Math.min(tc, 2)], 10),
+        tc ? "Follow-up " + (tc + 1) + (cfg.stall ? " of " + cfg.stall : "") + " \u2014 move them forward" : "Interested \u2014 follow up while it\u2019s warm");
       return "Follow-up set " + fmtWhen(t.dueAt);
     }
     if (outcome === "callback") {
@@ -4447,6 +4588,7 @@
       return "Callback set " + fmtWhen(t.dueAt);
     }
     if (outcome === "notinterested" && lead.stage && lead.stage !== "New Lead" && lead.stage !== "Closed Lost") {
+      lead.stalled = null;
       setStage(lead, "Closed Lost");
       return "Moved to Closed Lost";
     }
@@ -4614,6 +4756,8 @@
   // Any Call button outside the dial card dials, and when you come back the
   // dial card is open on that lead with the outcome buttons ready.
   function startCall(leadId, from, taskId, href) {
+    if (state.manualDial) kpRaw = "";
+    if (state.lastFollow && state.lastFollow.leadId !== leadId) state.lastFollow = null;
     var lead = findLeadById(leadId);
     if (!lead) return;
     closeLeadProfile(true);
@@ -4673,7 +4817,7 @@
     var bits = [];
     if (last) bits.push("Called " + callsForLead(lead.id).length + "\u00d7 \u00b7 last: " + outcomeLabel(last.outcomeKey, last.outcome).toLowerCase() + " " + agoStr(last.timestamp));
     if (next) bits.push("Next: " + taskWhen(next, null));
-    if (lead.exhausted) bits.push(lead.retired ? "retired after " + ((lead.recycled || 0) + 1) + " rounds" : MAX_ATTEMPTS + " attempts made" + (lead.restUntil ? " \u00b7 back " + dayLabel(new Date(lead.restUntil)) : ""));
+    if (lead.exhausted) bits.push(lead.retired ? "retired after " + ((lead.recycled || 0) + 1) + " rounds" : maxTries() + " tries made" + (lead.restUntil ? " \u00b7 back " + dayLabel(new Date(lead.restUntil)) : ""));
     if (lead.recycled && lead.status === "pending") bits.push("fresh try #" + (lead.recycled + 1));
     if (lead.released && lead.status === "pending") bits.push("back from " + lead.released.from);
     return '<div class="lead-track">' + escapeHtml(bits.join(" \u00b7 ")) + '</div>';
@@ -4717,6 +4861,7 @@
       (TEAM.on && !isDnc(lead) && closers().some(function (m) { return !TEAM.me || m.uid !== TEAM.me.uid; }) ? '<button class="star-btn lp-star" data-handoff="' + lead.id + '">\u21aa Hand off to a closer</button>' : '') +
       '<button class="star-btn lp-star' + (isDnc(lead) ? ' dnc-on' : '') + '" data-dnc-toggle="' + lead.id + '">' + (isDnc(lead) ? '\u26d4 On the Do Not Call list' : 'Do not call') + '</button>' +
       handoffInfoHtml(lead) +
+      (lead.stalled ? '<div class="lp-parked"><span><b>Parked</b> \u00b7 ' + escapeHtml(parkedWhy(lead)) + '</span><button type="button" data-revive="' + lead.id + '">Revive</button></div>' : '') +
       '<div class="lp-phone">' + escapeHtml(formatPhoneDisplay(lead.phoneRaw)) + '</div>' +
       (lead.source ? '<div class="lp-src">List: ' + escapeHtml(lead.source) + (lead.addedAt ? ' \u00b7 added ' + escapeHtml(dayLabel(new Date(lead.addedAt))) : '') + '</div>' : '') +
       (TEAM.on ? '<div class="lp-src">' + (lead.owner ? 'Owner: ' + escapeHtml(lead.owner.name) : 'Not assigned yet') + (claimedByOther(lead) ? ' \u00b7 <b>' + escapeHtml(lead.claim.name) + ' is on this lead now</b>' : '') + '</div>' : '') +
@@ -4954,7 +5099,8 @@
               '<input class="pipe-amount" type="number" min="0" step="1000" inputmode="numeric" value="' + (Number(l.amount) || 0) + '" data-pipe-amount="' + l.id + '">' +
               callLinkHtml(l, "pipeline", next ? next.id : null, "pipe-call", callIconSvg()) +
             '</div>' +
-            (!next && stage !== "Closed Lost" ? '<button class="pipe-sched" data-schedule-lead="' + l.id + '">\u26A0 No next step \u2014 schedule a follow-up</button>' : '') +
+            (l.stalled ? '<div class="pipe-parked"><span>Parked \u00b7 ' + escapeHtml(parkedWhy(l)) + '</span><button type="button" data-revive="' + l.id + '">Revive</button></div>'
+              : !next && stage !== "Closed Lost" ? '<button class="pipe-sched" data-schedule-lead="' + l.id + '">\u26A0 No next step \u2014 schedule a follow-up</button>' : '') +
           '</div>';
         });
       }
@@ -5146,6 +5292,7 @@
       data.id = uid();
       data.createdAt = Date.now();
       state.tasks.push(data);
+      var tl = findLeadById(data.leadId); if (tl && tl.stalled) { tl.stalled = null; tl.stallWhy = null; tl.touches = 0; tl.touchAt = Date.now(); }
     }
     saveState();
     closeTaskModal();
@@ -5239,20 +5386,20 @@
       return;
     }
 
-    if (!lead && state.queueFilter === "int") {
-      var poolN = interestedPool().length;
+    if (!lead && isRun()) {
+      var poolN = runPool().length, hotRun = state.queueFilter === "hot";
       main.innerHTML = lastFollowHtml() +
         '<div class="card done-panel card-enter">' +
           '<div class="glyph">\u2713</div>' +
-          '<h2>' + (poolN ? 'Every interested lead called' : 'No interested leads yet') + '</h2>' +
-          '<p>' + (poolN ? 'You\u2019ve reached all ' + poolN + ' of your interested leads in this round.' + ((state.queueList || "all") !== "all" ? ' (This list only.)' : '') + ' Start over to go through them again, or go back to your regular queue.'
-                         : 'Leads you mark Interested will be waiting here.') + '</p>' +
+          '<h2>' + (poolN ? (hotRun ? 'Every hot lead called' : 'Every interested lead called') : (hotRun ? 'No hot leads yet' : 'No interested leads yet')) + '</h2>' +
+          '<p>' + (poolN ? 'You\u2019ve reached all ' + poolN + ' of your ' + (hotRun ? 'hot' : 'interested') + ' leads in this round.' + ((state.queueList || "all") !== "all" ? ' (This list only.)' : '') + ' Start over to go through them again, or go back to your regular queue.'
+                         : hotRun ? 'Tap \u2605 on any lead to add it to your hot list.' : 'Leads you mark Interested will be waiting here.') + '</p>' +
           '<div class="modal-actions">' + (poolN ? '<button class="btn-secondary" id="intRestartBtn">Start over</button>' : '') +
             '<button class="btn-primary" id="intExitBtn">Back to all leads</button></div>' +
           (state.completedStack.length ? '<div style="margin-top:12px">' + prevButtonHtml() + '</div>' : '') +
         '</div>';
       var rb = document.getElementById("intRestartBtn");
-      if (rb) rb.addEventListener("click", function () { if (startInterestedRun(true)) { saveState(); render(); } });
+      if (rb) rb.addEventListener("click", function () { if (startRun(state.queueFilter, true)) { saveState(); render(); } });
       document.getElementById("intExitBtn").addEventListener("click", function () { state.queueFilter = "all"; saveState(); render(); });
       wirePrevButton();
       return;
@@ -5280,7 +5427,7 @@
           var w = CALL_WINDOWS[l.callWindow], z = leadZone(l); if (!w || !z.iana) return;
           var d = (w[1] - zoneTime(z.iana).hour + 24) % 24; if (soon === null || d < soon) soon = d;
         });
-        main.innerHTML = manualToggleHtml() + followupBannerHtml() + spamBannerHtml() + alertsHtml() + lastFollowHtml() + (focus ? '' : briefCardHtml() + hotStripHtml(null)) +
+        main.innerHTML = manualToggleHtml() + needsHtml(false) + lastFollowHtml() +
           '<div class="card done-panel card-enter"><div class="glyph">\uD83D\uDD53</div><h2>Waiting for the right time</h2><p>' +
           (win.length ? win.length + ' lead' + (win.length === 1 ? ' prefers' : 's prefer') + ' a different time of day' + (soon !== null ? ' \u2014 the next window opens in about ' + Math.max(1, soon) + ' hour' + (Math.max(1, soon) === 1 ? '' : 's') : '') + '. ' : '') +
           (taken ? taken + ' lead' + (taken === 1 ? ' is' : 's are') + ' being called by a teammate right now.' : '') + '</p>' +
@@ -5290,7 +5437,7 @@
         return;
       }
       main.innerHTML =
-        manualToggleHtml() + followupBannerHtml() + alertsHtml() + lastFollowHtml() +
+        manualToggleHtml() + needsHtml(false) + lastFollowHtml() +
         '<div class="card done-panel">' +
           '<div class="glyph">✓</div>' +
           '<h2>Queue complete</h2>' +
@@ -5340,18 +5487,17 @@
     if (enterCls && lastShownLeadId !== null) setTimeout(revealCard, 30);
     lastShownLeadId = lead.id;
     main.innerHTML =
-      (focus ? '' : manualToggleHtml() + followupBannerHtml()) + spamBannerHtml() + overdueBannerHtml() + handoffBannerHtml() + contestBannerHtml() + lockReqBannerHtml() + (focus ? '' : briefCardHtml() + installCardHtml() + hotStripHtml(lead.id)) +
-      locCardHtml() + lastFollowHtml() +
+      (focus ? '' : manualToggleHtml()) + needsHtml(focus) + lastFollowHtml() +
       '<div class="card' + enterCls + '">' +
         '<div class="eyebrow-row">' +
           (focus
             ? '<div class="eyebrow-left"><button class="prev-pill" id="focusBackBtn">\u2039 Back</button>' +
                 '<span class="queue-tag">' + (state.followupRun ? 'Follow-ups \u00b7 ' + dueTasks().length + ' due' : 'Follow-up call') + '</span></div>' +
               '<div class="eyebrow-right"><button class="skip-btn" data-open-lead="' + lead.id + '">Full profile</button></div>'
-            : '<div class="eyebrow-left">' + prevButtonHtml() + '<span class="queue-tag">' + (state.queueFilter === "int" ? 'Interested \u00b7 ' + pendingCount + ' left' : pendingCount + ' left in queue') + '</span></div>' +
+            : '<div class="eyebrow-left">' + prevButtonHtml() + '<span class="queue-tag">' + (isRun() ? (state.queueFilter === "hot" ? '\u2605 Hot \u00b7 ' : 'Interested \u00b7 ') + pendingCount + ' left' : pendingCount + ' left in queue') + '</span></div>' +
               '<div class="eyebrow-right">' +
                 (pendingCount > 1 ? '<button class="skip-btn" id="skipBtn">Skip for now</button>' : '') +
-                (state.queueFilter === "int" ? '' : '<button class="skip-btn danger-link" id="removeLeadBtn">Remove lead</button>') +
+                (isRun() ? '' : '<button class="skip-btn danger-link" id="removeLeadBtn">Remove lead</button>') +
               '</div>') +
         '</div>' +
         '<div class="lead-name-row"><div class="lead-name" data-open-lead="' + lead.id + '">' + escapeHtml(lead.name) + '</div>' + starBtnHtml(lead) + '</div>' +
@@ -5566,6 +5712,7 @@
   }
 
   function autoAdvanceToggleHtml() {
+    return "";
     return '<div class="toggle-row">' +
       '<div class="toggle-label">' +
         '<span class="t1">Auto-advance</span>' +
@@ -5589,7 +5736,7 @@
 
   function renderStats() {
     var block = document.getElementById("statsBlock");
-    if (state.callLog.length === 0) { block.style.display = "none"; return; }
+    block.style.display = "none"; return;   // History shows these counts; the Dial page stays clear
     block.style.display = "";
     var counts = { interested: 0, notinterested: 0, voicemail: 0, noanswer: 0, badnum: 0, callback: 0 };
     state.callLog.forEach(function (c) {
@@ -5609,7 +5756,7 @@
     return '<div class="stat"><div class="n">' + n + '</div><div class="l">' + label + '</div></div>';
   }
 
-  var queueHidden = false;
+  var queueHidden = true;
   function renderQueue() {
     var block = document.getElementById("queueBlock");
     var pending = pendingLeads();
@@ -5618,6 +5765,7 @@
     block.style.display = "";
     document.getElementById("queueHeading").textContent = "Up next (" + Math.max(pending.length - 1, 0) + ")";
     var list = document.getElementById("queueList");
+    queueHidden = !state.showUpNext;
     if (queueHidden) { list.style.display = "none"; document.getElementById("toggleQueueBtn").textContent = "Show"; }
     else { list.style.display = ""; document.getElementById("toggleQueueBtn").textContent = "Hide"; }
 
@@ -6304,8 +6452,8 @@
     var box = document.getElementById("queueControls");
     if (!box) return;
     if (state.manualDial && !state.focusLeadId && !state.recallLeadId && !state.awaitingOutcome) { box.style.display = "none"; return; }
-    var all = allPendingLeads(), intPool = interestedPool();
-    if (!state.leads.length || state.recallLeadId || state.focusLeadId || (!all.length && !intPool.length && state.queueFilter !== "int")) { box.style.display = "none"; return; }
+    var all = allPendingLeads(), intPool = interestedPool(), hPool = hotPool();
+    if (!state.leads.length || state.recallLeadId || state.focusLeadId || (!all.length && !intPool.length && !hPool.length && !isRun())) { box.style.display = "none"; return; }
     box.style.display = "";
     var counts = { all: all.length, now: 0, E: 0, C: 0, M: 0, P: 0, X: 0, U: 0 };
     all.forEach(function (l) {
@@ -6316,57 +6464,56 @@
     });
     var f = state.queueFilter || "all";
     var chips = [["all", "All"], ["now", "Callable now"], ["E", "Eastern"], ["C", "Central"], ["M", "Mountain"], ["P", "Pacific"], ["X", "AK / HI"], ["U", "Unknown"]];
-    chips.splice(2, 0, ["int", "Interested"]);
-    counts.int = f === "int" ? interestedLeads().length : intPool.length;
+    chips.splice(1, 0, ["hot", "Hot"], ["int", "Interested"]);
+    counts.int = f === "int" ? runLeads("int").length : intPool.length;
+    counts.hot = f === "hot" ? runLeads("hot").length : hPool.length;
     var chipHtml = chips.filter(function (c) {
       return c[0] === "all" || c[0] === "now" || counts[c[0]] > 0 || c[0] === f;
     }).map(function (c) {
       return '<button class="filter-chip' + (f === c[0] ? " active" : "") + '" data-qfilter="' + c[0] + '">' +
-        (c[0] === "now" ? '<span class="now-dot"></span>' : c[0] === "int" ? '<span class="int-dot"></span>' : '') + c[1] +
+        (c[0] === "now" ? '<span class="now-dot"></span>' : c[0] === "int" ? '<span class="int-dot"></span>' : c[0] === "hot" ? '<span class="hot-star">\u2605</span>' : '') + c[1] +
         ' <span class="chip-n">' + (counts[c[0]] || 0) + '</span></button>';
     }).join("");
     var o = state.queueOrder || "imported";
     var orders = [["smart", "\u2605 Best time to answer"], ["imported", "As imported"], ["east", "East \u2192 West"], ["west", "West \u2192 East"], ["state", "State A \u2192 Z"]];
-    box.innerHTML = '<div class="filter-row qc-chips">' + chipHtml + '</div>' +
-      '<div class="qc-order"><span>Call order</span><select id="queueOrderSelect">' +
-      orders.map(function (x) { return '<option value="' + x[0] + '"' + (o === x[0] ? " selected" : "") + '>' + x[1] + '</option>'; }).join("") +
-      '</select></div>' +
-      (function () {
-        var srcs = {}, base = f === "int" ? intPool : all;
-        base.forEach(function (l) { var k = l.source || "Original list"; srcs[k] = (srcs[k] || 0) + 1; });
-        var names = Object.keys(srcs);
-        var cur = state.queueList || "all";
-        if (names.length < 2 && cur === "all") return "";
-        return '<div class="qc-order"><span>List</span><select id="queueListSelect"><option value="all">All lists (' + base.length + ')</option>' +
-          names.map(function (k) { return '<option value="' + escapeHtml(k) + '"' + (cur === k ? ' selected' : '') + '>' + escapeHtml(k) + ' (' + srcs[k] + ')</option>'; }).join("") +
-          '</select></div>';
-      })() +
-      (f === "int" ? '<div class="qc-note int-note">Your interested leads, ' + (o === "smart" ? 'best answer hours first' : o === "imported" ? 'longest-waiting first' : 'in your call order') + '. Each one drops off this list once you log the call. <button class="link-btn" id="intExitLink">Back to all leads</button></div>' : '') +
-      (o === "smart" && f !== "int" ? '<div class="qc-note">' + smartNoteText(counts.prime || 0) + '</div>' : '');
-    var iel = document.getElementById("intExitLink");
-    if (iel) iel.addEventListener("click", function () { if (state.awaitingOutcome) { showToast("Log the outcome for this call first"); return; } state.queueFilter = "all"; saveState(); render(); });
-    var qls = document.getElementById("queueListSelect");
-    if (qls) qls.addEventListener("change", function (e) {
-      if (state.awaitingOutcome) { showToast("Log the outcome for this call first"); render(); return; }
-      state.queueList = e.target.value;
-      saveState();
-      render();
+    var ORDER_SHORT = { smart: "\u2605 Best time", imported: "Sort", east: "East \u2192 West", west: "West \u2192 East", state: "By state" };
+    var sortOn = o !== "imported" || (state.queueList || "all") !== "all";
+    box.innerHTML = '<div class="filter-row qc-chips"><button class="filter-chip sort-chip' + (sortOn ? ' active' : '') + '" id="qcSortBtn" type="button" aria-label="Call order and lists">\u21c5 ' +
+      escapeHtml(ORDER_SHORT[o] || "Sort") + ((state.queueList || "all") !== "all" ? ' \u00b7 1 list' : '') + '</button>' + chipHtml + '</div>';
+    document.getElementById("qcSortBtn").addEventListener("click", function () {
+      if (state.awaitingOutcome) { showToast("Log the outcome for this call first"); return; }
+      openSortSheet(o, orders, f === "int" || f === "hot" ? runPool(f) : all, counts.prime || 0);
     });
+
     box.querySelectorAll("[data-qfilter]").forEach(function (b) {
       b.addEventListener("click", function () {
         if (state.awaitingOutcome) { showToast("Log the outcome for this call first"); return; }
         var qf = b.getAttribute("data-qfilter");
-        if (qf === "int") { if (!startInterestedRun(false)) return; } else state.queueFilter = qf;
+        if (qf === "int" || qf === "hot") { if (!startRun(qf, false)) return; } else state.queueFilter = qf;
         saveState();
         render();
       });
     });
+  }
+  function openSortSheet(o, orders, base, prime) {
+    var srcs = {}; base.forEach(function (l) { var k = l.source || "Original list"; srcs[k] = (srcs[k] || 0) + 1; });
+    var names = Object.keys(srcs), cur = state.queueList || "all";
+    featOpen('<h3>Sort your leads</h3>' +
+      '<label for="queueOrderSelect">Call order</label><select id="queueOrderSelect">' +
+      orders.map(function (x) { return '<option value="' + x[0] + '"' + (o === x[0] ? " selected" : "") + '>' + x[1] + '</option>'; }).join("") + '</select>' +
+      (o === "smart" ? '<p class="sort-note">' + smartNoteText(prime) + '</p>' : '') +
+      (names.length >= 2 || cur !== "all" ? '<label for="queueListSelect" style="margin-top:14px">List</label><select id="queueListSelect"><option value="all">All lists (' + base.length + ')</option>' +
+        names.map(function (k) { return '<option value="' + escapeHtml(k) + '"' + (cur === k ? ' selected' : '') + '>' + escapeHtml(k) + ' (' + srcs[k] + ')</option>'; }).join("") + '</select>' : '') +
+      '<div class="modal-actions"><button class="btn-primary" id="sortDone" type="button">Done</button></div>');
     document.getElementById("queueOrderSelect").addEventListener("change", function (e) {
-      if (state.awaitingOutcome) { showToast("Log the outcome for this call first"); render(); return; }
       var label = e.target.options[e.target.selectedIndex].text;
       applyQueueOrder(e.target.value);
       showToast("Call order: " + label);
+      featClose();
     });
+    var qls = document.getElementById("queueListSelect");
+    if (qls) qls.addEventListener("change", function (e) { state.queueList = e.target.value; saveState(); render(); featClose(); });
+    document.getElementById("sortDone").addEventListener("click", featClose);
   }
 
   // When a new lead loads while you're scrolled down at the outcome buttons,
@@ -8473,6 +8620,45 @@
        'Don\u2019t call the same person twice within a couple of hours.'].map(function (t) { return '<li class="ci info"><span class="ci-dot">i</span><span>' + escapeHtml(t) + '</span></li>'; }).join("") +
       '</ul><a class="btn-secondary" href="https://www.freecallerregistry.com/" target="_blank" rel="noopener" style="display:block;text-align:center;margin-top:10px;text-decoration:none">Register your number (free)</a></div>';
   }
+  function fuSummary() { var c = fuCfg(); return "Up to " + c.tries + " tries \u00b7 " + (c.stall ? "park after " + c.stall + " follow-ups with no progress" : "never park warm leads"); }
+  function openFuRules() {
+    var c = fuCfg();
+    var seg = function (name, opts, cur) {
+      return '<div class="seg" role="radiogroup">' + opts.map(function (o) { return '<button type="button" class="seg-b' + (o[0] === cur ? ' on' : '') + '" data-seg="' + name + '" data-v="' + o[0] + '" role="radio" aria-checked="' + (o[0] === cur) + '">' + o[1] + '</button>'; }).join("") + '</div>';
+    };
+    featOpen('<h3>Follow-up rules</h3><p class="modal-sub">Spend calls on leads that are moving. ' + (TEAM.on ? 'These apply to everyone on your team.' : '') + '</p>' +
+      '<div class="fu-lbl">No answer: tries before parking a lead</div>' + seg("tries", [[3, "3"], [4, "4"], [6, "6"]], c.tries) +
+      '<p class="fu-hint" id="fuTriesHint"></p>' +
+      '<div class="fu-lbl">Interested or callback: follow-ups without moving a stage</div>' + seg("stall", [[2, "2"], [3, "3"], [5, "5"], [0, "Off"]], c.stall) +
+      '<p class="fu-hint" id="fuStallHint"></p>' +
+      '<ul class="fu-facts"><li>Due follow-ups come up closest to closing first: Committed, then Objection, Pitched, Qualified, biggest amounts first.</li>' +
+      '<li>A callback time the lead asked for is always kept, and comes up first.</li>' +
+      '<li>Parked leads show in Pipeline with a Revive button. Moving a lead\u2019s stage, or adding a follow-up by hand, brings it back.</li></ul>' +
+      '<div class="modal-actions"><button class="btn-secondary" id="fuCancel" type="button">Cancel</button><button class="btn-primary" id="fuSave" type="button">Save</button></div>');
+    var cur = { tries: c.tries, stall: c.stall };
+    var hints = function () {
+      document.getElementById("fuTriesHint").textContent = { 3: "3 tries over 2 business days.", 4: "4 tries over 3 business days.", 6: "6 tries over about 2 weeks." }[cur.tries] + " Then the lead rests and comes back in 60\u201390 days.";
+      document.getElementById("fuStallHint").textContent = cur.stall ? "After " + cur.stall + " follow-up calls with no stage change, the lead is parked so reps move on." : "Warm leads are never parked automatically.";
+    };
+    hints();
+    document.querySelectorAll("[data-seg]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var k = b.getAttribute("data-seg"); cur[k] = Number(b.getAttribute("data-v"));
+        document.querySelectorAll('[data-seg="' + k + '"]').forEach(function (x) { var on = x === b; x.classList.toggle("on", on); x.setAttribute("aria-checked", on); });
+        hints();
+      });
+    });
+    document.getElementById("fuCancel").addEventListener("click", featClose);
+    document.getElementById("fuSave").addEventListener("click", function () {
+      var v = { tries: cur.tries, stall: cur.stall };
+      if (TEAM.on && TEAM.db) {
+        TEAM.db.collection("leadChunks").doc("_team").set({ fu: v }, { merge: true })
+          .then(function () { TEAM.infoCfg = Object.assign({}, TEAM.infoCfg || {}, { fu: v }); showToast("Follow-up rules saved for your team"); render(); })
+          .catch(function () { showToast("Couldn\u2019t save \u2014 check your connection"); });
+      } else { state.fuCfg = v; saveState(); showToast("Follow-up rules saved"); render(); }
+      featClose();
+    });
+  }
   function openPacingEditor() {
     var cfg = pacingCfg(), m = document.getElementById("infoModal"), b = document.getElementById("infoModalBody");
     b.innerHTML = '<button class="close-x" id="pcClose">&times;</button><h3>Call pacing</h3>' +
@@ -8510,6 +8696,7 @@
                  overdue escalation, fair lead sharing, hot list, forecast, Face ID lock ---------- **/
   function setStage(lead, stage) {
     if (!lead) return;
+    if (stageRank(stage) > stageRank(lead.stage)) { lead.touches = 0; lead.progressAt = Date.now(); lead.stalled = null; lead.stallWhy = null; }
     if (lead.stage !== stage) lead.stageLog = (lead.stageLog || []).concat([{ s: stage, at: Date.now() }]).slice(-12);
     lead.stage = stage;
   }
@@ -8551,24 +8738,36 @@
   }
 
   /* ----- hot list ----- */
-  function isHot(id) { return (state.hotIds || []).indexOf(id) !== -1; }
+  // Stored on the lead itself ({ uid: starredAt }), so it syncs and never vanishes from a phone.
+  function hotKey() { return TEAM.on && TEAM.me ? TEAM.me.uid : "me"; }
+  function hotOn(l) { return !!(l && l.hot && l.hot[hotKey()]); }
+  function isHot(id) { return hotOn(findLeadById(id)); }
+  function migrateHot() {
+    if (!state.hotIds || !state.hotIds.length || (TEAM.on && (!TEAM.me || !TEAM.ready))) return;
+    var m = leadMap(), k = hotKey(), now = Date.now();
+    state.hotIds.forEach(function (id, i) { var l = m[id]; if (l) { l.hot = Object.assign({}, l.hot || {}); if (!l.hot[k]) l.hot[k] = now - i; } });
+    state.hotIds = []; saveState();
+  }
   function toggleHot(id) {
     var l = findLeadById(id); if (!l) return;
-    var was = isHot(id);
-    state.hotIds = was ? (state.hotIds || []).filter(function (x) { return x !== id; }) : [id].concat(state.hotIds || []).slice(0, 25);
+    var was = isHot(id), k = hotKey(), h = Object.assign({}, l.hot || {});
+    if (was) delete h[k]; else h[k] = Date.now();
+    l.hot = h;
     saveState();
     showToast(was ? l.name + " is off your hot list" : "\u2605 " + l.name + " is on your hot list");
     render();
     if (profileLeadId === id && document.getElementById("leadModal").classList.contains("show")) openLeadProfile(id);
   }
   function hotLeads() {
-    var m = leadMap();
-    return (state.hotIds || []).map(function (id) { return m[id]; }).filter(function (l) { return l && l.stage !== "Committed" && l.stage !== "Closed Lost"; });
+    var k = hotKey();
+    return state.leads.filter(function (l) { return hotOn(l) && l.stage !== "Committed" && l.stage !== "Closed Lost"; })
+      .sort(function (a, b) { return b.hot[k] - a.hot[k]; });
   }
   function starBtnHtml(lead) {
     return '<button class="star-btn' + (isHot(lead.id) ? ' on' : '') + '" data-star="' + lead.id + '" aria-label="' + (isHot(lead.id) ? 'Remove from hot list' : 'Add to hot list') + '">\u2605</button>';
   }
   function hotStripHtml(curId) {
+    return "";
     var hl = hotLeads().filter(function (l) { return l.id !== curId; }).slice(0, 5);
     if (!hl.length) return "";
     return '<div class="hot-strip"><div class="hot-head">\u2605 Hot list</div>' + hl.map(function (l) {
@@ -9457,7 +9656,7 @@
     if (state.awaitingOutcome || state.focusLeadId) return "";
     var on = !!state.manualDial;
     return '<button class="md-bar' + (on ? ' on' : '') + '" id="mdToggle" type="button" role="switch" aria-checked="' + on + '">' +
-      '<span class="md-txt"><b>Manual dial</b><span>' + (on ? 'On \u00b7 turn off to go back to your leads' : 'Dial any number with the keypad') + '</span></span>' +
+      '<span class="md-txt"><b>Manual dial</b>' + (on ? '<span>On \u00b7 switch off for your leads</span>' : '') + '</span>' +
       '<span class="md-switch" aria-hidden="true"><span></span></span></button>';
   }
   document.addEventListener("click", function (e) {
@@ -9499,7 +9698,7 @@
       var z = leadZone(match), t = z.iana ? zoneTime(z.iana) : null;
       info.innerHTML = '<b>' + escapeHtml(match.name) + '</b>' + (t ? ' \u00b7 ' + escapeHtml(t.label) + (t.ok ? '' : ' (outside 8 AM\u20139 PM)') : '');
       go.innerHTML = callLinkHtml(match, "dial", null, "kp-call", KP_PHONE);
-      var a = go.querySelector("a"); if (a) a.addEventListener("click", function () { kpRaw = ""; });
+      var a = go.querySelector("a"); if (a) a.addEventListener("click", function (e) { setTimeout(function () { if (!e.defaultPrevented) kpRaw = ""; }, 0); });   // keep the number if pacing holds the call
       return;
     }
     info.innerHTML = '<span class="kp-dim">New number \u00b7 check it\u2019s 8 AM\u20139 PM for them</span>';
@@ -9588,6 +9787,7 @@
       tile("hubCoach", I('<path d="M4 19l5-5 4 4 7-8"/><path d="M15 10h5v5"/>'), "Sales coach", "What\u2019s working, what isn\u2019t, and who needs help") +
       tile("hubVault", I('<rect x="3" y="5" width="18" height="15" rx="2"/><circle cx="12" cy="12.5" r="3"/><path d="M12 9.5V8M7 5V3.5M17 5V3.5"/>'), "Investor Vault",
         vaultPending().length ? vaultPending().length + " removal request" + (vaultPending().length === 1 ? "" : "s") + " waiting for you" : (VAULT.status === "rules" ? "One step left to switch it on" : "Every investor, their deals and key dates"), vaultPending().length > 0 || VAULT.status === "rules") +
+      tile("hubFollow", I('<path d="M4 12a8 8 0 1 0 2.3-5.6"/><path d="M4 4v4h4"/><path d="M12 8v4l3 2"/>'), "Follow-up rules", fuSummary()) +
       tile("hubPacing", I('<path d="M12 3v3M12 18v3M4.2 7l2.6 1.5M17.2 15.5l2.6 1.5M4.2 17l2.6-1.5M17.2 8.5l2.6-1.5"/><circle cx="12" cy="12" r="3.5"/>'), "Call pacing",
         "Keeps your team\u2019s numbers from being labeled spam \u00b7 " + pacingCfg().perDay + " calls a day per phone") +
       tile("hubSecurity", I('<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>'), "Security", secCfg().requireLock ? "Face ID lock required for everyone" : "Face ID lock for your team") +
@@ -9614,6 +9814,7 @@
     document.getElementById("hubCoach").addEventListener("click", function () { closeAdminHub(); openCoach("team"); });
     document.getElementById("hubVault").addEventListener("click", function () { closeAdminHub(); state.activeView = "vault"; saveState(); render(); });
     document.getElementById("hubPacing").addEventListener("click", function () { closeAdminHub(); openPacingEditor(); });
+    document.getElementById("hubFollow").addEventListener("click", function () { closeAdminHub(); openFuRules(); });
     document.getElementById("hubInfo").addEventListener("click", function () { closeAdminHub(); openInfoEditor(); });
     document.getElementById("hubOverdue").addEventListener("click", openOverdue);
     document.getElementById("hubGoals").addEventListener("click", openGoals);
@@ -9628,7 +9829,7 @@
     document.getElementById("hubLeads").addEventListener("click", function () { closeAdminHub(); openLoadModal(); switchTab("upload"); });
     document.getElementById("hubExport").addEventListener("click", function () { closeAdminHub(); document.getElementById("menuExportBtn").click(); });
     document.getElementById("hubBackup").addEventListener("click", function () { closeAdminHub(); document.getElementById("menuBackupBtn").click(); });
-    if (!isAdmin()) ["hubTeam", "hubInfo", "hubPacing", "hubSecurity", "hubLeads", "hubExport", "hubBackup", "hubGoals", "hubContest", "hubCustomer", "hubVault", "hubDnc", "hubLists"]
+    if (!isAdmin()) ["hubTeam", "hubInfo", "hubFollow", "hubPacing", "hubSecurity", "hubLeads", "hubExport", "hubBackup", "hubGoals", "hubContest", "hubCustomer", "hubVault", "hubDnc", "hubLists"]
       .forEach(function (id) { var e = document.getElementById(id); if (e) e.remove(); });
   }
 
@@ -9924,8 +10125,12 @@
       if (e.target === this) closeConfirm();
     });
 
+    document.getElementById("setAutoAdvance").addEventListener("change", function (e) { state.autoAdvance = e.target.checked; saveState(); showToast(state.autoAdvance ? "Auto-advance on" : "Auto-advance off"); });
+    document.getElementById("openFuRulesBtn").addEventListener("click", function () { closeMenuModal(); openFuRules(); });
+    document.getElementById("openMyDayBtn").addEventListener("click", function () { closeMenuModal(); openBrief(); });
     document.getElementById("toggleQueueBtn").addEventListener("click", function () {
       queueHidden = !queueHidden;
+      state.showUpNext = !queueHidden; saveState();
       renderQueue();
     });
 
