@@ -3,7 +3,7 @@
 <head>
 <script id="customerConfig" type="application/json">{}</script>
 <meta charset="UTF-8">
-<meta name="dovetail-build" content="2026-11-19">
+<meta name="dovetail-build" content="2026-11-20">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5691,6 +5691,40 @@
   .hub-go { flex: none; color: var(--text-faint); font-size: 20px; line-height: 1; }
   .hub-note { margin-top: 18px; padding: 0 4px; font-size: 12px; line-height: 1.5; color: var(--text-faint); word-break: break-word; }
   @media (max-width: 340px) { .hub-cats { gap: 8px; } .hub-cat { padding: 10px; } .hub-cat b { font-size: 14px; } }
+
+  /* ---- Settings: categories like Admin controls ---- */
+  #menuModalBody { min-height: min(640px, 84vh); }
+  #menuModalBody h3 { margin-bottom: 2px; }
+  .set-profile { display: flex; align-items: center; gap: 12px; margin-top: 14px; padding: 12px; border: 1px solid var(--border); border-radius: var(--radius-m, 14px); background: var(--surface-raised); }
+  .set-avatar { flex: none; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 17px;
+    color: var(--accent-text); background: var(--call-bg, var(--accent)); }
+  .set-who { min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+  .set-who b { font-size: 15.5px; font-weight: 650; }
+  .set-who span { font-size: 12.5px; color: var(--text-dim); overflow-wrap: anywhere; }
+  .set-cats .hub-cat.span2 { grid-column: 1 / -1; min-height: 0; }
+  .set-cats .set-admin-cat { border-color: var(--accent); border-color: color-mix(in srgb, var(--accent) 50%, var(--border)); background: color-mix(in srgb, var(--accent) 8%, var(--surface-raised)); }
+  body:not(.team-mode) .set-team-only { display: none !important; }
+  body.team-mode .set-data-cat { display: none !important; }
+  .set-foot { margin-top: 20px; padding: 0 4px; font-size: 11px; line-height: 1.5; color: var(--text-faint); text-align: center; }
+  .set-card { padding: 12px 14px 14px; border: 1px solid var(--border); border-radius: var(--radius-m, 14px); background: var(--surface-raised); }
+  .set-card > .set-label:first-child { margin-top: 0; }
+  .set-label { display: block; margin: 14px 0 6px; font-size: 12.5px; font-weight: 600; color: var(--text-dim); }
+  .set-input { width: 100%; box-sizing: border-box; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-s, 8px); color: var(--text);
+    padding: 10px 12px; font-size: 16px; font-family: inherit; }
+  .set-card .set-toggle { margin-top: 16px; }
+  .set-card .tx-toggle:first-child { margin-top: 0 !important; }
+  .set-card .tx-tpl { background: var(--surface); }
+  .set-card .tx-prev { background: var(--surface); }
+  .set-gap { margin-top: 12px; }
+  .set-note { margin: 12px 4px 0; font-size: 12px; line-height: 1.5; color: var(--text-faint); }
+  .set-view .tx-help { margin: 0 4px 12px; }
+  .hub-row.set-danger { --hc: var(--danger); }
+  .hub-row.set-danger .hub-t b { color: var(--danger); }
+  .modal label.set-toggle { display: flex; margin: 16px 0 0; font-size: inherit; font-weight: inherit; color: inherit; }
+  .set-toggle .switch { display: inline-block; }
+  #menuModalBody .set-card #txMyName { margin-bottom: 0; }
+  #menuModalBody .set-card .set-label { margin-top: 14px; }
+  #menuModalBody .set-card .set-label:first-child { margin-top: 0; }
   /* Motion off (Settings) or reduced motion: everything still works, nothing moves */
   html[data-motion="off"] #horizon, html[data-motion="off"] .rh-pop { animation: none !important; transition: none !important; }
   @media (prefers-reduced-motion: reduce) { #horizon, .rh-pop, .rhythm .rh-track .bar-fill { animation: none !important; transition: none !important; } }
@@ -5855,90 +5889,107 @@
 
 <!-- Menu modal -->
 <div class="modal-overlay" id="menuModal">
-  <div class="modal">
-    <button class="close-x" id="closeMenuModal">&times;</button>
-    <h3>Settings</h3>
-    <p class="modal-sub">Everything that shapes how the app looks and behaves.</p>
-
-    <div class="settings-section" id="accountSection" style="display:none">
-      <div class="settings-heading">Account</div>
-      <div class="acct-who" id="acctWho"></div>
-      <div class="modal-actions" style="flex-direction:column">
-        <button class="btn-primary team-admin-only" id="teamBtn" style="width:100%">Admin controls: logins, team &amp; scoreboard</button>
-        <button class="btn-secondary" id="lockToggleBtn" style="width:100%">Turn on Face ID lock</button>
-        <button class="btn-secondary" id="changePwBtn" style="width:100%">Change my password</button>
-        <button class="btn-secondary" id="signOutBtn" style="width:100%;color:var(--danger)">Sign out</button>
+  <div class="modal" id="menuModalBody">
+    <button class="close-x" id="closeMenuModal" aria-label="Close">&times;</button>
+    <div class="set-view" data-set-view="home">
+      <h3>Settings</h3>
+      <p class="modal-sub">How the app looks and works for you.</p>
+      <div class="set-profile" id="accountSection" style="display:none"><span class="set-avatar" id="acctAvatar" aria-hidden="true"></span><span class="set-who"><b id="acctName"></b><span id="acctWho"></span></span></div>
+      <div class="hub-cats set-cats">
+        <button class="hub-cat team-admin-only set-admin-cat" type="button" data-set-cat="admin" style="--hc:var(--accent)"><span class="hub-cat-top"><span class="hub-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 9.5C8 19.2 5 15.5 5 11V6l7-3z"/><path d="M9.5 12l1.8 1.8L15 10"/></svg></span><span class="hub-n" data-set-n="admin"></span></span><b>Admin controls</b><span class="hub-cat-sub" data-set-sum="admin"></span></button>
+        <button class="hub-cat set-team-only" type="button" data-set-cat="account" style="--hc:var(--callback)"><span class="hub-cat-top"><span class="hub-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg></span><span class="hub-n" data-set-n="account"></span></span><b>Account</b><span class="hub-cat-sub" data-set-sum="account"></span></button>
+        <button class="hub-cat" type="button" data-set-cat="coaching" style="--hc:var(--interested)"><span class="hub-cat-top"><span class="hub-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19l5-5 4 4 7-8"/><path d="M15 10h5v5"/></svg></span><span class="hub-n" data-set-n="coaching"></span></span><b>My day &amp; coaching</b><span class="hub-cat-sub" data-set-sum="coaching"></span></button>
+        <button class="hub-cat" type="button" data-set-cat="calling" style="--hc:var(--voicemail)"><span class="hub-cat-top"><span class="hub-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></span><span class="hub-n" data-set-n="calling"></span></span><b>Goals &amp; calling</b><span class="hub-cat-sub" data-set-sum="calling"></span></button>
+        <button class="hub-cat" type="button" data-set-cat="texts" style="--hc:var(--callback)"><span class="hub-cat-top"><span class="hub-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><span class="hub-n" data-set-n="texts"></span></span><b>Follow-up texts</b><span class="hub-cat-sub" data-set-sum="texts"></span></button>
+        <button class="hub-cat" type="button" data-set-cat="app" style="--hc:var(--gold)"><span class="hub-cat-top"><span class="hub-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></span><span class="hub-n" data-set-n="app"></span></span><b>Look &amp; app</b><span class="hub-cat-sub" data-set-sum="app"></span></button>
+        <button class="hub-cat admin-only set-data-cat" type="button" data-set-cat="data" style="--hc:var(--noanswer)"><span class="hub-cat-top"><span class="hub-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="8" ry="3"/><path d="M4 5.5v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/><path d="M4 11.5v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></span><span class="hub-n" data-set-n="data"></span></span><b>Data</b><span class="hub-cat-sub" data-set-sum="data"></span></button>
+      </div>
+      <div class="set-foot">
+        <div>Build 2026-11-20 · Team · Updates install automatically after midnight.</div>
+        <div id="updNote"></div>
       </div>
     </div>
-
-    <div class="settings-section">
-      <div class="settings-heading">Coaching</div>
-      <button class="settings-row" id="openCoachBtn" type="button"><span class="sr-l">My coach</span><span class="sr-v" id="coachHeadline"></span><span class="sr-c">›</span></button>
-      <button class="settings-row" id="openMyDayBtn" type="button" style="margin-top:8px"><span class="sr-l">My day</span><span class="sr-v">Who to call first and your best hours</span><span class="sr-c">›</span></button>
-      <button class="settings-row" id="openBriefBtn" type="button" style="margin-top:8px"><span class="sr-l">My day</span><span class="sr-v">Follow-ups, hot list, who to call first</span><span class="sr-c">›</span></button>
-      <button class="settings-row" id="openInstallBtn" type="button" style="margin-top:8px"><span class="sr-l">Install on your phone</span><span class="sr-v">Home screen icon, full screen</span><span class="sr-c">›</span></button>
-      <button class="settings-row" id="openReportBtn" type="button" style="margin-top:8px"><span class="sr-l">Results report</span><span class="sr-v">Your numbers this week, shareable</span><span class="sr-c">›</span></button>
-      <button class="settings-row" id="openTourBtn" type="button" style="margin-top:8px"><span class="sr-l">Take the tour</span><span class="sr-v">A 1-minute walkthrough</span><span class="sr-c">›</span></button>
+    <div class="hub-view set-view" data-set-view="account" hidden style="--hc:var(--callback)">
+      <button class="hub-back" type="button" data-set-back>‹ Settings</button>
+      <h3 class="hub-view-h">Account</h3>
+      <div class="hub-group">
+        <button class="hub-row" id="lockToggleBtn" type="button"><span class="hub-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span><span class="hub-t"><b>Face ID lock</b><span id="lockToggleSub">Off · tap to turn on</span></span><span class="hub-go" aria-hidden="true">›</span></button>
+        <button class="hub-row" id="changePwBtn" type="button"><span class="hub-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9"/><path d="M17 6l3 3"/></svg></span><span class="hub-t"><b>Change my password</b><span>Pick a new one any time</span></span><span class="hub-go" aria-hidden="true">›</span></button>
+        <button class="hub-row set-danger" id="signOutBtn" type="button"><span class="hub-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg></span><span class="hub-t"><b>Sign out</b><span>You can sign back in with your username</span></span><span class="hub-go" aria-hidden="true">›</span></button>
+      </div>
+      <button class="btn-primary team-admin-only" id="teamBtn" hidden>Admin controls</button>
     </div>
-
-    <div class="settings-section">
-      <div class="settings-heading">Appearance</div>
-      <button class="settings-row" id="openThemesBtn" type="button"><span class="sr-l">Theme</span><span class="sr-v" id="themeCurrent">Auto</span><span class="sr-c">›</span></button>
-    </div>
-
-    <div class="settings-section">
-      <div class="settings-heading">Calling</div>
-      <label for="dailyGoalInput" style="display:block;font-size:12.5px;font-weight:600;color:var(--text-dim);margin-bottom:6px;">Daily call goal</label>
-      <input type="number" id="dailyGoalInput" min="0" step="5" style="width:100%;background:var(--surface-raised);border:1px solid var(--border);border-radius:6px;color:var(--text);padding:9px 12px;font-size:14px;font-family:inherit;">
-      <p style="font-size:12px;color:var(--text-faint);margin:8px 0 0;line-height:1.5;">Every lead shows their local time. Anyone outside 8 AM–9 PM their time is flagged in red — federal telemarketing rules restrict sales calls outside those hours.</p>
-      <label class="set-toggle" for="setAutoAdvance"><span><b>Auto-advance</b><span>Moves to the next lead once you log an outcome. You always tap Call yourself.</span></span><span class="switch"><input type="checkbox" id="setAutoAdvance"><span class="slider"></span></span></label>
-      <button class="settings-row" id="openFuRulesBtn" type="button" style="margin-top:10px"><span class="sr-l">Follow-up rules</span><span class="sr-v" id="fuRulesSummary"></span><span class="sr-c">›</span></button>
-    </div>
-
-    <div class="settings-section">
-      <div class="settings-heading">Follow-up texts</div>
-      <p class="tx-help">After a missed call or an interested lead, a ready-to-send text pops up. One tap opens Messages; you tap Send. Offered only 8 AM\u20139 PM their time, and missed-call texts go once per lead.</p>
-      <label for="txMyName" class="tx-label">Your name</label>
-      <input type="text" id="txMyName" autocomplete="name">
-      <label class="up-check tx-toggle"><input type="checkbox" id="txNoAnswerOn"> Text after a missed call</label>
-      <textarea id="txNoAnswerTpl" class="tx-tpl"></textarea>
-      <div class="tx-prev" id="txNoAnswerPrev"></div>
-      <label class="up-check tx-toggle sub"><input type="checkbox" id="txAfterVm"> Also after leaving a voicemail</label>
-      <label class="up-check tx-toggle"><input type="checkbox" id="txInterestedOn"> Text after they\u2019re interested</label>
-      <textarea id="txInterestedTpl" class="tx-tpl"></textarea>
-      <div class="tx-prev" id="txInterestedPrev"></div>
-      <p class="tx-help">Fill-ins: {first} first name \u00b7 {name} full name \u00b7 {me} your name \u00b7 {next} their scheduled follow-up time.</p>
-      <button class="btn-secondary" id="txResetBtn" style="width:100%">Reset texts to default</button>
-      <button class="btn-secondary info-links-edit" id="infoLinksBtn" style="width:100%;margin-top:8px">Info links for Send info</button>
-    </div>
-
-    <div class="settings-section">
-      <div class="settings-heading">Pipeline</div>
-      <label for="dealTargetInput" style="display:block;font-size:12.5px;font-weight:600;color:var(--text-dim);margin-bottom:6px;">Deal target ($)</label>
-      <input type="number" id="dealTargetInput" min="0" step="10000" style="width:100%;background:var(--surface-raised);border:1px solid var(--border);border-radius:6px;color:var(--text);padding:9px 12px;font-size:14px;font-family:inherit;">
-    </div>
-
-    <div class="settings-section admin-only">
-      <div class="settings-heading">Data</div>
-      <div class="modal-actions" style="flex-direction:column">
-        <button class="btn-secondary" id="menuLoadBtn" style="width:100%">Load more leads</button>
-        <button class="btn-secondary" id="menuExportBtn" style="width:100%">Export call log (CSV)</button>
-        <button class="btn-secondary" id="menuBackupBtn" style="width:100%">Download full backup</button>
-        <button class="btn-secondary" id="menuRestoreBtn" style="width:100%">Restore from backup</button>
-        <input type="file" id="restoreFileInput" accept="application/json" style="display:none">
+    <div class="hub-view set-view" data-set-view="coaching" hidden style="--hc:var(--interested)">
+      <button class="hub-back" type="button" data-set-back>‹ Settings</button>
+      <h3 class="hub-view-h">My day &amp; coaching</h3>
+      <div class="hub-group">
+        <button class="hub-row" id="openCoachBtn" type="button"><span class="hub-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19l5-5 4 4 7-8"/><path d="M15 10h5v5"/></svg></span><span class="hub-t"><b>My coach</b><span id="coachHeadline"></span></span><span class="hub-go" aria-hidden="true">›</span></button>
+        <button class="hub-row" id="openBriefBtn" type="button"><span class="hub-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18"/><path d="M8 2v4M16 2v4"/></svg></span><span class="hub-t"><b>My day</b><span>Who to call first, follow-ups and your best hours</span></span><span class="hub-go" aria-hidden="true">›</span></button>
+        <button class="hub-row" id="openReportBtn" type="button"><span class="hub-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l3 3v15H6z"/><path d="M9 13h6"/><path d="M9 17h6"/><path d="M9 9h2"/></svg></span><span class="hub-t"><b>Results report</b><span>Your numbers this week, ready to share</span></span><span class="hub-go" aria-hidden="true">›</span></button>
       </div>
     </div>
-
-    <div class="settings-section danger-section">
-      <div class="settings-heading">Danger zone</div>
-      <div class="modal-actions" style="flex-direction:column">
-        <button class="btn-secondary" id="menuResetBtn" style="width:100%;color:var(--danger)">Reset everything</button>
+    <div class="hub-view set-view" data-set-view="calling" hidden style="--hc:var(--voicemail)">
+      <button class="hub-back" type="button" data-set-back>‹ Settings</button>
+      <h3 class="hub-view-h">Goals &amp; calling</h3>
+      <div class="set-card">
+        <label for="dailyGoalInput" class="set-label">Daily call goal</label>
+        <input type="number" id="dailyGoalInput" class="set-input" min="0" step="5" inputmode="numeric">
+        <label for="dealTargetInput" class="set-label">Deal target ($)</label>
+        <input type="number" id="dealTargetInput" class="set-input" min="0" step="10000" inputmode="numeric">
+        <label class="set-toggle" for="setAutoAdvance"><span><b>Auto-advance</b><span>Moves to the next lead once you log an outcome. You always tap Call yourself.</span></span><span class="switch"><input type="checkbox" id="setAutoAdvance"><span class="slider"></span></span></label>
+      </div>
+      <div class="hub-group set-gap">
+        <button class="hub-row" id="openFuRulesBtn" type="button"><span class="hub-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 0 2.3-5.6"/><path d="M4 4v4h4"/><path d="M12 8v4l3 2"/></svg></span><span class="hub-t"><b>Follow-up rules</b><span id="fuRulesSummary"></span></span><span class="hub-go" aria-hidden="true">›</span></button>
+      </div>
+      <p class="set-note">Every lead shows their local time. Anyone outside 8 AM–9 PM their time is flagged in red, because federal telemarketing rules restrict sales calls outside those hours.</p>
+    </div>
+    <div class="hub-view set-view" data-set-view="texts" hidden style="--hc:var(--callback)">
+      <button class="hub-back" type="button" data-set-back>‹ Settings</button>
+      <h3 class="hub-view-h">Follow-up texts</h3>
+      <p class="tx-help">After a missed call or an interested lead, a ready-to-send text pops up. One tap opens Messages; you tap Send. Offered only 8 AM–9 PM their time, and missed-call texts go once per lead.</p>
+      <div class="set-card">
+        <label for="txMyName" class="set-label">Your name</label>
+        <input type="text" id="txMyName" class="set-input" autocomplete="name">
+      </div>
+      <div class="set-card set-gap">
+        <label class="up-check tx-toggle"><input type="checkbox" id="txNoAnswerOn"> Text after a missed call</label>
+        <textarea id="txNoAnswerTpl" class="tx-tpl"></textarea>
+        <div class="tx-prev" id="txNoAnswerPrev"></div>
+        <label class="up-check tx-toggle sub"><input type="checkbox" id="txAfterVm"> Also after leaving a voicemail</label>
+      </div>
+      <div class="set-card set-gap">
+        <label class="up-check tx-toggle"><input type="checkbox" id="txInterestedOn"> Text after they’re interested</label>
+        <textarea id="txInterestedTpl" class="tx-tpl"></textarea>
+        <div class="tx-prev" id="txInterestedPrev"></div>
+      </div>
+      <p class="tx-help set-gap">Fill-ins: {first} first name · {name} full name · {me} your name · {next} their scheduled follow-up time.</p>
+      <div class="hub-group">
+        <button class="hub-row info-links-edit" id="infoLinksBtn" type="button"><span class="hub-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3L10 14"/><path d="M21 3l-7 18-4-7-7-4 18-7z"/></svg></span><span class="hub-t"><b>Info links for Send info</b><span>Pages your team can text to leads</span></span><span class="hub-go" aria-hidden="true">›</span></button>
+        <button class="hub-row" id="txResetBtn" type="button"><span class="hub-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 0 2.3-5.6"/><path d="M4 4v4h4"/></svg></span><span class="hub-t"><b>Reset texts to default</b><span>Puts the original wording back</span></span><span class="hub-go" aria-hidden="true">›</span></button>
       </div>
     </div>
-
-    <div style="margin-top:22px;padding-top:14px;border-top:1px solid var(--border);text-align:center;">
-      <div style="font-size:11px;color:var(--text-faint);">Build 2026-11-19 · Team · Updates install automatically after midnight.</div>
-      <div id="updNote"></div>
+    <div class="hub-view set-view" data-set-view="app" hidden style="--hc:var(--gold)">
+      <button class="hub-back" type="button" data-set-back>‹ Settings</button>
+      <h3 class="hub-view-h">Look &amp; app</h3>
+      <div class="hub-group">
+        <button class="hub-row" id="openThemesBtn" type="button"><span class="hub-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg></span><span class="hub-t"><b>Theme</b><span id="themeCurrent">Auto</span></span><span class="hub-go" aria-hidden="true">›</span></button>
+        <button class="hub-row" id="openInstallBtn" type="button"><span class="hub-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></span><span class="hub-t"><b>Install on your phone</b><span>Home screen icon, full screen</span></span><span class="hub-go" aria-hidden="true">›</span></button>
+        <button class="hub-row" id="openTourBtn" type="button"><span class="hub-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></span><span class="hub-t"><b>Take the tour</b><span>A 1-minute walkthrough</span></span><span class="hub-go" aria-hidden="true">›</span></button>
+      </div>
+    </div>
+    <div class="hub-view set-view" data-set-view="data" hidden style="--hc:var(--noanswer)">
+      <button class="hub-back" type="button" data-set-back>‹ Settings</button>
+      <h3 class="hub-view-h">Data</h3>
+      <div class="hub-group">
+        <button class="hub-row" id="menuLoadBtn" type="button"><span class="hub-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></span><span class="hub-t"><b>Load more leads</b><span>Excel, CSV, text or contacts</span></span><span class="hub-go" aria-hidden="true">›</span></button>
+        <button class="hub-row" id="menuExportBtn" type="button"><span class="hub-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5"/><path d="M5 20h14"/></svg></span><span class="hub-t"><b>Export call log</b><span>A CSV of every call</span></span><span class="hub-go" aria-hidden="true">›</span></button>
+        <button class="hub-row" id="menuBackupBtn" type="button"><span class="hub-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 4v6h8V4"/></svg></span><span class="hub-t"><b>Download full backup</b><span>Leads, calls and follow-ups in one file</span></span><span class="hub-go" aria-hidden="true">›</span></button>
+        <button class="hub-row" id="menuRestoreBtn" type="button"><span class="hub-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 0 2.3-5.6"/><path d="M4 4v4h4"/></svg></span><span class="hub-t"><b>Restore from backup</b><span>Load a backup file</span></span><span class="hub-go" aria-hidden="true">›</span></button>
+      </div>
+      <input type="file" id="restoreFileInput" accept="application/json" style="display:none">
+      <div class="hub-group set-gap danger-section">
+        <button class="hub-row set-danger" id="menuResetBtn" type="button"><span class="hub-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M6 6l1 14h10l1-14"/></svg></span><span class="hub-t"><b>Reset everything</b><span>Clears this phone’s leads and history</span></span><span class="hub-go" aria-hidden="true">›</span></button>
+      </div>
     </div>
   </div>
 </div>
@@ -8883,6 +8934,40 @@
     document.getElementById("singleError").textContent = "";
   }
   function openMenuModal() { document.getElementById("menuModal").classList.add("show"); }
+  // Settings home: one card per area with a live summary; tap a card for its controls.
+  function setShow(key) {
+    var body = document.getElementById("menuModalBody"); if (!body) return;
+    body.querySelectorAll("[data-set-view]").forEach(function (v) { v.hidden = v.getAttribute("data-set-view") !== key; });
+    body.scrollTop = 0;
+  }
+  function syncSettingsHome() {
+    var body = document.getElementById("menuModalBody"); if (!body) return;
+    var on = function (id) { var e = document.getElementById(id); return !!(e && e.checked); };
+    var goal = Number(state.dailyGoal) || 0, tc = document.getElementById("themeCurrent");
+    var sum = {
+      admin: "Team, leads, rules and reports",
+      account: (lockSupported() ? "Face ID " + (lockCred() ? "on" : "off") + " \u00b7 " : "") + "password, sign out",
+      coaching: (document.getElementById("coachHeadline") || {}).textContent || "My coach and my day",
+      calling: (goal ? goal + " calls a day" : "No daily goal") + " \u00b7 auto-advance " + (state.autoAdvance ? "on" : "off"),
+      texts: "Missed call " + (on("txNoAnswerOn") ? "on" : "off") + " \u00b7 interested " + (on("txInterestedOn") ? "on" : "off"),
+      app: "Theme: " + (tc ? tc.textContent.replace(/\s*\(.*\)$/, "") : "Auto") + " \u00b7 install, tour",
+      data: "Export, backup, restore"
+    };
+    body.querySelectorAll("[data-set-sum]").forEach(function (e) { e.textContent = sum[e.getAttribute("data-set-sum")] || ""; });
+    body.querySelectorAll("[data-set-n]").forEach(function (e) {
+      var v = body.querySelector('[data-set-view="' + e.getAttribute("data-set-n") + '"]');
+      var n = v ? Array.prototype.filter.call(v.querySelectorAll(".hub-row, .set-label, .set-toggle"), function (x) { return getComputedStyle(x).display !== "none" && !x.hidden; }).length : 0;
+      e.textContent = n ? String(n) : "";
+    });
+    // an odd number of visible cards: the last one spans the full width
+    var cards = Array.prototype.filter.call(body.querySelectorAll(".set-cats .hub-cat"), function (c) { c.classList.remove("span2"); return getComputedStyle(c).display !== "none"; });
+    if (cards.length % 2) cards[cards.length - 1].classList.add("span2");
+  }
+  document.addEventListener("click", function (e) {
+    var c = e.target.closest && e.target.closest("[data-set-cat]");
+    if (c) { if (c.getAttribute("data-set-cat") === "admin") { closeMenuModal(); openAdminHub(); } else setShow(c.getAttribute("data-set-cat")); return; }
+    if (e.target.closest && e.target.closest("[data-set-back]")) { syncSettingsHome(); setShow("home"); }
+  });
   function closeMenuModal() { document.getElementById("menuModal").classList.remove("show"); }
 
   /** ---------- Adding leads: upload a file, paste a list, or add one ---------- **/
@@ -9926,7 +10011,10 @@
     var acct = document.getElementById("accountSection");
     if (acct) acct.style.display = TEAM.on && TEAM.me ? "" : "none";
     var who = document.getElementById("acctWho");
-    if (who && TEAM.me) who.textContent = TEAM.me.name + " \u00b7 " + (isAdmin() ? "Admin" : isManager() ? "Manager" : "Rep") + (TEAM.me.closer ? " \u00b7 Closer" : "") + " \u00b7 username: " + TEAM.me.username;
+    if (who && TEAM.me) who.textContent = (isAdmin() ? "Admin" : isManager() ? "Manager" : "Rep") + (TEAM.me.closer ? " \u00b7 Closer" : "") + " \u00b7 username: " + TEAM.me.username;
+    var an = document.getElementById("acctName"), av = document.getElementById("acctAvatar");
+    if (an && TEAM.me) an.textContent = TEAM.me.name;
+    if (av && TEAM.me) av.textContent = (TEAM.me.name || "?").trim().charAt(0).toUpperCase();
   }
 
   /* ----- live listeners ----- */
@@ -12121,7 +12209,8 @@
   function updateLockBtn() {
     var b = document.getElementById("lockToggleBtn"); if (!b) return;
     b.style.display = lockSupported() ? "" : "none";
-    b.textContent = lockCred() ? "Face ID lock: On (tap to turn off)" : "Turn on Face ID lock";
+    var ls = document.getElementById("lockToggleSub");
+    if (ls) ls.textContent = lockCred() ? "On \u00b7 tap to turn off" : "Off \u00b7 tap to turn on"; else b.textContent = lockCred() ? "Face ID lock: On (tap to turn off)" : "Turn on Face ID lock";
   }
   function openSecurity() {
     var c = secCfg();
@@ -13023,6 +13112,8 @@
       if (TEAM.on) applyTeamVisibility();
       updateCoachHeadline();
       updateLockBtn();
+      syncSettingsHome();
+      setShow("home");
       openMenuModal();
     });
     document.getElementById("closeMenuModal").addEventListener("click", closeMenuModal);
@@ -13213,7 +13304,7 @@
 
     document.getElementById("setAutoAdvance").addEventListener("change", function (e) { state.autoAdvance = e.target.checked; saveState(); showToast(state.autoAdvance ? "Auto-advance on" : "Auto-advance off"); });
     document.getElementById("openFuRulesBtn").addEventListener("click", function () { closeMenuModal(); openFuRules(); });
-    document.getElementById("openMyDayBtn").addEventListener("click", function () { closeMenuModal(); openBrief(); });
+
     document.getElementById("toggleQueueBtn").addEventListener("click", function () {
       queueHidden = !queueHidden;
       state.showUpNext = !queueHidden; saveState();
