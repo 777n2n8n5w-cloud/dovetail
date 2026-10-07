@@ -3,7 +3,7 @@
 <head>
 <script id="customerConfig" type="application/json">{}</script>
 <meta charset="UTF-8">
-<meta name="dovetail-build" content="2026-11-16">
+<meta name="dovetail-build" content="2026-11-17">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -55,7 +55,7 @@
     --call-shadow: 0 12px 30px rgba(62,100,230,0.45);
     --tab-active-bg: linear-gradient(180deg, #5A80FF, #3E64E6);
     --card-shadow: 0 22px 44px rgba(3,6,20,0.55);
-    --header-bg: rgba(13,18,36,0.42); --header-blur: saturate(170%) blur(18px);
+    --header-bg: rgba(13,18,36,0.6); --header-blur: saturate(170%) blur(18px);
     --font-body: 'Archivo', system-ui, -apple-system, sans-serif;
     --font-display: 'Archivo', system-ui, -apple-system, sans-serif;
     --radius-l: 22px; --radius-m: 14px; --radius-s: 10px;
@@ -72,7 +72,7 @@
     --call-shadow: 0 12px 26px rgba(37,80,221,0.30);
     --tab-active-bg: linear-gradient(180deg, #3B66F0, #2550DD);
     --card-shadow: 0 16px 36px rgba(17,23,46,0.10);
-    --header-bg: rgba(236,239,247,0.5); --header-blur: saturate(170%) blur(18px);
+    --header-bg: rgba(236,239,247,0.66); --header-blur: saturate(170%) blur(18px);
     --font-body: 'Archivo', system-ui, -apple-system, sans-serif;
     --font-display: 'Archivo', system-ui, -apple-system, sans-serif;
     --radius-l: 22px; --radius-m: 14px; --radius-s: 10px;
@@ -89,7 +89,7 @@
     --call-shadow: 0 12px 26px rgba(37,80,221,0.30);
     --tab-active-bg: linear-gradient(180deg, #3B66F0, #2550DD);
     --card-shadow: 0 16px 36px rgba(17,23,46,0.10);
-    --header-bg: rgba(236,239,247,0.5); --header-blur: saturate(170%) blur(18px);
+    --header-bg: rgba(236,239,247,0.66); --header-blur: saturate(170%) blur(18px);
     --font-body: 'Archivo', system-ui, -apple-system, sans-serif;
     --font-display: 'Archivo', system-ui, -apple-system, sans-serif;
     --radius-l: 22px; --radius-m: 14px; --radius-s: 10px;
@@ -5636,6 +5636,10 @@
     body.st-live #viewTabs { margin-top: 8px; margin-bottom: 10px; }
     body.st-live .outcomes .out-btn { min-height: 50px; }
   }
+  /* ---- Header bar runs edge to edge and up under the status bar, so it sits flush with the phone ---- */
+  header.top { margin-left: -16px; margin-right: -16px; padding-left: 16px; padding-right: 16px;
+    top: 0; margin-top: calc(-1 * env(safe-area-inset-top, 0px)); padding-top: calc(18px + env(safe-area-inset-top, 0px)); }
+  @media (max-height: 760px) { header.top { padding-top: calc(10px + env(safe-area-inset-top, 0px)); } }
   /* Motion off (Settings) or reduced motion: everything still works, nothing moves */
   html[data-motion="off"] #horizon, html[data-motion="off"] .rh-pop { animation: none !important; transition: none !important; }
   @media (prefers-reduced-motion: reduce) { #horizon, .rh-pop, .rhythm .rh-track .bar-fill { animation: none !important; transition: none !important; } }
@@ -5882,7 +5886,7 @@
     </div>
 
     <div style="margin-top:22px;padding-top:14px;border-top:1px solid var(--border);text-align:center;">
-      <div style="font-size:11px;color:var(--text-faint);">Build 2026-11-16 · Team · Updates install automatically after midnight.</div>
+      <div style="font-size:11px;color:var(--text-faint);">Build 2026-11-17 · Team · Updates install automatically after midnight.</div>
       <div id="updNote"></div>
     </div>
   </div>
