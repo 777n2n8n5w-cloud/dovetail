@@ -3,7 +3,7 @@
 <head>
 <script id="customerConfig" type="application/json">{}</script>
 <meta charset="UTF-8">
-<meta name="dovetail-build" content="2026-11-18">
+<meta name="dovetail-build" content="2026-11-19">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5643,6 +5643,54 @@
   header.top { margin-left: -16px; margin-right: -16px; padding-left: 16px; padding-right: 16px;
     top: 0; margin-top: calc(-1 * env(safe-area-inset-top, 0px)); padding-top: calc(18px + env(safe-area-inset-top, 0px)); }
   @media (max-height: 760px) { header.top { padding-top: calc(10px + env(safe-area-inset-top, 0px)); } }
+
+  /* ---- Admin controls: six categories on one screen, decisions first ---- */
+  #adminModalBody { min-height: min(640px, 84vh); }   /* same sheet height on every view, so it doesn't jump */
+  #adminModalBody h3 { margin-bottom: 2px; }
+  .hub-who { margin-bottom: 4px; }
+  .hub-needs { margin-top: 14px; border-radius: var(--radius-m, 14px); overflow: hidden; border: 1px solid var(--notinterested);
+    border-color: color-mix(in srgb, var(--notinterested) 40%, var(--border)); background: var(--surface-raised); background: color-mix(in srgb, var(--notinterested) 8%, var(--surface-raised)); }
+  .hub-needs-h { padding: 10px 12px 0; font-size: 12.5px; font-weight: 700; color: var(--notinterested); }
+  .hub-need { width: 100%; display: flex; align-items: center; gap: 10px; padding: 8px 12px 10px; margin: 0; background: none; border: 0; color: var(--text);
+    font: inherit; font-size: 14px; font-weight: 600; text-align: left; cursor: pointer; }
+  .hub-need::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--notinterested);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--notinterested) 25%, transparent); }
+  .hub-need > span:first-child { flex: 1; min-width: 0; }
+  .hub-need + .hub-need { border-top: 1px solid color-mix(in srgb, var(--notinterested) 20%, var(--border)); padding-top: 10px; }
+  .hub-cats { margin-top: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .hub-cat { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; min-width: 0; min-height: 116px; padding: 12px 12px 13px; margin: 0;
+    border: 1px solid var(--border); border-radius: var(--radius-m, 14px); background: var(--surface-raised); color: var(--text); font: inherit; text-align: left; cursor: pointer;
+    transition: transform 0.12s ease; }
+  .hub-cat:active { transform: scale(0.97); }
+  .hub-cat.hot { border-color: var(--notinterested); border-color: color-mix(in srgb, var(--notinterested) 45%, var(--border)); }
+  .hub-cat-top { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-bottom: 8px; }
+  .hub-cat b { font-size: 15px; font-weight: 650; line-height: 1.2; }
+  .hub-cat-sub { font-size: 12px; line-height: 1.35; color: var(--text-dim); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .hub-n { font-size: 12px; font-weight: 700; color: var(--text-faint); font-variant-numeric: tabular-nums; }
+  .hub-flag { min-width: 0; padding: 3px 8px; border-radius: 999px; font-size: 11.5px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    color: var(--notinterested); background: var(--surface); background: color-mix(in srgb, var(--notinterested) 15%, transparent); }
+  .hub-ic { flex: none; width: 32px; height: 32px; border-radius: 9px; display: flex; align-items: center; justify-content: center;
+    color: var(--hc, var(--accent)); background: var(--surface); background: color-mix(in srgb, var(--hc, var(--accent)) 16%, transparent); }
+  .hub-ic svg { width: 17px; height: 17px; }
+  .hub-cat .hub-ic { width: 38px; height: 38px; border-radius: 11px; }
+  .hub-cat .hub-ic svg { width: 19px; height: 19px; }
+  .hub-back { margin: -6px 0 6px -6px; padding: 6px; background: none; border: 0; color: var(--accent); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
+  .hub-view-h { margin: 0 0 14px; }
+  .hub-group { border: 1px solid var(--border); border-radius: var(--radius-m, 14px); background: var(--surface-raised); overflow: hidden; }
+  .hub-row { position: relative; width: 100%; min-height: 60px; display: flex; align-items: center; gap: 12px; padding: 11px 12px; margin: 0;
+    background: none; border: 0; border-radius: 0; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
+  .hub-row + .hub-row::before { content: ""; position: absolute; top: 0; left: 56px; right: 0; height: 1px; background: var(--border); }
+  .hub-row:active { background: var(--surface); background: color-mix(in srgb, var(--text) 6%, transparent); }
+  .hub-row:focus-visible, .hub-need:focus-visible, .hub-cat:focus-visible, .hub-back:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .hub-t { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+  .hub-t b { font-size: 15px; font-weight: 600; line-height: 1.25; }
+  .hub-t span { font-size: 12.5px; line-height: 1.35; color: var(--text-dim); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .hub-badge { flex: none; max-width: 40%; padding: 3px 9px; border-radius: 999px; font-size: 11.5px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    color: var(--hc, var(--accent)); background: var(--surface); background: color-mix(in srgb, var(--hc, var(--accent)) 16%, transparent); }
+  .hub-row.hot .hub-badge { color: var(--notinterested); background: color-mix(in srgb, var(--notinterested) 15%, transparent); }
+  .hub-go { flex: none; color: var(--text-faint); font-size: 20px; line-height: 1; }
+  .hub-note { margin-top: 18px; padding: 0 4px; font-size: 12px; line-height: 1.5; color: var(--text-faint); word-break: break-word; }
+  @media (max-width: 340px) { .hub-cats { gap: 8px; } .hub-cat { padding: 10px; } .hub-cat b { font-size: 14px; } }
   /* Motion off (Settings) or reduced motion: everything still works, nothing moves */
   html[data-motion="off"] #horizon, html[data-motion="off"] .rh-pop { animation: none !important; transition: none !important; }
   @media (prefers-reduced-motion: reduce) { #horizon, .rh-pop, .rhythm .rh-track .bar-fill { animation: none !important; transition: none !important; } }
@@ -5889,7 +5937,7 @@
     </div>
 
     <div style="margin-top:22px;padding-top:14px;border-top:1px solid var(--border);text-align:center;">
-      <div style="font-size:11px;color:var(--text-faint);">Build 2026-11-18 · Team · Updates install automatically after midnight.</div>
+      <div style="font-size:11px;color:var(--text-faint);">Build 2026-11-19 · Team · Updates install automatically after midnight.</div>
       <div id="updNote"></div>
     </div>
   </div>
@@ -12750,68 +12798,125 @@
   function closeAdminHub() { document.getElementById("adminModal").classList.remove("show"); }
   function openAdminHub() {
     closeMenuModal();
+    var admin = isAdmin();
     var recapReady = new Date().getHours() >= 17 && state.recapSeen !== localDateStr(new Date());
     var members = Object.keys(TEAM.members).map(function (k) { return TEAM.members[k]; });
     var active = members.filter(function (m) { return m.active; }).length;
-    function tile(id, icon, title, sub, hot) {
-      return '<button class="hub-tile' + (hot ? ' hot' : '') + '" id="' + id + '" type="button"><span class="hub-ico">' + icon + '</span>' +
-        '<span class="hub-txt"><b>' + title + '</b><span>' + sub + '</span></span><span class="hub-go">\u203a</span></button>';
-    }
+    var od = overdueWarm().length, vp = vaultPending().length, vRules = VAULT.status === "rules";
+    var live = !!(contestCfg() && contestCfg().end > Date.now());
+    var nDnc = Object.keys(dncNums()).length + state.leads.filter(function (l) { return l.dnc; }).length;
+    var nLinks = infoCfg().links.length;
     var I = function (d) { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + d + '</svg>'; };
-    document.getElementById("adminModalBody").innerHTML =
-      '<button class="close-x" id="adminClose">&times;</button><h3>Admin controls</h3>' +
-      '<p class="modal-sub">Signed in as ' + escapeHtml(TEAM.me ? TEAM.me.name : "") + ' (admin). Only you see this.</p>' +
-      tile("hubTeam", I('<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7"/><path d="M18 14.8c2 .7 3.2 2.4 3.6 5.2"/>'),
-        "Team &amp; logins", "Create usernames and passwords for reps, turn access off or on, remove people \u00b7 " + active + " active") +
-      tile("hubScore", I('<path d="M5 20V10M12 20V4M19 20v-7"/>'), "Scoreboard &amp; daily recap",
-        recapReady ? "Today\u2019s recap is ready" : "Calls, conversations, interested and pipeline by rep", recapReady) +
-      tile("hubCoach", I('<path d="M4 19l5-5 4 4 7-8"/><path d="M15 10h5v5"/>'), "Sales coach", "What\u2019s working, what isn\u2019t, and who needs help") +
-      tile("hubVault", I('<rect x="3" y="5" width="18" height="15" rx="2"/><circle cx="12" cy="12.5" r="3"/><path d="M12 9.5V8M7 5V3.5M17 5V3.5"/>'), "Investor Vault",
-        vaultPending().length ? vaultPending().length + " removal request" + (vaultPending().length === 1 ? "" : "s") + " waiting for you" : (VAULT.status === "rules" ? "One step left to switch it on" : "Every investor, their deals and key dates"), vaultPending().length > 0 || VAULT.status === "rules") +
-      tile("hubFollow", I('<path d="M4 12a8 8 0 1 0 2.3-5.6"/><path d="M4 4v4h4"/><path d="M12 8v4l3 2"/>'), "Follow-up rules", fuSummary()) +
-      tile("hubPacing", I('<path d="M12 3v3M12 18v3M4.2 7l2.6 1.5M17.2 15.5l2.6 1.5M4.2 17l2.6-1.5M17.2 8.5l2.6-1.5"/><circle cx="12" cy="12" r="3.5"/>'), "Call pacing",
-        "Keeps your team\u2019s numbers from being labeled spam \u00b7 " + pacingCfg().perDay + " calls a day per phone") +
-      tile("hubSecurity", I('<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>'), "Security", secCfg().requireLock ? "Face ID lock required for everyone" : "Face ID lock for your team") +
-      (isOwnerMaster() ? tile("hubCustomer", I('<rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 18v3"/>'), "Customer copy", "Make a branded app for another office") : "") +
-      tile("hubInfo", I('<path d="M21 3L10 14"/><path d="M21 3l-7 18-4-7-7-4 18-7z"/>'), "Info links", (infoCfg().links.length ? infoCfg().links.length + " link" + (infoCfg().links.length === 1 ? "" : "s") + " your team can text with Send info" : "Add the pages your team can text to leads")) +
-      tile("hubOverdue", I('<circle cx="12" cy="12" r="9"/><path d="M12 7v5"/><path d="M12 16h.01"/>'), "Overdue follow-ups",
-        overdueWarm().length ? overdueWarm().length + " interested lead" + (overdueWarm().length === 1 ? "" : "s") + " more than a day late" : "None right now", overdueWarm().length > 0) +
-      tile("hubGoals", I('<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>'), "Monthly goals", "Targets and pace for each rep") +
-      tile("hubRoi", I('<path d="M4 20h16"/><path d="M7 16l4-4 3 3 5-6"/>'), "List ROI", "Which lead lists produce investors") +
-      tile("hubReport", I('<path d="M6 3h9l3 3v15H6z"/><path d="M9 13h6"/><path d="M9 17h6"/><path d="M9 9h2"/>'), "Results report", "Weekly results to share or save as PDF") +
-      tile("hubContest", I('<path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 6h3v2a3 3 0 0 1-3 3"/><path d="M7 6H4v2a3 3 0 0 0 3 3"/>'), "Contest",
-        contestCfg() && contestCfg().end > Date.now() ? "Live now: " + (CONTEST_METRICS[contestCfg().metric] || "") : "Start a competition for the team", !!(contestCfg() && contestCfg().end > Date.now())) +
-      tile("hubDnc", I('<circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/>'), "Do Not Call list", (Object.keys(dncNums()).length + state.leads.filter(function (l) { return l.dnc; }).length) + " blocked for everyone") +
-      tile("hubAnswers", I('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'), "Answer times", "When your investors actually pick up") +
-      tile("hubLists", I('<path d="M8 6h13"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/>'), "Lead lists", "Choose who calls each list, or delete one") +
-      tile("hubLeads", I('<path d="M12 5v14M5 12h14"/>'), "Add leads", "Upload Excel, CSV, text or contacts") +
-      tile("hubExport", I('<path d="M12 4v11M7 10l5 5 5-5"/><path d="M5 20h14"/>'), "Export call log", "A CSV of every call, for your records") +
-      tile("hubBackup", I('<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 4v6h8V4"/>'), "Download full backup", "Leads, calls and follow-ups in one file") +
-      '<div class="hub-note">Reps sign in at <b>' + escapeHtml(TEAM_LINK) + '</b> with the logins you create in Team &amp; logins.</div>';
+    function row(id, icon, title, sub, badge, hot) {
+      return '<button class="hub-row' + (hot ? ' hot' : '') + '" id="' + id + '" type="button">' +
+        '<span class="hub-ic">' + I(icon) + '</span><span class="hub-t"><b>' + title + '</b><span>' + sub + '</span></span>' +
+        (badge ? '<span class="hub-badge">' + badge + '</span>' : '') + '<span class="hub-go" aria-hidden="true">›</span></button>';
+    }
+    // [key, name, tone, icon, flag when something needs attention, summary, rows]
+    var GROUPS = [
+      ["team", "Team", "accent", '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7"/><path d="M18 14.8c2 .7 3.2 2.4 3.6 5.2"/>',
+        recapReady ? "Ready" : live ? "Live" : "", (admin ? active + " active · " : "") + "scoreboard, coach" + (admin ? ", goals" : ""), [
+        admin && row("hubTeam", '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7"/><path d="M18 14.8c2 .7 3.2 2.4 3.6 5.2"/>',
+          "Team &amp; logins", "Logins and who has access", active + " active"),
+        row("hubScore", '<path d="M5 20V10M12 20V4M19 20v-7"/>', "Scoreboard &amp; daily recap", recapReady ? "Today’s recap is ready" : "Calls and results by rep", recapReady ? "Ready" : "", recapReady),
+        row("hubCoach", '<path d="M4 19l5-5 4 4 7-8"/><path d="M15 10h5v5"/>', "Sales coach", "What’s working, who needs help"),
+        admin && row("hubGoals", '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>', "Monthly goals", "Targets and pace per rep"),
+        admin && row("hubContest", '<path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 6h3v2a3 3 0 0 1-3 3"/><path d="M7 6H4v2a3 3 0 0 0 3 3"/>', "Contest",
+          live ? "Live: " + (CONTEST_METRICS[contestCfg().metric] || "") : "Start a team competition", live ? "Live" : "")
+      ]],
+      ["investors", "Investors", "gold", '<rect x="3" y="5" width="18" height="15" rx="2"/><circle cx="12" cy="12.5" r="3"/><path d="M12 9.5V8M7 5V3.5M17 5V3.5"/>',
+        od ? od + " late" : (admin && vp) ? "Review" : (admin && vRules) ? "Set up" : "", (admin ? "Vault and " : "") + "overdue follow-ups", [
+        admin && row("hubVault", '<rect x="3" y="5" width="18" height="15" rx="2"/><circle cx="12" cy="12.5" r="3"/><path d="M12 9.5V8M7 5V3.5M17 5V3.5"/>', "Investor Vault",
+          vp ? vp + " removal request" + (vp === 1 ? "" : "s") + " waiting for you" : vRules ? "One step left to switch it on" : "Investors, deals and key dates", vp ? String(vp) : vRules ? "Set up" : "", vp > 0 || vRules),
+        row("hubOverdue", '<circle cx="12" cy="12" r="9"/><path d="M12 7v5"/><path d="M12 16h.01"/>', "Overdue follow-ups",
+          od ? "Interested leads over a day late" : "None right now", od ? od + " late" : "", od > 0)
+      ]],
+      ["leads", "Leads", "interested", '<path d="M8 6h13"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/>',
+        "", state.leads.length + " leads · lists, Do Not Call", [
+        admin && row("hubLeads", '<path d="M12 5v14M5 12h14"/>', "Add leads", "Excel, CSV, text or contacts"),
+        admin && row("hubLists", '<path d="M8 6h13"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/>', "Lead lists", "Who calls each list"),
+        admin && row("hubDnc", '<circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/>', "Do Not Call list", nDnc + " blocked for everyone")
+      ]],
+      ["rules", "Calling rules", "voicemail", '<path d="M4 12a8 8 0 1 0 2.3-5.6"/><path d="M4 4v4h4"/><path d="M12 8v4l3 2"/>',
+        "", "Up to " + fuCfg().tries + " tries · " + pacingCfg().perDay + " calls a day", [
+        admin && row("hubFollow", '<path d="M4 12a8 8 0 1 0 2.3-5.6"/><path d="M4 4v4h4"/><path d="M12 8v4l3 2"/>', "Follow-up rules", fuSummary()),
+        admin && row("hubPacing", '<path d="M12 3v3M12 18v3M4.2 7l2.6 1.5M17.2 15.5l2.6 1.5M4.2 17l2.6-1.5M17.2 8.5l2.6-1.5"/><circle cx="12" cy="12" r="3.5"/>', "Call pacing",
+          pacingCfg().perDay + " calls a day per phone, so numbers aren’t flagged"),
+        admin && row("hubInfo", '<path d="M21 3L10 14"/><path d="M21 3l-7 18-4-7-7-4 18-7z"/>', "Info links",
+          nLinks ? nLinks + " page" + (nLinks === 1 ? "" : "s") + " your team can text" : "Pages your team can text to leads")
+      ]],
+      ["reports", "Reports", "callback", '<path d="M5 20V10M12 20V4M19 20v-7"/>', "", "Results, answer times, list ROI", [
+        row("hubReport", '<path d="M6 3h9l3 3v15H6z"/><path d="M9 13h6"/><path d="M9 17h6"/><path d="M9 9h2"/>', "Results report", "Weekly results, share or save as PDF"),
+        row("hubAnswers", '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>', "Answer times", "When investors actually pick up"),
+        row("hubRoi", '<path d="M4 20h16"/><path d="M7 16l4-4 3 3 5-6"/>', "List ROI", "Which lead lists produce investors")
+      ]],
+      ["account", "Account &amp; data", "noanswer", '<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>', "", "Security, export, backup", [
+        admin && row("hubSecurity", '<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>', "Security",
+          secCfg().requireLock ? "Face ID required for everyone" : "Face ID lock for your team", secCfg().requireLock ? "On" : ""),
+        admin && row("hubExport", '<path d="M12 4v11M7 10l5 5 5-5"/><path d="M5 20h14"/>', "Export call log", "A CSV of every call"),
+        admin && row("hubBackup", '<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 4v6h8V4"/>', "Full backup", "Leads, calls and follow-ups in one file"),
+        admin && isOwnerMaster() && row("hubCustomer", '<rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 18v3"/>', "Customer copy", "Branded app for another office")
+      ]]
+    ];
+    // decisions waiting today, pulled to the top
+    var needs = [];
+    if (od) needs.push(["hubOverdue", od + " interested lead" + (od === 1 ? " is" : "s are") + " more than a day late"]);
+    if (admin && vp) needs.push(["hubVault", vp + " Vault removal request" + (vp === 1 ? " is" : "s are") + " waiting for you"]);
+    if (admin && vRules && !vp) needs.push(["hubVault", "Investor Vault has one step left to switch on"]);
+    if (recapReady) needs.push(["hubScore", "Today’s recap is ready"]);
+    var cats = GROUPS.map(function (g) { return { key: g[0], name: g[1], tone: g[2], icon: g[3], flag: g[4], sub: g[5], rows: g[6].filter(Boolean) }; })
+      .filter(function (c) { return c.rows.length; });
+    var grid = '<div class="hub-cats">' + cats.map(function (c) {
+      return '<button class="hub-cat' + (c.flag ? ' hot' : '') + '" type="button" data-hub-cat="' + c.key + '" style="--hc:var(--' + c.tone + ')">' +
+        '<span class="hub-cat-top"><span class="hub-ic">' + I(c.icon) + '</span>' + (c.flag ? '<span class="hub-flag">' + c.flag + '</span>' : '<span class="hub-n">' + c.rows.length + '</span>') + '</span>' +
+        '<b>' + c.name + '</b><span class="hub-cat-sub">' + c.sub + '</span></button>';
+    }).join("") + '</div>';
+    var views = cats.map(function (c) {
+      return '<div class="hub-view" data-hub-view="' + c.key + '" hidden><button class="hub-back" type="button" data-hub-back>‹ Admin controls</button>' +
+        '<h3 class="hub-view-h">' + c.name + '</h3><div class="hub-group" style="--hc:var(--' + c.tone + ')">' + c.rows.join("") + '</div></div>';
+    }).join("");
+    var body = document.getElementById("adminModalBody");
+    body.innerHTML =
+      '<button class="close-x" id="adminClose" aria-label="Close">&times;</button>' +
+      '<div class="hub-home" data-hub-view="home"><h3>Admin controls</h3>' +
+      '<p class="modal-sub hub-who">Signed in as ' + escapeHtml(TEAM.me ? TEAM.me.name : "") + (admin ? ' (admin)' : '') + '. Only you see this.</p>' +
+      (needs.length ? '<div class="hub-needs"><div class="hub-needs-h">Needs you</div>' +
+        needs.map(function (n) { return '<button class="hub-need" type="button" data-hub-go="' + n[0] + '"><span>' + n[1] + '</span><span class="hub-go" aria-hidden="true">›</span></button>'; }).join("") + '</div>' : '') +
+      grid +
+      (admin ? '<div class="hub-note">Reps sign in at <b>' + escapeHtml(TEAM_LINK) + '</b> with the logins you create in Team &amp; logins.</div>' : '') + '</div>' +
+      views;
+    function hubShow(key) {
+      body.querySelectorAll("[data-hub-view]").forEach(function (v) { v.hidden = v.getAttribute("data-hub-view") !== key; });
+      body.scrollTop = 0;
+    }
+    body.querySelectorAll("[data-hub-cat]").forEach(function (b) { b.addEventListener("click", function () { hubShow(b.getAttribute("data-hub-cat")); }); });
+    body.querySelectorAll("[data-hub-back]").forEach(function (b) { b.addEventListener("click", function () { hubShow("home"); }); });
     document.getElementById("adminModal").classList.add("show");
+    body.scrollTop = 0;
     document.getElementById("adminClose").addEventListener("click", closeAdminHub);
-    document.getElementById("hubTeam").addEventListener("click", function () { closeAdminHub(); openTeamPanel(); });
-    document.getElementById("hubScore").addEventListener("click", function () { closeAdminHub(); openScoreboard(); });
-    document.getElementById("hubCoach").addEventListener("click", function () { closeAdminHub(); openCoach("team"); });
-    document.getElementById("hubVault").addEventListener("click", function () { closeAdminHub(); state.activeView = "vault"; saveState(); render(); });
-    document.getElementById("hubPacing").addEventListener("click", function () { closeAdminHub(); openPacingEditor(); });
-    document.getElementById("hubFollow").addEventListener("click", function () { closeAdminHub(); openFuRules(); });
-    document.getElementById("hubInfo").addEventListener("click", function () { closeAdminHub(); openInfoEditor(); });
-    document.getElementById("hubOverdue").addEventListener("click", openOverdue);
-    document.getElementById("hubGoals").addEventListener("click", openGoals);
-    document.getElementById("hubRoi").addEventListener("click", openListRoi);
-    document.getElementById("hubSecurity").addEventListener("click", openSecurity);
-    document.getElementById("hubReport").addEventListener("click", function () { openReport("week"); });
-    document.getElementById("hubContest").addEventListener("click", openContestSetup);
-    document.getElementById("hubDnc").addEventListener("click", function () { openDnc(); });
-    document.getElementById("hubLists").addEventListener("click", openLists);
+    body.querySelectorAll("[data-hub-go]").forEach(function (b) {
+      b.addEventListener("click", function () { var t = document.getElementById(b.getAttribute("data-hub-go")); if (t) t.click(); });
+    });
+    (document.getElementById("hubTeam") || document.createElement("i")).addEventListener("click", function () { closeAdminHub(); openTeamPanel(); });
+    (document.getElementById("hubScore") || document.createElement("i")).addEventListener("click", function () { closeAdminHub(); openScoreboard(); });
+    (document.getElementById("hubCoach") || document.createElement("i")).addEventListener("click", function () { closeAdminHub(); openCoach("team"); });
+    (document.getElementById("hubVault") || document.createElement("i")).addEventListener("click", function () { closeAdminHub(); state.activeView = "vault"; saveState(); render(); });
+    (document.getElementById("hubPacing") || document.createElement("i")).addEventListener("click", function () { closeAdminHub(); openPacingEditor(); });
+    (document.getElementById("hubFollow") || document.createElement("i")).addEventListener("click", function () { closeAdminHub(); openFuRules(); });
+    (document.getElementById("hubInfo") || document.createElement("i")).addEventListener("click", function () { closeAdminHub(); openInfoEditor(); });
+    (document.getElementById("hubOverdue") || document.createElement("i")).addEventListener("click", openOverdue);
+    (document.getElementById("hubGoals") || document.createElement("i")).addEventListener("click", openGoals);
+    (document.getElementById("hubRoi") || document.createElement("i")).addEventListener("click", openListRoi);
+    (document.getElementById("hubSecurity") || document.createElement("i")).addEventListener("click", openSecurity);
+    (document.getElementById("hubReport") || document.createElement("i")).addEventListener("click", function () { openReport("week"); });
+    (document.getElementById("hubContest") || document.createElement("i")).addEventListener("click", openContestSetup);
+    (document.getElementById("hubDnc") || document.createElement("i")).addEventListener("click", function () { openDnc(); });
+    (document.getElementById("hubLists") || document.createElement("i")).addEventListener("click", openLists);
     var hcu = document.getElementById("hubCustomer"); if (hcu) hcu.addEventListener("click", openCustomerCopy);
-    document.getElementById("hubAnswers").addEventListener("click", function () { closeAdminHub(); openScoreboard("answers"); });
-    document.getElementById("hubLeads").addEventListener("click", function () { closeAdminHub(); openLoadModal(); switchTab("upload"); });
-    document.getElementById("hubExport").addEventListener("click", function () { closeAdminHub(); document.getElementById("menuExportBtn").click(); });
-    document.getElementById("hubBackup").addEventListener("click", function () { closeAdminHub(); document.getElementById("menuBackupBtn").click(); });
-    if (!isAdmin()) ["hubTeam", "hubInfo", "hubFollow", "hubPacing", "hubSecurity", "hubLeads", "hubExport", "hubBackup", "hubGoals", "hubContest", "hubCustomer", "hubVault", "hubDnc", "hubLists"]
-      .forEach(function (id) { var e = document.getElementById(id); if (e) e.remove(); });
+    (document.getElementById("hubAnswers") || document.createElement("i")).addEventListener("click", function () { closeAdminHub(); openScoreboard("answers"); });
+    (document.getElementById("hubLeads") || document.createElement("i")).addEventListener("click", function () { closeAdminHub(); openLoadModal(); switchTab("upload"); });
+    (document.getElementById("hubExport") || document.createElement("i")).addEventListener("click", function () { closeAdminHub(); document.getElementById("menuExportBtn").click(); });
+    (document.getElementById("hubBackup") || document.createElement("i")).addEventListener("click", function () { closeAdminHub(); document.getElementById("menuBackupBtn").click(); });
   }
 
   /** ---------- Automatic updates, installed overnight ---------- **/
