@@ -3,7 +3,7 @@
 <head>
 <script id="customerConfig" type="application/json">{}</script>
 <meta charset="UTF-8">
-<meta name="dovetail-build" content="2026-11-21">
+<meta name="dovetail-build" content="2026-11-22">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -6257,6 +6257,52 @@
   /* ---- Overdue run ---- */
   body.st-late #mainArea .card::before { background: var(--notinterested); }
   .od-run { width: 100%; margin: 2px 0 14px; padding: 13px; font-weight: 700; }
+
+  /* ---- Search: full screen, top-anchored, flush with the status bar and the keyboard ---- */
+  body.srch-open { overflow: hidden; }
+  .srch { position: fixed; left: 0; right: 0; top: 0; height: 100%; height: 100dvh; z-index: 120; display: flex; flex-direction: column;
+    background: var(--bg); background-image: var(--bg-image, none); background-size: var(--bg-size, auto); opacity: 0; transition: opacity 0.16s ease; }
+  .srch.show { opacity: 1; }
+  .srch[hidden] { display: none; }
+  .srch-bar { flex: none; display: flex; align-items: center; gap: 10px; padding: calc(12px + env(safe-area-inset-top, 0px)) 16px 10px;
+    background: var(--header-bg, var(--bg)); -webkit-backdrop-filter: var(--header-blur, none); backdrop-filter: var(--header-blur, none);
+    border-bottom: 1px solid var(--border); border-bottom-color: color-mix(in srgb, var(--border) 70%, transparent); }
+  .srch-bar, .srch-scope, .srch-out { width: 100%; max-width: 480px; margin: 0 auto; box-sizing: border-box; }
+  .srch-field { flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 6px 0 12px; margin: 0 !important;
+    border-radius: var(--radius-m, 12px); border: 1px solid var(--border); background: var(--surface-raised); color: var(--text-faint); cursor: text; }
+  .srch-field:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent); }
+  .srch-field svg { flex: none; width: 18px; height: 18px; }
+  .srch-field input { flex: 1; min-width: 0; height: 100%; border: 0 !important; outline: none !important; background: transparent !important; box-shadow: none !important;
+    color: var(--text); font: inherit; font-size: 16px; padding: 0 !important; -webkit-appearance: none; appearance: none; }
+  .srch-field input::-webkit-search-cancel-button, .srch-field input::-webkit-search-decoration { -webkit-appearance: none; display: none; }
+  .srch-field input::placeholder { color: var(--text-faint); }
+  .srch-clear { flex: none; width: 30px; height: 30px; border-radius: 50%; border: 0; background: var(--border); color: var(--text); font-size: 18px; line-height: 1; cursor: pointer; }
+  .srch-cancel { flex: none; background: none; border: 0; padding: 8px 2px; color: var(--accent); font: inherit; font-size: 15.5px; font-weight: 600; cursor: pointer; }
+  .srch-scope { flex: none; display: flex; gap: 6px; padding: 10px 16px 0; overflow-x: auto; scrollbar-width: none; }
+  .srch-scope[hidden] { display: none; }
+  .srch-out { flex: 1; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; padding: 6px 16px calc(24px + env(safe-area-inset-bottom, 0px)); }
+  .srch-head { display: flex; align-items: baseline; gap: 6px; margin: 16px 4px 7px; font-size: 12.5px; font-weight: 700; color: var(--text-faint); }
+  .srch-head span { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .srch-group { border: 1px solid var(--border); border-radius: var(--radius-m, 14px); background: var(--surface-raised); overflow: hidden; }
+  .srch-row { position: relative; display: flex; align-items: center; }
+  .srch-row + .srch-row::before { content: ""; position: absolute; top: 0; left: 62px; right: 0; height: 1px; background: var(--border); }
+  .srch-main { flex: 1; min-width: 0; display: flex; align-items: center; gap: 12px; padding: 10px 6px 10px 12px; min-height: 60px; margin: 0;
+    background: none; border: 0; color: var(--text); font: inherit; text-align: left; cursor: pointer; }
+  .srch-main:active { background: color-mix(in srgb, var(--text) 6%, transparent); }
+  .srch-av { flex: none; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px;
+    color: var(--hc, var(--accent)); background: var(--surface); background: color-mix(in srgb, var(--hc, var(--accent)) 16%, transparent); }
+  .srch-t { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+  .srch-t b { font-size: 15.5px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .srch-t > span { font-size: 12.5px; line-height: 1.35; color: var(--text-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .srch-t mark { background: none; color: var(--accent); font-weight: 700; padding: 0; }
+  .srch-call { flex: none; width: 40px; height: 40px; margin-right: 10px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    background: var(--call-bg, var(--accent)); color: var(--call-text, var(--accent-text)); box-shadow: none; }
+  .srch-call svg { width: 18px; height: 18px; }
+  .srch-tip { margin: 14px 4px 0; font-size: 12.5px; line-height: 1.5; color: var(--text-faint); }
+  .srch-empty { margin-top: 28px; text-align: center; display: flex; flex-direction: column; gap: 6px; }
+  .srch-empty b { font-size: 15px; color: var(--text); overflow-wrap: anywhere; }
+  .srch-empty span { font-size: 13px; color: var(--text-dim); }
+  html[data-motion="off"] .srch { transition: none; }
   /* Motion off (Settings) or reduced motion: everything still works, nothing moves */
   html[data-motion="off"] #horizon, html[data-motion="off"] .rh-pop { animation: none !important; transition: none !important; }
   @media (prefers-reduced-motion: reduce) { #horizon, .rh-pop, .rhythm .rh-track .bar-fill { animation: none !important; transition: none !important; } }
@@ -6437,7 +6483,7 @@
         <button class="hub-cat admin-only set-data-cat" type="button" data-set-cat="data" style="--hc:var(--noanswer)"><span class="hub-cat-top"><span class="hub-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="8" ry="3"/><path d="M4 5.5v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/><path d="M4 11.5v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></span><span class="hub-n" data-set-n="data"></span></span><b>Data</b><span class="hub-cat-sub" data-set-sum="data"></span></button>
       </div>
       <div class="set-foot">
-        <div>Build 2026-11-21 · Team · Updates install automatically after midnight.</div>
+        <div>Build 2026-11-22 · Team · Updates install automatically after midnight.</div>
         <div id="updNote"></div>
       </div>
     </div>
@@ -6635,6 +6681,18 @@
 
 <div class="text-prompt" id="textPrompt" style="display:none" role="dialog" aria-label="Send a follow-up text"></div>
 
+<div class="srch" id="searchOverlay" role="dialog" aria-modal="true" aria-label="Search" hidden>
+  <div class="srch-bar">
+    <label class="srch-field" for="gsQ">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
+      <input type="search" id="gsQ" placeholder="Name, phone, company or deal" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="search">
+      <button type="button" class="srch-clear" id="gsClear" aria-label="Clear search" hidden>&times;</button>
+    </label>
+    <button type="button" class="srch-cancel" id="gsCancel">Cancel</button>
+  </div>
+  <div class="srch-scope" id="gsScope" hidden></div>
+  <div class="srch-out" id="gsOut"></div>
+</div>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -13301,19 +13359,31 @@
 
   /* ----- search everything: investors in the Vault and every lead you can see ----- */
   function searchAll(q) {
-    q = String(q || "").trim(); var ql = q.toLowerCase(), qd = q.replace(/\D/g, "");
-    if (ql.length < 2 && qd.length < 3) return null;
-    var hit = function (name, phone, extra) {
-      if (qd.length >= 3 && String(phone || "").replace(/\D/g, "").indexOf(qd) !== -1) return true;
-      return ql.length >= 2 && (String(name || "").toLowerCase().indexOf(ql) !== -1 || String(extra || "").toLowerCase().indexOf(ql) !== -1);
-    };
+    q = String(q || "").trim();
+    var ql = q.toLowerCase(), qd = q.replace(/\D/g, ""), letters = /[a-z]/i.test(q);
+    if ((letters && ql.replace(/[^a-z0-9]/g, "").length < 2) || (!letters && qd.length < 3)) return null;
+    var toks = letters ? ql.split(/[\s,]+/).filter(Boolean) : [];
+    var qd2 = qd.length === 11 && qd.charAt(0) === "1" ? qd.slice(1) : qd;
+    function score(name, phone, extra) {
+      var n = String(name || "").toLowerCase(), pd = String(phone || "").replace(/\D/g, ""), x = String(extra || "").toLowerCase(), sc = 0;
+      if (!letters && qd.length >= 3 && (pd.indexOf(qd) !== -1 || pd.indexOf(qd2) !== -1)) sc = pd.slice(-qd2.length) === qd2 ? 95 : 80;
+      if (toks.length && toks.every(function (t) { return n.indexOf(t) !== -1 || x.indexOf(t) !== -1 || (/^\d+$/.test(t) && t.length >= 3 && pd.indexOf(t) !== -1); })) {
+        var inName = toks.every(function (t) { return n.indexOf(t) !== -1; });
+        var starts = n.indexOf(ql) === 0 ? 100 : toks.every(function (t) { return (" " + n).indexOf(" " + t) !== -1; }) ? 88 : inName ? 70 : 45;
+        sc = Math.max(sc, starts);
+      }
+      return sc;
+    }
     var me = TEAM.me ? TEAM.me.uid : null;
-    var inv = vaultRecords().filter(function (r) {
-      return hit(r.name, (r.phone || "") + " " + (r.phoneRaw || ""), (r.investments || []).map(function (i) { return i.deal; }).join(" ") + " " + (r.interests || "") + " " + (r.notes || ""));
-    }).sort(function (a, b) { return String(a.name).localeCompare(String(b.name)); });
-    var leads = state.leads.filter(function (l) { return (!TEAM.on || canSeeTeam() || !l.owner || l.owner.uid === me) && hit(l.name, l.phone, l.notes); })
-      .sort(function (a, b) { return String(a.name).localeCompare(String(b.name)); });
-    return { inv: inv.slice(0, 25), invN: inv.length, leads: leads.slice(0, 40), leadN: leads.length };
+    var inv = vaultRecords().map(function (r) {
+      return { r: r, s: score(r.name, (r.phone || "") + " " + (r.phoneRaw || ""), (r.investments || []).map(function (i) { return i.deal; }).join(" ") + " " + (r.interests || "") + " " + (r.notes || "") + " " + (r.ownerName || "") + " " + (r.email || "")) };
+    }).filter(function (x) { return x.s > 0; }).sort(function (a, b) { return (b.s - a.s) || String(a.r.name).localeCompare(String(b.r.name)); }).map(function (x) { return x.r; });
+    var leads = state.leads.filter(function (l) { return !TEAM.on || canSeeTeam() || !l.owner || l.owner.uid === me; }).map(function (l) {
+      return { l: l, s: score(l.name, (l.phone || "") + " " + (l.phoneRaw || ""), [l.notes, l.source, l.stage, l.owner ? l.owner.name : "", l.email, l.company].filter(Boolean).join(" ")) };
+    }).filter(function (x) { return x.s > 0; }).sort(function (a, b) {
+      return (b.s - a.s) || (stageRank(b.l.stage) - stageRank(a.l.stage)) || String(a.l.name).localeCompare(String(b.l.name));
+    }).map(function (x) { return x.l; });
+    return { inv: inv.slice(0, 25), invN: inv.length, leads: leads.slice(0, 40), leadN: leads.length, toks: toks, q: q };
   }
   /** ---------- Keypad: dial any number, like the iPhone keypad; save it afterward only if you want ---------- **/
   var kpRaw = "";
@@ -13415,31 +13485,111 @@
     });
   }
 
-  function openSearch() {
-    var hint = '<p class="ll-hint">Search your investors and every lead you can see, by name, phone, company or deal.</p>';
-    featOpen('<h3>Search</h3><input type="search" id="gsQ" placeholder="Name, phone, company or deal" autocomplete="off" autocapitalize="none" spellcheck="false" enterkeyhint="search"><div id="gsOut" class="gs-out">' + hint + '</div>');
-    var inp = document.getElementById("gsQ"), out = document.getElementById("gsOut"), timer = null;
-    var draw = function () {
-      var r = searchAll(inp.value);
-      if (!r) { out.innerHTML = hint; return; }
-      if (!r.invN && !r.leadN) { out.innerHTML = '<div class="pipe-empty">No one matches \u201c' + escapeHtml(inp.value.trim()) + '\u201d.</div>'; return; }
-      out.innerHTML =
-        (r.invN ? '<div class="gs-head">Investors \u00b7 ' + r.invN + '</div>' + r.inv.map(function (v) {
-          var deals = (v.investments || []).map(function (i) { return i.deal; }).filter(Boolean).slice(0, 2).join(", ");
-          return '<button class="gs-row" data-gs-vault="' + escapeHtml(v.id) + '"><b>' + escapeHtml(v.name) + '</b><span>' +
-            escapeHtml([formatPhoneDisplay(v.phoneRaw || v.phone || ""), deals, TEAM.on && canSeeTeam() && v.ownerName ? v.ownerName : ""].filter(Boolean).join(" \u00b7 ")) + '</span></button>';
-        }).join("") + (r.invN > r.inv.length ? '<p class="ll-hint">Showing ' + r.inv.length + ' of ' + r.invN + '. Type more to narrow it down.</p>' : '') : '') +
-        (r.leadN ? '<div class="gs-head">Leads \u00b7 ' + r.leadN + '</div>' + r.leads.map(function (l) {
-          var where = l.stage && l.stage !== "New Lead" ? l.stage : l.status === "pending" ? "Not called yet" : l.outcome ? outcomeLabel(l.outcome) : "";
-          return '<button class="gs-row" data-gs-lead="' + escapeHtml(l.id) + '"><b>' + escapeHtml(l.name) + '</b><span>' +
-            escapeHtml([formatPhoneDisplay(l.phoneRaw), where, TEAM.on && l.owner ? firstName(l.owner.name) : "", l.source || ""].filter(Boolean).join(" \u00b7 ")) + '</span></button>';
-        }).join("") + (r.leadN > r.leads.length ? '<p class="ll-hint">Showing ' + r.leads.length + ' of ' + r.leadN + '. Type more to narrow it down.</p>' : '') : '');
-      out.querySelectorAll("[data-gs-vault]").forEach(function (b) { b.addEventListener("click", function () { featClose(); openVault(b.getAttribute("data-gs-vault")); }); });
-      out.querySelectorAll("[data-gs-lead]").forEach(function (b) { b.addEventListener("click", function () { featClose(); openLeadProfile(b.getAttribute("data-gs-lead")); }); });
-    };
-    inp.addEventListener("input", function () { clearTimeout(timer); timer = setTimeout(draw, 120); });
-    inp.focus();   // same tap, so the iPhone keyboard opens right away
+  /* ----- Search: full screen, pinned to the top, results end right above the keyboard ----- */
+  var SRCH = { q: "", scope: "all", at: 0, timer: null };
+  function srchMark(text, toks) {
+    text = String(text || ""); var low = text.toLowerCase(), hits = [];
+    (toks || []).forEach(function (t) { var i = low.indexOf(t); while (t && i !== -1) { hits.push([i, i + t.length]); i = low.indexOf(t, i + t.length); } });
+    if (!hits.length) return escapeHtml(text);
+    hits.sort(function (a, b) { return a[0] - b[0]; });
+    var out = "", pos = 0;
+    hits.forEach(function (h) { if (h[0] < pos) h[0] = pos; if (h[1] <= h[0]) return; out += escapeHtml(text.slice(pos, h[0])) + "<mark>" + escapeHtml(text.slice(h[0], h[1])) + "</mark>"; pos = h[1]; });
+    return out + escapeHtml(text.slice(pos));
   }
+  function srchInitial(name) { return escapeHtml(String(name || "?").trim().charAt(0).toUpperCase() || "?"); }
+  function srchLeadRow(l, toks) {
+    var where = l.stage && l.stage !== "New Lead" ? l.stage : l.status === "pending" ? "Not called yet" : l.outcome ? outcomeLabel(l.outcome) : "";
+    var tone = l.stage && l.stage !== "New Lead" && l.stage !== "Closed Lost" ? "interested" : l.outcome === "callback" ? "callback" : l.outcome === "notinterested" ? "notinterested" : l.status === "pending" ? "accent" : "noanswer";
+    return '<div class="srch-row"><button class="srch-main" type="button" data-gs-lead="' + escapeHtml(l.id) + '">' +
+      '<span class="srch-av" style="--hc:var(--' + tone + ')">' + srchInitial(l.name) + '</span>' +
+      '<span class="srch-t"><b>' + srchMark(l.name, toks) + '</b><span>' + escapeHtml([formatPhoneDisplay(l.phoneRaw), where, TEAM.on && l.owner ? firstName(l.owner.name) : "", l.source || ""].filter(Boolean).join(" · ")) + '</span></span></button>' +
+      (l.phone || l.phoneRaw ? callLinkHtml(l, "dial", "", "srch-call", callIconSvg()) : '') + '</div>';
+  }
+  function srchInvRow(v, toks) {
+    var deals = (v.investments || []).map(function (i) { return i.deal; }).filter(Boolean).slice(0, 2).join(", ");
+    return '<div class="srch-row"><button class="srch-main" type="button" data-gs-vault="' + escapeHtml(v.id) + '">' +
+      '<span class="srch-av" style="--hc:var(--gold)">' + srchInitial(v.name) + '</span>' +
+      '<span class="srch-t"><b>' + srchMark(v.name, toks) + '</b><span>' + escapeHtml([formatPhoneDisplay(v.phoneRaw || v.phone || ""), deals, TEAM.on && canSeeTeam() && v.ownerName ? v.ownerName : ""].filter(Boolean).join(" · ")) + '</span></span></button></div>';
+  }
+  function srchRecent() {
+    var seen = {}, out = [], me = TEAM.me ? TEAM.me.uid : null;
+    for (var i = state.callLog.length - 1; i >= 0 && out.length < 6; i--) {
+      var c = state.callLog[i]; if (seen[c.leadId] || (TEAM.on && c.by && me && c.by.uid !== me)) continue;
+      var l = findLeadById(c.leadId); if (!l) continue; seen[c.leadId] = 1; out.push(l);
+    }
+    return out;
+  }
+  function srchDraw() {
+    var out = document.getElementById("gsOut"), inp = document.getElementById("gsQ"); if (!out || !inp) return;
+    var q = inp.value; SRCH.q = q;
+    document.getElementById("gsClear").hidden = !q;
+    var r = searchAll(q), scope = document.getElementById("gsScope");
+    if (!r) {
+      scope.hidden = true;
+      var rec = srchRecent();
+      out.innerHTML = (rec.length ? '<div class="srch-head">Recent calls</div><div class="srch-group">' + rec.map(function (l) { return srchLeadRow(l, []); }).join("") + '</div>' : '') +
+        '<p class="srch-tip">Search by name, any part of a phone number, company, deal, list or rep.' + (q.trim() ? ' Keep typing…' : '') + '</p>';
+      return;
+    }
+    var both = r.invN && r.leadN, sc = both ? SRCH.scope : "all";
+    scope.hidden = !both;
+    if (both) scope.innerHTML = [["all", "All", r.invN + r.leadN], ["leads", "Leads", r.leadN], ["inv", "Investors", r.invN]].map(function (x) {
+      return '<button type="button" class="filter-chip' + (sc === x[0] ? ' active' : '') + '" data-gs-scope="' + x[0] + '">' + x[1] + ' <span class="chip-n">' + x[2] + '</span></button>';
+    }).join("");
+    if (!r.invN && !r.leadN) { out.innerHTML = '<div class="srch-empty"><b>No one matches “' + escapeHtml(q.trim()) + '”</b><span>Try part of the name, or the last 4 digits of the number.</span></div>'; return; }
+    out.innerHTML =
+      (r.invN && sc !== "leads" ? '<div class="srch-head">Investors <span>' + r.invN + '</span></div><div class="srch-group">' + r.inv.map(function (v) { return srchInvRow(v, r.toks); }).join("") + '</div>' +
+        (r.invN > r.inv.length ? '<p class="srch-tip">Showing ' + r.inv.length + ' of ' + r.invN + '. Type more to narrow it down.</p>' : '') : '') +
+      (r.leadN && sc !== "inv" ? '<div class="srch-head">Leads <span>' + r.leadN + '</span></div><div class="srch-group">' + r.leads.map(function (l) { return srchLeadRow(l, r.toks); }).join("") + '</div>' +
+        (r.leadN > r.leads.length ? '<p class="srch-tip">Showing ' + r.leads.length + ' of ' + r.leadN + '. Type more to narrow it down.</p>' : '') : '');
+  }
+  function srchFit() {
+    // keep the panel exactly the visible area, so results end right above the keyboard
+    var el = document.getElementById("searchOverlay"), vv = window.visualViewport; if (!el || el.hidden) return;
+    if (vv) { el.style.height = vv.height + "px"; el.style.transform = "translateY(" + vv.offsetTop + "px)"; }
+  }
+  function openSearch() {
+    var el = document.getElementById("searchOverlay"); if (!el) return;
+    el.hidden = false; document.body.classList.add("srch-open");
+    var inp = document.getElementById("gsQ");
+    if (Date.now() - SRCH.at > 120000) { SRCH.q = ""; SRCH.scope = "all"; }
+    inp.value = SRCH.q;
+    srchDraw(); srchFit();
+    inp.focus();   // same tap, so the iPhone keyboard opens right away
+    if (inp.value) inp.select();
+    requestAnimationFrame(function () { el.classList.add("show"); });
+  }
+  function closeSearch() {
+    var el = document.getElementById("searchOverlay"); if (!el || el.hidden) return;
+    SRCH.at = Date.now();
+    var inp = document.getElementById("gsQ"); if (inp) inp.blur();
+    el.classList.remove("show"); el.hidden = true; el.style.height = ""; el.style.transform = "";
+    document.body.classList.remove("srch-open");
+  }
+  (function wireSearch() {
+    var el = document.getElementById("searchOverlay"); if (!el) return;
+    var inp = document.getElementById("gsQ");
+    inp.addEventListener("input", function () { clearTimeout(SRCH.timer); SRCH.timer = setTimeout(srchDraw, 90); });
+    inp.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") { e.preventDefault(); closeSearch(); }
+      if (e.key === "Enter") { e.preventDefault(); var first = el.querySelector(".srch-main"); if (first) first.click(); else inp.blur(); }
+    });
+    document.getElementById("gsClear").addEventListener("click", function () { inp.value = ""; SRCH.scope = "all"; srchDraw(); inp.focus(); });
+    document.getElementById("gsCancel").addEventListener("click", closeSearch);
+    el.addEventListener("click", function (e) {
+      var sc = e.target.closest("[data-gs-scope]"); if (sc) { SRCH.scope = sc.getAttribute("data-gs-scope"); srchDraw(); return; }
+      var lv = e.target.closest("[data-gs-lead]"); if (lv) { closeSearch(); openLeadProfile(lv.getAttribute("data-gs-lead")); return; }
+      var vv = e.target.closest("[data-gs-vault]"); if (vv) { closeSearch(); openVault(vv.getAttribute("data-gs-vault")); return; }
+      if (e.target.closest("a[data-call-lead]")) closeSearch();   // the app's call handler takes it from here
+    });
+    // scrolling the results tucks the keyboard away, like Mail and Contacts
+    document.getElementById("gsOut").addEventListener("touchstart", function () { if (document.activeElement === inp) inp.blur(); }, { passive: true });
+    if (window.visualViewport) { window.visualViewport.addEventListener("resize", srchFit); window.visualViewport.addEventListener("scroll", srchFit); }
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !el.hidden) closeSearch();
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") { e.preventDefault(); if (el.hidden) openSearch(); else closeSearch(); }
+    });
+  })();
   document.getElementById("searchBtn").addEventListener("click", openSearch);
 
 
