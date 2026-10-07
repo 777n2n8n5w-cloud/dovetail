@@ -3,7 +3,7 @@
 <head>
 <script id="customerConfig" type="application/json">{}</script>
 <meta charset="UTF-8">
-<meta name="dovetail-build" content="2026-11-17">
+<meta name="dovetail-build" content="2026-11-18">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4824,7 +4824,10 @@
     width: 100%; margin-top: 8px; padding: 9px 10px; border-radius: 8px; border: 1px dashed var(--voicemail);
     background: none; color: var(--voicemail); font-family: inherit; font-size: 12.5px; font-weight: 600; cursor: pointer;
   }
-  .tasks-head { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; }
+  .tasks-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 16px; }
+  .tasks-head > div { min-width: 0; }
+  .tasks-head > button { flex: none !important; width: auto; }
+  :root[data-theme]:not([data-theme^="flow"]) .tasks-title { font-size: calc(17px * var(--brand-k, 1)); }
   .tasks-title { font-size: 17px; font-weight: 700; }
   .tasks-sub { font-size: 12px; color: var(--text-faint); margin-top: 2px; }
   .task-item.overdue { border-color: var(--notinterested); }
@@ -5886,7 +5889,7 @@
     </div>
 
     <div style="margin-top:22px;padding-top:14px;border-top:1px solid var(--border);text-align:center;">
-      <div style="font-size:11px;color:var(--text-faint);">Build 2026-11-17 · Team · Updates install automatically after midnight.</div>
+      <div style="font-size:11px;color:var(--text-faint);">Build 2026-11-18 · Team · Updates install automatically after midnight.</div>
       <div id="updNote"></div>
     </div>
   </div>
@@ -11234,7 +11237,7 @@
     if (TEAM.on && admin && VAULT.who !== "all") recs = recs.filter(function (r) { return r.ownerUid === VAULT.who; });
     var total = recs.reduce(function (a, r) { return a + vaultTotal(r); }, 0);
     var html = '<div class="tasks-head"><div><div class="tasks-title">Investor Vault</div><div class="tasks-sub">' + recs.length + ' investor' + (recs.length === 1 ? '' : 's') + ' \u00b7 ' + fmtMoney(total) + ' invested' + (TEAM.on && !admin ? ' \u00b7 yours' : '') + '</div></div>' +
-      '<button class="btn-primary" id="vaultAddBtn" style="padding:9px 14px">+ Add</button></div>';
+      '<button class="btn-primary" id="vaultAddBtn" style="flex:none;padding:9px 16px;border-radius:8px;font-size:13px;">+ Add</button></div>';
     if (TEAM.on && VAULT.status === "rules") {
       html += '<div class="vault-setup">' + (admin
         ? '<b>One step to switch on the Vault.</b> Your database needs the updated rules. Tap <b>Copy updated rules</b>, open your Firebase rules page, replace everything in the box, and tap Publish.' +
