@@ -3,11 +3,11 @@
 <head>
 <script id="customerConfig" type="application/json">{}</script>
 <meta charset="UTF-8">
-<meta name="dovetail-build" content="2026-11-23">
+<meta name="dovetail-build" content="2026-11-24">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Dovetail">
+<meta name="apple-mobile-web-app-title" content="VPEX">
 <meta name="robots" content="noindex, nofollow">
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
@@ -15,10 +15,10 @@
 <meta name="format-detection" content="telephone=yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Dovetail Suite">
+<meta name="apple-mobile-web-app-title" content="VPEX">
 <meta name="theme-color" content="#12151A">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2312151A'/%3E%3Ctext x='50' y='68' font-size='54' text-anchor='middle'%3E%F0%9F%93%9E%3C/text%3E%3C/svg%3E">
-<title>Dovetail Suite</title>
+<title>VPEX Dialer</title>
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta name="theme-color" content="#12151A" id="themeColorMeta">
@@ -6818,7 +6818,7 @@
 <body>
 <div class="auth-screen lock-screen" id="lockScreen" style="display:none">
   <div class="auth-card">
-    <div class="auth-brand">Dovetail is locked</div>
+    <div class="auth-brand">VPEX is locked</div>
     <div class="auth-sub">Unlock to keep working.</div>
     <button class="btn-primary" id="lockGo" style="width:100%;margin-top:6px">Unlock with Face ID</button>
     <div class="auth-msg" id="lockMsg" style="display:none;margin-top:12px"></div>
@@ -6830,7 +6830,7 @@
 </div>
 <div class="auth-screen" id="authScreen" style="display:none">
   <div class="auth-card">
-    <div class="auth-brand">Dovetail Suite</div>
+    <div class="auth-brand">VPEX Dialer</div>
     <div class="auth-sub" id="authSub">Sign in to your team account</div>
     <div class="auth-msg" id="authMsg" style="display:none"></div>
     <div class="auth-connecting" id="authConnecting" style="display:none">Connecting…</div>
@@ -6857,7 +6857,7 @@
 
   <header class="top">
     <div class="brand">
-      <div class="name">Dovetail Suite</div>
+      <div class="name">VPEX</div>
       <div class="sub-line"><div class="sub" id="headerSub">No leads loaded</div><span class="loc-chip" id="locChip" hidden></span><span class="save-pill" id="savePill"></span></div>
     </div>
     <div class="header-right">
@@ -6990,7 +6990,7 @@
         <button class="hub-cat admin-only set-data-cat" type="button" data-set-cat="data" style="--hc:var(--noanswer)"><span class="hub-cat-top"><span class="hub-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="8" ry="3"/><path d="M4 5.5v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/><path d="M4 11.5v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></span><span class="hub-n" data-set-n="data"></span></span><b>Data</b><span class="hub-cat-sub" data-set-sum="data"></span></button>
       </div>
       <div class="set-foot">
-        <div>Build 2026-11-23 · Team · Updates install automatically after midnight.</div>
+        <div>Build 2026-11-24 · Team · Updates install automatically after midnight.</div>
         <div id="updNote"></div>
       </div>
     </div>
@@ -7208,7 +7208,7 @@
 <script>
   /** ---------- Customer copies (white-label) and demo office ---------- **/
   var CUSTOMER = (function () { try { var el = document.getElementById("customerConfig"); return (el && JSON.parse(el.textContent || "{}")) || {}; } catch (e) { return {}; } })();
-  var APP_NAME = CUSTOMER.app || "Dovetail Suite", SHORT_NAME = CUSTOMER.app || "Dovetail", COMPANY = CUSTOMER.company || "Dovetail Investment Group";
+  var APP_NAME = CUSTOMER.app || "VPEX Dialer", SHORT_NAME = CUSTOMER.app || "VPEX", COMPANY = CUSTOMER.company || "Dovetail Investment Group";
   var BASE_DOMAIN = (CUSTOMER.firebase && CUSTOMER.firebase.authDomain) || "dovetail-f863c.firebaseapp.com";
   if (CUSTOMER.theme) { try { if (!window.localStorage.getItem("dovetail_dialer_theme_v1")) window.localStorage.setItem("dovetail_dialer_theme_v1", CUSTOMER.theme); } catch (e) {} }
   var DEMO = (function () { try { if (/demo/i.test(location.hash)) window.localStorage.setItem("dovetail_demo", "1"); return window.localStorage.getItem("dovetail_demo") === "1"; } catch (e) { return false; } })();
@@ -7493,7 +7493,7 @@
   function enterDemo() { try { window.localStorage.setItem("dovetail_demo", "1"); } catch (e) {} location.hash = "demo"; location.reload(); }
   // Brand words and vocabulary for customer copies: rewrites visible text, so every screen follows automatically.
   function brandText(t) {
-    if (CUSTOMER.app || CUSTOMER.company) t = t.replace(/Dovetail Investment Group/g, COMPANY).replace(/Dovetail Suite/g, APP_NAME).replace(/\bDovetail\b/g, SHORT_NAME);
+    if (CUSTOMER.app || CUSTOMER.company) t = t.replace(/Dovetail Investment Group/g, COMPANY).replace(/VPEX Dialer/g, APP_NAME).replace(/\bVPEX\b/g, SHORT_NAME);
     if (WORD_RE) t = t.replace(WORD_RE, function (m, w, off, str) { return w === "Closed" && str.substr(off + 6, 5) === " Lost" ? w : WORDMAP[w]; });
     return t;
   }
@@ -11835,7 +11835,7 @@
       var newUid = cred.user.uid;
       try { await sa.signOut(); } catch (e) {}
       await TEAM.db.collection("members").doc(newUid).set({ username: user, name: name, role: "rep", active: true, createdAt: Date.now(), createdBy: TEAM.me.uid, lastSeen: 0 });
-      var details = "Dovetail login\nLink: " + TEAM_LINK + "\nUsername: " + user + "\nPassword: " + pw;
+      var details = SHORT_NAME + " login\nLink: " + TEAM_LINK + "\nUsername: " + user + "\nPassword: " + pw;
       document.getElementById("tmName").value = "";
       document.getElementById("tmUser").value = "";
       document.getElementById("tmPw").value = "";
@@ -13408,8 +13408,8 @@
   async function lockSetup() {
     if (!lockSupported()) { showToast("This phone doesn\u2019t support Face ID unlock here"); return false; }
     try {
-      var cred = await navigator.credentials.create({ publicKey: { challenge: rnd(32), rp: { name: "Dovetail" },
-        user: { id: rnd(16), name: TEAM.me ? TEAM.me.username : "dovetail", displayName: TEAM.me ? TEAM.me.name : "Dovetail" },
+      var cred = await navigator.credentials.create({ publicKey: { challenge: rnd(32), rp: { name: SHORT_NAME },
+        user: { id: rnd(16), name: TEAM.me ? TEAM.me.username : "dovetail", displayName: TEAM.me ? TEAM.me.name : SHORT_NAME },
         pubKeyCredParams: [{ type: "public-key", alg: -7 }, { type: "public-key", alg: -257 }],
         authenticatorSelection: { authenticatorAttachment: "platform", userVerification: "required", residentKey: "preferred" }, timeout: 60000, attestation: "none" } });
       window.localStorage.setItem(lockKey(), b64u(cred.rawId));
@@ -13557,7 +13557,16 @@
       var c = document.createElement("canvas"); c.width = c.height = 180; var g = c.getContext("2d"), grd = g.createLinearGradient(0, 0, 180, 180);
       grd.addColorStop(0, "#1B2A41"); grd.addColorStop(1, "#0B1220"); g.fillStyle = grd; g.fillRect(0, 0, 180, 180);
       g.strokeStyle = "#C9A227"; g.lineWidth = 6; g.strokeRect(16, 16, 148, 148);
-      g.fillStyle = "#E9C46A"; g.font = "bold 96px Georgia, serif"; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText(SHORT_NAME.charAt(0).toUpperCase(), 90, 98);
+      // A short name (VPEX) becomes the wordmark, with the rest of the app name small underneath; a long one gets its first letter.
+      var mark = SHORT_NAME.length <= 5 ? SHORT_NAME.toUpperCase() : SHORT_NAME.charAt(0).toUpperCase(), sp = APP_NAME.indexOf(" ");
+      var sub = mark.length > 1 && sp > 0 ? APP_NAME.slice(sp + 1).toUpperCase() : "", face = "'Avenir Next', 'Helvetica Neue', Arial, sans-serif";
+      g.fillStyle = "#E9C46A"; g.textAlign = "center"; g.textBaseline = "middle";
+      if (mark.length > 1) {
+        var fs = 62; g.font = "800 " + fs + "px " + face;
+        var mw = g.measureText(mark).width; if (mw > 124) { fs = Math.floor(fs * 124 / mw); g.font = "800 " + fs + "px " + face; }
+        g.fillText(mark, 90, sub ? 82 : 92);
+        if (sub) { g.fillStyle = "#C9A227"; g.font = "700 15px " + face; try { g.letterSpacing = "5px"; } catch (e) {} g.fillText(sub, 92, 124); }
+      } else { g.font = "bold 96px Georgia, serif"; g.fillText(mark, 90, 98); }
       var url = c.toDataURL("image/png");
       ["apple-touch-icon", "icon"].forEach(function (rel) { var l = document.querySelector('link[rel="' + rel + '"]'); if (!l) { l = document.createElement("link"); l.rel = rel; document.head.appendChild(l); } l.href = url; });
     } catch (e) {}
@@ -14588,7 +14597,7 @@
     });
     document.getElementById("signOutBtn").addEventListener("click", function () {
       closeMenuModal();
-      showConfirm("Sign out of Dovetail on this phone?", teamSignOut, "Sign out");
+      showConfirm("Sign out of " + SHORT_NAME + " on this phone?", teamSignOut, "Sign out");
     });
     document.getElementById("teamBtn").addEventListener("click", openAdminHub);
     document.getElementById("adminBtn").addEventListener("click", openAdminHub);
